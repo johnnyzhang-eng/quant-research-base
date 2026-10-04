@@ -4,9 +4,9 @@ Updated: 2026-10-04. This is a bounded research-foundation milestone, not a clai
 
 | Goal | Acceptance | Current status |
 |---|---|---|
-| G1 Reproducible entry | Validated spec; isolated runs; input/source snapshots; complete attempt registry; known-answer, rejection, rerun and tamper tests | Implemented for validation-only; default49 tests, optional Vibe8 tests; mandatory metric12 and protocol11 controls |
+| G1 Reproducible entry | Validated spec; isolated runs; input/source snapshots; complete attempt registry; known-answer, rejection, rerun and tamper tests | Implemented for validation-only; default53 tests, optional Vibe8 tests; mandatory metric12 and protocol11 controls plus sealed historical preflight |
 | G2 Data and instrument | Frozen provenance/units/timing; source permissions; reference controls through the actual engine path; separate discrepancies and unsupported features | Partial: reference39, shared21, aligned21; bounded dividend/split/settlement bridge; local snapshot audit available; historical data/model gaps remain |
-| G3 First study | Frozen four-ETF monthly ten-month-average hypothesis; next-session execution; B0/BR/BC baselines; explicit costs and robustness; independent ledgers | Pending: no formal historical-return trial; unresolved source use, price/share basis, timing, actions and account model |
+| G3 First study | Frozen four-ETF monthly ten-month-average hypothesis; next-session execution; B0/BR/BC baselines; explicit costs and robustness; independent ledgers; or explicit missing-condition evidence if entry conditions absent | No formal historical-return trial; each run produces an evidence-bound D01-D06 remaining-condition report. Current provider-use rights, historical units/timing, account/currency support and historical inference remain unresolved; see HISTORICAL_READINESS.md |
 | G4 Public delivery | Authorized repository; allowlisted, reviewed publication; runnable synthetic examples; documented evidence and limitations; remote validation | Initial release public with verified per-check CI; subsequent milestones reviewed separately; no vendor data or private factors included |
 
 ## Next work in dependency order

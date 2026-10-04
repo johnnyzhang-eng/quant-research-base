@@ -54,7 +54,8 @@ def audit_daily(path, expected_sessions, kind):
     return {"rows": len(table), "first": min(dates) if dates else None,
             "last": max(dates) if dates else None, "error_count": len(findings),
             "error_examples": findings[:20], "missing_volume": missing_volume,
-            "missing_received_timestamps": missing_received,
+            "received_timestamp_check": "checked" if kind == "yahoo" else "not_checked",
+            "missing_received_timestamps": missing_received if kind == "yahoo" else None,
             "missing_sessions_full_window": len(set(expected_sessions)-covered),
             "extra_sessions": sorted(covered-set(expected_sessions))[:20]}
 
@@ -141,6 +142,10 @@ def audit_snapshot(manifest_path):
     # Nothing in a byte/hash audit certifies a price vendor, PIT or market calendar.
     return {"integrity_passed": True, "files_checked": len(checks), "files": checks,
             "calendar_rows": len(sessions), "daily": daily, "cross_source": cross,
+            "source_metadata": {s: {k: assets[s].get(k) for k in (
+                "currency", "timezone", "adjustment_basis", "volume_basis",
+                "historical_received_timestamps", "source_revision_status")}
+                for s in sorted(assets)},
             "issuer_distributions": actions, "gaps": gaps,
             "historical_ready": False, "classification": "LOCAL_SNAPSHOT_AUDIT_ONLY",
             "limitations": ["Not a PIT archive", "Calendar intraday times not fully certified",

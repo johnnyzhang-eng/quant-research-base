@@ -68,6 +68,8 @@ class DataInstrumentTests(unittest.TestCase):
         self.assertEqual(d["error_count"], 0)
         self.assertEqual(d["missing_volume"], 1)
         self.assertEqual(d["missing_sessions_full_window"], 0)
+        self.assertEqual(d["received_timestamp_check"], "not_checked")
+        self.assertIsNone(d["missing_received_timestamps"])
     def test_bad_ohlc_and_nonfinite_rejected(self):
         for row in ("2024-10-07,10,9,8,11,100\n", "2024-10-07,NaN,12,9,11,100\n"):
             self.assertGreater(self.audit(row)["error_count"], 0)
@@ -124,6 +126,12 @@ class WorkflowTests(unittest.TestCase):
             self.assertEqual(report["reference_controls"]["passed"], 39)
             self.assertEqual(report["formal_history_trials"], 0)
             self.assertFalse(report["data_historical_ready"])
+            preflight = load_json(run / "historical_preflight.json")
+            self.assertFalse(preflight["historical_run_permitted"])
+            self.assertEqual(len(preflight["gates"]), 6)
+            self.assertFalse(preflight["controls"]["protocol_vibe"]["observed"])
+            for kind in ("reference", "metrics", "protocol_reference"):
+                self.assertTrue(preflight["controls"][kind]["accepted"], preflight["controls"][kind])
             self.assertTrue(verify_run(run, self.output / "registry.jsonl")["verified"])
             science.append(report["scientific_result_sha256"])
             keys.append(report["reproduction_key"])

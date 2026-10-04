@@ -125,6 +125,9 @@ def run_validation(spec_path, workspace, output, vibe=False):
         live_paths = path_controls(run / "protocol_vibe", use_vibe=True) if engine is not None else None
         if live_paths is not None:
             write_json(run / "protocol_path_vibe.json", live_paths)
+        from .historical_readiness import assess
+        preflight = assess(data, reference, engine, metrics, paths, live_paths, spec["assumptions"])
+        write_json(run / "historical_preflight.json", preflight)
         sources_unchanged = sources == package_inventory()
         errors = []
         if reference is not None and not reference["accepted"]:
@@ -148,7 +151,8 @@ def run_validation(spec_path, workspace, output, vibe=False):
                        "python": platform.python_version(), "vibe": bool(vibe or spec["run_vibe_controls"]),
                        "engine_environment": {k: engine[k] for k in ("engine_source_sha256", "dependencies")} if engine else None}
         scientific = {"reference": reference, "data": data, "engine": engine, "metrics": metrics,
-                      "protocol_reference": paths, "protocol_vibe": live_paths}
+                      "protocol_reference": paths, "protocol_vibe": live_paths,
+                      "historical_preflight": preflight}
         status = "VALIDATION_ERRORS" if errors else "VALIDATION_COMPLETED_WITH_GAPS"
         result = {"schema_version": "1", "run_id": run_id, "at": now(), "status": status,
                   "experiment_id": spec["experiment_id"], "purpose": spec["purpose"],
@@ -163,6 +167,9 @@ def run_validation(spec_path, workspace, output, vibe=False):
                                              "vibe": live_paths["cases_passed"] if live_paths is not None else None,
                                              "total": paths["cases_total"], "classification": paths["classification"]},
                   "formal_history_trials": 0, "broker_orders": 0,
+                  "historical_preflight": {"gate_decision": preflight["gate_decision"],
+                                           "unresolved_conditions": len(preflight["gates"]),
+                                           "report": "historical_preflight.json"},
                   "gaps": data["gaps"] if data else [{"id": "DATA", "detail": "No historical dataset attached"}],
                   "limitations": ["Validation-only, not a strategy-return or broker result",
                                   "Control acceptance is bounded by its cases and declared model"]}

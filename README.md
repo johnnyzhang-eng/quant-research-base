@@ -38,7 +38,9 @@ python -B -m research_base run --spec examples/validation.json --output runs-loc
 
 这条可选路径不会自动安装依赖或获取行情。被测引擎源码哈希、numpy/pandas版本和逐事件差异会保存到本地。兼容性以实际来源和控制记录为准。
 
-默认测试环境执行49项测试，另8项Vibe集成测试明确跳过；已有Vibe的本机环境执行全部57项。GitHub默认CI不安装Vibe，不能据此宣称引擎集成已在远端验证。见[账户适配模型](docs/ACCOUNTING_MODEL.md)、[指标口径](docs/METRICS.md)与[完整协议路径](docs/PROTOCOL_PATH.md)。
+默认测试环境执行53项测试，另8项Vibe集成测试明确跳过；已有Vibe的本机环境执行全部61项。GitHub默认CI不安装Vibe，不能据此宣称引擎集成已在远端验证。见[账户适配模型](docs/ACCOUNTING_MODEL.md)、[指标口径](docs/METRICS.md)与[完整协议路径](docs/PROTOCOL_PATH.md)。
+
+每次运行另输出[历史研究预检](docs/HISTORICAL_READINESS.md)，把不可变快照声明、本轮测量和D01–D06剩余条件分别记录。合成验收、完整性哈希或手改“ready”标签都不能授权历史试验。
 
 `VALIDATION_COMPLETED_WITH_GAPS` 表示有限检查完成且仍有缺口。它不代表数据已适合历史研究、策略盈利或账户可执行。运行错误、配置拒绝和策略表现分别分类。
 
