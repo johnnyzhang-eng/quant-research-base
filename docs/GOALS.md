@@ -4,16 +4,16 @@ Updated: 2026-10-04. This is a bounded research-foundation milestone, not a clai
 
 | Goal | Acceptance | Current status |
 |---|---|---|
-| G1 Reproducible entry | Validated spec; isolated runs; input/source snapshots; complete attempt registry; known-answer, rejection, rerun and tamper tests | Implemented for validation-only; 20 local tests recorded |
-| G2 Data and instrument | Frozen provenance/units/timing; source permissions; reference controls through the actual engine path; separate discrepancies and unsupported features | Partial: reference39, shared10, aligned7 and unsupported3; local snapshot audit available; historical data/model gaps remain |
+| G1 Reproducible entry | Validated spec; isolated runs; input/source snapshots; complete attempt registry; known-answer, rejection, rerun and tamper tests | Implemented for validation-only; default24 tests, optional Vibe5 tests |
+| G2 Data and instrument | Frozen provenance/units/timing; source permissions; reference controls through the actual engine path; separate discrepancies and unsupported features | Partial: reference39, shared21, aligned21; bounded dividend/split/settlement bridge; local snapshot audit available; historical data/model gaps remain |
 | G3 First study | Frozen four-ETF monthly ten-month-average hypothesis; next-session execution; B0/BR/BC baselines; explicit costs and robustness; independent ledgers | Pending: no formal historical-return trial; unresolved source use, price/share basis, timing, actions and account model |
-| G4 Public delivery | Authorized repository; allowlisted, reviewed publication; runnable synthetic examples; documented evidence and limitations; remote validation | Initial release in progress; no vendor data or private factors included |
+| G4 Public delivery | Authorized repository; allowlisted, reviewed publication; runnable synthetic examples; documented evidence and limitations; remote validation | Initial release public with verified per-check CI; subsequent milestones reviewed separately; no vendor data or private factors included |
 
 ## Next work in dependency order
 
 1. Resolve sustainable source permissions and select a primary price/volume definition, preserving cross-source disagreement.
 2. Freeze consistent corporate-action/share units, a signal-vs-trade price mapping, information timing and calendar assumptions.
-3. Extend the actual engine adapter for dividend receivable/payment, splits and delayed settlement; all extensions need known-answer and wrong-output/source-copy controls.
+3. Extend the bounded actual-engine accounting acceptance to the full strategy and four-asset path. Dividend receivable/payment, integer splits and delayed settlement now pass synthetic fixed-target controls; this does not establish historical price/share-basis correctness or all basket allocations.
 4. Define and independently test performance metrics and simple-holding/risk-matched/cash baselines before historical results.
 5. Run one registered historical model, with frozen costs/latency assumptions and explicit limitations; preserve unsuccessful trials too.
 6. Start forward records after freezing rules. A few monthly decisions are limited evidence; monitor strategy and baseline together.

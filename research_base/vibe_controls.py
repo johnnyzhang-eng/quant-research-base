@@ -15,6 +15,7 @@ from pathlib import Path
 from .evidence import ContractError, digest, write_json
 from .reference import low_frequency_engine as reference
 from .reference import run_controls as oracle
+from .vibe_accounting import accounting_class
 
 
 @contextmanager
@@ -83,6 +84,76 @@ def shared_cases():
     d = base(); oracle.intent(d, "2024-10-07", SPY=1)
     oracle.bar(d, "2024-10-08", open_capacity_shares=3)
     cases.append(("P10_partial_open_capacity", d, expect("70", "100", 3, [fill("2024-10-08", 3, "10")])))
+    d = base(cash="0"); d["initial"]["holdings"]["SPY"] = 10
+    d["actions"] = [oracle.dividend("after-sale", "2024-10-08", "2024-10-11")]
+    oracle.intent(d, "2024-10-07", SPY=0)
+    for day in d["calendar"]["sessions"][1:5]:
+        oracle.price(d, day, "9")
+    cases.append(("P11_sell_on_ex_keeps_entitlement", d,
+                  expect("100", "100", 0, [fill("2024-10-08", -10, "9")])))
+    d = base(); oracle.intent(d, "2024-10-07", SPY=1)
+    d["actions"] = [oracle.dividend("buy-on-ex", "2024-10-08", "2024-10-11")]
+    for day in d["calendar"]["sessions"][1:5]:
+        oracle.price(d, day, "9")
+    cases.append(("P12_buy_on_ex_has_no_entitlement", d,
+                  expect("1", "100", 11, [fill("2024-10-08", 11, "9")])))
+    d = base(cash="0"); d["initial"]["holdings"]["SPY"] = 10
+    d["actions"] = [oracle.dividend("taxed", "2024-10-08", "2024-10-11", tax="0.2")]
+    for day in d["calendar"]["sessions"][1:5]:
+        oracle.price(d, day, "9")
+    cases.append(("P13_net_withheld_dividend", d, expect("8", "98", 10, [])))
+    for retry, cid in ((False, "P14_unsettled_sale_not_reused"), (True, "P15_new_intent_after_cash_settles")):
+        d = oracle.fixture(symbols=["SPY", "EFA"], cash="0")
+        d["initial"]["holdings"]["SPY"] = 10
+        d["settlement"].update(cash_sessions=2, share_sessions=0)
+        oracle.intent(d, "2024-10-07", EFA=1)
+        fills = [fill("2024-10-08", -10, "10")]
+        if retry:
+            oracle.intent(d, "2024-10-09", EFA=1)
+            fills.append(fill("2024-10-10", 10, "10"))
+        cases.append((cid, d, {"cash": "0" if retry else "100", "equity": "100",
+                              "holdings": {"SPY": 0, "EFA": 10 if retry else 0}, "fills": fills}))
+    d = base(); d["settlement"]["share_sessions"] = 2
+    oracle.intent(d, "2024-10-07", SPY=1); oracle.intent(d, "2024-10-08", SPY=0)
+    oracle.intent(d, "2024-10-09", SPY=0)
+    d["actions"] = [{"id": "locked-split", "type": "split", "symbol": "SPY",
+                     "effective_date": "2024-10-09", "known_at": "2024-10-09T12:00:00Z",
+                     "numerator": 2, "denominator": 1}]
+    for day in d["calendar"]["sessions"][2:5]:
+        oracle.price(d, day, "5")
+    cases.append(("P16_split_locked_shares_and_release", d,
+                  expect("100", "100", 0, [fill("2024-10-08", 10, "10"), fill("2024-10-10", -20, "5")])))
+    d = base(cash="0"); d["initial"]["holdings"]["SPY"] = 10
+    d["actions"] = [oracle.dividend("beyond-end", "2024-10-08", "2024-10-14")]
+    oracle.intent(d, "2024-10-07", SPY=0)
+    for day in d["calendar"]["sessions"][1:5]:
+        oracle.price(d, day, "9")
+    cases.append(("P17_final_receivable_not_cash", d,
+                  expect("90", "100", 0, [fill("2024-10-08", -10, "9")])))
+    d = base(cash="0"); d["initial"]["holdings"]["SPY"] = 10
+    d["actions"] = [oracle.dividend("post-split-div", "2024-10-08", "2024-10-11", amount="0.5"),
+                    {"id": "same-day-split", "type": "split", "symbol": "SPY", "effective_date": "2024-10-08",
+                     "known_at": "2024-10-08T12:00:00Z", "numerator": 2, "denominator": 1}]
+    for day in d["calendar"]["sessions"][1:5]:
+        oracle.price(d, day, "4.5")
+    cases.append(("P18_split_then_post_split_dividend", d, expect("10", "100", 20, [])))
+    d = base(cash="0"); d["initial"]["holdings"]["SPY"] = 10
+    oracle.intent(d, "2024-10-07", SPY=0); oracle.bar(d, "2024-10-08", open_capacity_shares=3)
+    cases.append(("P19_partial_sale_capacity", d,
+                  expect("30", "100", 7, [fill("2024-10-08", -3, "10")])))
+    d = base(cash="50"); d["initial"]["holdings"]["SPY"] = 5
+    oracle.intent(d, "2024-10-07", SPY=1); oracle.bar(d, "2024-10-08", open_capacity_shares=3)
+    cases.append(("P20_partial_increase_capacity", d,
+                  expect("20", "100", 8, [fill("2024-10-08", 3, "10")])))
+    d = oracle.fixture(symbols=["SPY", "EFA"], cash="0")
+    d["settlement"].update(cash_sessions=0, share_sessions=0)
+    d["initial"]["holdings"]["SPY"] = 10
+    d["actions"] = [oracle.dividend("not-spendable", "2024-10-07", "2024-10-10")]
+    for day in d["calendar"]["sessions"][:5]:
+        oracle.price(d, day, "9")
+    oracle.intent(d, "2024-10-07", SPY="0.9", EFA="0.1")
+    cases.append(("P21_receivable_not_spendable", d,
+                  {"cash": "10", "equity": "100", "holdings": {"SPY": 10, "EFA": 0}, "fills": []}))
     return cases
 
 
@@ -172,20 +243,28 @@ def aligned_class(native):
     return AlignedUS
 
 
-def unsupported(data):
+def unsupported(data, aligned=False):
     problems = []
-    if data["actions"]:
+    if data["actions"] and not aligned:
         problems.append("Corporate-action application/payment not implemented in this adapter")
-    if data["settlement"]["cash_sessions"] or data["settlement"]["share_sessions"]:
+    if not aligned and (data["settlement"]["cash_sessions"] or data["settlement"]["share_sessions"]):
         problems.append("Delayed settlement not implemented in this adapter")
-    if any(data["initial"]["holdings"].values()):
+    if any(data["initial"]["holdings"].values()) and not aligned:
         problems.append("Initial holdings transfer not implemented in this adapter")
     if data["fees"]["annual_cash_rate"] != "0":
         problems.append("Cash interest not implemented in this adapter")
+    if aligned and any(m["lot_size"] != 1 or Decimal(m["price_tick"]) != Decimal("0.01")
+                       for m in data["instruments"].values()):
+        problems.append("Aligned model accepts only one-share lots and USD 0.01 price ticks")
+    if aligned and Decimal(data["fees"]["fee_quantum"]) != Decimal("0.01"):
+        problems.append("Aligned fee rounding accepts only USD 0.01 quantum")
     return problems
 
 
 def execute_vibe(data, native, aligned=False):
+    unavailable = unsupported(data, aligned)
+    if unavailable:
+        raise ContractError("; ".join(unavailable))
     import pandas as pd
     from backtest.engines.base import _align
     frames, signals = {}, {}
@@ -212,14 +291,28 @@ def execute_vibe(data, native, aligned=False):
               "commission_min": float(data["fees"]["minimum_commission"]),
               "position_adjustment": "rebalance", "leverage": 1.0,
               "rebalance_mask": sorted(execute_dates) if execute_dates else [data["start"]]}
-    engine = aligned_class(native)(config, data["fees"]) if aligned else native(config, market="us")
+    engine = accounting_class(aligned_class(native))(config, data["fees"], data) if aligned else native(config, market="us")
     dates, close, valuation, target, _ = _align(frames, signals, data["symbols"])
     # Both paths get the same explicit one-shot decision calendar; a missing
     # intent must not become an implicit daily retry or rebalance.
     engine._execute_bars(dates, frames, close, target, data["symbols"], close_val_df=valuation)
     if aligned and engine.terminal_mark is not None:
-        engine.equity_snapshots[-1] = engine.terminal_mark
         engine.actual_position_snapshots[-1] = engine.terminal_positions
+    if aligned:
+        ledger = {"events": engine.account_events, "snapshots": engine.account_snapshots}
+        checked = oracle.independent_replay(data, ledger)
+        snapshot_errors = []
+        for actual_snapshot, native_snapshot in zip(engine.account_snapshots, engine.equity_snapshots):
+            for field, value in (("equity", native_snapshot.equity), ("settled_cash", native_snapshot.capital)):
+                snapshot_errors.extend(differences(actual_snapshot[field], value,
+                                                  f"{actual_snapshot['date']}.engine.{field}"))
+        actual = reference_projection(data, ledger)
+        details = {"projection": actual, "independent_replay": checked["replayed"],
+                   "replay_errors": checked["errors"] + snapshot_errors, "account_ledger": ledger,
+                   "native_equity_snapshots": [{**asdict(s), "timestamp": str(s.timestamp)} for s in engine.equity_snapshots],
+                   "native_fill_records": [{**asdict(f), "timestamp": str(f.timestamp)} for f in engine.fill_records],
+                   "decision_calendar": sorted(execute_dates), "adapter": "aligned-v2-accounting"}
+        return actual, details
     cash = Decimal(data["initial"]["settled_cash"])
     holdings = {s: Decimal(0) for s in data["symbols"]}
     fills, replay, errors = [], [], []
@@ -249,7 +342,10 @@ def run_controls(run):
     with offline_connections() as network_attempts:
         from backtest.engines.global_equity import GlobalEquityEngine
         from backtest.engines.base import BaseEngine
+        import backtest.models as models
+        import backtest.rebalance_mask as rebalance_mask
         reports, oracle_ok = [], True
+        aligned_ledgers = {}
         first_result = None
         for cid, data, expected in shared_cases():
             write_json(run / "shared_inputs" / f"{cid}.json", {"input": data, "expected": expected})
@@ -262,12 +358,14 @@ def run_controls(run):
                 first_result = data, result
             item = {"id": cid, "expected": expected,
                     "reference": {"accepted": not ref_errors and replay["passed"], "differences": ref_errors}}
-            unavailable = unsupported(data)
             for label, aligned in (("native", False), ("aligned", True)):
+                unavailable = unsupported(data, aligned)
                 if unavailable:
                     item[label] = {"status": "UNSUPPORTED", "reasons": unavailable}
                     continue
                 actual, details = execute_vibe(data, GlobalEquityEngine, aligned)
+                if aligned:
+                    aligned_ledgers[cid] = (data, details["account_ledger"])
                 write_json(run / "vibe_actual" / f"{cid}.{label}.json", details)
                 errors = differences(expected, actual)
                 item[label] = {"status": "MATCH" if not errors and not details["replay_errors"] else "DIFFERS",
@@ -280,21 +378,45 @@ def run_controls(run):
         write_json(run / "calibration" / "injected_wrong_fee.json", bad)
         # Known flat control is exercised through the same target path.
         flat_ok = reports[0]["native"]["status"] == "MATCH"
+        injections = []
+        for cid, mutation in (("P11_sell_on_ex_keeps_entitlement", "entitlement"),
+                              ("P13_net_withheld_dividend", "tax_net"),
+                              ("P14_unsettled_sale_not_reused", "settlement"),
+                              ("P16_split_locked_shares_and_release", "locked_quantity"),
+                              ("P17_final_receivable_not_cash", "noncash_equity")):
+            data, ledger = aligned_ledgers[cid]
+            wrong = copy.deepcopy(ledger)
+            if mutation in ("entitlement", "tax_net"):
+                event = next(e for e in wrong["events"] if e["type"] == "DIV_EX")
+                event["entitled_qty" if mutation == "entitlement" else "net_amount"] = "999"
+            elif mutation == "settlement":
+                next(e for e in wrong["events"] if e["type"] == "FILL")["settlement_date"] = "2024-10-08"
+            elif mutation == "locked_quantity":
+                next(s for s in wrong["snapshots"] if s["date"] == "2024-10-09")["sellable"]["SPY"] = 20
+            else:
+                wrong["snapshots"][-1]["equity"] = "90"
+            replay = oracle.independent_replay(data, wrong)
+            write_json(run / "calibration" / f"{mutation}.json", replay)
+            injections.append({"mutation": mutation, "detected": not replay["passed"]})
         summary = {"cases_total": len(reports), "reference_matches": sum(r["reference"]["accepted"] for r in reports)}
         for label in ("native", "aligned"):
             summary[label] = {status: sum(r[label]["status"] == status for r in reports)
                               for status in ("MATCH", "DIFFERS", "UNSUPPORTED")}
         source = {name: digest(Path(inspect.getfile(cls))) for name, cls in
-                  (("GlobalEquityEngine", GlobalEquityEngine), ("BaseEngine", BaseEngine))}
+                  (("GlobalEquityEngine", GlobalEquityEngine), ("BaseEngine", BaseEngine),
+                   ("models", models), ("rebalance_mask", rebalance_mask))}
         deps = {n: importlib.metadata.version(n) for n in ("numpy", "pandas")}
         return {"classification": "SYNTHETIC_FIXED_TARGET_ACCEPTANCE_NOT_HISTORY",
-                "instrument_calibrated": bool(oracle_ok and flat_ok and not bad["passed"] and not network_attempts),
+                "instrument_calibrated": bool(oracle_ok and flat_ok and not bad["passed"] and
+                                              all(x["detected"] for x in injections) and not network_attempts),
                 "aligned_supported_cases_accepted": summary["aligned"]["DIFFERS"] == 0,
                 "summary": summary, "reports": reports, "engine_source_sha256": source,
                 "dependencies": deps, "network_attempts_blocked": len(network_attempts),
                 "injected_fee_error_detected": not bad["passed"],
+                "accounting_error_injections": injections,
                 "limitations": ["Fixed targets; no Vibe full SMA strategy path tested",
-                                "Aligned adapter: integer USD cash, explicit fees/ticks, opening capacity, terminal mark only",
-                                "No corporate-action, delayed settlement, initial-holdings or FX acceptance",
+                                "Aligned model: long-only USD, integer shares, explicit fees/ticks, dividend receivables, splits and settlement",
+                                "No FX, cash interest, fractional splits/cash-in-lieu or general corporate-action acceptance",
+                                "Native basket fitting remains a separate model choice; fixed cases do not certify all allocations",
                                 "Both paths use the declared one-shot decision calendar and private engine hooks",
                                 "Installed source hashes matter; no inference about latest upstream versions"]}
