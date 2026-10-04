@@ -1,0 +1,9 @@
+{
+  "protocol_version": "synthetic-controls-v1",
+  "classification": "SYNTHETIC_CONTROLS_ONLY",
+  "purpose": "Validate known-answer accounting, timing and rejection behavior",
+  "historical_return_claim": false,
+  "benchmark": "Literal hand-calculated outcomes and independent event replay",
+  "search": "No parameter or strategy search",
+  "limitations": "Invented prices, calendar, capacity, costs and settlement; not real execution evidence"
+}
