@@ -154,6 +154,8 @@ def shared_cases():
     oracle.intent(d, "2024-10-07", SPY="0.9", EFA="0.1")
     cases.append(("P21_receivable_not_spendable", d,
                   {"cash": "10", "equity": "100", "holdings": {"SPY": 10, "EFA": 0}, "fills": []}))
+    for cid, data, expected in cases:
+        data["performance_boundary_date"] = "2024-10-04"  # invented settled opening marks, not exchange evidence
     return cases
 
 
@@ -307,9 +309,12 @@ def execute_vibe(data, native, aligned=False):
                 snapshot_errors.extend(differences(actual_snapshot[field], value,
                                                   f"{actual_snapshot['date']}.engine.{field}"))
         actual = reference_projection(data, ledger)
+        from .performance_bridge import from_vibe
+        metric_input, performance = from_vibe(data, ledger, opening_date=data["performance_boundary_date"])
         details = {"projection": actual, "independent_replay": checked["replayed"],
                    "replay_errors": checked["errors"] + snapshot_errors, "account_ledger": ledger,
                    "native_equity_snapshots": [{**asdict(s), "timestamp": str(s.timestamp)} for s in engine.equity_snapshots],
+                   "performance_input": metric_input, "performance": performance,
                    "native_fill_records": [{**asdict(f), "timestamp": str(f.timestamp)} for f in engine.fill_records],
                    "decision_calendar": sorted(execute_dates), "adapter": "aligned-v2-accounting"}
         return actual, details
@@ -368,6 +373,11 @@ def run_controls(run):
                     aligned_ledgers[cid] = (data, details["account_ledger"])
                 write_json(run / "vibe_actual" / f"{cid}.{label}.json", details)
                 errors = differences(expected, actual)
+                if aligned:
+                    initial = Decimal(data["initial"]["settled_cash"]) + sum(
+                        Decimal(q) * Decimal(data["initial"]["marks"][s]) for s, q in data["initial"]["holdings"].items())
+                    expected_return = Decimal(expected["equity"]) / initial - 1
+                    errors.extend(differences(expected_return, details["performance"]["period_net_return"]["value"], "performance.net_return"))
                 item[label] = {"status": "MATCH" if not errors and not details["replay_errors"] else "DIFFERS",
                                "differences": errors, "replay_errors": details["replay_errors"]}
             reports.append(item)

@@ -116,6 +116,9 @@ def run_validation(spec_path, workspace, output, vibe=False):
             from .vibe_controls import run_controls
             engine = run_controls(run)
             write_json(run / "vibe_controls.json", engine)
+        from .performance_controls import run_controls as metric_controls
+        metrics = metric_controls(run)
+        write_json(run / "metric_controls.json", metrics)
         sources_unchanged = sources == package_inventory()
         errors = []
         if reference is not None and not reference["accepted"]:
@@ -130,11 +133,13 @@ def run_validation(spec_path, workspace, output, vibe=False):
             errors.append("Vibe acceptance instrument calibration failed")
         if engine is not None and not engine["aligned_supported_cases_accepted"]:
             errors.append("Aligned Vibe supported cases differ from fixed contract")
+        if not metrics["accepted"]:
+            errors.append("Metric/calibration instrument controls differ")
         fingerprint = {"source": sources, "spec": spec, "protocol_sha256": digest(protocol),
                        "dataset_manifest_sha256": manifest_sha, "dataset_inventory": inventory,
                        "python": platform.python_version(), "vibe": bool(vibe or spec["run_vibe_controls"]),
                        "engine_environment": {k: engine[k] for k in ("engine_source_sha256", "dependencies")} if engine else None}
-        scientific = {"reference": reference, "data": data, "engine": engine}
+        scientific = {"reference": reference, "data": data, "engine": engine, "metrics": metrics}
         status = "VALIDATION_ERRORS" if errors else "VALIDATION_COMPLETED_WITH_GAPS"
         result = {"schema_version": "1", "run_id": run_id, "at": now(), "status": status,
                   "experiment_id": spec["experiment_id"], "purpose": spec["purpose"],
@@ -143,6 +148,8 @@ def run_validation(spec_path, workspace, output, vibe=False):
                   "data_attached": data is not None, "data_historical_ready": False,
                   "reference_controls": {k: reference[k] for k in ("passed", "total", "scope")} if reference else None,
                   "vibe_controls": engine["summary"] if engine else None,
+                  "metric_controls": {"passed": metrics["cases_passed"], "total": metrics["cases_total"],
+                                      "scope": metrics["classification"]},
                   "formal_history_trials": 0, "broker_orders": 0,
                   "gaps": data["gaps"] if data else [{"id": "DATA", "detail": "No historical dataset attached"}],
                   "limitations": ["Validation-only, not a strategy-return or broker result",
