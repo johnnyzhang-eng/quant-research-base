@@ -1,6 +1,6 @@
 # Quant Research Base
 
-一个以数据口径、已知答案、独立核账和实验留痕为基础的量化研究项目。当前是 **v0.3 验收基底**，尚未完成真实历史策略收益验证，也没有券商交易功能。
+一个以数据口径、已知答案、独立核账和实验留痕为基础的量化研究项目。当前是 **v0.4 验收基底**，尚未完成真实历史策略收益验证，也没有券商交易功能。
 
 本项目复用现有引擎，研究规范与证据留在引擎外：数据/协议 → 仪器验收 → 主回测路径 → 独立核账/基准 → 向前验证。
 
@@ -38,7 +38,9 @@ python -B -m research_base run --spec examples/validation.json --output runs-loc
 
 这条可选路径不会自动安装依赖或获取行情。被测引擎源码哈希、numpy/pandas版本和逐事件差异会保存到本地。兼容性以实际来源和控制记录为准。
 
-默认测试环境执行53项测试，另8项Vibe集成测试明确跳过；已有Vibe的本机环境执行全部61项。GitHub默认CI不安装Vibe，不能据此宣称引擎集成已在远端验证。见[账户适配模型](docs/ACCOUNTING_MODEL.md)、[指标口径](docs/METRICS.md)与[完整协议路径](docs/PROTOCOL_PATH.md)。
+默认测试环境执行65项测试，另9项Vibe集成测试明确跳过；已有Vibe的本机环境执行全部74项。GitHub默认CI不安装Vibe，不能据此宣称引擎集成已在远端验证。见[账户适配模型](docs/ACCOUNTING_MODEL.md)、[指标口径](docs/METRICS.md)、[完整协议路径](docs/PROTOCOL_PATH.md)与[配对月度检验](docs/PAIRED_INFERENCE.md)。
+
+固定配对月度增长与循环区块bootstrap程序已接入统一入口，归档6个合成账户验收、4个坏输入拒绝及完整抽样位置/结果。它保留破产和缺月，不能从一个窗口或合成区间推导策略支持。
 
 每次运行另输出[历史研究预检](docs/HISTORICAL_READINESS.md)，把不可变快照声明、本轮测量和D01–D06剩余条件分别记录。合成验收、完整性哈希或手改“ready”标签都不能授权历史试验。
 

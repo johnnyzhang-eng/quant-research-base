@@ -130,8 +130,9 @@ class WorkflowTests(unittest.TestCase):
             self.assertFalse(preflight["historical_run_permitted"])
             self.assertEqual(len(preflight["gates"]), 6)
             self.assertFalse(preflight["controls"]["protocol_vibe"]["observed"])
-            for kind in ("reference", "metrics", "protocol_reference"):
+            for kind in ("reference", "metrics", "protocol_reference", "paired_inference"):
                 self.assertTrue(preflight["controls"][kind]["accepted"], preflight["controls"][kind])
+            self.assertEqual(report["inference_controls"]["passed"], 6)
             self.assertTrue(verify_run(run, self.output / "registry.jsonl")["verified"])
             science.append(report["scientific_result_sha256"])
             keys.append(report["reproduction_key"])

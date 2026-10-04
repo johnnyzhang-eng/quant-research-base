@@ -34,7 +34,7 @@ def record_passed(row, causal):
                                 and row.get("replay", {}).get("errors") == [])))
 
 
-def case_evidence(report, expected, *, causal=False):
+def case_evidence(report, expected, *, causal=False, rejection_types=None):
     if report is None:
         return {"observed": False, "accepted": False, "passed": None, "total": None}
     rows = report.get("reports", [])
@@ -50,24 +50,28 @@ def case_evidence(report, expected, *, causal=False):
                     and all(c.get("passed") is True for c in controls))
     if "bad_inputs" in report:
         rejections = report["bad_inputs"]
+        required = rejection_types if rejection_types is not None else {
+            "missing_observation", "misaligned_rf", "missing_flow", "duplicate_fill"}
         accepted = (accepted and len(rejections) == 4
-                    and {r.get("mutation") for r in rejections} == {
-                        "missing_observation", "misaligned_rf", "missing_flow", "duplicate_fill"}
+                    and {r.get("mutation") for r in rejections} == required
                     and all(r.get("detected") is True for r in rejections))
     return {"observed": True, "accepted": accepted, "passed": passed, "total": len(rows),
             "scope": "SYNTHETIC_CONTROL_EVIDENCE_ONLY"}
 
 
-def assess(audit, reference, engine, metrics, paths, live_paths, assumptions):
+def assess(audit, reference, engine, metrics, paths, live_paths, assumptions, inference=None):
     """Derive observations from this run; never edit source conditions in place."""
     inputs = {"data_audit": audit, "reference": reference, "vibe": engine,
               "metrics": metrics, "protocol_reference": paths, "protocol_vibe": live_paths,
-              "assumptions": assumptions}
+              "assumptions": assumptions, "paired_inference": inference}
     fingerprints = {k: canonical_hash(v) if v is not None else None for k, v in inputs.items()}
     controls = {"reference": case_evidence(reference, 39),
                 "metrics": case_evidence(metrics, 12),
                 "protocol_reference": case_evidence(paths, 11, causal=True),
                 "protocol_vibe": case_evidence(live_paths, 11, causal=True)}
+    if inference is not None:
+        controls["paired_inference"] = case_evidence(inference, 6, rejection_types={
+            "missing_month", "context_mismatch", "external_flow", "partial_month"})
     aligned_rows = engine.get("reports", []) if engine else []
     aligned_passed = sum(r.get("aligned", {}).get("status") == "MATCH"
                          and r.get("aligned", {}).get("differences") == []

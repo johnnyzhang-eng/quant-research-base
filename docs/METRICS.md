@@ -37,7 +37,7 @@ Square-root scaling is a descriptive annualization convention; it is not a corre
 
 Select the smallest absolute gap to strategy annual volatility, using a numerical tie quantum of1e−12 absolute annual volatility and lower k on ties. Keep all101 points. No mean return, CAGR or Calmar enters selection. Relative risk error above10%, zero/undefined strategy volatility, or an undefined candidate prevents a risk-matched claim. Preserve the selected k for other windows/cost/capital scenarios; never recalibrate on confirmation or forward data.
 
-The synthetic grid control only checks this selection algorithm. The separate full protocol controls now generate S/B0/BR/BC accounts for invented inputs. **Historical101-account risk calibration, RMB FX accounting, historical strategy evaluation, monthly paired log-growth/bootstrap inference, beta/exposure attribution and forward evidence remain pending.** A conditional USD study must be labeled as such, not as the protocol's executable RMB personal account.
+The synthetic grid control only checks this selection algorithm. The separate full protocol controls now generate S/B0/BR/BC accounts for invented inputs. [Paired monthly growth/bootstrap](PAIRED_INFERENCE.md) now has a fixed account-window API and synthetic controls. **Historical101-account risk calibration, RMB FX accounting, historical strategy evaluation and its complete scenario/window inference matrix, beta/exposure attribution and forward evidence remain pending.** A conditional USD study must be labeled as such, not as the protocol's executable RMB personal account.
 
 ## Instrument evidence
 

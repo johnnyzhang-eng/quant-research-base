@@ -125,8 +125,11 @@ def run_validation(spec_path, workspace, output, vibe=False):
         live_paths = path_controls(run / "protocol_vibe", use_vibe=True) if engine is not None else None
         if live_paths is not None:
             write_json(run / "protocol_path_vibe.json", live_paths)
+        from .inference_controls import run_controls as inference_controls
+        inference = inference_controls(run)
+        write_json(run / "inference_controls.json", inference)
         from .historical_readiness import assess
-        preflight = assess(data, reference, engine, metrics, paths, live_paths, spec["assumptions"])
+        preflight = assess(data, reference, engine, metrics, paths, live_paths, spec["assumptions"], inference=inference)
         write_json(run / "historical_preflight.json", preflight)
         sources_unchanged = sources == package_inventory()
         errors = []
@@ -146,13 +149,15 @@ def run_validation(spec_path, workspace, output, vibe=False):
             errors.append("Metric/calibration instrument controls differ")
         if not paths["accepted"] or (live_paths is not None and not live_paths["accepted"]):
             errors.append("Full protocol/allocation path or causal-prefix controls differ")
+        if not inference["accepted"]:
+            errors.append("Paired inference instrument controls differ")
         fingerprint = {"source": sources, "spec": spec, "protocol_sha256": digest(protocol),
                        "dataset_manifest_sha256": manifest_sha, "dataset_inventory": inventory,
                        "python": platform.python_version(), "vibe": bool(vibe or spec["run_vibe_controls"]),
                        "engine_environment": {k: engine[k] for k in ("engine_source_sha256", "dependencies")} if engine else None}
         scientific = {"reference": reference, "data": data, "engine": engine, "metrics": metrics,
                       "protocol_reference": paths, "protocol_vibe": live_paths,
-                      "historical_preflight": preflight}
+                      "historical_preflight": preflight, "paired_inference": inference}
         status = "VALIDATION_ERRORS" if errors else "VALIDATION_COMPLETED_WITH_GAPS"
         result = {"schema_version": "1", "run_id": run_id, "at": now(), "status": status,
                   "experiment_id": spec["experiment_id"], "purpose": spec["purpose"],
@@ -167,6 +172,8 @@ def run_validation(spec_path, workspace, output, vibe=False):
                                              "vibe": live_paths["cases_passed"] if live_paths is not None else None,
                                              "total": paths["cases_total"], "classification": paths["classification"]},
                   "formal_history_trials": 0, "broker_orders": 0,
+                  "inference_controls": {"passed": inference["cases_passed"], "total": inference["cases_total"],
+                                         "classification": inference["classification"]},
                   "historical_preflight": {"gate_decision": preflight["gate_decision"],
                                            "unresolved_conditions": len(preflight["gates"]),
                                            "report": "historical_preflight.json"},
