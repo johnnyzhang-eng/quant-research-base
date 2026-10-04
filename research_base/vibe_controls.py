@@ -302,7 +302,7 @@ def execute_vibe(data, native, aligned=False):
         engine.actual_position_snapshots[-1] = engine.terminal_positions
     if aligned:
         ledger = {"events": engine.account_events, "snapshots": engine.account_snapshots}
-        checked = oracle.independent_replay(data, ledger)
+        checked = oracle.independent_replay(data, ledger, monetary_tolerance="0.00000001")
         snapshot_errors = []
         for actual_snapshot, native_snapshot in zip(engine.account_snapshots, engine.equity_snapshots):
             for field, value in (("equity", native_snapshot.equity), ("settled_cash", native_snapshot.capital)):
@@ -313,6 +313,7 @@ def execute_vibe(data, native, aligned=False):
         metric_input, performance = from_vibe(data, ledger, opening_date=data["performance_boundary_date"])
         details = {"projection": actual, "independent_replay": checked["replayed"],
                    "replay_errors": checked["errors"] + snapshot_errors, "account_ledger": ledger,
+                   "replay_monetary_tolerance_usd": "0.00000001",
                    "native_equity_snapshots": [{**asdict(s), "timestamp": str(s.timestamp)} for s in engine.equity_snapshots],
                    "performance_input": metric_input, "performance": performance,
                    "native_fill_records": [{**asdict(f), "timestamp": str(f.timestamp)} for f in engine.fill_records],
@@ -424,9 +425,9 @@ def run_controls(run):
                 "dependencies": deps, "network_attempts_blocked": len(network_attempts),
                 "injected_fee_error_detected": not bad["passed"],
                 "accounting_error_injections": injections,
-                "limitations": ["Fixed targets; no Vibe full SMA strategy path tested",
+                "limitations": ["This shared suite uses fixed targets; separate protocol_path reports test the project's causal SMA pipeline",
                                 "Aligned model: long-only USD, integer shares, explicit fees/ticks, dividend receivables, splits and settlement",
                                 "No FX, cash interest, fractional splits/cash-in-lieu or general corporate-action acceptance",
-                                "Native basket fitting remains a separate model choice; fixed cases do not certify all allocations",
+                                "Aligned adapter now uses registered sequential fee-aware targets; allocation cases are in protocol_path reports",
                                 "Both paths use the declared one-shot decision calendar and private engine hooks",
                                 "Installed source hashes matter; no inference about latest upstream versions"]}

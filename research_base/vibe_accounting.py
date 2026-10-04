@@ -4,7 +4,7 @@ This bridge changes the declared model, not the vendor source. It uses engine
 positions/fills/capital; the independent Fraction replay lives elsewhere.
 """
 from dataclasses import replace
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal, ROUND_HALF_UP, ROUND_FLOOR
 
 from .reference import low_frequency_engine as contract
 
@@ -21,6 +21,19 @@ def accounting_class(base):
             self.phase = None
             self.seeded = False
             self.capacity_used = {}
+            self.bar_lookup = {(b["date"], b["symbol"]): b for b in data["bars"]}
+            self.account_marks = {s: Decimal(v) for s, v in data["initial"]["marks"].items()}
+            self.prior_volumes = {s: [Decimal(v) for v in values] for s, values in data["seed_volume_history"].items()}
+            self.order_metadata = {}
+            self.close_frame = None
+            self.actions_by_day = {}
+            for action in data["actions"]:
+                self.actions_by_day.setdefault(action["effective_date"], []).append(action)
+
+        def cash_for_planning(self):
+            # Registered USD decision quantum; quantities and event prices/fees
+            # stay exact. This addresses binary state representation only.
+            return Decimal(str(self.capital)).quantize(Decimal("0.00000001"))
 
         def emit(self, kind, **fields):
             # Sequence is also the identifier used by settlement events.
@@ -51,6 +64,9 @@ def accounting_class(base):
             from backtest.models import Position
             self.account_day = str(timestamp.date())
             self.capacity_used = {s: 0 for s in codes}
+            if self.close_frame is None:
+                import pandas as pd
+                self.close_frame = pd.DataFrame({s: data_map[s]["close"] for s in codes})
             if not self.seeded:
                 for s, qty in self.account_data["initial"]["holdings"].items():
                     if qty:
@@ -66,7 +82,7 @@ def accounting_class(base):
                 if p["due"] <= self.account_day:
                     self.emit("SHARE_SETTLEMENT", fill_sequence=p["sequence"], qty=p["qty"])
                     self.pending_shares.remove(p)
-            actions = [a for a in self.account_data["actions"] if a["effective_date"] == self.account_day]
+            actions = self.actions_by_day.get(self.account_day, [])
             for a in sorted(actions, key=lambda a: (a["type"] != "split", a["id"])):
                 s = a["symbol"]
                 if contract.stamp(a["known_at"]) > contract.stamp(data_map[s].loc[timestamp, "open_at"]):
@@ -83,6 +99,7 @@ def accounting_class(base):
                     for p in self.pending_shares:
                         if p["symbol"] == s:
                             p["qty"] = int(Decimal(p["qty"]) * ratio)
+                    self.account_marks[s] /= ratio
                     self.emit("SPLIT", action_id=a["id"], symbol=s,
                               numerator=a["numerator"], denominator=a["denominator"])
                 else:
@@ -100,7 +117,17 @@ def accounting_class(base):
             return False
 
         def _calc_open_equity(self, data_map, close_df, ts):
-            return super()._calc_open_equity(data_map, close_df, ts) + float(self.assets_not_cash())
+            value = self.cash_for_planning() + self.assets_not_cash()
+            for s in self.account_data["symbols"]:
+                bar = self.bar_lookup[self.account_day, s]
+                price = Decimal(bar["open"]) if bar["open"] is not None else self.account_marks[s]
+                value += self.held(s) * price
+            return float(value)
+
+        def _safe_price(self, close_df, ts, symbol, fallback, **kwargs):
+            import pandas as pd
+            value = close_df.loc[ts, symbol]
+            return float(value) if pd.notna(value) else float(self.account_marks[symbol])
 
         def _calc_equity(self, close_df, ts):
             return super()._calc_equity(close_df, ts) + float(self.assets_not_cash())
@@ -113,30 +140,96 @@ def accounting_class(base):
             return super().can_execute(symbol, direction, bar)
 
         def _execute_target_rebalance(self, weights, data_map, ts, equity, codes):
+            from backtest.engines.base import _OpenOrder
             sessions = self.account_data["calendar"]["sessions"]
             requested = {sessions[sessions.index(p["decision_date"]) + 1]
                          for p in self.account_data["control_intents"]}
             if self.account_day not in requested:
                 return  # an empty intent calendar must preserve opening holdings
-            # Commit sales before planning buys. Only settled proceeds enter
-            # capital, so the native basket fitter cannot spend sale receivables.
-            self.phase = "sell"
-            try:
-                super()._execute_target_rebalance(weights, data_map, ts, equity, codes)
-                self.phase = "buy"
-                super()._execute_target_rebalance(weights, data_map, ts, equity, codes)
-            finally:
-                self.phase = None
+            intent = next(p for p in self.account_data["control_intents"]
+                          if sessions[sessions.index(p["decision_date"]) + 1] == self.account_day)
+            order = sorted(codes, key=lambda s: (("SPY", "EFA", "IEF", "GLD").index(s) if s in ("SPY", "EFA", "IEF", "GLD") else 4, s))
+            nav = Decimal(str(equity)).quantize(Decimal("0.00000001"))
+            deltas = {}
+            for s in order:
+                bar = self.bar_lookup[self.account_day, s]
+                mark = Decimal(bar["open"]) if bar["open"] is not None else self.account_marks[s]
+                target = int((nav * Decimal(str(weights[s])) / mark).to_integral_value(rounding=ROUND_FLOOR))
+                deltas[s] = target - self.held(s)
+            self.emit("TARGET_PLAN", decision_date=intent["decision_date"], opening_equity=nav,
+                      allocation_policy="SPY_EFA_IEF_GLD_SEQUENTIAL_FEE_AWARE", deltas=deltas)
+            for side in ("SELL", "BUY"):
+                for s in order:
+                    delta = deltas[s]
+                    if (side == "SELL" and delta >= 0) or (side == "BUY" and delta <= 0):
+                        continue
+                    bar = self.bar_lookup[self.account_day, s]
+                    wanted = abs(delta)
+                    self.emit("ORDER_ATTEMPT", symbol=s, side=side, requested_qty=wanted,
+                              decision_date=intent["decision_date"], observed_at=bar["open_at"])
+                    reason = ("MISSING_OPEN" if bar["open"] is None else
+                              "UNKNOWN_OPEN_TRADABILITY" if bar["open_status"] == "unknown" else
+                              "HALTED_AT_OPEN" if bar["open_status"] == "halted" else
+                              "UNKNOWN_OPEN_LIQUIDITY" if bar["open_capacity_shares"] is None else
+                              "ZERO_OPEN_LIQUIDITY" if bar["open_capacity_shares"] <= 0 else
+                              "VOLUME_WARMUP_INCOMPLETE" if len(self.prior_volumes[s]) < 20 else None)
+                    if reason:
+                        self.emit("ORDER_CANCEL", symbol=s, side=side, requested_qty=wanted, reason=reason)
+                        continue
+                    capacity = int(sum(self.prior_volumes[s][-20:]) / 20 * Decimal("0.001"))
+                    capacity = min(capacity, bar["open_capacity_shares"] - self.capacity_used[s])
+                    qty = min(wanted, capacity)
+                    reasons = ["CAPACITY"] if qty < wanted else []
+                    direction = 1 if side == "BUY" else -1
+                    price = self.apply_slippage(float(bar["open"]), direction)
+                    if side == "SELL":
+                        if qty > self.sellable(s):
+                            qty = self.sellable(s); reasons.append("UNSETTLED_SHARES")
+                    else:
+                        low, high = 0, qty
+                        while low < high:
+                            middle = (low + high + 1) // 2
+                            fee = self.calc_commission(middle, price, 1, True)
+                            if middle * Decimal(str(price)) + Decimal(str(fee)) <= self.cash_for_planning():
+                                low = middle
+                            else:
+                                high = middle - 1
+                        if low < qty:
+                            reasons.append("INSUFFICIENT_SETTLED_CASH")
+                        qty = low
+                    if qty <= 0:
+                        self.emit("ORDER_CANCEL", symbol=s, side=side, requested_qty=wanted,
+                                  reason="|".join(reasons) or "NO_EXECUTABLE_QUANTITY")
+                        continue
+                    fee = self.calc_commission(qty, price, 1, side == "BUY")
+                    if side == "SELL" and qty * Decimal(str(price)) - Decimal(str(fee)) <= 0:
+                        self.emit("ORDER_CANCEL", symbol=s, side=side, requested_qty=wanted, reason="NONPOSITIVE_NET_PROCEEDS")
+                        continue
+                    self.order_metadata = {"requested_qty": wanted, "decision_date": intent["decision_date"],
+                                           "intent_source": intent.get("source", "SYNTHETIC_CONTROL_INTENT"), "reduction_reasons": reasons}
+                    if side == "SELL":
+                        before = self.positions[s]
+                        if qty == self.held(s):
+                            self._close_position(s, price, ts, "signal")
+                        else:
+                            self._execute_partial_reduction(self._plan_reduction(before, before.size-qty, price), ts)
+                    else:
+                        fill = _OpenOrder(s, 1, price, qty, 1.0, qty*price, fee)
+                        if s in self.positions:
+                            self._execute_position_increase(fill, ts)
+                        else:
+                            self._execute_open_order(fill, ts)
+                    if qty < wanted:
+                        self.emit("ORDER_REMAINDER_CANCEL", symbol=s, side=side, unfilled_qty=wanted-qty, reasons=reasons)
 
         def _plan_reduction(self, before, target_size, price):
-            bars = self.account_data["bars"]
-            bar = next(b for b in bars if b["date"] == self.account_day and b["symbol"] == before.symbol)
+            bar = self.bar_lookup[self.account_day, before.symbol]
             remaining = bar["open_capacity_shares"] - self.capacity_used[before.symbol]
             qty = min(before.size - target_size, self.sellable(before.symbol), max(remaining, 0))
             return super()._plan_reduction(before, before.size - qty, price)
 
         def _execute_position_increase(self, order, ts):
-            bar = next(b for b in self.account_data["bars"] if b["date"] == self.account_day and b["symbol"] == order.symbol)
+            bar = self.bar_lookup[self.account_day, order.symbol]
             size = min(order.size, max(bar["open_capacity_shares"] - self.capacity_used[order.symbol], 0))
             if size <= 0:
                 return
@@ -163,9 +256,9 @@ def accounting_class(base):
             tax = (qty * price * Decimal(f["buy_tax_rate" if side == "BUY" else "sell_tax_rate"])).quantize(q, rounding=ROUND_HALF_UP)
             lag = self.account_data["settlement"]["share_sessions" if side == "BUY" else "cash_sessions"]
             due = self.due(lag)
-            bar = next(b for b in self.account_data["bars"] if b["date"] == self.account_day and b["symbol"] == s)
+            bar = self.bar_lookup[self.account_day, s]
             seq = self.emit("FILL", symbol=s, side=side, qty=qty, price=price, raw_open=bar["open"],
-                            commission=comm, platform=platform, tax=tax, fee=fee, settlement_date=due)
+                            commission=comm, platform=platform, tax=tax, fee=fee, settlement_date=due, **self.order_metadata)
             if lag and side == "BUY":
                 self.pending_shares.append({"sequence": seq, "symbol": s, "qty": qty, "due": due})
             elif lag:
@@ -174,12 +267,24 @@ def accounting_class(base):
                 self.pending_cash.append({"sequence": seq, "amount": proceeds, "due": due})
 
         def after_rebalance_bar(self, timestamp, data_map, codes):
+            if self.capital < -1e-8:
+                raise contract.ContractError("Negative native cash beyond registered monetary tolerance")
+            for s in codes:
+                bar = self.bar_lookup[self.account_day, s]
+                if self.capacity_used[s] and (bar["volume"] is None or Decimal(bar["volume"]) < self.capacity_used[s]):
+                    self.emit("POST_CLOSE_FILL_DIAGNOSTIC", symbol=s, reason="UNKNOWN_OR_INSUFFICIENT_DAILY_VOLUME",
+                              simulated_qty=self.capacity_used[s], daily_volume=bar["volume"], observed_at=bar["available_at"],
+                              action="REVIEW_NOT_RETROACTIVE_CANCEL")
+                if bar["close"] is not None:
+                    self.account_marks[s] = Decimal(bar["close"])
+                if bar["volume"] is None:
+                    self.prior_volumes[s] = []
+                else:
+                    self.prior_volumes[s].append(Decimal(bar["volume"]))
             holdings = {s: self.held(s) for s in codes}
             # Equity originates in the native valuation path plus explicit
             # non-cash assets. Never substitute the replay's calculated equity.
-            import pandas as pd
-            frame = pd.DataFrame({s: data_map[s]["close"] for s in codes})
-            equity = self._calc_equity(frame, timestamp)
+            equity = self._calc_equity(self.close_frame, timestamp)
             self.account_snapshots.append(contract.serial({"date": self.account_day,
                 "settled_cash": Decimal(str(self.capital)), "unsettled_cash": sum((p["amount"] for p in self.pending_cash), Decimal(0)),
                 "dividend_receivable": sum((p["amount"] for p in self.receivables.values()), Decimal(0)),

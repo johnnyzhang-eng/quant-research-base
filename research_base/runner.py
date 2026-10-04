@@ -119,6 +119,12 @@ def run_validation(spec_path, workspace, output, vibe=False):
         from .performance_controls import run_controls as metric_controls
         metrics = metric_controls(run)
         write_json(run / "metric_controls.json", metrics)
+        from .path_controls import run_controls as path_controls
+        paths = path_controls(run / "protocol_reference", use_vibe=False)
+        write_json(run / "protocol_path_reference.json", paths)
+        live_paths = path_controls(run / "protocol_vibe", use_vibe=True) if engine is not None else None
+        if live_paths is not None:
+            write_json(run / "protocol_path_vibe.json", live_paths)
         sources_unchanged = sources == package_inventory()
         errors = []
         if reference is not None and not reference["accepted"]:
@@ -135,11 +141,14 @@ def run_validation(spec_path, workspace, output, vibe=False):
             errors.append("Aligned Vibe supported cases differ from fixed contract")
         if not metrics["accepted"]:
             errors.append("Metric/calibration instrument controls differ")
+        if not paths["accepted"] or (live_paths is not None and not live_paths["accepted"]):
+            errors.append("Full protocol/allocation path or causal-prefix controls differ")
         fingerprint = {"source": sources, "spec": spec, "protocol_sha256": digest(protocol),
                        "dataset_manifest_sha256": manifest_sha, "dataset_inventory": inventory,
                        "python": platform.python_version(), "vibe": bool(vibe or spec["run_vibe_controls"]),
                        "engine_environment": {k: engine[k] for k in ("engine_source_sha256", "dependencies")} if engine else None}
-        scientific = {"reference": reference, "data": data, "engine": engine, "metrics": metrics}
+        scientific = {"reference": reference, "data": data, "engine": engine, "metrics": metrics,
+                      "protocol_reference": paths, "protocol_vibe": live_paths}
         status = "VALIDATION_ERRORS" if errors else "VALIDATION_COMPLETED_WITH_GAPS"
         result = {"schema_version": "1", "run_id": run_id, "at": now(), "status": status,
                   "experiment_id": spec["experiment_id"], "purpose": spec["purpose"],
@@ -150,6 +159,9 @@ def run_validation(spec_path, workspace, output, vibe=False):
                   "vibe_controls": engine["summary"] if engine else None,
                   "metric_controls": {"passed": metrics["cases_passed"], "total": metrics["cases_total"],
                                       "scope": metrics["classification"]},
+                  "protocol_path_controls": {"reference": paths["cases_passed"],
+                                             "vibe": live_paths["cases_passed"] if live_paths is not None else None,
+                                             "total": paths["cases_total"], "classification": paths["classification"]},
                   "formal_history_trials": 0, "broker_orders": 0,
                   "gaps": data["gaps"] if data else [{"id": "DATA", "detail": "No historical dataset attached"}],
                   "limitations": ["Validation-only, not a strategy-return or broker result",

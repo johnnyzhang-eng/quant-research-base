@@ -4,7 +4,7 @@ Updated: 2026-10-04. This is a bounded research-foundation milestone, not a clai
 
 | Goal | Acceptance | Current status |
 |---|---|---|
-| G1 Reproducible entry | Validated spec; isolated runs; input/source snapshots; complete attempt registry; known-answer, rejection, rerun and tamper tests | Implemented for validation-only; default39 tests, optional Vibe5 tests; mandatory metric12 controls |
+| G1 Reproducible entry | Validated spec; isolated runs; input/source snapshots; complete attempt registry; known-answer, rejection, rerun and tamper tests | Implemented for validation-only; default49 tests, optional Vibe8 tests; mandatory metric12 and protocol11 controls |
 | G2 Data and instrument | Frozen provenance/units/timing; source permissions; reference controls through the actual engine path; separate discrepancies and unsupported features | Partial: reference39, shared21, aligned21; bounded dividend/split/settlement bridge; local snapshot audit available; historical data/model gaps remain |
 | G3 First study | Frozen four-ETF monthly ten-month-average hypothesis; next-session execution; B0/BR/BC baselines; explicit costs and robustness; independent ledgers | Pending: no formal historical-return trial; unresolved source use, price/share basis, timing, actions and account model |
 | G4 Public delivery | Authorized repository; allowlisted, reviewed publication; runnable synthetic examples; documented evidence and limitations; remote validation | Initial release public with verified per-check CI; subsequent milestones reviewed separately; no vendor data or private factors included |
@@ -13,8 +13,8 @@ Updated: 2026-10-04. This is a bounded research-foundation milestone, not a clai
 
 1. Resolve sustainable source permissions and select a primary price/volume definition, preserving cross-source disagreement.
 2. Freeze consistent corporate-action/share units, a signal-vs-trade price mapping, information timing and calendar assumptions.
-3. Extend the bounded actual-engine accounting acceptance to the full strategy and four-asset path. Dividend receivable/payment, integer splits and delayed settlement now pass synthetic fixed-target controls; this does not establish historical price/share-basis correctness or all basket allocations.
-4. Net-account metrics and the101-account risk-selection API now have synthetic acceptance. Generate actual S/B0/BR/BC ledgers through a consistent full strategy/account path, including frozen costs, FX and timing; the synthetic grid is not a completed benchmark study.
+3. A causal four-asset signal/benchmark pipeline now feeds actual Vibe execution in synthetic controls, with sequential fee-aware allocation, prior-volume screening and past-only missing-open marks. Extend this accepted scope to validated historical inputs and frozen account/FX assumptions; synthetic acceptance is not historical price/share-basis acceptance.
+4. Net-account metrics, actual synthetic S/B0/BR/BC ledger generation and the101-account risk-selection API now have controls. Run all101 development calibration accounts on suitable historical inputs, with frozen costs and currency; the synthetic grid is not a completed historical benchmark study.
 5. Run one registered historical model, with frozen costs/latency assumptions and explicit limitations; preserve unsuccessful trials too.
 6. Start forward records after freezing rules. A few monthly decisions are limited evidence; monitor strategy and baseline together.
 

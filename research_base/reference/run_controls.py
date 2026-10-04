@@ -79,7 +79,7 @@ def rounded(v, step, how):
     return n * step
 
 
-def independent_replay(data, result):
+def independent_replay(data, result, monetary_tolerance="0.00000000000000000001"):
     """Uses inputs + individual events, never kernel value/fee/settlement helpers
     or a kernel equity series to calculate the expected equity."""
     cash = F(data["initial"]["settled_cash"])
@@ -91,10 +91,17 @@ def independent_replay(data, result):
     sessions = data["calendar"]["sessions"]
     replay = []
     errors = []
+    events_by_day = {}
+    for event in result["events"]:
+        events_by_day.setdefault(event["date"], []).append(event)
+    tolerance = F(monetary_tolerance)
+    if tolerance < 0 or tolerance > F(1, 10**8):
+        raise ValueError("Replay monetary tolerance must lie between0 and USD1e-8")
     def check(label, actual, expected):
         if isinstance(expected, (int, F)) and not isinstance(expected, bool):
             try:
-                good = abs(F(str(actual)) - expected) <= F(1, 10**20)
+                bound = tolerance if label.endswith((":cash", ":unsettled", ":receivable", ":equity")) else F(1, 10**20)
+                good = abs(F(str(actual)) - expected) <= bound
             except (ValueError, TypeError):
                 good = False
         else:
@@ -104,7 +111,7 @@ def independent_replay(data, result):
     previous = None
     for snap in result["snapshots"]:
         d = snap["date"]
-        events = [e for e in result["events"] if e["date"] == d]
+        events = events_by_day.get(d, [])
         by = lambda name: [e for e in events if e["type"] == name]
         if previous is not None:
             elapsed = (date.fromisoformat(d) - date.fromisoformat(previous)).days
@@ -204,7 +211,7 @@ def independent_replay(data, result):
         check(d+":equity", snap["equity"], equity)
         replay.append({"date": d, "equity_exact_fraction": str(equity), "cash_exact_fraction": str(cash)})
         previous = d
-    return {"method": "independent fractions; raw quotes, initial state and events", "errors": errors,
+    return {"method": "independent fractions; raw quotes, initial state and events", "monetary_tolerance": monetary_tolerance, "errors": errors,
             "passed": not errors, "replayed": replay}
 
 
