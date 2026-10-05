@@ -108,7 +108,7 @@ class PaperTransport(Protocol):
     def cancel_order(self, *, acc_id: int, trd_env: str, order_id: str) -> dict: ...
 
 
-class FutuPaperAdapter:
+class DurablePaperAdapter:
     """Durable intent/reservation guard. Constructor and recovery never send.
 
     fee_bound is an explicit assumed upper bound for this single order, NOT an
@@ -152,16 +152,7 @@ class FutuPaperAdapter:
                         (kind, intent, at, encoded, hashlib.sha256(encoded.encode()).hexdigest()))
 
     def _guard(self, at):
-        _time(at)
-        if self.transport.peer_identity() != (self.binding.peer_host, self.binding.peer_port):
-            raise ValueError('FIXED_PEER_CHANGED')
-        accounts = self.transport.get_accounts()
-        if self.transport.peer_identity() != (self.binding.peer_host,self.binding.peer_port):
-            raise ValueError('FIXED_PEER_CHANGED_DURING_ACCOUNT_QUERY')
-        with self._tx(): self._record('ACCOUNTS', None, at, accounts)
-        matches = [r for r in accounts if type(r.get('acc_id')) is int and r['acc_id'] == self.binding.acc_id]
-        if len(matches) != 1 or matches[0].get('trd_env') != 'SIMULATE' or self.binding.market not in matches[0].get('markets', []) or matches[0].get('sim_acc_type') != 'STOCK_AND_OPTION' or matches[0].get('acc_status') != 'ACTIVE':
-            raise ValueError('LIVE_ACCOUNT_ENVIRONMENT_MARKET_NOT_BOUND')
+        raise NotImplementedError("PROVIDER_BINDING_GUARD_REQUIRED")
 
     def _payload(self, payload):
         if set(payload) != {'code', 'side', 'quantity', 'limit_price'}:
@@ -186,7 +177,7 @@ class FutuPaperAdapter:
 
     def preflight(self, *, at):
         self._guard(at)
-        snapshot = self.transport.snapshot(acc_id=self.binding.acc_id, trd_env='SIMULATE', at=at)
+        snapshot = self.transport.snapshot(acc_id=self.binding.acc_id, trd_env=self.binding.environment, at=at)
         with self._tx(): self._record('PREFLIGHT', None, at, snapshot)
         checked = _time(self.clock())
         started, received = _time(snapshot.get('request_started_at')), _time(snapshot.get('received_at'))
@@ -279,7 +270,7 @@ class FutuPaperAdapter:
             self._fee(fee_bound, send_at)
             if (_time(send_at)-_time(snapshot['request_started_at'])).total_seconds() > self.envelope.max_snapshot_age_seconds:
                 raise ValueError('PREFLIGHT_EXPIRED_AT_SEND')
-            response = self.transport.place_order(acc_id=self.binding.acc_id, trd_env='SIMULATE', remark=remark, **p)
+            response = self.transport.place_order(acc_id=self.binding.acc_id, trd_env=self.binding.environment, remark=remark, **p)
             with self._tx():
                 self._record('PLACE_RESPONSE', intent, at, response)
                 self.db.execute("UPDATE intents SET state='UNKNOWN' WHERE intent=? AND state='SUBMITTING'", (intent,))
@@ -326,7 +317,7 @@ class FutuPaperAdapter:
         row = self.intent(intent)
         if _time(at) < _time(row['watermark'] or row['created_at']): raise ValueError('QUERY_WATERMARK_REVERSED')
         self._guard(at)
-        orders = self.transport.query_orders(acc_id=self.binding.acc_id, trd_env='SIMULATE', remark=row['remark'], order_id=row['order_id'], since=row['created_at'], at=at)
+        orders = self.transport.query_orders(acc_id=self.binding.acc_id, trd_env=self.binding.environment, remark=row['remark'], order_id=row['order_id'], since=row['created_at'], at=at)
         with self._tx():
             self._record('ORDER_QUERY', intent, at, orders)
             self.db.execute('UPDATE intents SET watermark=? WHERE intent=?', (at,intent))
@@ -375,7 +366,7 @@ class FutuPaperAdapter:
             self.db.execute("UPDATE intents SET cancel_token=?,cancel_state='REQUESTING' WHERE intent=?", (token,intent))
             self._record('BEFORE_CANCEL', intent, at, {'order_id':row['order_id'],'cancel_token':token})
         try:
-            response = self.transport.cancel_order(acc_id=self.binding.acc_id,trd_env='SIMULATE',order_id=row['order_id'])
+            response = self.transport.cancel_order(acc_id=self.binding.acc_id,trd_env=self.binding.environment,order_id=row['order_id'])
         except Exception as exc:
             response = {'request_accepted':None,'exception_type':type(exc).__name__}
         self.cancel_response(intent, token, response, at=at)
@@ -396,6 +387,22 @@ class FutuPaperAdapter:
                 'records':[dict(r) for r in self.db.execute('SELECT * FROM records ORDER BY sequence')],
                 'execution_records':[], 'actual_fees':None,
                 'classification':'guarded_paper_transport_economic_reconciliation_unverified'}
+
+
+class FutuPaperAdapter(DurablePaperAdapter):
+    """OpenD-specific account guard over the persistent paper intent core."""
+    def _guard(self, at):
+        _time(at)
+        if self.transport.peer_identity() != (self.binding.peer_host, self.binding.peer_port):
+            raise ValueError('FIXED_PEER_CHANGED')
+        accounts = self.transport.get_accounts()
+        if self.transport.peer_identity() != (self.binding.peer_host,self.binding.peer_port):
+            raise ValueError('FIXED_PEER_CHANGED_DURING_ACCOUNT_QUERY')
+        with self._tx(): self._record('ACCOUNTS', None, at, accounts)
+        matches = [r for r in accounts if type(r.get('acc_id')) is int and r['acc_id'] == self.binding.acc_id]
+        if len(matches) != 1 or matches[0].get('trd_env') != 'SIMULATE' or self.binding.market not in matches[0].get('markets', []) or matches[0].get('sim_acc_type') != 'STOCK_AND_OPTION' or matches[0].get('acc_status') != 'ACTIVE':
+            raise ValueError('LIVE_ACCOUNT_ENVIRONMENT_MARKET_NOT_BOUND')
+
 
 
 class OpenDTransport:

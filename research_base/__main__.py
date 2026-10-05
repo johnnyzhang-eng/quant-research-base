@@ -6,7 +6,7 @@ from .runner import run_validation
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Offline research evidence and acceptance; no broker orders")
+    parser = argparse.ArgumentParser(description="Research evidence and guarded explicit paper-only execution")
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run")
     run.add_argument("--spec", type=Path, required=True)
@@ -37,7 +37,17 @@ def main():
     paper = commands.add_parser("paper-local-readiness", help="Local SDK/config inventory only; no provider connection or order")
     paper.add_argument("--config", type=Path, required=True)
     paper.add_argument("--private-root", type=Path, required=True)
+    alpaca = commands.add_parser("alpaca-paper-run", help="One explicit PAPER action; fixed paper origin, no live fallback or retries")
+    alpaca.add_argument("--config", type=Path, required=True)
+    alpaca.add_argument("--credentials", type=Path, required=True)
+    alpaca.add_argument("--private-root", type=Path, required=True)
+    alpaca.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.command == "alpaca-paper-run":
+        from .official_paper_run import run_alpaca
+        code, folder = run_alpaca(args.config, args.credentials, args.private_root, args.output)
+        print(json.dumps({"exit_code": code, "run_id": folder.name, "output": str(folder)}, ensure_ascii=False))
+        return code
     if args.command == "paper-local-readiness":
         from .official_paper_run import local_readiness
         print(json.dumps(local_readiness(args.config, args.private_root), ensure_ascii=False))

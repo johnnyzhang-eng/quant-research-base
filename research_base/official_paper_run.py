@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from .evidence import ContractError, append_event, canonical_hash, digest, load_json, seal_run, write_json
 from .execution.futu_paper import FutuPaperAdapter, FutuPaperBinding, PaperRiskEnvelope
+from .execution.alpaca_paper import AlpacaPaperAdapter, AlpacaPaperBinding
 
 SCHEMA = 'official-paper-run/1'
 
@@ -30,16 +31,20 @@ def _private(path, root):
 
 def validate_config(config):
     fields = {'schema_version', 'binding', 'envelope', 'state_file', 'action', 'intent', 'payload', 'fee_bound'}
-    if not isinstance(config, dict) or set(config) != fields or config['schema_version'] != SCHEMA:
+    is_alpaca = isinstance(config, dict) and config.get('schema_version') == 'official-paper-run/2' and config.get('provider') == 'alpaca'
+    if is_alpaca:
+        fields.add('provider')
+    if not isinstance(config, dict) or set(config) != fields or (not is_alpaca and config['schema_version'] != SCHEMA):
         raise ContractError('EXACT_PAPER_RUN_CONFIG_REQUIRED')
     try:
-        binding = FutuPaperBinding(**dict(config['binding'],
+        binding_class = AlpacaPaperBinding if is_alpaca else FutuPaperBinding
+        binding = binding_class(**dict(config['binding'],
             allowed_acc_ids=tuple(config['binding']['allowed_acc_ids']),
             allowed_codes=tuple(config['binding']['allowed_codes']))).validate()
         envelope = PaperRiskEnvelope(**config['envelope']).validate()
     except (KeyError, TypeError, ValueError) as exc:
         raise ContractError('INVALID_PAPER_BINDING_OR_ENVELOPE') from exc
-    if binding.peer_host not in {'127.0.0.1', '::1', 'localhost'}:
+    if not is_alpaca and binding.peer_host not in {'127.0.0.1', '::1', 'localhost'}:
         raise ContractError('FIRST_PROBE_REQUIRES_LOCAL_OPEND')
     if envelope.max_quantity != 1 or envelope.max_pending_orders != 1:
         raise ContractError('FIRST_PROBE_LIMIT_ONE_SHARE_ONE_PENDING')
@@ -68,16 +73,21 @@ def local_readiness(config_path, private_root):
     """Local inventory only: SDK presence is not login, permission or peer proof."""
     path = _private(config_path, private_root)
     config = load_json(path)
-    validate_config(config)
+    binding, _ = validate_config(config)
+    is_alpaca = isinstance(binding, AlpacaPaperBinding)
     return {'schema_version': 'paper-local-readiness/1', 'config_sha256': digest(path),
-            'sdk_import_discoverable': find_spec('futu') is not None,
+            'provider': 'alpaca' if is_alpaca else 'futu',
+            'sdk_import_discoverable': None if is_alpaca else find_spec('futu') is not None,
             'provider_contacted': False, 'send_attempts': 0,
             'login_verified': False, 'peer_attested': False,
             'settled_cash_verified': False, 'economic_reconciliation_verified': False,
             'classification': 'LOCAL_INVENTORY_ONLY_NOT_OFFICIAL_ACCEPTANCE',
-            'required': ['reviewed installed SDK transport with actual socket peer attestation',
+            'required': (['private PAPER credentials and canonical allowed account UUID',
+                         'fixed verified TLS paper origin; fresh ACTIVE USD paper account',
+                         'flat unlevered paper account and finite one-share probe'] if is_alpaca else
+                        ['reviewed installed SDK transport with actual socket peer attestation',
                          'fresh explicit SIMULATE account and US authorization',
-                         'reviewed settled cash/sellable quantity and explicit fee bound']}
+                         'reviewed settled cash/sellable quantity and explicit fee bound'])}
 
 
 def run_paper(config_path, private_root, output, *, transport, observed_at=None, clock=None):
@@ -103,16 +113,22 @@ def run_paper(config_path, private_root, output, *, transport, observed_at=None,
     write_json(folder / 'input.json', config)
     from .execution import futu_paper
     source_files = {'runner': Path(__file__), 'adapter': Path(futu_paper.__file__)}
+    is_alpaca = isinstance(binding, AlpacaPaperBinding)
+    if is_alpaca:
+        from .execution import alpaca_paper
+        source_files['alpaca_transport'] = Path(alpaca_paper.__file__)
     code_hashes = {key: digest(path) for key, path in source_files.items()}
     write_json(folder / 'code-hashes.json', code_hashes)
     state.parent.mkdir(parents=True, exist_ok=True)
     adapter = None
     result = {'schema_version': 'paper-run-result/1', 'action': config['action'],
+              'provider': 'alpaca' if is_alpaca else 'futu',
               'status': 'NOT_STARTED', 'errors': [], 'official_chain_verified': False,
               'economic_reconciliation_verified': False, 'actual_fees': None,
               'goal_complete': False}
     try:
-        adapter = FutuPaperAdapter(state, transport, binding=binding, envelope=envelope,
+        adapter_class = AlpacaPaperAdapter if is_alpaca else FutuPaperAdapter
+        adapter = adapter_class(state, transport, binding=binding, envelope=envelope,
                                    **({'clock': clock} if clock is not None else {}))
         # Every restart recovers unresolved intents before a new action. Absence
         # cannot trigger a send; adapter keeps the original cash reservation.
@@ -134,6 +150,23 @@ def run_paper(config_path, private_root, output, *, transport, observed_at=None,
         else:
             response = adapter.submit(config['intent'], config['payload'], at=at, fee_bound=config['fee_bound'])
         write_json(folder / 'response.json', response)
+        if is_alpaca and config['action'] in {'recover', 'cancel'}:
+            # A finite observation; it never clears OMS blockers or sends again.
+            import json
+            from .execution.alpaca_paper import reconcile_paper_probe
+            local = adapter.intent(config['intent'])
+            journal = adapter.snapshot()['records']
+            preflights = [json.loads(r['payload']) for r in journal if r['kind'] == 'PREFLIGHT']
+            queries = [json.loads(r['payload']) for r in journal if r['kind'] == 'ORDER_QUERY' and r['intent'] == config['intent']]
+            orders = [o for page in queries for o in page if o.get('order_id') == local['order_id']]
+            if local['order_id'] and preflights and orders:
+                final = transport.snapshot(acc_id=binding.acc_id, trd_env='PAPER', at=at)
+                activities = transport.activities(order_id=local['order_id'], all_account=True,
+                    from_at=preflights[0]['request_started_at'], until_at=final['received_at'])
+                observation = reconcile_paper_probe(preflights[0], orders[-1], final, activities)
+                write_json(folder / 'paper-probe-evidence.json', {'before': preflights[0], 'order': orders[-1],
+                    'after': final, 'activities': activities, 'observation': observation})
+                result['paper_probe_observation_matched'] = observation['matched']
         result['status'] = 'ACTION_RETURNED_REVIEW_REQUIRED'
     except Exception as exc:
         result['status'] = 'BLOCKED_OR_UNCERTAIN'
@@ -156,3 +189,20 @@ def run_paper(config_path, private_root, output, *, transport, observed_at=None,
         append_event(registry, {'event': 'FINISHED', 'run_id': folder.name,
                                'status': result['status'], 'seal_sha256': checksum})
     return int(bool(result['errors'])), folder
+
+
+def run_alpaca(config_path, credentials_path, private_root, output):
+    """Explicit finite network entry; never read credentials for another provider."""
+    from .execution.alpaca_paper import AlpacaPaperTransport, PaperHTTP
+    config_path = _private(config_path, private_root)
+    binding, envelope = validate_config(load_json(config_path))
+    if not isinstance(binding, AlpacaPaperBinding):
+        raise ContractError('ALPACA_PAPER_CONFIG_REQUIRED')
+    path = _private(credentials_path, private_root)
+    if path.stat().st_mode & 0o077:
+        raise ContractError('PRIVATE_CREDENTIAL_FILE_MODE_0600_REQUIRED')
+    credentials = load_json(path)
+    if not isinstance(credentials, dict) or set(credentials) != {'key_id', 'secret_key'}:
+        raise ContractError('EXACT_PRIVATE_PAPER_CREDENTIAL_FIELDS_REQUIRED')
+    transport = AlpacaPaperTransport(PaperHTTP(**credentials), binding=binding, envelope=envelope)
+    return run_paper(config_path, private_root, output, transport=transport)
