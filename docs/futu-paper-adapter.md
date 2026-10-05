@@ -81,7 +81,17 @@ The injected mapping sends `trd_env=SIMULATE` and the concrete `acc_id` on every
 account-specific call. Placement uses `OrderType.NORMAL`, `TimeInForce.DAY`,
 `Session.RTH`, `adjust_limit=0`, and a remark within 64 UTF-8 bytes. Current order,
 account, and position queries request `refresh_cache=True`; history queries span
-the intent creation day through the recovery day. Cancellation calls
+the intent creation day through the recovery day, both converted to the US
+exchange dates in `America/New_York` (including daylight-saving offsets).
+Using UTC dates could miss an earlier exchange-day order after it leaves the
+current-order query's retention window. Raw provider timestamps are preserved;
+their timezone semantics remain unverified. Account queries explicitly
+request `currency=Currency.USD` instead of relying on the SDK's HKD default.
+This request does not certify the paper response's settled USD semantics:
+`settled_cash_usd` and its evidence remain unknown without a reviewed resolver.
+The SDK accepts and packs the currency parameter, while single-market accounts
+may ignore it; server behavior is not established by these offline controls.
+Cancellation calls
 `modify_order(CANCEL, order_id, 0, 0, …)`. These are the documented OpenD interfaces:
 [placement](https://openapi.futunn.com/futu-api-doc/en/trade/place-order.html),
 [order query](https://openapi.futunn.com/futu-api-doc/en/trade/get-order-list.html),
@@ -105,7 +115,7 @@ fee accuracy, or fully reconciled paper trading is certified by this module.
 
 ## Reproducible controls
 
-`python -m unittest tests.test_futu_paper -v` executes 22 invented provider-shaped
+`python -m unittest tests.test_futu_paper -v` executes 23 invented provider-shaped
 controls. Their known answers include cash reservation USD 11 for a one-share
 USD 10 order plus USD 1 assumed fee, one provider send after repeated intent
 calls, zero recovery sends after a separate-process crash, retained USD 11 on

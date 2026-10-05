@@ -12,6 +12,7 @@ import hashlib
 import json
 import sqlite3
 from typing import Protocol
+from zoneinfo import ZoneInfo
 
 CLASSIFICATION = 'invented_provider_shaped_controls_not_official_acceptance'
 TERMINAL = frozenset({'FILLED_ALL', 'CANCELLED_ALL', 'CANCELLED_PART', 'FAILED', 'DISABLED', 'DELETED'})
@@ -450,7 +451,10 @@ class OpenDTransport:
     def query_orders(self, *, acc_id,trd_env,remark,order_id,since,at):
         args = self._args(acc_id,trd_env)
         current = self._records(self.context.order_list_query(order_id=order_id or '',refresh_cache=True,**args))
-        historical = self._records(self.context.history_order_list_query(start=_time(since).date().isoformat(),end=_time(at).date().isoformat(),**args))
+        exchange_zone = ZoneInfo('America/New_York')
+        start = _time(since).astimezone(exchange_zone).date().isoformat()
+        end = _time(at).astimezone(exchange_zone).date().isoformat()
+        historical = self._records(self.context.history_order_list_query(start=start,end=end,**args))
         # Preserve duplicate snapshots: adapter checks identity; latest query is a
         # non-atomic view and makes no authoritative absence assertion.
         return [self._order(r) for r in historical+current]
@@ -458,7 +462,7 @@ class OpenDTransport:
     def snapshot(self, *, acc_id,trd_env,at):
         args = self._args(acc_id,trd_env)
         started = self.clock()
-        accounts = self._records(self.context.accinfo_query(refresh_cache=True,**args))
+        accounts = self._records(self.context.accinfo_query(currency=self.sdk.Currency.USD,refresh_cache=True,**args))
         positions = self._records(self.context.position_list_query(refresh_cache=True,**args))
         orders = self._records(self.context.order_list_query(refresh_cache=True,**args))
         received = self.clock()

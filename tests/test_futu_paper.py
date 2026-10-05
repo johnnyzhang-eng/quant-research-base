@@ -278,6 +278,29 @@ class InventedSDKContext:
 
 
 class SDKMappingTests(unittest.TestCase):
+    def test_history_queries_cover_new_york_dates_in_winter_and_summer(self):
+        sdk=SimpleNamespace(RET_OK=0,TrdEnv=SimpleNamespace(SIMULATE='SIMULATE'))
+        cases=[
+            ('2030-01-02T04:30:00Z','2030-01-05T04:30:00Z','2030-01-01','2030-01-04'),
+            ('2030-07-02T03:30:00Z','2030-07-05T03:30:00Z','2030-07-01','2030-07-04'),
+            ('2026-10-06T02:00:00Z','2026-10-09T02:00:00Z','2026-10-05','2026-10-08'),
+        ]
+        for since,at,expected_start,expected_end in cases:
+            with self.subTest(since=since):
+                context=InventedSDKContext()
+                context.order_list_query=lambda **kwargs:(0,[])  # Beyond the current-order retention window.
+                raw_created=expected_start+' 22:00:00'
+                def history(**kwargs):
+                    context.calls.append(('history',kwargs))
+                    covered=kwargs['start'] <= expected_start <= kwargs['end']
+                    return 0,[context.row(create_time=raw_created)] if covered else []
+                context.history_order_list_query=history
+                transport=OpenDTransport(context,sdk,peer_identity=lambda:('127.0.0.1',11111))
+                orders=transport.query_orders(acc_id=123,trd_env='SIMULATE',remark='tag',order_id=None,since=since,at=at)
+                self.assertEqual(context.calls,[('history',{'start':expected_start,'end':expected_end,'trd_env':'SIMULATE','acc_id':123})])
+                self.assertEqual([order['order_id'] for order in orders],['12345'])
+                self.assertEqual(orders[0]['raw']['create_time'],raw_created)
+
     def test_raw_account_ids_never_coerce_into_whitelist(self):
         sdk=SimpleNamespace(RET_OK=0)
         context=InventedSDKContext()
@@ -292,7 +315,7 @@ class SDKMappingTests(unittest.TestCase):
                 finally: adapter.close()
 
     def test_explicit_sdk_arguments_and_unknown_fees_cash(self):
-        sdk=SimpleNamespace(RET_OK=0,TrdEnv=SimpleNamespace(SIMULATE='SIMULATE'),TrdSide=SimpleNamespace(BUY='BUY',SELL='SELL'),OrderType=SimpleNamespace(NORMAL='NORMAL'),TimeInForce=SimpleNamespace(DAY='DAY'),Session=SimpleNamespace(RTH='RTH'),ModifyOrderOp=SimpleNamespace(CANCEL='CANCEL'))
+        sdk=SimpleNamespace(RET_OK=0,Currency=SimpleNamespace(USD='USD'),TrdEnv=SimpleNamespace(SIMULATE='SIMULATE'),TrdSide=SimpleNamespace(BUY='BUY',SELL='SELL'),OrderType=SimpleNamespace(NORMAL='NORMAL'),TimeInForce=SimpleNamespace(DAY='DAY'),Session=SimpleNamespace(RTH='RTH'),ModifyOrderOp=SimpleNamespace(CANCEL='CANCEL'))
         context=InventedSDKContext(); transport=OpenDTransport(context,sdk,peer_identity=lambda:('127.0.0.1',11111))
         transport.get_accounts(); transport.place_order(acc_id=123,trd_env='SIMULATE',remark='tag',**PAYLOAD)
         transport.query_orders(acc_id=123,trd_env='SIMULATE',remark='tag',order_id=None,since=AT,at=LATER)
@@ -302,6 +325,7 @@ class SDKMappingTests(unittest.TestCase):
         for kind,args in context.calls:
             self.assertEqual((args['acc_id'],args['trd_env']),(123,'SIMULATE'))
             if kind in {'orders','cash','positions'}: self.assertIs(args['refresh_cache'],True)
+            if kind == 'cash': self.assertEqual(args['currency'],sdk.Currency.USD)
         place=context.calls[0][1]
         self.assertEqual((place['time_in_force'],place['session'],place['adjust_limit']),('DAY','RTH',0))
         with self.assertRaises(ValueError): transport.cancel_order(acc_id=123,trd_env='REAL',order_id='12345')
