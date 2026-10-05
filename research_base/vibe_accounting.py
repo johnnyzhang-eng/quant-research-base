@@ -9,10 +9,16 @@ from decimal import Decimal, ROUND_HALF_UP, ROUND_FLOOR
 from .reference import low_frequency_engine as contract
 
 
-def accounting_class(base):
+def accounting_class(base, *, input_mode="synthetic"):
+    if input_mode not in {"synthetic", "historical_model"}:
+        raise contract.ContractError("explicit supported accounting input mode required")
     class AccountingUS(base):
         def __init__(self, config, fees, data):
-            contract.validate(data, "synthetic")
+            if input_mode == "synthetic":
+                contract.validate(data, "synthetic")
+            else:
+                from .historical_contract import validate_account_input
+                validate_account_input(data)
             super().__init__(config, fees)
             self.account_data = data
             self.pending_cash, self.pending_shares, self.receivables = [], [], {}
@@ -48,6 +54,29 @@ def accounting_class(base):
             if index >= len(sessions):
                 raise contract.ContractError("calendar does not cover settlement")
             return sessions[index]
+
+        def execution_date(self, intent):
+            sessions = self.account_data["calendar"]["sessions"]
+            if input_mode == "historical_model":
+                return intent["execution_date"]
+            return sessions[sessions.index(intent["decision_date"]) + 1]
+
+        def settlement_lag(self, side):
+            return self.account_data["settlement"]["share_sessions" if side == "BUY" else "cash_sessions"]
+
+        def fill_fee_details(self, qty, price, side):
+            f = self.contract_fees
+            q = Decimal(f["fee_quantum"])
+            comm = max(qty * price * Decimal(f["commission_rate"]), Decimal(f["minimum_commission"]))
+            return {"commission": comm.quantize(q, rounding=ROUND_HALF_UP),
+                    "platform": Decimal(f["platform_per_order"]).quantize(q, rounding=ROUND_HALF_UP),
+                    "tax": (qty * price * Decimal(f["buy_tax_rate" if side == "BUY" else "sell_tax_rate"])).quantize(q, rounding=ROUND_HALF_UP)}
+
+        def closing_information_known(self, bar):
+            return True  # synthetic contract timing was checked before execution
+
+        def dividend_payment_due(self, receivable):
+            return receivable["due"] == self.account_day
 
         def held(self, symbol):
             position = self.positions.get(symbol)
@@ -110,7 +139,7 @@ def accounting_class(base):
                     self.emit("DIV_EX", action_id=a["id"], symbol=s, entitled_qty=qty,
                               gross_per_share=gross, withholding_rate=tax, net_amount=amount, pay_date=a["pay_date"])
             for aid, p in list(self.receivables.items()):
-                if p["due"] == self.account_day:
+                if self.dividend_payment_due(p):
                     self.capital += float(p["amount"])
                     self.emit("DIV_PAY", action_id=aid, amount=p["amount"])
                     del self.receivables[aid]
@@ -123,6 +152,10 @@ def accounting_class(base):
                 price = Decimal(bar["open"]) if bar["open"] is not None else self.account_marks[s]
                 value += self.held(s) * price
             return float(value)
+
+        def planning_mark(self, symbol):
+            bar = self.bar_lookup[self.account_day, symbol]
+            return Decimal(bar["open"]) if bar["open"] is not None else self.account_marks[symbol]
 
         def _safe_price(self, close_df, ts, symbol, fallback, **kwargs):
             import pandas as pd
@@ -142,18 +175,17 @@ def accounting_class(base):
         def _execute_target_rebalance(self, weights, data_map, ts, equity, codes):
             from backtest.engines.base import _OpenOrder
             sessions = self.account_data["calendar"]["sessions"]
-            requested = {sessions[sessions.index(p["decision_date"]) + 1]
-                         for p in self.account_data["control_intents"]}
+            requested = {self.execution_date(p) for p in self.account_data["control_intents"]}
             if self.account_day not in requested:
                 return  # an empty intent calendar must preserve opening holdings
             intent = next(p for p in self.account_data["control_intents"]
-                          if sessions[sessions.index(p["decision_date"]) + 1] == self.account_day)
+                          if self.execution_date(p) == self.account_day)
             order = sorted(codes, key=lambda s: (("SPY", "EFA", "IEF", "GLD").index(s) if s in ("SPY", "EFA", "IEF", "GLD") else 4, s))
             nav = Decimal(str(equity)).quantize(Decimal("0.00000001"))
             deltas = {}
             for s in order:
                 bar = self.bar_lookup[self.account_day, s]
-                mark = Decimal(bar["open"]) if bar["open"] is not None else self.account_marks[s]
+                mark = self.planning_mark(s)
                 target = int((nav * Decimal(str(weights[s])) / mark).to_integral_value(rounding=ROUND_FLOOR))
                 deltas[s] = target - self.held(s)
             self.emit("TARGET_PLAN", decision_date=intent["decision_date"], opening_equity=nav,
@@ -168,6 +200,8 @@ def accounting_class(base):
                     self.emit("ORDER_ATTEMPT", symbol=s, side=side, requested_qty=wanted,
                               decision_date=intent["decision_date"], observed_at=bar["open_at"])
                     reason = ("MISSING_OPEN" if bar["open"] is None else
+                              "LATE_OPEN_QUOTE" if (bar["open_quote_known_at"] is None or
+                                  contract.stamp(bar["open_quote_known_at"]) > contract.stamp(bar["open_at"])) else
                               "UNKNOWN_OPEN_TRADABILITY" if bar["open_status"] == "unknown" else
                               "HALTED_AT_OPEN" if bar["open_status"] == "halted" else
                               "UNKNOWN_OPEN_LIQUIDITY" if bar["open_capacity_shares"] is None else
@@ -248,17 +282,12 @@ def accounting_class(base):
             self.capacity_used[s] += qty
             price, fee = Decimal(str(fields["execution_price"])), Decimal(str(fields["fee"]))
             side = "BUY" if signed > 0 else "SELL"
-            f = self.contract_fees
-            q = Decimal(f["fee_quantum"])
-            comm = max(qty * price * Decimal(f["commission_rate"]), Decimal(f["minimum_commission"]))
-            comm = comm.quantize(q, rounding=ROUND_HALF_UP)
-            platform = Decimal(f["platform_per_order"]).quantize(q, rounding=ROUND_HALF_UP)
-            tax = (qty * price * Decimal(f["buy_tax_rate" if side == "BUY" else "sell_tax_rate"])).quantize(q, rounding=ROUND_HALF_UP)
-            lag = self.account_data["settlement"]["share_sessions" if side == "BUY" else "cash_sessions"]
+            fee_details = self.fill_fee_details(qty, price, side)
+            lag = self.settlement_lag(side)
             due = self.due(lag)
             bar = self.bar_lookup[self.account_day, s]
             seq = self.emit("FILL", symbol=s, side=side, qty=qty, price=price, raw_open=bar["open"],
-                            commission=comm, platform=platform, tax=tax, fee=fee, settlement_date=due, **self.order_metadata)
+                            **fee_details, fee=fee, settlement_date=due, **self.order_metadata)
             if lag and side == "BUY":
                 self.pending_shares.append({"sequence": seq, "symbol": s, "qty": qty, "due": due})
             elif lag:
@@ -275,9 +304,9 @@ def accounting_class(base):
                     self.emit("POST_CLOSE_FILL_DIAGNOSTIC", symbol=s, reason="UNKNOWN_OR_INSUFFICIENT_DAILY_VOLUME",
                               simulated_qty=self.capacity_used[s], daily_volume=bar["volume"], observed_at=bar["available_at"],
                               action="REVIEW_NOT_RETROACTIVE_CANCEL")
-                if bar["close"] is not None:
+                if bar["close"] is not None and self.closing_information_known(bar):
                     self.account_marks[s] = Decimal(bar["close"])
-                if bar["volume"] is None:
+                if bar["volume"] is None or not self.closing_information_known(bar):
                     self.prior_volumes[s] = []
                 else:
                     self.prior_volumes[s].append(Decimal(bar["volume"]))

@@ -1,0 +1,1323 @@
+[
+  {
+    "id": "E02",
+    "title": "已收单而回复丢失：子进程退出77，再打开持久DB",
+    "coverage": "stated reply-loss crash window",
+    "steps": [
+      {
+        "op": "crash_submit",
+        "expect": {
+          "result.exit_code": 77,
+          "local.orders.0.state": "SUBMITTING",
+          "venue.accept_count": 1,
+          "local.reserved_cash": 100500,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "restart",
+        "expect": {
+          "local.account.halted": 1,
+          "local.orders.0.state": "UNKNOWN",
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "submit",
+        "expect": {
+          "result.duplicate": true,
+          "result.state": "UNKNOWN",
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "blocked",
+        "expect": {
+          "result.accepted": false,
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "reconcile",
+        "expect": {
+          "result.matched": true,
+          "result.resumed": false,
+          "local.orders.0.state": "ACKNOWLEDGED",
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "reconcile",
+        "resume": true,
+        "expect": {
+          "result.resumed": true,
+          "local.account.halted": 0
+        }
+      },
+      {
+        "op": "submit",
+        "expect": {
+          "result.duplicate": true,
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "E2-F",
+        "qty": 100,
+        "fee": 500,
+        "expect": {
+          "local.account.cash": 899500,
+          "local.position_qty": 100,
+          "local.reserved_cash": 0
+        }
+      },
+      {
+        "op": "reconcile",
+        "expect": {
+          "result.matched": true,
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      }
+    ],
+    "gaps": []
+  },
+  {
+    "id": "E04",
+    "title": "撤单回报前又成交50：保留150份，释放余150份预留",
+    "coverage": "stated cancel/partial-fill race, zero fill fees",
+    "steps": [
+      {
+        "op": "submit",
+        "order": {
+          "quantity": 300
+        },
+        "expect": {
+          "result.accepted": true,
+          "local.reserved_cash": 300500
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "a",
+        "qty": 100,
+        "expect": {
+          "local.orders.0.filled": 100,
+          "local.reserved_cash": 200500,
+          "local.account.cash": 900000
+        }
+      },
+      {
+        "op": "cancel",
+        "expect": {
+          "local.orders.0.state": "CANCEL_PENDING",
+          "local.reserved_cash": 200500
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "b",
+        "qty": 50,
+        "expect": {
+          "local.orders.0.state": "CANCEL_PENDING",
+          "local.orders.0.filled": 150,
+          "local.reserved_cash": 150500,
+          "local.account.cash": 850000
+        }
+      },
+      {
+        "op": "cancel_response",
+        "state": "CANCELLED",
+        "expect": {
+          "local.orders.0.state": "CANCELLED",
+          "local.orders.0.filled": 150,
+          "local.reserved_cash": 0,
+          "local.position_qty": 150,
+          "local.account.cash": 850000
+        }
+      },
+      {
+        "op": "replay_fill",
+        "exec_id": "b",
+        "expect": {
+          "result.duplicate": true,
+          "local.account.cash": 850000
+        }
+      },
+      {
+        "op": "reconcile",
+        "expect": {
+          "result.matched": true
+        }
+      }
+    ],
+    "gaps": []
+  },
+  {
+    "id": "E01",
+    "title": "同意图并发、重启重放及参数冲突",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "parallel_submit",
+        "orders": [
+          {
+            "intent": "one"
+          },
+          {
+            "intent": "one"
+          }
+        ],
+        "expect": {
+          "result.accepted_count": 2,
+          "result.duplicate_count": 1,
+          "venue.accept_count": 1,
+          "local.reserved_cash": 100500,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "submit",
+        "order": {
+          "quantity": 101
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "INTENT_PARAMETER_CONFLICT",
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "restart",
+        "expect": {
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "submit",
+        "expect": {
+          "result.duplicate": true,
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "reconcile",
+        "resume": true,
+        "expect": {
+          "result.matched": true,
+          "result.resumed": true
+        }
+      }
+    ],
+    "gaps": []
+  },
+  {
+    "id": "E03",
+    "title": "唯一成交去重：100+50，重复不重复扣款",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "order": {
+          "quantity": 300
+        },
+        "expect": {
+          "result.accepted": true
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "a",
+        "qty": 100,
+        "expect": {
+          "local.orders.0.filled": 100,
+          "local.account.cash": 900000
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "b",
+        "qty": 50,
+        "expect": {
+          "local.orders.0.filled": 150,
+          "local.account.cash": 850000,
+          "local.reserved_cash": 150500
+        }
+      },
+      {
+        "op": "replay_fill",
+        "exec_id": "a",
+        "expect": {
+          "result.duplicate": true,
+          "local.orders.0.filled": 150,
+          "local.account.cash": 850000
+        }
+      },
+      {
+        "op": "replay_fill",
+        "exec_id": "a",
+        "change": {
+          "qty": 99
+        },
+        "expect": {
+          "result.applied": false,
+          "result.reason": "EXECUTION_PARAMETER_CONFLICT",
+          "local.account.halted": 1,
+          "local.orders.0.filled": 150
+        }
+      }
+    ],
+    "gaps": []
+  },
+  {
+    "id": "E05",
+    "title": "撤单超时/拒绝保持预留；之后到期释放",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "expect": {
+          "local.reserved_cash": 100500
+        }
+      },
+      {
+        "op": "cancel",
+        "expect": {
+          "local.reserved_cash": 100500
+        }
+      },
+      {
+        "op": "cancel_response",
+        "state": "TIMEOUT",
+        "expect": {
+          "result.accepted": false,
+          "local.orders.0.state": "CANCEL_PENDING",
+          "local.reserved_cash": 100500
+        }
+      },
+      {
+        "op": "cancel_response",
+        "state": "CANCEL_REJECTED",
+        "expect": {
+          "result.reason": "CANCEL_REJECTED",
+          "local.orders.0.state": "ACKNOWLEDGED",
+          "local.reserved_cash": 100500
+        }
+      },
+      {
+        "op": "reconcile",
+        "expect": {
+          "result.matched": true,
+          "local.reserved_cash": 100500
+        }
+      },
+      {
+        "op": "cancel_response",
+        "state": "EXPIRED",
+        "expect": {
+          "local.orders.0.state": "EXPIRED",
+          "local.reserved_cash": 0
+        }
+      },
+      {
+        "op": "reconcile",
+        "expect": {
+          "result.matched": true
+        }
+      }
+    ],
+    "gaps": [
+      "无自主价格撮合或到期定时器；未成交与到期由事件控制。"
+    ]
+  },
+  {
+    "id": "E06",
+    "title": "断线丢成交推送、乱序重放、重启补查",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "order": {
+          "quantity": 300
+        },
+        "expect": {
+          "result.accepted": true
+        }
+      },
+      {
+        "op": "pause",
+        "reason": "DISCONNECTED",
+        "expect": {
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "a",
+        "qty": 100,
+        "deliver": false,
+        "expect": {
+          "result.delivery": "LOST",
+          "local.orders.0.filled": 0,
+          "venue.orders.0.filled": 100
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "b",
+        "qty": 50,
+        "expect": {
+          "local.orders.0.filled": 50,
+          "local.account.cash": 950000
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "blocked",
+        "expect": {
+          "result.accepted": false,
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "restart",
+        "expect": {
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "reconcile",
+        "resume": true,
+        "expect": {
+          "result.matched": true,
+          "result.resumed": true,
+          "local.orders.0.filled": 150,
+          "local.account.cash": 850000,
+          "local.position_qty": 150
+        }
+      },
+      {
+        "op": "replay_fill",
+        "exec_id": "a",
+        "expect": {
+          "result.duplicate": true,
+          "local.account.cash": 850000
+        }
+      }
+    ],
+    "gaps": [
+      "断线为事件注入，无实际socket/Mac休眠测试或长期消息积压。"
+    ]
+  },
+  {
+    "id": "E07",
+    "title": "独立已知现金答案：10000买100x10费5=8995",
+    "coverage": "frozen hand-computed cash/position answer",
+    "steps": [
+      {
+        "op": "submit",
+        "expect": {
+          "local.account.cash": 1000000,
+          "local.reserved_cash": 100500
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "control",
+        "qty": 100,
+        "fee": 500,
+        "expect": {
+          "local.account.cash": 899500,
+          "local.position_qty": 100,
+          "local.orders.0.fees": 500,
+          "local.reserved_cash": 0
+        }
+      },
+      {
+        "op": "replay_fill",
+        "exec_id": "control",
+        "expect": {
+          "result.duplicate": true,
+          "local.account.cash": 899500,
+          "local.position_qty": 100
+        }
+      },
+      {
+        "op": "restart",
+        "expect": {
+          "local.account.cash": 899500,
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "reconcile",
+        "expect": {
+          "result.matched": true,
+          "local.account.cash": 899500
+        }
+      },
+      {
+        "op": "replay_fill",
+        "exec_id": "control",
+        "expect": {
+          "result.duplicate": true,
+          "local.account.cash": 899500
+        }
+      }
+    ],
+    "gaps": []
+  },
+  {
+    "id": "E08",
+    "title": "外部现金/持仓差异被发现，不覆盖本地账",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "external_change",
+        "change": {
+          "cash_delta": 100,
+          "symbol": "TEST.CNY",
+          "qty_delta": 100
+        },
+        "expect": {
+          "venue.cash": 1000100,
+          "local.account.cash": 1000000
+        }
+      },
+      {
+        "op": "reconcile",
+        "resume": true,
+        "expect": {
+          "result.matched": false,
+          "result.differences": [
+            "CASH_MISMATCH",
+            "POSITION_MISMATCH"
+          ],
+          "local.account.halted": 1,
+          "local.account.cash": 1000000,
+          "local.position_qty": 0
+        }
+      },
+      {
+        "op": "external_order",
+        "intent": "manual",
+        "expect": {
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "reconcile",
+        "expect": {
+          "result.matched": false,
+          "result.differences": [
+            "EXTRA_VENUE_ORDER:manual",
+            "CASH_MISMATCH",
+            "POSITION_MISMATCH"
+          ]
+        }
+      }
+    ],
+    "gaps": [
+      "差异只隔离；未实现有审批的账务调整，迟到费见E15。"
+    ]
+  },
+  {
+    "id": "E09",
+    "title": "在途额度1000：两笔各600并发只接一笔",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "parallel_submit",
+        "orders": [
+          {
+            "intent": "first",
+            "order": {
+              "quantity": 60
+            }
+          },
+          {
+            "intent": "second",
+            "order": {
+              "quantity": 60
+            }
+          }
+        ],
+        "expect": {
+          "result.accepted_count": 1,
+          "result.rejected_count": 1,
+          "venue.accept_count": 1,
+          "local.reserved_cash": 60000,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "cancel_first_order",
+        "expect": {
+          "local.reserved_cash": 60000
+        }
+      },
+      {
+        "op": "cancel_first_confirm",
+        "expect": {
+          "local.reserved_cash": 0
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "third",
+        "order": {
+          "quantity": 60
+        },
+        "expect": {
+          "result.accepted": true,
+          "venue.accept_count": 2,
+          "local.reserved_cash": 60000,
+          "venue.submit_call_count": 2
+        }
+      }
+    ],
+    "gaps": [],
+    "config": {
+      "fee_cap": 0,
+      "inflight_cap": 100000
+    }
+  },
+  {
+    "id": "E10",
+    "title": "持仓100但可卖0，禁止卖出",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "order": {
+          "side": "SELL",
+          "quantity": 1
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "INSUFFICIENT_UNRESERVED_SELLABLE",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      }
+    ],
+    "gaps": [
+      "可卖数量为fixture字段，无真实T+1解冻/产品回转模型。"
+    ],
+    "config": {
+      "initial_positions": {
+        "TEST.CNY": {
+          "qty": 100,
+          "sellable": 0
+        }
+      }
+    }
+  },
+  {
+    "id": "E10b",
+    "title": "在途卖60占用数量，再卖50拒绝",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "order": {
+          "side": "SELL",
+          "quantity": 60
+        },
+        "expect": {
+          "result.accepted": true,
+          "local.reserved_quantity": 60
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "second",
+        "order": {
+          "side": "SELL",
+          "quantity": 50
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "INSUFFICIENT_UNRESERVED_SELLABLE",
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "s",
+        "qty": 20,
+        "expect": {
+          "local.position_qty": 80,
+          "local.reserved_quantity": 40,
+          "local.account.cash": 1020000
+        }
+      },
+      {
+        "op": "cancel",
+        "expect": {
+          "local.reserved_quantity": 40
+        }
+      },
+      {
+        "op": "cancel_response",
+        "state": "CANCELLED",
+        "expect": {
+          "local.reserved_quantity": 0,
+          "local.position_qty": 80
+        }
+      },
+      {
+        "op": "reconcile",
+        "expect": {
+          "result.matched": true
+        }
+      }
+    ],
+    "gaps": [],
+    "config": {
+      "initial_positions": {
+        "TEST.CNY": {
+          "qty": 100,
+          "sellable": 100
+        }
+      }
+    }
+  },
+  {
+    "id": "E11",
+    "title": "数量/刻度/NaN/价格范围/停牌/过期与未来行情",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "intent": "invalid-0",
+        "order": {
+          "quantity": 0
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "INVALID_SIDE_OR_QUANTITY",
+          "venue.accept_count": 0,
+          "local.account.cash": 1000000,
+          "local.reserved_cash": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "invalid-1",
+        "order": {
+          "quantity": true
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "INVALID_SIDE_OR_QUANTITY",
+          "venue.accept_count": 0,
+          "local.account.cash": 1000000,
+          "local.reserved_cash": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "invalid-2",
+        "order": {
+          "price": "NaN"
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "PRICE_NOT_POSITIVE_CENT_ALIGNED",
+          "venue.accept_count": 0,
+          "local.account.cash": 1000000,
+          "local.reserved_cash": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "invalid-3",
+        "order": {
+          "price": "-1"
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "PRICE_NOT_POSITIVE_CENT_ALIGNED",
+          "venue.accept_count": 0,
+          "local.account.cash": 1000000,
+          "local.reserved_cash": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "invalid-4",
+        "order": {
+          "price": "10.001"
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "PRICE_NOT_POSITIVE_CENT_ALIGNED",
+          "venue.accept_count": 0,
+          "local.account.cash": 1000000,
+          "local.reserved_cash": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "invalid-5",
+        "order": {
+          "symbol": "LOT100.CNY",
+          "quantity": 150
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "LOT_OR_TICK_INVALID",
+          "venue.accept_count": 0,
+          "local.account.cash": 1000000,
+          "local.reserved_cash": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "invalid-6",
+        "order": {
+          "price": "10.20"
+        },
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "PRICE_OUTSIDE_TEST_BOUND",
+          "venue.accept_count": 0,
+          "local.account.cash": 1000000,
+          "local.reserved_cash": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "quote",
+        "updates": {
+          "tick": 5
+        },
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "order": {
+          "price": "10.01"
+        },
+        "expect": {
+          "result.reason": "LOT_OR_TICK_INVALID",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "quote",
+        "updates": {
+          "tick": 1,
+          "status": "HALTED"
+        },
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "expect": {
+          "result.reason": "SYMBOL_NOT_TRADING",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "quote",
+        "updates": {
+          "status": "TRADING",
+          "stamp": "2026-10-08T09:58:00+08:00"
+        },
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "expect": {
+          "result.reason": "QUOTE_TIME_INVALID",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "quote",
+        "updates": {
+          "stamp": "2026-10-08T10:01:00+08:00"
+        },
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "expect": {
+          "result.reason": "QUOTE_TIME_INVALID",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      }
+    ],
+    "gaps": []
+  },
+  {
+    "id": "E12",
+    "title": "真实/未知/缺失环境及非白名单账户拒绝",
+    "coverage": "strict fictional environment/account binding",
+    "steps": [
+      {
+        "op": "submit",
+        "order": {
+          "environment": "REAL"
+        },
+        "intent": "env-0",
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "ENVIRONMENT_OR_ACCOUNT_REFUSED",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "order": {
+          "environment": "UNKNOWN"
+        },
+        "intent": "env-1",
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "ENVIRONMENT_OR_ACCOUNT_REFUSED",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "order": {
+          "environment": null
+        },
+        "intent": "env-2",
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "ENVIRONMENT_OR_ACCOUNT_REFUSED",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      },
+      {
+        "op": "submit",
+        "order": {
+          "account": "REAL-ACCOUNT"
+        },
+        "intent": "env-3",
+        "expect": {
+          "result.accepted": false,
+          "result.reason": "ENVIRONMENT_OR_ACCOUNT_REFUSED",
+          "venue.accept_count": 0,
+          "venue.submit_call_count": 0
+        }
+      }
+    ],
+    "gaps": [
+      "无账户发现或真实会话切换。"
+    ]
+  },
+  {
+    "id": "E13",
+    "title": "测试亏损阈值/人工暂停重启不自动恢复",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "expect": {
+          "result.accepted": true
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "loss",
+        "qty": 100,
+        "fee": 500,
+        "expect": {
+          "local.account.cash": 899500
+        }
+      },
+      {
+        "op": "mark",
+        "marks": {
+          "TEST.CNY": "9.00"
+        },
+        "expect": {
+          "result.loss": 10500,
+          "result.paused": true
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "blocked",
+        "expect": {
+          "result.accepted": false,
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      },
+      {
+        "op": "restart",
+        "expect": {
+          "local.account.halted": 1,
+          "local.account.reason": "TEST_LOSS_LIMIT"
+        }
+      },
+      {
+        "op": "reconcile",
+        "resume": true,
+        "expect": {
+          "result.matched": true,
+          "result.resumed": false,
+          "result.resume_blocked": true,
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "pause",
+        "reason": "MANUAL",
+        "expect": {
+          "local.account.reason": "MANUAL"
+        }
+      },
+      {
+        "op": "restart",
+        "expect": {
+          "local.account.reason": "MANUAL",
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "reconcile",
+        "resume": true,
+        "expect": {
+          "result.resume_blocked": true,
+          "local.account.halted": 1
+        }
+      }
+    ],
+    "gaps": [
+      "合成估值，无真实净值/峰值回撤或管理员恢复流程。"
+    ],
+    "config": {
+      "loss_limit": 10000
+    }
+  },
+  {
+    "id": "E13b",
+    "title": "每日委托次数限制",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "expect": {
+          "result.accepted": true
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "day",
+        "qty": 100,
+        "expect": {
+          "local.account.cash": 900000
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "second",
+        "expect": {
+          "result.reason": "DAILY_SUBMIT_CAP",
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      }
+    ],
+    "gaps": [],
+    "config": {
+      "daily_submit_cap": 1
+    }
+  },
+  {
+    "id": "E13c",
+    "title": "每日成交+在途名义金额限制",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "order": {
+          "quantity": 60
+        },
+        "expect": {
+          "result.accepted": true
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "day",
+        "qty": 60,
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "intent": "second",
+        "order": {
+          "quantity": 60
+        },
+        "expect": {
+          "result.reason": "DAILY_GROSS_CAP",
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      }
+    ],
+    "gaps": [],
+    "config": {
+      "daily_gross_cap": 100000
+    }
+  },
+  {
+    "id": "E13d",
+    "title": "人工与亏损暂停叠加断线，恢复不能顺手清除",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "submit",
+        "expect": {
+          "result.accepted": true
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "multi",
+        "qty": 100,
+        "fee": 500,
+        "expect": {}
+      },
+      {
+        "op": "mark",
+        "marks": {
+          "TEST.CNY": "9.00"
+        },
+        "expect": {
+          "result.loss": 10500
+        }
+      },
+      {
+        "op": "pause",
+        "reason": "MANUAL",
+        "expect": {}
+      },
+      {
+        "op": "pause",
+        "reason": "DISCONNECTED",
+        "expect": {}
+      },
+      {
+        "op": "restart",
+        "expect": {
+          "local.active_pauses": [
+            "DISCONNECTED",
+            "MANUAL",
+            "TEST_LOSS_LIMIT"
+          ]
+        }
+      },
+      {
+        "op": "reconcile",
+        "resume": true,
+        "expect": {
+          "result.matched": true,
+          "result.resumed": false,
+          "result.blocking_pause_reasons": [
+            "MANUAL",
+            "TEST_LOSS_LIMIT"
+          ],
+          "local.active_pauses": [
+            "DISCONNECTED",
+            "MANUAL",
+            "TEST_LOSS_LIMIT"
+          ]
+        }
+      },
+      {
+        "op": "submit",
+        "intent": "still-blocked",
+        "expect": {
+          "result.accepted": false,
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      }
+    ],
+    "gaps": [],
+    "config": {
+      "loss_limit": 10000
+    }
+  },
+  {
+    "id": "E14",
+    "title": "市场时区/UTC跨日/合成休市半日市/币种",
+    "coverage": "bounded offline subset",
+    "steps": [
+      {
+        "op": "quote",
+        "updates": {
+          "stamp": "2026-10-08T02:00:00+00:00"
+        },
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "now": "2026-10-08T02:00:00+00:00",
+        "expect": {
+          "result.accepted": true,
+          "local.orders.0.day": "2026-10-08"
+        }
+      },
+      {
+        "op": "quote",
+        "updates": {
+          "stamp": "2026-10-08T00:00:00+08:00"
+        },
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "intent": "midnight",
+        "now": "2026-10-07T16:00:00+00:00",
+        "expect": {
+          "result.reason": "OUTSIDE_SYNTHETIC_SESSION"
+        }
+      },
+      {
+        "op": "quote",
+        "updates": {
+          "stamp": "2026-10-10T10:00:00+08:00"
+        },
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "intent": "holiday",
+        "now": "2026-10-10T10:00:00+08:00",
+        "expect": {
+          "result.reason": "OUTSIDE_SYNTHETIC_SESSION"
+        }
+      },
+      {
+        "op": "quote",
+        "updates": {
+          "stamp": "2026-10-09T13:00:00+08:00"
+        },
+        "expect": {}
+      },
+      {
+        "op": "submit",
+        "intent": "halfday",
+        "now": "2026-10-09T13:00:00+08:00",
+        "expect": {
+          "result.reason": "OUTSIDE_SYNTHETIC_SESSION"
+        }
+      },
+      {
+        "op": "submit",
+        "order": {
+          "symbol": "TEST.USD",
+          "currency": "USD"
+        },
+        "expect": {
+          "result.reason": "SYMBOL_OR_CURRENCY_REFUSED",
+          "venue.accept_count": 1,
+          "venue.submit_call_count": 1
+        }
+      }
+    ],
+    "gaps": [
+      "日历为合成输入，非真实交易所日历；未实现换汇与多币种账本。"
+    ]
+  },
+  {
+    "id": "E15",
+    "title": "迟到费用/成交更正：隔离并暂停，尚未入账",
+    "coverage": "quarantine only; NOT adjustment accounting",
+    "steps": [
+      {
+        "op": "submit",
+        "expect": {
+          "result.accepted": true
+        }
+      },
+      {
+        "op": "fill",
+        "exec_id": "adjust",
+        "qty": 100,
+        "fee": 500,
+        "expect": {
+          "local.account.cash": 899500
+        }
+      },
+      {
+        "op": "adjustment",
+        "event": {
+          "kind": "LATE_FEE",
+          "fee_delta": 100,
+          "exec_id": "adjust"
+        },
+        "expect": {
+          "result.quarantined": true,
+          "result.applied": false,
+          "local.account.cash": 899500,
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "adjustment",
+        "event": {
+          "kind": "FILL_CORRECTION",
+          "qty_delta": -10,
+          "exec_id": "adjust"
+        },
+        "expect": {
+          "result.quarantined": true,
+          "local.account.cash": 899500,
+          "local.position_qty": 100
+        }
+      },
+      {
+        "op": "restart",
+        "expect": {
+          "local.account.halted": 1
+        }
+      },
+      {
+        "op": "reconcile",
+        "resume": true,
+        "expect": {
+          "result.resume_blocked": true,
+          "local.account.halted": 1
+        }
+      }
+    ],
+    "gaps": [
+      "未实现后到费用、成交撤销/更正追加账务；终态新成交只暂停，不自动解释。"
+    ]
+  }
+]
