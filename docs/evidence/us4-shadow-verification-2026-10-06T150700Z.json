@@ -1,0 +1,145 @@
+{
+  "actual_state": {
+    "CNY_floor_enforced": false,
+    "account_NAV_computed": false,
+    "block_reason": "RIGHTS_UNQUALIFIED",
+    "fills": 0,
+    "forward_signals": 0,
+    "orders": 0,
+    "paid_calls": 0,
+    "qualified_activation_established": false,
+    "source_market_snapshot_retained_by_entry": false,
+    "source_qualified": false,
+    "trade_permission": false
+  },
+  "artifact_fingerprints": [
+    {
+      "bytes": 8717,
+      "retention": "private local original; fingerprint only",
+      "role": "shadow_protocol",
+      "sha256": "b6ec0810063bbc8446b7137aaf6d23811571e5e66b4dffbf327691b0b9ed6038"
+    },
+    {
+      "bytes": 42996,
+      "retention": "private local original; fingerprint only",
+      "role": "shadow_entry",
+      "sha256": "d90e8a83208da7ed05a5d648e8cfafceb4c07a779cf0699efdabd378842b7a4d"
+    },
+    {
+      "bytes": 33736,
+      "retention": "private local original; fingerprint only",
+      "role": "producer_control_program",
+      "sha256": "46c2d6531bb6d08643d0e6cc80842c48c426770f0a3ba82fe8339227828a21a9"
+    },
+    {
+      "bytes": 15695,
+      "retention": "private local original; fingerprint only",
+      "role": "producer_control_result",
+      "sha256": "36644d7977b8c432f0c961590b500f067c61eb8824bc21d8f3d461d4136ff84a"
+    },
+    {
+      "bytes": 52821,
+      "retention": "private local original; fingerprint only",
+      "role": "independent_auditor",
+      "sha256": "ba56bcf77a59b3b4181b419d46f332aef1745f9059b71cda4b5e1e28186ab5bc"
+    },
+    {
+      "bytes": 14539,
+      "retention": "private local original; fingerprint only",
+      "role": "independent_acceptance_result",
+      "sha256": "3c718c6c5774890eebc3defde5a030d43f490ca05da98fe6c11551c7a11959bd"
+    },
+    {
+      "bytes": 12246,
+      "retention": "private local original; fingerprint only",
+      "role": "original_independent_attempt",
+      "sha256": "c17bee03d9f2618dc4e2fa3f3484995e69d118aa3ee67b26d9a231f66c5229e4"
+    },
+    {
+      "bytes": 2326,
+      "retention": "private local original; fingerprint only",
+      "role": "original_instrument_confirmation",
+      "sha256": "c939983bad80e2f4b595648c67d1bb929c93f43d9e9bda5b8aa4d65a1f1eb062"
+    },
+    {
+      "bytes": 3709,
+      "retention": "private local original; fingerprint only",
+      "role": "root_pre_acceptance_decision_check",
+      "sha256": "b53b87fc8bc1aeb8044f8defffb8672898618ec25a13a9256e36478b697197b1"
+    },
+    {
+      "bytes": 3303,
+      "retention": "private local original; fingerprint only",
+      "role": "actual_source_rejection_diagnostic",
+      "sha256": "c5ed5113ffe778e45543eca8527b8a3d4783bb538078bc5b9cc28d2142e184d5"
+    },
+    {
+      "bytes": 18850,
+      "retention": "private local original; fingerprint only",
+      "role": "current_source_rights_review",
+      "sha256": "3f71b1e5cce2f4eeb0e819b3e0ff17000294880b9ed6f6ad08c8eefff177e72a"
+    },
+    {
+      "bytes": 14671,
+      "retention": "private local original; fingerprint only",
+      "role": "retained_instrument_attempt_2",
+      "sha256": "d9fb2624c3e0bdfa9680e3482fbc10214a98d516ed8ea8066a4a69e7f8431cbb"
+    },
+    {
+      "bytes": 14671,
+      "retention": "private local original; fingerprint only",
+      "role": "retained_instrument_attempt_3",
+      "sha256": "b719712e69cded2e5a90223985bced944f89c3c5eb5b141f3ba237e90fd271da"
+    }
+  ],
+  "claim_boundaries": [
+    "Control prices, rights, clocks and calendars are invented; successful controls cannot qualify actual inputs",
+    "The actual packet is rejected at the rights gate before later normalization/clock/calendar stages",
+    "Historical publication/PIT and clock authenticity are not independently established",
+    "Original NO_NEXT_SESSION decision remains preserved; separate next-session time does not certify future price or fill",
+    "No account connection, new order, profitability or live-execution readiness is established"
+  ],
+  "completed": {
+    "actual_rights_false_diagnostic_runs": 2,
+    "actual_same_cutoff_state_and_output_bytes_identical": true,
+    "atomic_interruption_and_restart_controls_verified": true,
+    "independent_assertions": 1278,
+    "independent_controls": 54,
+    "independent_failures": 0,
+    "localized_persistent_state_repairs": 3,
+    "mathematical_expected_method": "Independent Fraction arithmetic from invented original rows",
+    "producer_controls": 111,
+    "repeat_published_bytes_verified": true
+  },
+  "decision_check": {
+    "acceptance_level": "Independent offline implementation controls only",
+    "current_final_entry_verified": true,
+    "instrument_confirmation_method": "Readonly original result and event-chain audit; no retired-byte rerun",
+    "original_attempt_expected_reason_differences": 4,
+    "original_attempt_product_findings": 3
+  },
+  "id": "us4-shadow-verification-2026-10-06T150700Z",
+  "missing_acceptance": [
+    "Applicable Paper Only agreement and eligibility evidence",
+    "Private original/transformed/derived retention and termination conditions",
+    "Complete exact-row observed receipts, reviewed clocks, calendar and corporate-action coverage",
+    "Qualified prospective warmup activation followed by future month-end observations",
+    "Whole-account fees, FX, tax, settlement and actual execution conditions",
+    "Accepted four-ETF economic research report and investment advantage"
+  ],
+  "preserved": {
+    "all_independent_attempts": true,
+    "prior_dedicated_historical_pilot": true,
+    "prior_frozen_historical_protocol": true,
+    "prior_public_checkpoint_bytes": true
+  },
+  "previous_public_checkpoint": {
+    "commit_sha": "c3afae4f589c656898be6c7f0b3adf84eed64410",
+    "json_sha256": "9a2e9655a558c31b6ca2e7551fadab1c4d644f36e8822d2a41743f3d65ec893d",
+    "markdown_sha256": "fc71dea94189f8238a97a758c503bd93891d5c5c0bda2bf7a01c62be03363ad3"
+  },
+  "publication_scope": "Only reviewed completion scope, limitations and fingerprints; no private source, parameters, signals, financial constraints or user identity",
+  "schema": "public-us4-shadow-verification/1",
+  "scope": "Fixed no-order four-ETF prospective observation entry; implementation controls and actual unqualified-source rejection only",
+  "verified_at_utc": "2026-10-06T15:07:00.137823+00:00"
+}
