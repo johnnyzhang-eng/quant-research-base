@@ -1,0 +1,480 @@
+{
+  "schema": "public-research-evidence-ledger/1",
+  "checkpoint_date": "2026-10-06",
+  "created_at_utc": "2026-10-06T13:54:28.964191+00:00",
+  "scope": "Sanitized progress and content fingerprints; private archives remain local with explicit completion limits.",
+  "issue": "https://github.com/johnnyzhang-eng/quant-research-base/issues/1",
+  "pull_request": "https://github.com/johnnyzhang-eng/quant-research-base/pull/2",
+  "consultations": {
+    "first_full_context_answers": 7,
+    "partial_context_first_answers": 1,
+    "followup_questions_submitted": 7,
+    "followup_substantive_terminal_answers": 5,
+    "followup_terminal_refusals": 1,
+    "followup_quota_interrupted_partials": 1,
+    "AI_opinions_establish_profit": false,
+    "providers": [
+      {
+        "platform": "chatgpt",
+        "first_context": "full",
+        "followup": "substantive_terminal",
+        "private_text_fingerprints": [
+          {
+            "role": "first_response",
+            "sha256": "83ebd2cd05ec54812f7a03607c7a19cefcb40a8314bd57684480fb6b015662d0",
+            "bytes": 25810,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_actual_question",
+            "sha256": "9c7a6c5c6e335e5f57b6859cac48b6f8fda831141d594152e3fd422592af5aae",
+            "bytes": 1284,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_response",
+            "sha256": "e1e679540b488f31a82af6e466eaf738851ce362c3774d86f0b274d27dc14607",
+            "bytes": 30449,
+            "retention": "private_local_only"
+          }
+        ],
+        "first_terminal_response_observed": true,
+        "first_answer_archive_complete": true,
+        "archive_limitation": null
+      },
+      {
+        "platform": "gemini",
+        "first_context": "full",
+        "followup": "terminal_refusal",
+        "private_text_fingerprints": [
+          {
+            "role": "first_response",
+            "sha256": "fd2554a17a2369fb0f2b62ab3d2198b560f0f5923d473de39dc7c60d24887de3",
+            "bytes": 11322,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_actual_question",
+            "sha256": "848ac3de7043ee80bd8752f3b33d4c6e0d8a52354b621e9fe67c859923aa8644",
+            "bytes": 1686,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_response",
+            "sha256": "e5dc96fcc07b877db2ac44b69024a325e75dfe739973de36e7710f0be0507356",
+            "bytes": 81,
+            "retention": "private_local_only"
+          }
+        ],
+        "first_terminal_response_observed": true,
+        "first_answer_archive_complete": false,
+        "archive_limitation": "AX archive omits mathematical formulas and variables; complete visible first answer is not proven retained."
+      },
+      {
+        "platform": "deepseek",
+        "first_context": "full",
+        "followup": "substantive_terminal",
+        "private_text_fingerprints": [
+          {
+            "role": "first_response",
+            "sha256": "de8f729885a39bf0025f5bfcc8a8c39f5a266ec96273ed310ead4ebc8c16f6fa",
+            "bytes": 11981,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_actual_question",
+            "sha256": "17629474385d7a4fb3569e9cd83c99deaaeb1b8c8b077e32f87d172944a013bb",
+            "bytes": 2550,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_response",
+            "sha256": "94c88a9ea6cc625c778bcbc0721df69762254e8a85ec3f26ee12295e1d365317",
+            "bytes": 29276,
+            "retention": "private_local_only"
+          }
+        ],
+        "first_terminal_response_observed": true,
+        "first_answer_archive_complete": true,
+        "archive_limitation": null
+      },
+      {
+        "platform": "claude",
+        "first_context": "full",
+        "followup": "quota_interrupted_partial",
+        "private_text_fingerprints": [
+          {
+            "role": "first_response",
+            "sha256": "9b60d72dbaa7280f4587e32dc81d2ff895671396b972e9c9ac938f525d3c2043",
+            "bytes": 24768,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_actual_question",
+            "sha256": "c53bd9a2225f093dc0d58602908036e75d2fae964f6b9d4e6e70f58acc652093",
+            "bytes": 1191,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_response",
+            "sha256": "e095f8f43cd14ba7632ed404a994b460df4cfc425dd76f1305d3e01edace81bd",
+            "bytes": 766,
+            "retention": "private_local_only"
+          }
+        ],
+        "first_terminal_response_observed": true,
+        "first_answer_archive_complete": true,
+        "archive_limitation": null
+      },
+      {
+        "platform": "grok",
+        "first_context": "full",
+        "followup": "substantive_terminal",
+        "private_text_fingerprints": [
+          {
+            "role": "first_response",
+            "sha256": "f7f980a9e78832c67d36544993f0aa09602d5a5e61168d76647b6adb8bc02f56",
+            "bytes": 12994,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_actual_question",
+            "sha256": "bdc056b118d0edbb9c5638942b1dd3f51b9a2c76c2a2f9a99f0587ed63fec0a6",
+            "bytes": 1144,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_response",
+            "sha256": "8bc6e804192e3e7a31cdb4ac1274c85d09eae9d7027671c841c7be8576a085db",
+            "bytes": 8817,
+            "retention": "private_local_only"
+          }
+        ],
+        "first_terminal_response_observed": true,
+        "first_answer_archive_complete": true,
+        "archive_limitation": null
+      },
+      {
+        "platform": "qwen",
+        "first_context": "full",
+        "followup": "substantive_terminal",
+        "private_text_fingerprints": [
+          {
+            "role": "first_response",
+            "sha256": "02a4c22fb4479bf119a8acf206b1463e9cdfc62fca7d81d38fe06990988b31b3",
+            "bytes": 14875,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_actual_question",
+            "sha256": "9f1b341537eb33b201797cc144e7c3f21239f671a055399a034469a4ab87be9e",
+            "bytes": 1010,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_response",
+            "sha256": "8a51eb3264a9f52e9802f6edcf6ba29492444c37f423c57150339912e7a51df2",
+            "bytes": 14754,
+            "retention": "private_local_only"
+          }
+        ],
+        "first_terminal_response_observed": true,
+        "first_answer_archive_complete": true,
+        "archive_limitation": "Answer text retained; complete source href values are not exposed by the AX archive."
+      },
+      {
+        "platform": "perplexity",
+        "first_context": "full",
+        "followup": "substantive_terminal",
+        "private_text_fingerprints": [
+          {
+            "role": "first_response",
+            "sha256": "4afe5c1cd995c98b14c851867b22d46bf2232c9118182f5f05590995d091e9fd",
+            "bytes": 34020,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_actual_question",
+            "sha256": "dae82b83ce2fc9e912504fded307095d0d3e7ad9ecf6b2e3989b75c2e47c796c",
+            "bytes": 1063,
+            "retention": "private_local_only"
+          },
+          {
+            "role": "followup_response",
+            "sha256": "6b20b60c14979766dbf75506ffca9f938296532f46861d4668c6cc72f5ba3147",
+            "bytes": 25592,
+            "retention": "private_local_only"
+          }
+        ],
+        "first_terminal_response_observed": true,
+        "first_answer_archive_complete": true,
+        "archive_limitation": "Answer text and readable source links retained; 21 citation-thumbnail image nodes were not exported."
+      },
+      {
+        "platform": "kimi",
+        "first_context": "partial",
+        "followup": "not_submitted",
+        "private_text_fingerprints": [
+          {
+            "role": "first_response",
+            "sha256": "c1cae85cf2e0dd3581142f22022930f56b03357f1a36cd743d6767e9fd219cb3",
+            "bytes": 4977,
+            "retention": "private_local_only"
+          }
+        ],
+        "first_terminal_response_observed": true,
+        "first_answer_archive_complete": false,
+        "archive_limitation": "Only the partial-context first answer was accepted and archived; full request was not accepted."
+      }
+    ],
+    "complete_first_answer_text_archives": 6,
+    "full_context_first_answer_archive_gaps": 1,
+    "archive_method": "Accessibility-exposed text and readable link nodes, not byte-identical provider HTML or complete visual export; platform-specific limits remain explicit."
+  },
+  "historical_attempts": [
+    {
+      "role": "first_frozen_exploratory_matrix",
+      "evaluation_paths": 48,
+      "status": "retained_private"
+    },
+    {
+      "role": "exposure_attribution_supplement",
+      "calibration_paths": 3,
+      "evaluation_paths": 96,
+      "paired_comparisons": 96,
+      "calendar_months": 69,
+      "independently_reconciled": true
+    },
+    {
+      "role": "author_inspired_unlevered_variant",
+      "calibration_paths": 5,
+      "evaluation_paths": 144,
+      "paired_comparisons": 160,
+      "calendar_months": 69,
+      "independently_reconciled": true,
+      "assertion_counts": {
+        "assertions": 13405496,
+        "signal_rows": 14160,
+        "daily_rows": 305911,
+        "fills": 151679,
+        "decisions": 176140,
+        "rebalances": 78538
+      },
+      "artifacts_checked": 761,
+      "protected_hashes_checked": 11,
+      "original_paper_replication": false,
+      "clean_OOS": false,
+      "historical_PIT_verified": false,
+      "actual_execution_verified": false,
+      "multiple_testing_adjusted": false
+    }
+  ],
+  "offline_controls": {
+    "variant_production": 149,
+    "variant_independent_production_comparisons": 150,
+    "initial_floor_gate": 70,
+    "fixed_asof_entry": 55
+  },
+  "fixed_entry": {
+    "historical_modelled_entry_delivered": true,
+    "same_cutoff_repeat_byte_identical": true,
+    "matched_to_independently_audited_path": true,
+    "unknown_realtime_inputs_blocked": true,
+    "live_execution_enabled": false
+  },
+  "bounded_paper_probe": {
+    "lifecycle_observed": true,
+    "fill_count": 0,
+    "fill_and_fee_calibration_accepted": false,
+    "prior_uncertain_intent_preserved": true,
+    "continuous_paper_enabled": false
+  },
+  "outstanding_gates": [
+    "Actual market and venue access has not been verified.",
+    "Full original four-ETF historical protocol is incomplete.",
+    "Historical daily source publication availability, cross-source prices, venue filters and actual costs are unverified.",
+    "The author-inspired fixed-survivor unlevered variant is not the original paper dynamic-universe/leverage strategy.",
+    "Realtime source/retention/receipt/completeness and quote identity must qualify separately.",
+    "The offline initial-floor gate is not connected to a real account, FX marks, OMS or liquidation.",
+    "No strategy is certified profitable or ready for live trading."
+  ],
+  "privacy": {
+    "raw_market_data_exported": false,
+    "private_parameters_or_signals_exported": false,
+    "account_or_credentials_exported": false,
+    "private_financial_constraints_exported": false,
+    "raw_AI_conversations_or_private_URLs_exported": false,
+    "private_code_included": false,
+    "source_code_version_fingerprints_included": true
+  },
+  "activity_for_this_checkpoint": {
+    "new_order_submissions": 0,
+    "paid_calls": 0
+  },
+  "private_artifact_fingerprints": [
+    {
+      "role": "cross_ai_collection_ledger",
+      "sha256": "2fc2a968210a03c26dbd06e846e314764c936d4e8dbd21d35539205f6027f8cc",
+      "bytes": 31171,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "cross_ai_review",
+      "sha256": "6c692cfd6b8a973eaad442f37671dfbc66c973f124fc896afb7cab40d4f1ab81",
+      "bytes": 39850,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "primary_paper_rule_review",
+      "sha256": "8be4fa40f6b8fe4574cf5cc9f2bb39870f4823197d3802ad6b623e4927a60b02",
+      "bytes": 7802,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "historical_first_matrix_report",
+      "sha256": "d1c19b160f975c554802e83e13f89a4cd23ae81683b6b5dc35c6f4474f0d525f",
+      "bytes": 129380,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "historical_exposure_matrix_report",
+      "sha256": "2d1d9a06c11f054839c0d199d162fa9cb67bbb0827b34409edda9664b02db010",
+      "bytes": 327718,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "historical_exposure_independent_audit",
+      "sha256": "2759740bd22d80cb678199bd0f6a233887897f9d2a112660a39aa6df79a264cc",
+      "bytes": 1784,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_frozen_protocol",
+      "sha256": "7d95ab4548665e96006775372307cf818cb12737c1a91a710a445afd9fbe9040",
+      "bytes": 13525,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_implementation",
+      "sha256": "c2218331958cf65196addf4110f789ed6406c3b1d6e88641900d586224bb023c",
+      "bytes": 41479,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_artificial_controls",
+      "sha256": "a6a97dec63b1c8be1886af65463c886ce64c5aa83081ea94ce407814eb7c9803",
+      "bytes": 119718,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "independent_variant_implementation",
+      "sha256": "bd41c8b41dafcf3e491e13161c4c7a6a23521e8b331c922a0db96ba04800cfd1",
+      "bytes": 62577,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "independent_variant_artificial_controls",
+      "sha256": "e77bb2f95c585f6c5f735d235f30d6e69bfab8af4a792cc8c7327f66b17cfa1a",
+      "bytes": 13863,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_historical_report",
+      "sha256": "bd54e13c557e8b0ff1808cce8928d64e42d1b90775e102821129dc9284e06d86",
+      "bytes": 618660,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_paired_statistics",
+      "sha256": "f72916c4ce60fd8e03f813d38164045a73374de54528cc72b36967806c2a346d",
+      "bytes": 986435,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_independent_history_audit",
+      "sha256": "4957fe12428f6e2f603886f68503f502ae0bfefc67c3115803081197682ca67d",
+      "bytes": 2093,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_result_renderer",
+      "sha256": "ec78f7a380b307de2897c4ba03bed41f60f0def7ab66f95076944ad0726ec8d2",
+      "bytes": 47949,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_local_results_review",
+      "sha256": "3090f9fa5ae702c9f8a5a24f47a7fd039e22c17cfa2abf2c39fda0fe4ff938c1",
+      "bytes": 71128,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "new_variant_local_results_summary",
+      "sha256": "84ea7d5dc5bbb9dc63f6983b23e6fe4a6cd6287c9147cc787d2ba9c34572d2dd",
+      "bytes": 1259446,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "offline_initial_floor_gate_implementation",
+      "sha256": "441eb45240e9b729e5666a76ce0418bcdf315a7ed19c73f5324d95ef737556db",
+      "bytes": 27242,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "offline_initial_floor_gate_controls",
+      "sha256": "262c4a12c25f0852174db31db977c75ba3b1a5d759e7954d2f6c607c550317d3",
+      "bytes": 18366,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "fixed_asof_entry_implementation",
+      "sha256": "9549fd144d0d55e8a2a6d2be57f0efbe8ef67ded96effeae4df24d365c64eaa4",
+      "bytes": 22310,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "fixed_asof_entry_controls",
+      "sha256": "f6f4ec9887f3aa876214499813366bc19369516f75f653d6b557d5945faefdd8",
+      "bytes": 105805,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "fixed_asof_entry_verification",
+      "sha256": "ad91bfb3b568a168c5b9468fdb34590e814335d8bfbf359093e846262fec21a5",
+      "bytes": 2392,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "bounded_paper_lifecycle_local_summary",
+      "sha256": "4165a60153587a0f3129674dccec979226c12ed779dc3f832a3e210125a3675a",
+      "bytes": 1327,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "issuer_process_date_local_review",
+      "sha256": "4bdd424233509f4c8e8e609802a6bf97be31e2430e22eb022a6553bc1676bdf1",
+      "bytes": 3761,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "historical_archive_source_terms_review",
+      "sha256": "f51ffbae14d265f9862cea8bded438ec78b07db21a26ae26fc60fda11ae73149",
+      "bytes": 1926,
+      "retention": "private_local_only"
+    },
+    {
+      "role": "shadow_input_source_terms_review",
+      "sha256": "a6e45b94920c2c7451cd92a7a1806d2bb833dfa1b4f45c8f665a7b5237c69fbe",
+      "bytes": 3041,
+      "retention": "private_local_only"
+    }
+  ],
+  "market_selection": {
+    "final_execution_market_selected": false,
+    "research_routes": [
+      "Existing four-ETF input pilot",
+      "Exploratory crypto spot variants"
+    ],
+    "scope_note": "Data availability selected the first runnable experiment; it does not establish crypto as the preferred investment market."
+  }
+}
