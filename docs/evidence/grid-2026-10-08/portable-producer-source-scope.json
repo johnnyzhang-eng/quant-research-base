@@ -1,0 +1,49 @@
+{
+  "schema": "conditional-grid-public-producer-source-scope/1",
+  "frozen_original_private_producer_sha256": "47d0f95ac48a39dfb5814130cdd89eebf86d4f0aa8c5c4d9ef7642d2696b4c49",
+  "public_portable_producer_sha256": "6118a3ad1c22e154a91b1cfa40ddb8ae161bd3db058a9008d723e2eb614653c2",
+  "public_controls_sha256": "b04218cba7b1be65cef3c68aa4fe6ff02ff51a6645f579ef6f34006bd6f91de3",
+  "controls_copied_byte_for_byte": true,
+  "actual_public_variant_known_answer_controls": {
+    "tests_run": 23,
+    "passed": true,
+    "python_version": "Python 3.12.13",
+    "command": [
+      "python",
+      "-B",
+      "tools/test_spot_grid_economic_diagnostic_20261008_v0.py"
+    ],
+    "exit_code": 0,
+    "stderr_sha256": "457d094ef794738fc727fd69888edb89465c42fee96a7333729392357631df1a",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "portable_diff": {
+    "personal_absolute_root_replaced_by_unconfigured_relative_placeholder": true,
+    "historical_CLI_requires_explicit_local_root": true,
+    "all_original_non_main_function_or_class_ASTs_unchanged": true,
+    "non_main_definition_count": 24,
+    "economic_algorithm_constants_and_model_methods_changed": false,
+    "private_original_source_modified": false,
+    "private_original_diff_not_distributed": true
+  },
+  "missing_explicit_local_root_rejected_before_history_read": true,
+  "fee_label_scope": {
+    "v0_ordinary_fees_USDT_includes_initialization_in_grid_and_hold": true,
+    "minute_fees_USDT_includes_initialization_excludes_hypothetical_exit": true,
+    "initialization_fee_must_not_be_added_twice": true,
+    "private_13_path_clarification_sha256": "b70a7e6acea8f26e965737b950cde25eb653bc306718e9e203d1437091719147"
+  },
+  "protocol_sha256": "256d2f05f8334160b616ca0771e6bc42d037f2e04187e089baf8a083c0d372eb",
+  "private_original_month_report_sha256": "bd52944e873ef2b08f0178024279425b5cad98b79d8b6a568169f5cb7750d790",
+  "actual_historical_replay_using_public_variant_performed": false,
+  "public_variant_is_original_frozen_replay_source": false,
+  "private_market_raw_or_derived_traces_distributed": false,
+  "private_protocol_or_account_information_distributed": false,
+  "synthetic_controls_scope": "Model cash/coin arithmetic, fixed conditional fill mechanics, timing, reservations and cancellation only.",
+  "native_bot_replication_or_execution_qualification_admitted": false,
+  "profitability_or_alpha_admitted": false,
+  "actual_orders": 0,
+  "credentials_reads": 0,
+  "new_network_requests": 0,
+  "paid_calls": 0
+}

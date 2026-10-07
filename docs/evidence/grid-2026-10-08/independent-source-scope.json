@@ -1,0 +1,57 @@
+{
+  "schema": "conditional-grid-public-independent-source-scope/1",
+  "public_source_sha256": "849734299d989659521405c54408d62fbe5fc819996e04dab038835604359334",
+  "original_final_source_sha256": "849734299d989659521405c54408d62fbe5fc819996e04dab038835604359334",
+  "public_source_is_exact_original_bytes": true,
+  "private_personal_paths_or_default_root_present": false,
+  "full_history_mode_requires_explicit_owner_supplied_read_only_paths": true,
+  "public_self_controls_actual_command": [
+    "python",
+    "-B",
+    "tools/binance_spot_grid_economic_independent_audit_20261008_v0.py",
+    "--self-controls"
+  ],
+  "public_self_controls_exit_code": 0,
+  "public_self_controls_observed": {
+    "instrument": {
+      "assertions": 23,
+      "groups": 5,
+      "in_memory_wrong_fee_clock_quantum_phase_cases_rejected": 4,
+      "producer_files_mutated": 0
+    },
+    "model": {
+      "actual_market_return_runs": 0,
+      "assertions": 2260,
+      "known_answer_groups": 9,
+      "producer_helpers_called": 0
+    }
+  },
+  "public_self_controls_stdout_sha256": "dfe1afe1bbc4e9d83382e55000e0e0ee4a13accb61aa9d438316827f50840227",
+  "public_self_controls_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "private_final_actual_audit_json_sha256": "603666eb39a51526c98831d30adb55c8e8b2eba50b70ac294c1ab4f12b8bfb72",
+  "private_final_actual_audit_provenance_sha256": "a803aeb17dd8591a75d02250d54be166ba7e985bbd6ccc99da35c2501cbe95e5",
+  "private_final_actual_audit_txt_sha256": "ac5c1040cd508eb20e623d17432a21e60318b97d3e8c2dd94c2fc7225b230245",
+  "actual_private_audit_scope": {
+    "status": "accepted_only_for_fixed_conditional_single_seen_month_accounting_model",
+    "artifact_hashes_and_sizes_verified": 53,
+    "minute_rows_exactly_compared": 580320,
+    "fill_rows_exactly_compared": 380,
+    "lifecycle_rows_exactly_compared": 1584,
+    "distinct_previously_seen_market_periods": 1,
+    "independent_clean_OOS_market_trials": 0,
+    "correlated_account_paths": 13,
+    "producer_helpers_imported_or_run": false,
+    "producer_market_run_relaunched": false
+  },
+  "source_boundary": "Actual historical audit binds the original frozen producer digest, not the separately fingerprinted public plumbing variant. Public synthetic controls require neither producer helpers nor market data.",
+  "fee_field_scope": "Both grid and HOLD legacy ordinary_fees_USDT include initialization; adding initialization again would double-count it.",
+  "public_raw_or_derived_market_account_data_distributed": false,
+  "public_private_protocol_or_account_information_distributed": false,
+  "native_bot_replication": false,
+  "actual_fill_robustness_or_clean_OOS_established": false,
+  "profitability_or_execution_admitted": false,
+  "actual_orders": 0,
+  "credentials_reads": 0,
+  "network_requests": 0,
+  "paid_calls": 0
+}
