@@ -1,0 +1,125 @@
+{
+  "schema": "strategy-source-audit-checkpoint/1",
+  "generated_at_utc": "2026-10-07T08:25:27.463669+00:00",
+  "source_versions": [
+    {
+      "repository": "WW-shan/Atlas20",
+      "commit": "46c1af3934a459252c8cea18c1c149fc75705505"
+    },
+    {
+      "repository": "WW-shan/LTT_Strategy",
+      "commit": "23199e0b1d3192a4f2adea0f7575c3c46832b971"
+    }
+  ],
+  "claims": [
+    {
+      "id": "A1",
+      "support": "fixed-source static review",
+      "claim": "Atlas20's candidate pool combines a current ranking, an explicit legacy list and previously onboarded cache. Historical coins never collected remain outside this evidence.",
+      "next_requirement": "An independently versioned historical universe with as-of publication and identity records."
+    },
+    {
+      "id": "A2",
+      "support": "fixed-source formula plus independent synthetic counterexample and mathematical/pandas review",
+      "claim": "The retrospective price cleaner can change admission of a past row when only later prices change.",
+      "next_requirement": "Correction first-known time and revision vintages, followed by a causal replay; real return impact is unmeasured."
+    },
+    {
+      "id": "A3",
+      "support": "fixed-source inference review",
+      "claim": "CSCV splits overlap; candidate-column trial counts do not establish a complete research ledger. Walk-forward stitching of candidate return paths does not reconstruct switched holdings and cash.",
+      "next_requirement": "Bind all trial choices, input vintages, fixed-primary inference and switch accounting before treating results as independent validation."
+    },
+    {
+      "id": "A4",
+      "support": "fixed-source inference review",
+      "claim": "The research text calls cost settings round-trip totals, while the engine charges the setting against one-way L1 notional. A full switch has two units of turnover.",
+      "next_requirement": "Reconcile cost units before comparison; this discrepancy alone establishes no direction of performance error."
+    },
+    {
+      "id": "L1",
+      "support": "fixed-source LTT rule review",
+      "claim": "LTT's turtle and RSI alerts use distinct sources and bar references, and each timeframe is scanned separately. The reviewed paths do not specify a complete position, exit, shorting, fee or order policy.",
+      "next_requirement": "A faithful economic specification and source/bar-close alignment; any single-source daily subset must be labeled a new experiment."
+    },
+    {
+      "id": "W1",
+      "support": "official public JavaScript component instrument review",
+      "claim": "WWCloud's catalogue UI maps several transport, HTTP, JSON and catalogue-format exceptions into one generic error state.",
+      "next_requirement": "Actual request diagnosis, supported model entitlement and gateway prices; the observed message alone does not prove invalid credentials."
+    }
+  ],
+  "synthetic_causality_example": {
+    "target_row": 120,
+    "identical_history_prefix": true,
+    "past_ring_rows": [
+      60,
+      89
+    ],
+    "future_ring_rows": [
+      152,
+      181
+    ],
+    "past_price": 1000,
+    "past_ring_median": 10,
+    "future_ring_medians": [
+      10,
+      1000
+    ],
+    "past_drop_decisions": [
+      true,
+      false
+    ],
+    "minimum_future_ring_observations": 15,
+    "offsets_are_rows_not_guaranteed_calendar_days": true,
+    "third_party_strategy_or_return_replay": false
+  },
+  "artifacts": [
+    {
+      "artifact": "atlas20-point-in-time-source-audit-20261007.json",
+      "sha256": "53b1ff8ec68555f2dde145ac56ad5029a951eaee67469b4e133ffcb58c2fd607",
+      "raw_evidence_uploaded": false
+    },
+    {
+      "artifact": "atlas20-inference-source-audit-20261007.json",
+      "sha256": "2b56095d731ee55e38f172025c7e2b74b22fb0d78b82a9198d08886bad44a358",
+      "raw_evidence_uploaded": false
+    },
+    {
+      "artifact": "ltt-strategy-rule-review-20261007.json",
+      "sha256": "e2444e11af0734b352eb51a79090a420eb411ca57beff9d8edfc593d6a895935",
+      "raw_evidence_uploaded": false
+    },
+    {
+      "artifact": "atlas20-causal-data-probe-20261007.json",
+      "sha256": "e1f2c5262e8efa8d967cfb7e80815fa8ad46376bdd31e08f60e70708536477d3",
+      "raw_evidence_uploaded": false
+    },
+    {
+      "artifact": "atlas20-causal-probe-independent-review-20261007.json",
+      "sha256": "aa5a1512e5461089e25c53a32a72f4a319ce68e41d90693bf2215f3095dcc4c8",
+      "raw_evidence_uploaded": false
+    },
+    {
+      "artifact": "wwcloud-catalog-error-instrument-audit-20261007.json",
+      "sha256": "b9aaf5f11c07e113a6c686a9b549f5367a3c13c67a07a609441e1d5532b8869f",
+      "raw_evidence_uploaded": false
+    }
+  ],
+  "preserved_gates": {
+    "original_goal_complete": false,
+    "strategy_profit_edge_accepted": false,
+    "actual_forward_return_samples": 0,
+    "original_four_ETF_coverage_rights_actions": "open",
+    "funding_real_cash_fees_margin_settlement": "open",
+    "funded_execution_route_and_initial_capital_stop": "open"
+  },
+  "this_source_review": {
+    "market_data_downloads": 0,
+    "external_repository_execution": 0,
+    "orders": 0,
+    "paid_model_calls": 0,
+    "new_or_exported_keys": 0
+  },
+  "scope": "Source audit and independently checked synthetic mechanism only; not author-performance reproduction, execution readiness or a substitute for the original research programme."
+}

@@ -8,6 +8,7 @@ import tempfile
 import unittest
 from fractions import Fraction
 from pathlib import Path
+from unittest.mock import patch
 
 from research_base.evidence import ContractError, digest
 from research_base.performance import calibrate_risk, report
@@ -121,6 +122,22 @@ class PerformanceTests(unittest.TestCase):
         r = calibrate_risk(fixture([100, 100, 100]), candidates, boundary_date="2024-10-07", end_date="2024-10-09")
         self.assertFalse(r["risk_matched"])
         self.assertIsNone(r["selected_k"])
+
+    def test_nearby_unequal_risk_errors_are_not_quantized_into_a_tie(self):
+        strategy = report(fixture([100, 101, 100]))
+        strategy["volatility_annual"] = {"status": "DEFINED", "value": .01}
+        candidates = {}
+        rendered = []
+        for i in range(101):
+            key = f"{i/100:.2f}"
+            candidates[key] = fixture([100, 101, 100])
+            item = copy.deepcopy(strategy)
+            item["volatility_annual"]["value"] = .0100000000004 if i == 0 else .0100000000003 if i == 1 else .1
+            rendered.append(item)
+        with patch("research_base.performance.report", side_effect=[strategy, *rendered]):
+            result = calibrate_risk(candidates["0.00"], candidates, boundary_date=strategy["calendar"][0], end_date=strategy["calendar"][-1])
+        self.assertEqual(result["selected_k"], "0.01")
+        self.assertNotEqual(result["candidates"][0]["absolute_risk_error_decimal"], result["candidates"][1]["absolute_risk_error_decimal"])
 
     def test_negative_growth_keeps_negative_calmar(self):
         r = report(fixture([100, 110, 90], dates=["2023-01-01", "2023-07-01", "2024-01-01"]))

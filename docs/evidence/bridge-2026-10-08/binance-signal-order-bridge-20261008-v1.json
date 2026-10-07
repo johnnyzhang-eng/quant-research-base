@@ -1,0 +1,71 @@
+{
+  "schema": "binance-signal-order-bridge-report/1",
+  "created_utc": "2026-10-07T17:56:44.646962+00:00",
+  "mode": "FAKE_TRANSPORT_HISTORY_CONTROL",
+  "status": "OFFLINE_FAKE_V4_DURABLE_BRIDGE_CANDIDATE",
+  "draft_instrument_repair": {
+    "initial_draft_report_sha256": "dd3b2c1a6e6929a4007a9c6b871b67ae8085f7e3033e35f86ac98911ad8081da",
+    "initial_methods": 17,
+    "initial_harness_errors": 1,
+    "mechanism": "Sign hook advanced clock on account preflight instead of order signing; test wrongly expected a consumed POST reservation. Hook now targets outbound order business field only.",
+    "draft_announced_as_frozen": false,
+    "initial_draft_bytes_retained": false,
+    "candidate_adapter_changed_to_fix_harness": false
+  },
+  "source_sha256": "07c7d706fd15ef937691e368e3074a953f6f890ee6f29ec8ee30c468a3ff2c20",
+  "test_sha256": "c65b282644d0dd639572d5bd47370dead7c5593f7d30c091f59658954052cce4",
+  "adapter_sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+  "frozen_prerequisites_unchanged": true,
+  "controls": {
+    "unittest_methods": 18,
+    "assertion_calls": 115,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "independent_audit": false,
+    "failed_method_ids": []
+  },
+  "contract": {
+    "max_cutoff_to_eligible_ms": 60000,
+    "assumption": "Explicit small engineering span, not a venue or daily strategy convention.",
+    "eligible_age_max_ms": 60000,
+    "observation_age_max_ms": 5000,
+    "ttl_max_ms": 60000,
+    "expiry_equality_allowed": true,
+    "gross_notional_cap_USDT": "25",
+    "fees_outside_gross_cap": true,
+    "portfolio_capital_is_artificial": true,
+    "BTC_BUY_projection_only": true,
+    "registry_business_key": "fixed protocol + bound portfolio + BTCUSDT + cutoff; source intent renaming conflicts"
+  },
+  "observed_controls": [
+    "Own Fraction price/grid/debit known answer and hostile Decimal context.",
+    "Fresh child processes reopen same registry, reuse exact plan/ID and reject same-cutoff renaming.",
+    "Concurrent separate connections grant one new plan for initialized retained registry.",
+    "Quote/cash/time retries return frozen plan without new permission; target/source/protocol/portfolio conflicts reject.",
+    "Cutoff-to-eligible 60,000ms equality accepted, 60,001ms rejected; future/stale/risk/unsupported actions rejected.",
+    "Actual v4 request argument capture binds deadline_ms to compiled manifest; fake outbound business fields checked.",
+    "Signature and guard processing crossing deadline send no POST, preserve consumed reservations; two recovery queries never reissue.",
+    "Missing journal after fake dispatch stamp conservatively consumes permission; recovery does not create a new intent.",
+    "Fresh reopened fake execution state reconciles fills/fees; topup baseline matches compiled artificial portfolio."
+  ],
+  "remaining_boundaries": [
+    "This producer report requires independent peer audit of its exact source/report.",
+    "Per-retained local registry integrity only; deletion/copy/new registry is not account-wide deduplication.",
+    "Compile registry and adapter journal are separate commits; crash after stamp but before journal loses send eligibility conservatively.",
+    "No prospective source authentication/PIT, market data, actual account state or eligibility admission.",
+    "No SELL/ETH execution, continuous strategy scheduler, live/profit acceptance or deposit integration.",
+    "Deadline is last local transport dispatch sample, not exchange arrival or fill guarantee.",
+    "Root's exhausted canonical probe budgets are not accessed or replenished; all states here are newly created temporary fakes."
+  ],
+  "actions": {
+    "real_keys_read": 0,
+    "real_network_calls": 0,
+    "testnet_HTTP_calls": 0,
+    "canonical_probe_journal_access": 0,
+    "new_forward_signals": 0,
+    "paid_calls": 0,
+    "github_writes": 0
+  },
+  "public_scope": "Synthetic control code/report only; original historical weights and private paths removed from this new version."
+}

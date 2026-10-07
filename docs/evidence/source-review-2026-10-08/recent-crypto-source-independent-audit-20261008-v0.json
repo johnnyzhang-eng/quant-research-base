@@ -1,0 +1,468 @@
+{
+  "accepted_claim": "The pinned public evidence is insufficient to independently admit economic claims or exact strategy reproduction; raw disclosure reconciliation is actionable",
+  "complete_source_imports_for_two_read_files": [
+    {
+      "external_code_executed": false,
+      "from_import_modules": [
+        "domains.strategy_contract",
+        "typing"
+      ],
+      "plain_import_modules": [
+        "math"
+      ],
+      "strategy_key": "asia_drift_btc_v2"
+    },
+    {
+      "external_code_executed": false,
+      "from_import_modules": [
+        "domains.strategy_contract",
+        "typing"
+      ],
+      "plain_import_modules": [
+        "math"
+      ],
+      "strategy_key": "crash_recovery_eth_v3"
+    }
+  ],
+  "count_or_literal_field_errors_found": 0,
+  "created_at_utc": "2026-10-07T18:05:18.667932+00:00",
+  "decision_check": {
+    "P1": "All16 independently hash-matched captures and exact set comparisons confirm counts; source formatting failure was a literal-text measurement issue, corrected wrapped-bold/whitespace controls match the actual disclosure",
+    "P2": "Public README/index/card scope reconciliation and deliberately private source are distinct disclosure mechanisms; neither establishes economic validation failure",
+    "P3": "Strong alternatives remain earlier-stage card metrics, stale export/schema, or private later-stage validation; exact logs/schema/data/cost definitions are required to separate them"
+  },
+  "external_source_code_executed": false,
+  "historical_backtests_run": 0,
+  "independent_method": "Strict JSON with duplicate-object-key rejection; decimal tokens retained as text and Fraction sign checks; byte-built Git blob SHA1 independently compared with git hash-object --stdin; no root code imported or executed",
+  "literal_card_status_distribution": {
+    "passed": 10
+  },
+  "literal_stage_count_distribution": {
+    "2": 10
+  },
+  "negative_literal_return_count": 10,
+  "negative_literal_sharpe_count": 10,
+  "network_requests_in_independent_audit": 0,
+  "nonblocking_scope_qualifications": [
+    {
+      "field": "verified_raw_captures.upstream_path",
+      "observation": "README.md occurs for two different pinned repositories; upstream_path alone is not a unique capture key",
+      "resolution": "This independent report supplies uniquely Git-blob-matched repository/revision/path identities for all16 captures"
+    },
+    {
+      "field": "static_source_reviews.static_imports",
+      "observation": "Root field contains ImportFrom modules; ordinary import math is also present in both read files",
+      "resolution": "Interpret root field as from-import modules, not complete dependency closure; no execution readiness inferred"
+    },
+    {
+      "field": "public_exact_reproduction_possible_from_reviewed_tree_alone",
+      "observation": "Only the tree inventory and selected documents were reviewed; zero Python paths and author-declared private source do not independently inspect every file or prohibit approximate reimplementation",
+      "resolution": "False is an evidence-admission boundary: exact reproduction has not been established by reviewed material, not proof that every public reconstruction is impossible"
+    }
+  ],
+  "not_supported": [
+    "Author strategies failed their undisclosed later stages",
+    "Negative literal cards prove a full whole-account loss under current venue costs",
+    "All strategy logic in the repo is unusable",
+    "Approximate reconstruction is impossible",
+    "Crypto market as a whole failed",
+    "Current real-money profitability or trading eligibility is established"
+  ],
+  "original_goal_complete": false,
+  "own_instrument_controls": [
+    {
+      "independent_hash_and_git_CLI_agree": true,
+      "name": "known_git_blob_empty"
+    },
+    {
+      "independent_hash_and_git_CLI_agree": true,
+      "name": "known_git_blob_test_newline"
+    },
+    {
+      "name": "duplicate_JSON_fields_rejected",
+      "passed": true
+    },
+    {
+      "name": "exact_Fraction_sign_control",
+      "passed": true
+    },
+    {
+      "name": "independent_wrapped_bold_disclosure_control",
+      "passed": true
+    }
+  ],
+  "paid_model_calls": 0,
+  "passed_cards": [
+    {
+      "independent_validation_pass_determined": false,
+      "key": "asia_drift_btc_v2",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-0.4809",
+      "oos_total_return_bps": "-155.76",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 9
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "asia_drift_btc_v3",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-0.5309",
+      "oos_total_return_bps": "-165.26",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 8
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "asia_drift_btc_v9",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-0.9439",
+      "oos_total_return_bps": "-176.87",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 4
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "crash_recovery_eth_v3",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-0.6984",
+      "oos_total_return_bps": "-169.13",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 7
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "ema_pullback_eth_v7",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-0.4706",
+      "oos_total_return_bps": "-562.98",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 52
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "gap_fade_btc_v8",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-0.8241",
+      "oos_total_return_bps": "-372.46",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 49
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "monday_drift_sol_v4",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-0.6115",
+      "oos_total_return_bps": "-273.34",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 8
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "rel_strength_eth_v3",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-1.7501",
+      "oos_total_return_bps": "-302.97",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 10
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "scalp_btclead_sol_v3",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-1.3889",
+      "oos_total_return_bps": "-325.08",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 37
+    },
+    {
+      "independent_validation_pass_determined": false,
+      "key": "vol_burst_sol_v2",
+      "negative_oos_return": true,
+      "negative_oos_sharpe": true,
+      "oos_sharpe": "-0.2644",
+      "oos_total_return_bps": "-243.55",
+      "stage_count_differs_from_seven": true,
+      "stages_passed": 2,
+      "status": "passed",
+      "total_trades": 86
+    }
+  ],
+  "private_paths_identity_or_credentials_in_report": false,
+  "real_order_requests": 0,
+  "root_auditor_code_executed_by_independent_auditor": false,
+  "root_count_comparisons": [
+    {
+      "field": "tree_file_count",
+      "independent_value": 836,
+      "matches_root_report": true
+    },
+    {
+      "field": "strategy_source_file_count",
+      "independent_value": 416,
+      "matches_root_report": true
+    },
+    {
+      "field": "passed_source_files",
+      "independent_value": 10,
+      "matches_root_report": true
+    },
+    {
+      "field": "rejected_source_files",
+      "independent_value": 406,
+      "matches_root_report": true
+    },
+    {
+      "field": "card_files_in_tree",
+      "independent_value": 416,
+      "matches_root_report": true
+    },
+    {
+      "field": "index_entries",
+      "independent_value": 406,
+      "matches_root_report": true
+    },
+    {
+      "field": "index_status_counts",
+      "independent_value": {
+        "rejected": 406
+      },
+      "matches_root_report": true
+    },
+    {
+      "field": "index_matches_rejected_source_keys",
+      "independent_value": true,
+      "matches_root_report": true
+    },
+    {
+      "field": "all_source_keys_have_card_paths",
+      "independent_value": true,
+      "matches_root_report": true
+    },
+    {
+      "field": "passed_source_keys_missing_from_index",
+      "independent_value": [
+        "asia_drift_btc_v2",
+        "asia_drift_btc_v3",
+        "asia_drift_btc_v9",
+        "crash_recovery_eth_v3",
+        "ema_pullback_eth_v7",
+        "gap_fade_btc_v8",
+        "monday_drift_sol_v4",
+        "rel_strength_eth_v3",
+        "scalp_btclead_sol_v3",
+        "vol_burst_sol_v2"
+      ],
+      "matches_root_report": true
+    },
+    {
+      "field": "passed_cards_actually_read",
+      "independent_value": 10,
+      "matches_root_report": true
+    },
+    {
+      "field": "validation_harness_python_files_in_tree",
+      "independent_value": [],
+      "matches_root_report": true
+    }
+  ],
+  "root_report_sha256": "3290e0f9008e1d8d691065dccdc29fd7cd4abebae01538f395aedaec2bb8da5c",
+  "root_source_sha256": "998d48055dafc8fee7b86bf59ee6f217d176e91bb36e4683cfdb22054e0a13ed",
+  "schema": "recent-crypto-source-independent-audit/1",
+  "status": "PINNED_DISCLOSURE_COUNTS_AND_RAW_FIELDS_CONFIRMED_WITH_SCOPE_QUALIFICATIONS",
+  "tree_metadata": [
+    {
+      "blob_file_count": 836,
+      "duplicate_paths": 0,
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "revision_matches_capture_URL": true,
+      "total_entries_including_directories": 839,
+      "tree_capture_sha256": "d17d3b32431850d1d9529b946e7af825332eaf9df866d7115805dea57c5cf0cc",
+      "truncated": false
+    },
+    {
+      "blob_file_count": 22,
+      "duplicate_paths": 0,
+      "repository": "AKzar1el/walk-forward-crypto",
+      "revision": "8ec32ea1ad454edd88abc5118a808c6fa764063b",
+      "revision_matches_capture_URL": true,
+      "total_entries_including_directories": 25,
+      "tree_capture_sha256": "4c75a7f806b51906ed424d19f12bbe58c911878e59cf31f03123ab70d99358a7",
+      "truncated": false
+    }
+  ],
+  "unique_capture_matching_not_inferred_from_list_order": true,
+  "unique_raw_capture_mappings": [
+    {
+      "bytes": 15462,
+      "git_blob_sha1": "06b7ce141b12d0bf05f5b8b52332dd507ffc418a",
+      "path": "README.md",
+      "repository": "AKzar1el/walk-forward-crypto",
+      "revision": "8ec32ea1ad454edd88abc5118a808c6fa764063b",
+      "sha256": "42b97b101ac463ad9cdca568ba49c8b43fad0489a3f8309c13a23398e7c067f9",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 3188,
+      "git_blob_sha1": "d2ef70e891bb259ed7adae244bd370c7b049c637",
+      "path": "docs/REDACTION_REPORT.md",
+      "repository": "AKzar1el/walk-forward-crypto",
+      "revision": "8ec32ea1ad454edd88abc5118a808c6fa764063b",
+      "sha256": "32dd2e891882640a456ecf234d4e3b69b9f97b9e5f6fa930d8b371e7f3468c94",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 4178,
+      "git_blob_sha1": "bf8d6e0eb1ec366234f1d4d3b6eafbdedc0f5c8c",
+      "path": "README.md",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "2e35fe467d40fc5ea74c657334afcb46b83c241e0a2125c96bc2d86f58f3ace0",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 347,
+      "git_blob_sha1": "1467429951ebcc6b0614e6d81fe8edacfdc043a4",
+      "path": "cards/asia_drift_btc_v2.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "fffa487ae696d81ff5cf1708b7e20e4d881f355c97539f7438753083e56a5ce3",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 346,
+      "git_blob_sha1": "80b80e32986a746ad66d45ef5d331067edd0e7cd",
+      "path": "cards/asia_drift_btc_v3.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "9ddc91b194aa28b8b5b62eaae11c1c524b96c9e5e6bcdbe6abd91e73f2cafff9",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 345,
+      "git_blob_sha1": "ba3c73f08c571bceab2c44e774ea16fb52ddb44d",
+      "path": "cards/asia_drift_btc_v9.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "9341ee995957fe48501334ec8c82a4a166c813309158911afcf5ed67b733f943",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 351,
+      "git_blob_sha1": "b97a26adec9202835c30bacf8d2f74248989545b",
+      "path": "cards/crash_recovery_eth_v3.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "9f25c44a6b51dfc90b700a06011da5f589e698c976b3b173e3a0563c57624e53",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 351,
+      "git_blob_sha1": "1c81501f9343dd14a2375e1224045f0a5dae6a07",
+      "path": "cards/ema_pullback_eth_v7.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "5505273ece72f9a1773660e83046938717cda20e29eb583fa9551a56231316d0",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 346,
+      "git_blob_sha1": "de493da279b2c308360c59ba15f2a1260e7e3ad5",
+      "path": "cards/gap_fade_btc_v8.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "93d8d3c9ca7cbf4194f675c1e2dc52be76ad7418e8404c927e23475d76806d12",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 348,
+      "git_blob_sha1": "ffba2604a365208bcfca4b48e5073dd9578076df",
+      "path": "cards/monday_drift_sol_v4.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "a73ad27f251dc32bb56f7a28ce68e1fb285a910147e347bd032ccc60debb1af5",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 347,
+      "git_blob_sha1": "3e6118bc456605fdd5444e29cff973d983652d32",
+      "path": "cards/rel_strength_eth_v3.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "82347df40e7046c129b7867ec0dc4e91123374860d45ef7c018f6784e98936d4",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 357,
+      "git_blob_sha1": "331e3a88ec8689409f376c059aec16ec5c031a90",
+      "path": "cards/scalp_btclead_sol_v3.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "4b57127472c79ccb271555c1cadac46f6b70c73c1ee7bc32f9ebe553e4276910",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 347,
+      "git_blob_sha1": "789967d6447364f8d5473adc39e160e8f049e51d",
+      "path": "cards/vol_burst_sol_v2.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "e8fab24f88f3c95ff2e4a7dfc41c7499e54e466fdebfc79daac5bb3bdd4a1ed3",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 57017,
+      "git_blob_sha1": "156f0fa9b576d397b85f5cee717332ea10f9ba22",
+      "path": "index.json",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "81266b709738802f41762d5d046b5c9d0e67dcd07646a7bbc7006767ec95cc0d",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 5810,
+      "git_blob_sha1": "6e610f1b8add6edcd808e455e960aa32532acd59",
+      "path": "passed/asia_drift_btc_v2.py",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "05e3df461079589f1877cc37faab88a512b0080244a2e4400fe6f854bc177dc7",
+      "unique_match_across_both_pinned_trees": true
+    },
+    {
+      "bytes": 5745,
+      "git_blob_sha1": "2bb439a3694608866dfad7201c1d3d6735a71d63",
+      "path": "passed/crash_recovery_eth_v3.py",
+      "repository": "CacheCarti/Crypto-Strategies",
+      "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+      "sha256": "e65c02e64503832ce41cb4f64d8df6a6f6e024d4992289311be6eb0b9fc123cf",
+      "unique_match_across_both_pinned_trees": true
+    }
+  ]
+}

@@ -1,0 +1,331 @@
+{
+  "schema": "binance-api-full-unicode-independent-audit/1",
+  "status": "FINITE_TECHNICAL_CONTROLS_PASS",
+  "criteria": {
+    "schema": "binance-api-full-unicode-independent-audit/1",
+    "controls_frozen": "prior full17 named controls plus3 fd swaps and Unicode identities, fees, signed wallet bytes",
+    "unicode_bound": "observed candidate1..20 alnum codepoints, exact case/width; not a claim about universal Binance asset rules",
+    "hmac_instrument": "RFC4231 case2 via prior audit; exact Unicode percentencoding and independent frozen literal HMAC",
+    "cli_gate": "on-disk False blocks all3 finite modes before key/Journal/HTTP; memory-only True branch uses entirely fake key/client/DB",
+    "technical_decision": "tested technical conditions only; order permission decision remains root's responsibility",
+    "limitations": [
+      "one preserved Journal with exclusive owned0700 parent",
+      "no malicious sameUID sandbox or account-global exactly-once",
+      "notional<=25 excludes fee-inclusive total debit",
+      "isolated-account reconciliation assumption",
+      "no real authentication, fill, eligibility, account balance, profitability or finite order authorization inferred"
+    ]
+  },
+  "candidate_source_sha256": "154fdb545de15b061314c0ddd02546bf1446b47d5e3ac1fb687f412f174a4442",
+  "candidate_test_sha256": "845bccf7d7281efe48ec83a2c59c2587c3837572480734850aa8fb3d82c489cf",
+  "operator_cli_source_sha256": "341ca5be8bae10f4d8ac26cef671bca991e8cbca1d3c6696b3d8aea93fe3a72a",
+  "criteria_sha256": "1aab114c021327bb9e825155faa54f283cee92a153f162f4c2ee98f1acc33f79",
+  "auditor_source_sha256": "eb728f1f7e46a9012e1dca89a2c34ffb6d488c313549d917368b4792d69cfc68",
+  "prior_full_instrument_sha256": "e6c91840362569c455eb694b7a2e5ec1edb67e82ddb4a854f2992ecc2034b24e",
+  "prior_fd_instrument_sha256": "0f56347b620953b5362717c960acc54ce8d08a47fac3edf33ebe84491ced29fe",
+  "previous_focused_report_sha256": "5697b0bf8740f1a54f01f0b4eafa14a0f4646691bb7174d57d31d943bea06371",
+  "all_pinned_inputs_unchanged": true,
+  "independent_checks": [
+    {
+      "id": "instrument-signing-known-answer",
+      "instrument_executed": true,
+      "result": "PASS",
+      "known_answer": "RFC4231 case2 literal",
+      "percent_encoding_control": true,
+      "signed_bytes_independently_recomputed": true
+    },
+    {
+      "id": "hard-origins-methods-redirect",
+      "instrument_executed": true,
+      "result": "PASS",
+      "hard_origin_and_endpoint_rejections": 20,
+      "redirect_not_followed": true,
+      "production_methods_all_get": true,
+      "redirect_attempts": 1
+    },
+    {
+      "id": "fake-credential-file-controls",
+      "instrument_executed": true,
+      "result": "PASS",
+      "positive_owned_0700_0600_fixture": true,
+      "mode_scope_schema_and_final_symlinks_rejected": true,
+      "actual_credential_files_read": 0
+    },
+    {
+      "id": "same-origin-clock",
+      "instrument_executed": true,
+      "result": "PASS",
+      "origins_with_unsigned_public_clock_then_signed_read": 2,
+      "wrong_origin_and_stale_clock_rejected": true
+    },
+    {
+      "id": "durable-unknown-restart-query-only",
+      "instrument_executed": true,
+      "result": "PASS",
+      "unknown_send_restarts": [
+        {
+          "initial_error_kind": "timeout",
+          "actual_fake_new_order_posts": 1,
+          "recovery_gets": 1,
+          "new_order_budget_consumed": true
+        },
+        {
+          "initial_error_kind": "http500",
+          "actual_fake_new_order_posts": 1,
+          "recovery_gets": 1,
+          "new_order_budget_consumed": true
+        },
+        {
+          "initial_error_kind": "minus2013",
+          "actual_fake_new_order_posts": 1,
+          "recovery_gets": 1,
+          "new_order_budget_consumed": true
+        }
+      ],
+      "durable_pre_send_crash_posts": 0,
+      "minus2013_never_releases_budget": true
+    },
+    {
+      "id": "partial-fill-once-cancel",
+      "instrument_executed": true,
+      "result": "PASS",
+      "new_order_posts": 1,
+      "cancel_attempts": 1,
+      "recoveries_use_bound_order_id": true,
+      "partial_fill_account_identity_matches_fraction": true,
+      "canceled_buy_still_has_residual_position": true,
+      "different_intent_rejected_after_terminal": true
+    },
+    {
+      "id": "same-journal-concurrent-send",
+      "instrument_executed": true,
+      "result": "PASS",
+      "concurrent_runners": 2,
+      "fake_new_order_posts": 1,
+      "safe_losing_runner_guard_errors": 1,
+      "not_a_multi_host_distributed_lock": true
+    },
+    {
+      "id": "cross-journal-namespace",
+      "instrument_executed": true,
+      "result": "FINDING",
+      "finding": {
+        "severity": "P1_SCOPE",
+        "title": "Once budget is per supplied journal file, not global account authorization",
+        "mechanism": "Two freshly owned 0600 files both reserve and send the same approved manifest; module has no credential/manifest registry outside each file.",
+        "reproducing_check": "cross-journal-namespace",
+        "scope": "API caller must freeze one canonical journal path; a fresh path cannot be treated as safe recovery."
+      },
+      "different_journal_files": 2,
+      "fake_new_order_posts": 2
+    },
+    {
+      "id": "sqlite-schema-trigger",
+      "instrument_executed": true,
+      "result": "PASS",
+      "matching_columns_with_budget_reset_trigger_rejected": true
+    },
+    {
+      "id": "decimal-bound-context",
+      "instrument_executed": true,
+      "result": "PASS",
+      "numeric_bounds_context_independent": true,
+      "fraction_verified_25_cap": true,
+      "grid_and_min_notional_controls": 3
+    },
+    {
+      "id": "journal-file-mode-and-reopen",
+      "instrument_executed": true,
+      "result": "PASS",
+      "ordinary_mode_and_final_symlink_controls_rejected": 5,
+      "simulated_same_user_path_swap_rejected": true,
+      "independent_fd_swap_controls": [
+        {
+          "flavor": "symlink0644",
+          "old_control": {
+            "flavor": "symlink0644",
+            "accepted": true,
+            "guard_rejected": false,
+            "checked_file_fd_alive_at_connect": false,
+            "checked_parent_fd_alive_at_connect": false,
+            "sql_calls_before_guard": 5,
+            "connection_closed": true,
+            "effective_db_bytes_unchanged": true,
+            "source_target_bytes_unchanged": true
+          },
+          "new_candidate": {
+            "flavor": "symlink0644",
+            "accepted": false,
+            "guard_rejected": true,
+            "checked_file_fd_alive_at_connect": true,
+            "checked_parent_fd_alive_at_connect": true,
+            "sql_calls_before_guard": 0,
+            "connection_closed": true,
+            "effective_db_bytes_unchanged": true,
+            "source_target_bytes_unchanged": true
+          }
+        },
+        {
+          "flavor": "regular0644",
+          "old_control": {
+            "flavor": "regular0644",
+            "accepted": true,
+            "guard_rejected": false,
+            "checked_file_fd_alive_at_connect": false,
+            "checked_parent_fd_alive_at_connect": false,
+            "sql_calls_before_guard": 5,
+            "connection_closed": true,
+            "effective_db_bytes_unchanged": true,
+            "source_target_bytes_unchanged": true,
+            "replacement_inode_differs": true
+          },
+          "new_candidate": {
+            "flavor": "regular0644",
+            "accepted": false,
+            "guard_rejected": true,
+            "checked_file_fd_alive_at_connect": true,
+            "checked_parent_fd_alive_at_connect": true,
+            "sql_calls_before_guard": 0,
+            "connection_closed": true,
+            "effective_db_bytes_unchanged": true,
+            "source_target_bytes_unchanged": true,
+            "replacement_inode_differs": true
+          }
+        },
+        {
+          "flavor": "regular0600",
+          "old_control": {
+            "flavor": "regular0600",
+            "accepted": true,
+            "guard_rejected": false,
+            "checked_file_fd_alive_at_connect": false,
+            "checked_parent_fd_alive_at_connect": false,
+            "sql_calls_before_guard": 5,
+            "connection_closed": true,
+            "effective_db_bytes_unchanged": true,
+            "source_target_bytes_unchanged": true,
+            "replacement_inode_differs": true
+          },
+          "new_candidate": {
+            "flavor": "regular0600",
+            "accepted": false,
+            "guard_rejected": true,
+            "checked_file_fd_alive_at_connect": true,
+            "checked_parent_fd_alive_at_connect": true,
+            "sql_calls_before_guard": 0,
+            "connection_closed": true,
+            "effective_db_bytes_unchanged": true,
+            "source_target_bytes_unchanged": true,
+            "replacement_inode_differs": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "fresh-recovery-guard",
+      "instrument_executed": true,
+      "result": "PASS",
+      "no_intent_or_unspent_recovery_rejected_without_fake_network": true,
+      "wrong_approval_hash_rejected_without_fake_network": true
+    },
+    {
+      "id": "wallet-readonly-key-evidence",
+      "instrument_executed": true,
+      "result": "PASS",
+      "unsafe_or_missing_capabilities_rejected": 8,
+      "sensitive_wallet_reads_after_unsafe_evidence": 0
+    },
+    {
+      "id": "accounting-limit-contradiction",
+      "instrument_executed": true,
+      "result": "PASS",
+      "fraction_verified_btc_fee_identity": true,
+      "broken_accounting_controls_rejected": 4,
+      "above_buy_limit_fill_rejected": true,
+      "aggregate_quote_above_limit_times_executed_rejected": true,
+      "observation_rejection_preserves_reserved_state": true
+    },
+    {
+      "id": "wallet-status-and-pagination",
+      "instrument_executed": true,
+      "result": "PASS",
+      "statuses6_7_8_distinct": true,
+      "short_page_does_not_prove_history_or_balance": true,
+      "repeated_full_page_coverage_gap_reported": true,
+      "outside_window_and_unknown_status_reported": true,
+      "all_fake_wallet_calls_production_get_only": true,
+      "raw_deposit_identifiers_not_returned": true
+    },
+    {
+      "id": "redacted-private-objects",
+      "instrument_executed": true,
+      "result": "PASS",
+      "private_object_repr_redacted": true,
+      "raw_transport_exception_not_propagated": true
+    },
+    {
+      "id": "operator-cli-offline-boundaries",
+      "instrument_executed": true,
+      "result": "PASS",
+      "cli_source_sha256": "341ca5be8bae10f4d8ac26cef671bca991e8cbca1d3c6696b3d8aea93fe3a72a",
+      "actual_import_and_reviewed_sha_match_v3": true,
+      "on_disk_finite_gate_false": true,
+      "all3_finite_modes_guard_before_key_journal_http": true,
+      "default_zero_network_and_no_credentials": true,
+      "pending_or_wrong_pin_blocks_before_key": true,
+      "memory_only_enabled_branch_fresh_recover_still_query_guard": true,
+      "memory_only_enabled_branch_wrong_journal_or_hash_guard": true,
+      "fake_unicode_auth_get_only_and_balances_redacted": true,
+      "fake_unicode_wallet_coin_migrated_get_only": true,
+      "unsafe_or_missing_wallet_permissions_guard": true,
+      "no_real_key_or_canonical_state_path_read_or_written": true
+    },
+    {
+      "id": "unicode-asset-identity-fee-utf8-hmac",
+      "instrument_executed": true,
+      "result": "PASS",
+      "exact_distinct_balance_names": 9,
+      "all_free_plus_locked_equal_fraction2": true,
+      "unicode_commission_fraction_identity": true,
+      "width_and_case_preserved_no_normalization": true,
+      "candidate20_codepoint_bound_positive": true,
+      "invalid_unicode_controls_rejected": 11,
+      "pair_network_ascii_constraints_preserved": true,
+      "utf8_percentencoding_matches_frozen_literal": true,
+      "signed_hmac_matches_frozen_literal": true,
+      "wallet_reads_get_only": true,
+      "universal_venue_asset_definition_proven": false
+    }
+  ],
+  "scope_findings": [
+    {
+      "severity": "P1_SCOPE",
+      "title": "Once budget is per supplied journal file, not global account authorization",
+      "mechanism": "Two freshly owned 0600 files both reserve and send the same approved manifest; module has no credential/manifest registry outside each file.",
+      "reproducing_check": "cross-journal-namespace",
+      "scope": "API caller must freeze one canonical journal path; a fresh path cannot be treated as safe recovery."
+    }
+  ],
+  "unresolved_logic_findings": [],
+  "harness_or_candidate_errors": [],
+  "technical_probe_admission_conditions_met": true,
+  "operator_finite_gate_currently_enabled": false,
+  "actual_order_permission_decision_owner": "root using human authorization",
+  "technical_acceptance_scope": [
+    "one preserved Journal with exclusive owned0700 parent",
+    "no malicious sameUID sandbox or account-global exactly-once",
+    "notional<=25 excludes fee-inclusive total debit",
+    "isolated-account reconciliation assumption",
+    "no real authentication, fill, eligibility, account balance, profitability or finite order authorization inferred"
+  ],
+  "producer54_tests_executed_or_recounted": false,
+  "actual_network_calls": 0,
+  "actual_credential_files_read": 0,
+  "actual_private_state_paths_accessed": 0,
+  "real_orders": 0,
+  "paid_calls": 0,
+  "captured_candidate_output_bytes": 0,
+  "p1_known_answer_and_old_attack_controls": true,
+  "p2_unicode_parser_separate_from_transport": true,
+  "p3_no_global_once_or_real_auth_claim": true
+}

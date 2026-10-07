@@ -1,0 +1,317 @@
+{
+  "auditor_source_sha256": "998d48055dafc8fee7b86bf59ee6f217d176e91bb36e4683cfdb22054e0a13ed",
+  "control_groups_passed": 10,
+  "controls": [
+    "known_complete_tree",
+    "truncated_tree_rejected",
+    "wrong_revision_rejected",
+    "duplicate_tree_path_rejected",
+    "known_index_row",
+    "duplicate_index_key_rejected",
+    "negative_return_does_not_infer_failed_validation",
+    "stage_gap_separate_from_return_sign",
+    "known_git_blob_hash",
+    "wrapped_bold_disclosure_normalization"
+  ],
+  "created_at_utc": "2026-10-07T18:00:34.641710+00:00",
+  "crypto_strategies": {
+    "all_source_keys_have_card_paths": true,
+    "card_files_in_tree": 416,
+    "claim_scope": "README, index and released card fields require reconciliation; private later-stage metrics may explain them. No independent profit or failed-validation determination.",
+    "index_entries": 406,
+    "index_matches_rejected_source_keys": true,
+    "index_status_counts": {
+      "rejected": 406
+    },
+    "next_required_evidence": [
+      "versioned seven-stage logs and card schema",
+      "validator, strategy contract and fill/cost semantics",
+      "exact data windows, gap treatment and sentiment vintages",
+      "whole-account return paths and matched holding benchmark",
+      "parameter-selection history and fresh forward sample"
+    ],
+    "passed_cards": [
+      {
+        "independent_validation_pass_determined": false,
+        "key": "asia_drift_btc_v2",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-0.4809",
+        "oos_total_return_bps": "-155.76",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 9
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "asia_drift_btc_v3",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-0.5309",
+        "oos_total_return_bps": "-165.26",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 8
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "asia_drift_btc_v9",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-0.9439",
+        "oos_total_return_bps": "-176.87",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 4
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "crash_recovery_eth_v3",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-0.6984",
+        "oos_total_return_bps": "-169.13",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 7
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "ema_pullback_eth_v7",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-0.4706",
+        "oos_total_return_bps": "-562.98",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 52
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "gap_fade_btc_v8",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-0.8241",
+        "oos_total_return_bps": "-372.46",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 49
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "monday_drift_sol_v4",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-0.6115",
+        "oos_total_return_bps": "-273.34",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 8
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "rel_strength_eth_v3",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-1.7501",
+        "oos_total_return_bps": "-302.97",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 10
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "scalp_btclead_sol_v3",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-1.3889",
+        "oos_total_return_bps": "-325.08",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 37
+      },
+      {
+        "independent_validation_pass_determined": false,
+        "key": "vol_burst_sol_v2",
+        "negative_oos_return": true,
+        "negative_oos_sharpe": true,
+        "oos_sharpe": "-0.2644",
+        "oos_total_return_bps": "-243.55",
+        "stage_count_differs_from_seven": true,
+        "stages_passed": 2,
+        "status": "passed",
+        "total_trades": 86
+      }
+    ],
+    "passed_cards_actually_read": 10,
+    "passed_source_files": 10,
+    "passed_source_keys_missing_from_index": [
+      "asia_drift_btc_v2",
+      "asia_drift_btc_v3",
+      "asia_drift_btc_v9",
+      "crash_recovery_eth_v3",
+      "ema_pullback_eth_v7",
+      "gap_fade_btc_v8",
+      "monday_drift_sol_v4",
+      "rel_strength_eth_v3",
+      "scalp_btclead_sol_v3",
+      "vol_burst_sol_v2"
+    ],
+    "rejected_source_files": 406,
+    "repository": "CacheCarti/Crypto-Strategies",
+    "revision": "f8e32599c192b823dbe7aea77a2b9341c6114527",
+    "static_source_reviews": [
+      {
+        "executed": false,
+        "static_imports": [
+          "domains.strategy_contract",
+          "typing"
+        ],
+        "strategy_key": "asia_drift_btc_v2"
+      },
+      {
+        "executed": false,
+        "static_imports": [
+          "domains.strategy_contract",
+          "typing"
+        ],
+        "strategy_key": "crash_recovery_eth_v3"
+      }
+    ],
+    "strategy_source_file_count": 416,
+    "tree_complete": true,
+    "tree_file_count": 836,
+    "validation_harness_python_files_in_tree": []
+  },
+  "decision_check": {
+    "P1": "Known-answer controls, complete exact-revision trees and Git blob matching precede counts and literal card metrics.",
+    "P2": "Inconsistent public field scope differs from deliberately private source; neither mechanism establishes trading failure.",
+    "P3": "Keep strongest alternative: cards can contain earlier-stage metrics while private later stages passed; source logs/schema are needed."
+  },
+  "external_code_executed": false,
+  "historical_strategy_returns_reproduced": false,
+  "network_requests_in_auditor": 0,
+  "new_paid_model_calls": 0,
+  "new_strategy_admitted_for_trading": false,
+  "original_goal_complete": false,
+  "real_money_order_posts": 0,
+  "schema_version": 1,
+  "status": "PINNED_PUBLIC_DISCLOSURE_REVIEW_ONLY",
+  "verified_raw_captures": [
+    {
+      "bytes": 57017,
+      "git_blob_sha": "156f0fa9b576d397b85f5cee717332ea10f9ba22",
+      "sha256": "81266b709738802f41762d5d046b5c9d0e67dcd07646a7bbc7006767ec95cc0d",
+      "upstream_path": "index.json"
+    },
+    {
+      "bytes": 4178,
+      "git_blob_sha": "bf8d6e0eb1ec366234f1d4d3b6eafbdedc0f5c8c",
+      "sha256": "2e35fe467d40fc5ea74c657334afcb46b83c241e0a2125c96bc2d86f58f3ace0",
+      "upstream_path": "README.md"
+    },
+    {
+      "bytes": 347,
+      "git_blob_sha": "1467429951ebcc6b0614e6d81fe8edacfdc043a4",
+      "sha256": "fffa487ae696d81ff5cf1708b7e20e4d881f355c97539f7438753083e56a5ce3",
+      "upstream_path": "cards/asia_drift_btc_v2.json"
+    },
+    {
+      "bytes": 346,
+      "git_blob_sha": "80b80e32986a746ad66d45ef5d331067edd0e7cd",
+      "sha256": "9ddc91b194aa28b8b5b62eaae11c1c524b96c9e5e6bcdbe6abd91e73f2cafff9",
+      "upstream_path": "cards/asia_drift_btc_v3.json"
+    },
+    {
+      "bytes": 345,
+      "git_blob_sha": "ba3c73f08c571bceab2c44e774ea16fb52ddb44d",
+      "sha256": "9341ee995957fe48501334ec8c82a4a166c813309158911afcf5ed67b733f943",
+      "upstream_path": "cards/asia_drift_btc_v9.json"
+    },
+    {
+      "bytes": 351,
+      "git_blob_sha": "b97a26adec9202835c30bacf8d2f74248989545b",
+      "sha256": "9f25c44a6b51dfc90b700a06011da5f589e698c976b3b173e3a0563c57624e53",
+      "upstream_path": "cards/crash_recovery_eth_v3.json"
+    },
+    {
+      "bytes": 351,
+      "git_blob_sha": "1c81501f9343dd14a2375e1224045f0a5dae6a07",
+      "sha256": "5505273ece72f9a1773660e83046938717cda20e29eb583fa9551a56231316d0",
+      "upstream_path": "cards/ema_pullback_eth_v7.json"
+    },
+    {
+      "bytes": 346,
+      "git_blob_sha": "de493da279b2c308360c59ba15f2a1260e7e3ad5",
+      "sha256": "93d8d3c9ca7cbf4194f675c1e2dc52be76ad7418e8404c927e23475d76806d12",
+      "upstream_path": "cards/gap_fade_btc_v8.json"
+    },
+    {
+      "bytes": 348,
+      "git_blob_sha": "ffba2604a365208bcfca4b48e5073dd9578076df",
+      "sha256": "a73ad27f251dc32bb56f7a28ce68e1fb285a910147e347bd032ccc60debb1af5",
+      "upstream_path": "cards/monday_drift_sol_v4.json"
+    },
+    {
+      "bytes": 347,
+      "git_blob_sha": "3e6118bc456605fdd5444e29cff973d983652d32",
+      "sha256": "82347df40e7046c129b7867ec0dc4e91123374860d45ef7c018f6784e98936d4",
+      "upstream_path": "cards/rel_strength_eth_v3.json"
+    },
+    {
+      "bytes": 357,
+      "git_blob_sha": "331e3a88ec8689409f376c059aec16ec5c031a90",
+      "sha256": "4b57127472c79ccb271555c1cadac46f6b70c73c1ee7bc32f9ebe553e4276910",
+      "upstream_path": "cards/scalp_btclead_sol_v3.json"
+    },
+    {
+      "bytes": 347,
+      "git_blob_sha": "789967d6447364f8d5473adc39e160e8f049e51d",
+      "sha256": "e8fab24f88f3c95ff2e4a7dfc41c7499e54e466fdebfc79daac5bb3bdd4a1ed3",
+      "upstream_path": "cards/vol_burst_sol_v2.json"
+    },
+    {
+      "bytes": 5810,
+      "git_blob_sha": "6e610f1b8add6edcd808e455e960aa32532acd59",
+      "sha256": "05e3df461079589f1877cc37faab88a512b0080244a2e4400fe6f854bc177dc7",
+      "upstream_path": "passed/asia_drift_btc_v2.py"
+    },
+    {
+      "bytes": 5745,
+      "git_blob_sha": "2bb439a3694608866dfad7201c1d3d6735a71d63",
+      "sha256": "e65c02e64503832ce41cb4f64d8df6a6f6e024d4992289311be6eb0b9fc123cf",
+      "upstream_path": "passed/crash_recovery_eth_v3.py"
+    },
+    {
+      "bytes": 15462,
+      "git_blob_sha": "06b7ce141b12d0bf05f5b8b52332dd507ffc418a",
+      "sha256": "42b97b101ac463ad9cdca568ba49c8b43fad0489a3f8309c13a23398e7c067f9",
+      "upstream_path": "README.md"
+    },
+    {
+      "bytes": 3188,
+      "git_blob_sha": "d2ef70e891bb259ed7adae244bd370c7b049c637",
+      "sha256": "32dd2e891882640a456ecf234d4e3b69b9f97b9e5f6fa930d8b371e7f3468c94",
+      "upstream_path": "docs/REDACTION_REPORT.md"
+    }
+  ],
+  "walk_forward_crypto": {
+    "author_discloses_separate_private_strategy_source": true,
+    "private_strategy_failure_inferred": false,
+    "public_exact_reproduction_possible_from_reviewed_tree_alone": false,
+    "public_python_files": [],
+    "repository": "AKzar1el/walk-forward-crypto",
+    "revision": "8ec32ea1ad454edd88abc5118a808c6fa764063b",
+    "tree_complete": true,
+    "tree_file_count": 22
+  }
+}

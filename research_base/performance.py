@@ -249,17 +249,18 @@ def _calibrate(strategy, candidates, boundary_date, end_date):
             raise ContractError("A calibration account has undefined risk; retain as blocked experiment")
         gap = abs(Decimal(str(vol))-Decimal(str(target_vol))) if target_vol is not None else None
         rows.append({"k": k, "volatility_annual": vol, "absolute_risk_error": finite_float(gap) if gap is not None else None,
+                     "absolute_risk_error_decimal": str(gap) if gap is not None else None,
                      "account_sha256": r["ledger_sha256"]})
     output = {"version": VERSION, "classification": "DEVELOPMENT_ONLY_RISK_CALIBRATION",
               "boundary_date": boundary_date, "end_date": end_date, "currency": s["currency"],
               "strategy_sha256": s["ledger_sha256"], "strategy_volatility": target_vol,
               "candidates": rows, "selected_k": None, "risk_matched": False,
-              "tie_policy": "risk error rounded to 1e-12 absolute annual volatility; lower k wins",
+              "tie_policy": "minimum reported annual-volatility gap without tie quantization; exactly equal gaps use lower k",
               "return_optimization": False}
     if target_vol is None or target_vol <= 0:
         return {**output, "reason": "STRATEGY_RISK_UNDEFINED_OR_ZERO"}
-    best = min(rows, key=lambda r: (Decimal(str(r["absolute_risk_error"])).quantize(Decimal("1e-12")), Decimal(r["k"])))
-    relative = Decimal(str(best["absolute_risk_error"])) / Decimal(str(target_vol))
+    best = min(rows, key=lambda r: (Decimal(r["absolute_risk_error_decimal"]), Decimal(r["k"])))
+    relative = Decimal(best["absolute_risk_error_decimal"]) / Decimal(str(target_vol))
     return {**output, "selected_k": best["k"], "relative_risk_error": finite_float(relative),
             "risk_matched": relative <= Decimal("0.10"),
             "reason": None if relative <= Decimal("0.10") else "RISK_ERROR_EXCEEDS_TEN_PERCENT"}

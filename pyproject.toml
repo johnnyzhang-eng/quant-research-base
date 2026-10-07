@@ -12,3 +12,6 @@ dependencies = []
 
 [tool.setuptools.packages.find]
 include = ["research_base*"]
+
+[tool.setuptools.package-data]
+"research_base.execution" = ["fixtures.json"]

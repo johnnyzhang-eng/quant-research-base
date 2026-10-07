@@ -1,0 +1,524 @@
+{
+  "count_scope": "Three unique main synthetic specifications. Public re-run and reviewer function calls are verification repeats, not additional independent strategy trials.",
+  "data_kind": "Invented fixtures only; 100000 is a test numeraire, not user capital.",
+  "fee_assumptions_per_main_control": {
+    "K05": "per-fill20bps paid in quote",
+    "K06": "zero fee, timing isolation",
+    "K07": "per-fill20bps paid in quote"
+  },
+  "fixed_source_commit": "46c1af3934a459252c8cea18c1c149fc75705505",
+  "fixture_results": [
+    {
+      "cash_bridge_fill_ledger": [
+        {
+          "NAV_after_at_declared_fixture_marks": {
+            "decimal": 99800.39920159681,
+            "fraction": "50000000/501"
+          },
+          "asset": "A",
+          "cash_after": {
+            "decimal": 0.0,
+            "fraction": "0"
+          },
+          "event": "first_OOS_entry_from_actual_cash",
+          "fee_quote": {
+            "decimal": 199.6007984031936,
+            "fraction": "100000/501"
+          },
+          "holdings_after": {
+            "A": {
+              "decimal": 998.003992015968,
+              "fraction": "500000/501"
+            }
+          },
+          "notional": {
+            "decimal": 99800.39920159681,
+            "fraction": "50000000/501"
+          },
+          "price": {
+            "decimal": 100.0,
+            "fraction": "100"
+          },
+          "quantity": {
+            "decimal": 998.003992015968,
+            "fraction": "500000/501"
+          },
+          "side": "buy"
+        },
+        {
+          "NAV_after_at_declared_fixture_marks": {
+            "decimal": 99600.7984031936,
+            "fraction": "49900000/501"
+          },
+          "asset": "A",
+          "cash_after": {
+            "decimal": 99600.7984031936,
+            "fraction": "49900000/501"
+          },
+          "event": "second_OOS_switch_sell_A",
+          "fee_quote": {
+            "decimal": 199.6007984031936,
+            "fraction": "100000/501"
+          },
+          "holdings_after": {
+            "A": {
+              "decimal": 0.0,
+              "fraction": "0"
+            }
+          },
+          "notional": {
+            "decimal": 99800.39920159681,
+            "fraction": "50000000/501"
+          },
+          "price": {
+            "decimal": 100.0,
+            "fraction": "100"
+          },
+          "quantity": {
+            "decimal": 998.003992015968,
+            "fraction": "500000/501"
+          },
+          "side": "sell"
+        },
+        {
+          "NAV_after_at_declared_fixture_marks": {
+            "decimal": 99401.99441436489,
+            "fraction": "24950000000/251001"
+          },
+          "asset": "B",
+          "cash_after": {
+            "decimal": 0.0,
+            "fraction": "0"
+          },
+          "event": "second_OOS_switch_buy_B",
+          "fee_quote": {
+            "decimal": 198.80398882872976,
+            "fraction": "49900000/251001"
+          },
+          "holdings_after": {
+            "A": {
+              "decimal": 0.0,
+              "fraction": "0"
+            },
+            "B": {
+              "decimal": 994.0199441436488,
+              "fraction": "249500000/251001"
+            }
+          },
+          "notional": {
+            "decimal": 99401.99441436489,
+            "fraction": "24950000000/251001"
+          },
+          "price": {
+            "decimal": 100.0,
+            "fraction": "100"
+          },
+          "quantity": {
+            "decimal": 994.0199441436488,
+            "fraction": "249500000/251001"
+          },
+          "side": "buy"
+        }
+      ],
+      "fixture_candidate_returns": [
+        {
+          "A": "0.02",
+          "B": "0.01",
+          "index": "2000-01-01"
+        },
+        {
+          "A": "0.02",
+          "B": "0.01",
+          "index": "2000-01-02"
+        },
+        {
+          "A": "0.0",
+          "B": "0.03",
+          "index": "2000-01-03"
+        },
+        {
+          "A": "0.0",
+          "B": "0.0",
+          "index": "2000-01-04"
+        }
+      ],
+      "id": "K05",
+      "limits": "Prebuilt candidate returns include their own history. Fixture assumes their first OOS holdings already exist; cash bridge starts flat. No generic return-bias direction or actual author impact measured. Bridge ends holding B, not fully liquidated.",
+      "quote_fee_cash_bridge_terminal_mark_NAV": {
+        "decimal": 99401.99441436489,
+        "fraction": "24950000000/251001"
+      },
+      "source_chained_returns": [
+        0.0,
+        -0.0040000000000000036
+      ],
+      "source_function_executed": "_walk_forward",
+      "source_selection_rows": [
+        {
+          "previous_candidate": "None",
+          "selected_candidate": "A",
+          "switched": "False",
+          "test_end": "2000-01-03",
+          "test_start": "2000-01-03",
+          "train_A": "1.0404",
+          "train_B": "1.0201",
+          "train_end": "2000-01-02",
+          "train_metric": "1.0404",
+          "train_start": "2000-01-01"
+        },
+        {
+          "previous_candidate": "A",
+          "selected_candidate": "B",
+          "switched": "True",
+          "test_end": "2000-01-04",
+          "test_start": "2000-01-04",
+          "train_A": "1.02",
+          "train_B": "1.0403",
+          "train_end": "2000-01-03",
+          "train_metric": "1.0403",
+          "train_start": "2000-01-02"
+        }
+      ],
+      "source_terminal_NAV": 99600.0
+    },
+    {
+      "cash_bridge_fill_ledger": [
+        {
+          "NAV_after_at_declared_fixture_marks": {
+            "decimal": 100000.0,
+            "fraction": "100000"
+          },
+          "asset": "A",
+          "cash_after": {
+            "decimal": 0.0,
+            "fraction": "0"
+          },
+          "event": "eligible_open110_after_signal_close100",
+          "fee_quote": {
+            "decimal": 0.0,
+            "fraction": "0"
+          },
+          "holdings_after": {
+            "A": {
+              "decimal": 909.0909090909091,
+              "fraction": "10000/11"
+            }
+          },
+          "notional": {
+            "decimal": 100000.0,
+            "fraction": "100000"
+          },
+          "price": {
+            "decimal": 110.0,
+            "fraction": "110"
+          },
+          "quantity": {
+            "decimal": 909.0909090909091,
+            "fraction": "10000/11"
+          },
+          "side": "buy"
+        }
+      ],
+      "declared_open_fill_close_mark_NAV": {
+        "decimal": 100000.0,
+        "fraction": "100000"
+      },
+      "fixture": "Signal close100; next-row close-to-close return10%; eligible next open110 and close110.",
+      "id": "K06",
+      "independent_timing_guard_cases": [
+        {
+          "eligible": true,
+          "intent": 9,
+          "open": 10,
+          "receipt": 8
+        },
+        {
+          "eligible": false,
+          "intent": 12,
+          "open": 10,
+          "receipt": 11
+        },
+        {
+          "eligible": false,
+          "intent": 10,
+          "open": 10,
+          "receipt": 9
+        }
+      ],
+      "limits": "No actual market receipt/open quote. Timing guard is a local specified control, not an upstream feature or production calendar/latency certification.",
+      "source_function_executed": "run_backtest",
+      "source_next_row_return_NAV": 110000.00000000001
+    },
+    {
+      "cash_bridge_fill_ledger": [
+        {
+          "NAV_after_at_declared_fixture_marks": {
+            "decimal": 99800.39920159681,
+            "fraction": "50000000/501"
+          },
+          "asset": "A",
+          "cash_after": {
+            "decimal": 0.0,
+            "fraction": "0"
+          },
+          "event": "buy_A",
+          "fee_quote": {
+            "decimal": 199.6007984031936,
+            "fraction": "100000/501"
+          },
+          "holdings_after": {
+            "A": {
+              "decimal": 998.003992015968,
+              "fraction": "500000/501"
+            }
+          },
+          "notional": {
+            "decimal": 99800.39920159681,
+            "fraction": "50000000/501"
+          },
+          "price": {
+            "decimal": 100.0,
+            "fraction": "100"
+          },
+          "quantity": {
+            "decimal": 998.003992015968,
+            "fraction": "500000/501"
+          },
+          "side": "buy"
+        },
+        {
+          "NAV_after_at_declared_fixture_marks": {
+            "decimal": 99600.7984031936,
+            "fraction": "49900000/501"
+          },
+          "asset": "A",
+          "cash_after": {
+            "decimal": 99600.7984031936,
+            "fraction": "49900000/501"
+          },
+          "event": "sell_A",
+          "fee_quote": {
+            "decimal": 199.6007984031936,
+            "fraction": "100000/501"
+          },
+          "holdings_after": {
+            "A": {
+              "decimal": 0.0,
+              "fraction": "0"
+            }
+          },
+          "notional": {
+            "decimal": 99800.39920159681,
+            "fraction": "50000000/501"
+          },
+          "price": {
+            "decimal": 100.0,
+            "fraction": "100"
+          },
+          "quantity": {
+            "decimal": 998.003992015968,
+            "fraction": "500000/501"
+          },
+          "side": "sell"
+        },
+        {
+          "NAV_after_at_declared_fixture_marks": {
+            "decimal": 99401.99441436489,
+            "fraction": "24950000000/251001"
+          },
+          "asset": "B",
+          "cash_after": {
+            "decimal": 0.0,
+            "fraction": "0"
+          },
+          "event": "buy_B",
+          "fee_quote": {
+            "decimal": 198.80398882872976,
+            "fraction": "49900000/251001"
+          },
+          "holdings_after": {
+            "A": {
+              "decimal": 0.0,
+              "fraction": "0"
+            },
+            "B": {
+              "decimal": 994.0199441436488,
+              "fraction": "249500000/251001"
+            }
+          },
+          "notional": {
+            "decimal": 99401.99441436489,
+            "fraction": "24950000000/251001"
+          },
+          "price": {
+            "decimal": 100.0,
+            "fraction": "100"
+          },
+          "quantity": {
+            "decimal": 994.0199441436488,
+            "fraction": "249500000/251001"
+          },
+          "side": "buy"
+        },
+        {
+          "NAV_after_at_declared_fixture_marks": {
+            "decimal": 99203.19042553616,
+            "fraction": "24900100000/251001"
+          },
+          "asset": "B",
+          "cash_after": {
+            "decimal": 99203.19042553616,
+            "fraction": "24900100000/251001"
+          },
+          "event": "sell_B",
+          "fee_quote": {
+            "decimal": 198.80398882872976,
+            "fraction": "49900000/251001"
+          },
+          "holdings_after": {
+            "A": {
+              "decimal": 0.0,
+              "fraction": "0"
+            },
+            "B": {
+              "decimal": 0.0,
+              "fraction": "0"
+            }
+          },
+          "notional": {
+            "decimal": 99401.99441436489,
+            "fraction": "24950000000/251001"
+          },
+          "price": {
+            "decimal": 100.0,
+            "fraction": "100"
+          },
+          "quantity": {
+            "decimal": 994.0199441436488,
+            "fraction": "249500000/251001"
+          },
+          "side": "sell"
+        }
+      ],
+      "controls": {
+        "closed_wallet_fee_sum_reconciles_PnL": true,
+        "unfunded_buy_rejected_before_state_change": true,
+        "unsupported_multi_asset_buy_rejected_atomically": true,
+        "zero_fee_source_and_wallet_return_to100000": true
+      },
+      "fixture": "Four rows, zero returns/constant prices100; cash→A→B→cash; fee20bps, slippage0.",
+      "id": "K07",
+      "limits": "L1-return and self-financing quote-fee models are different contracts. Fractional quantities only; no venue lot rounding, spread, borrowing, real execution or full source-engine reproduction.",
+      "quote_fee_terminal_cash_NAV": {
+        "decimal": 99203.19042553616,
+        "fraction": "24900100000/251001"
+      },
+      "source_L1_fraction_expectation": {
+        "decimal": 99201.9984,
+        "fraction": "62001249/625"
+      },
+      "source_daily_returns": [
+        0.0,
+        -0.0020000000000000018,
+        -0.0040000000000000036,
+        -0.0020000000000000018
+      ],
+      "source_function_executed": "run_backtest",
+      "source_terminal_NAV": 99201.9984,
+      "source_turnover": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ]
+    }
+  ],
+  "limits": [
+    "Pure invented prices/candidates only; actual author returns and error direction not measured.",
+    "L1 return costs and quote-fee self-financing fills use different contracts, not forced equal returns.",
+    "K05 ends holding B; its NAV is mark-to-market, not terminal closed cash.",
+    "No market data rights, actual execution, lot rounding, latency/calendar or profitable strategy accepted.",
+    "The original four-ETF, frozen BTC/ETH prospective baselines, funding whole-account and CNY/FX constraints remain in scope."
+  ],
+  "market_backtests_added": 0,
+  "native_Goal_complete": false,
+  "new_orders": 0,
+  "other_original_specifications_not_executed_by_this_run": [
+    "K01",
+    "K02",
+    "K03",
+    "K04",
+    "K08",
+    "K09",
+    "K10",
+    "K11",
+    "K12",
+    "K13"
+  ],
+  "paid_calls": 0,
+  "profit_edges_accepted": 0,
+  "public_experiment_script_sha256": "322195a6ca6e68a32d4317a8808f61f1ef97575c466948de59a3b080fada78f4",
+  "public_helper_scope": "One nonzero held asset at a time, enforced before mutations. Not a general multi-asset account engine.",
+  "public_variant_v1_change": "Metadata fee wording clarifies zero-fee K06 exception; all fixture/source/guard bodies unchanged; exact new public script was run in a fresh v1 directory.",
+  "review_fingerprints": {
+    "independent_control_review": "ec9b08f9dc142109fd0415bfd376c8f3dae2c96432845758a6d09e09b3968567",
+    "original_private_control_report": "64e124f5831e1632a90bfafeccde5cb6b69277b21ab62bd464f33195f27a64fc",
+    "public_variant_actual_CLI_run": "686c963f67c157c711fca5711d78ce26f018e13b31b04a893544a6de60db2644",
+    "public_variant_independent_addendum": "325eabe0c835927fd2d5a1a7c908a8df06263c36fa1acc877a27f6d5528562ad"
+  },
+  "review_status": "Independent source AST and per-fill arithmetic plus nonempty positive/negative controls reviewed; public CLI also actually run by root in a fresh directory. Reviewer did not independently execute the CLI/main.",
+  "runtime_observed": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "python": "3.12.14"
+  },
+  "schema": "atlas20-cash-bridge-public-checkpoint/1",
+  "source_and_frozen_protocols_journals_unchanged": true,
+  "source_snapshots": [
+    {
+      "extracted_AST_sha256": "fa2fca26aeb694ea078b6ef8788f1e9dd870b19bf266b4d1bdf4b2cce5722c56",
+      "fixed_source_sha256": "6f4b393839de07e1768ed887aef8d9035973591b6f50783753042aba7f20b9c2",
+      "functions_or_classes": [
+        "BacktestResult",
+        "cap_and_normalize",
+        "cap_sector_weights",
+        "aggregate_sector_exposure",
+        "run_backtest"
+      ],
+      "saved_extracted_code_sha256": "c3045e26f49afe150ec07fc7e5156143269e1827e2c33de7469f02ea0ec9a144",
+      "source_filename": "src__atlas20__backtest__engine.py",
+      "source_first_line": 13,
+      "source_last_line": 247
+    },
+    {
+      "extracted_AST_sha256": "a8eb3529fc59a1324c284d56804f1198674fd16c217e71eb44af4c5441803543",
+      "fixed_source_sha256": "6f2abb14adc94cdb6ccd5cdbb759d18c7872b6545120c9070b79976fba1acdba",
+      "functions_or_classes": [
+        "_metric_value",
+        "_select_candidate",
+        "_apply_switch_cost",
+        "_walk_forward"
+      ],
+      "saved_extracted_code_sha256": "1888cd2a3e617b5c39a16b6052aaf9d3304e36aeb801072c35290ac75ada2a00",
+      "source_filename": "scripts__run_vol_target_walk_forward.py",
+      "source_first_line": 65,
+      "source_last_line": 143
+    },
+    {
+      "extracted_AST_sha256": "454814ffbd1994da029904aed7c1063b83c8de78882f19618b13fa5822d3575a",
+      "fixed_source_sha256": "c4bf327e08b785d3380803a04d4835c12c868228416d59bc5ce61c1306ee67b8",
+      "functions_or_classes": [
+        "_metrics_from_returns"
+      ],
+      "saved_extracted_code_sha256": "3c2d10b5d24287dba53a00bbbfbade5a306ea2073dbabaf3aaed81812ece6adc",
+      "source_filename": "scripts__run_strategy_evidence_audit.py",
+      "source_first_line": 81,
+      "source_last_line": 95
+    }
+  ],
+  "unique_main_control_specifications_executed": [
+    "K05",
+    "K06",
+    "K07"
+  ]
+}

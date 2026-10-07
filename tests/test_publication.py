@@ -17,6 +17,19 @@ class PublicationGuardTests(unittest.TestCase):
         self.assertIn("credential pattern", publication.check_file("docs/x.md", fake))
     def test_binary_denied(self):
         self.assertTrue(publication.check_file("docs/account.png", b"image"))
+    def test_reviewed_experiment_path_without_widening_directory(self):
+        approved = "experiments/atlas20_inventory_bridge_controls.py"
+        self.assertEqual(publication.check_file(approved, b"Synthetic source control"), [])
+        for name in ("experiments/other.py", "experiments/atlas20_inventory_bridge_controls.py.bak",
+                     "experiments/nested/atlas20_inventory_bridge_controls.py"):
+            with self.subTest(name=name):
+                self.assertIn("outside public allowlist", publication.check_file(name, b"unreviewed"))
+    def test_reviewed_experiment_still_rejects_confidential_content(self):
+        approved = "experiments/atlas20_inventory_bridge_controls.py"
+        fake_key = ("ghp_" + "A" * 36).encode()
+        self.assertIn("credential pattern", publication.check_file(approved, fake_key))
+        personal_path = ("/" + "Users" + "/" + "example/private.txt").encode()
+        self.assertIn("local personal path", publication.check_file(approved, personal_path))
 
 
 if __name__ == "__main__":

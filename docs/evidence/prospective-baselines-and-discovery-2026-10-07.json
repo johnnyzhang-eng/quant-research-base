@@ -1,0 +1,148 @@
+{
+  "schema": "baselines-and-follow-network-checkpoint/1",
+  "recorded_at_utc": "2026-10-07T07:32:11.819728+00:00",
+  "baseline_iteration": {
+    "implemented": true,
+    "producer_controls": 38,
+    "independent_controls": 33,
+    "independently_recomputed_artificial_common_days": 28,
+    "actual_offline_journal_initialized": true,
+    "actual_initialization_at_utc": "2026-10-07T07:25:35.900416+00:00",
+    "actual_journal_rows": 1,
+    "actual_baseline_wallets": [
+      "initial_equal_buy_and_hold",
+      "monthly_equal_rebalance",
+      "quote_cash"
+    ],
+    "cash_only_before_evaluation": true,
+    "decisions_fills_marks_fees": 0,
+    "original_two_wallet_journal_unchanged": true,
+    "independent_wallets_not_additional_user_capital": true,
+    "common_first_evaluation_day_UTC": "2026-10-08",
+    "differing_actual_intent_and_opening_times_must_remain_visible": true,
+    "frozen_existing_daily_entry_unchanged": true
+  },
+  "follow_network": {
+    "root": "WW-shan",
+    "depth": 2,
+    "relevant_public_author_nodes": [
+      {
+        "id": "N1",
+        "login": "WW-shan"
+      },
+      {
+        "id": "N2",
+        "login": "Soli22de"
+      },
+      {
+        "id": "N3",
+        "login": "your-quantguy"
+      },
+      {
+        "id": "N4",
+        "login": "Tanglaoye-future"
+      }
+    ],
+    "public_following_edges": [
+      [
+        "N1",
+        "N2"
+      ],
+      [
+        "N1",
+        "N3"
+      ],
+      [
+        "N2",
+        "N3"
+      ],
+      [
+        "N2",
+        "N4"
+      ]
+    ],
+    "fixed_version_READMEs_read": 8,
+    "references": [
+      {
+        "repository": "WW-shan/Atlas20",
+        "commit": "46c1af3934a459252c8cea18c1c149fc75705505",
+        "readme_sha256": "23b50f1fcab31d42142bf715a5d08f94801750d586778427bf6835e061bee5ce",
+        "source_url": "https://github.com/WW-shan/Atlas20/blob/46c1af3934a459252c8cea18c1c149fc75705505/README.md"
+      },
+      {
+        "repository": "WW-shan/LTT_Strategy",
+        "commit": "23199e0b1d3192a4f2adea0f7575c3c46832b971",
+        "readme_sha256": "2f9e8a464efcfd4e3bd9749919d887977e1efffa029080f829d754065dd7a30a",
+        "source_url": "https://github.com/WW-shan/LTT_Strategy/blob/23199e0b1d3192a4f2adea0f7575c3c46832b971/README.md"
+      },
+      {
+        "repository": "WW-shan/crypto-alpha-portfolio",
+        "commit": "b58df269b857d7312c226fb60212693c7b882e76",
+        "readme_sha256": "e57f4f8e031e0657e4b596aa81eb7cf46110e0b3dffef79d1dc29e5f3e1f94fd",
+        "source_url": "https://github.com/WW-shan/crypto-alpha-portfolio/blob/b58df269b857d7312c226fb60212693c7b882e76/README.md"
+      },
+      {
+        "repository": "WW-shan/four_meme",
+        "commit": "0e1a547a94fbebbabd96f3ac2a122d0af42fd6c7",
+        "readme_sha256": "48e8ddb18b2f6c8f5c72ead405626dd0fa61e6aec44ccaceaa8aa35775dea195",
+        "source_url": "https://github.com/WW-shan/four_meme/blob/0e1a547a94fbebbabd96f3ac2a122d0af42fd6c7/README.md"
+      },
+      {
+        "repository": "Soli22de/Bili_Stock",
+        "commit": "03dc32d55d2a5abcf7485489b6f6d1df46af11b1",
+        "readme_sha256": "399a740e6507c821b0d0b31911f6794e481de673a9f0bec8fcc77357bca3ec39",
+        "source_url": "https://github.com/Soli22de/Bili_Stock/blob/03dc32d55d2a5abcf7485489b6f6d1df46af11b1/README.md"
+      },
+      {
+        "repository": "your-quantguy/entropy-arb",
+        "commit": "aa0391471f6bf72f78c45801fb8117b7bf7e8c89",
+        "readme_sha256": "c885c39f2a60c55031b51b7792d8096d4d3e485ff1dc826abdb85b8db5257683",
+        "source_url": "https://github.com/your-quantguy/entropy-arb/blob/aa0391471f6bf72f78c45801fb8117b7bf7e8c89/README.md"
+      },
+      {
+        "repository": "your-quantguy/gate-crossex",
+        "commit": "423356d89e5c8f41d9d9033f4db1f40299774ec0",
+        "readme_sha256": "67b5273673d16f32c59bafdde749aa2f05271506819088af548939dc88c49d61",
+        "source_url": "https://github.com/your-quantguy/gate-crossex/blob/423356d89e5c8f41d9d9033f4db1f40299774ec0/README.md"
+      },
+      {
+        "repository": "Tanglaoye-future/quant_system",
+        "commit": "c58ba75e35a8f360a4b4d3fbd571d66fa8ee5f1d",
+        "readme_sha256": "178eece32097e623481f4765cb2895ff148343c8a10ed2eb2c2251df910c0a6b",
+        "source_url": "https://github.com/Tanglaoye-future/quant_system/blob/c58ba75e35a8f360a4b4d3fbd571d66fa8ee5f1d/README.md"
+      }
+    ],
+    "unrelated_user_following_disclosed": false,
+    "duplicate_forks_paths_and_authors_not_independent_validation": true,
+    "mechanisms_for_further_tests": [
+      "static ETF allocation versus timing overlay",
+      "completed-day trend signal comparison",
+      "two-venue executable price spread with full costs",
+      "stock factor and timing ablation; options modeled separately",
+      "previously announced token unlock events",
+      "complete failed-token lifecycle modeling"
+    ]
+  },
+  "fingerprints": {
+    "baseline_producer_code": "73b83649bb1bc6b3e34d63f7f47af92f4cc4ade00d303dd649951dd84844ad15",
+    "baseline_protocol": "3006c32de7f81f48e82b9934d6b759aa99362dd8f877c45b96e073992fb51c68",
+    "baseline_producer_controls": "a126cf14cc9a6677ae3f77d478d6866b7ad04eadd07ec80885a44cdf48fb3008",
+    "baseline_independent_controls": "f998ca604aa784975a867a255f3449ae86b5eadc4fe501e193e938e7506c57f4",
+    "baseline_actual_init_independent_receipt": "34f2e82cb61e3fc947d02b5c15a329b555b68c1c5bcf56443b68c957208199aa",
+    "follow_network_private_review": "888a26dc3e4a1bf519988bfb8f0c848f64fff041b8c651315d26a6c06954e0f0"
+  },
+  "activity": {
+    "orders": 0,
+    "paid_calls": 0,
+    "external_repository_code_executed": false,
+    "unqualified_new_market_data_collected": false
+  },
+  "limits": [
+    "All controls and the 28-day numerical audit use artificial data, not 28 observed future market days.",
+    "Actual initialization supplies no future return observation, profitable advantage, funded account or production eligibility.",
+    "Fixed-version READMEs are hypothesis sources; author claims and following relationships do not establish independently verified performance.",
+    "The original four-ETF, full funding settlement, production source, account and currency/risk gates remain open.",
+    "No model gateway balance, credential, account identifier or private strategy parameter is exported."
+  ],
+  "goal_complete": false
+}

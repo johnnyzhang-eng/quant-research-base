@@ -1,0 +1,12 @@
+{
+  "initial_announced_bytes_retained": false,
+  "initial_announced_report_filename": "binance-deadline-independent-audit-20261008-v0.json",
+  "initial_announced_sha256": "0b231f921aa8186dc812b450a7785d34ebdfdd81ca711c4d9696c107173ff0db",
+  "initial_bytes_restored": false,
+  "initial_report_overwritten_after_announcement": true,
+  "original_adapter_and_producer_source_sha_unchanged": true,
+  "revision_independently_saved_filename": "binance-deadline-independent-audit-20261008-v1.json",
+  "revision_sha256": "105960dada0076ad1ca81908f9582d95f13ddf360633c86cd5838e2431067ca1",
+  "schema": "deadline-audit-version-provenance/0",
+  "scope": "Strengthened class-structure/request AST proof and explicit harness repair, with same36 scenarios; version1 preserves the revision independently. No claim that the original v0 frozen report remains unchanged."
+}

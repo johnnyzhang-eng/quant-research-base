@@ -1,0 +1,463 @@
+{
+  "schema": "funding-allocation-synthetic-controls-public/1",
+  "checkpoint_date": "2026-10-07",
+  "scope": "Bounded synthetic fixture next-intent planner; no market replay, production execution or profit evidence.",
+  "accepted_scope": "Exactv1 planner and tests accepted by independent offline review only.",
+  "source_files": [
+    {
+      "path": "research_base/funding_allocation.py",
+      "sha256": "fb974a727ee952e1f8ebcd6d0d6710335f2aaaede73abe8f41a0d80e0a24be13"
+    },
+    {
+      "path": "tests/test_funding_allocation.py",
+      "sha256": "787391a9a77cbf2637ac74a350ab4eb53ca732c2b2d52ce4e14d0cb7040d23f4"
+    }
+  ],
+  "independent_review_sha256": "fdf961c52b3faf18089d7302240d458e13058c1b5a4a8f0507d87751fba5518e",
+  "producer_receipt_sha256": "3933cd3198edb555b62a3c5789ac3661b74ab3408395bb1b7e015b759b378379",
+  "policy": "Fixed fixture hedge target with an initial-margin buffer; not the paper-calibrated optimal collateral policy.",
+  "execution_semantics": "One next intent only; fixture-confirmed fill and fresh-state hash before replanning; cover-before-spot-sell and spot-buy-before-short; neither leg is assumed atomic.",
+  "budget_fix": {
+    "mandatory_cleanup_operations": "Two outstanding leg closes plus every in-flight transfer receipt and every captured funding post; reserve max(caller reserve,mandatory cleanup).",
+    "fixed_core_operation_limit": 128,
+    "core_limit_enlarged": false
+  },
+  "known_answer_controls": {
+    "completion_budget": {
+      "existing_receive_125": {
+        "starting_operations": 125,
+        "planned_required_total": 128,
+        "unchanged_before_confirmation": true,
+        "decision": {
+          "status": "NEXT_INTENT",
+          "reason": "FIXED_TARGET",
+          "mandatory_cleanup": {
+            "close_legs": 1,
+            "funding_posts": 0,
+            "total": 2,
+            "transfer_receives": 1
+          },
+          "reserved_future_operations": 2
+        },
+        "actual_closure": {
+          "NAV": "2000",
+          "fees": "0",
+          "funding_cash_posted": "0",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 128,
+          "account_events": 128,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "05bb6b5dbf31e632b10d453df3ab2ecfc8d81922c536b04d43821fc21bed3d5b"
+        },
+        "wait_plan": {
+          "status": "WAIT",
+          "reason": "TRANSFER_RECEIPT_REQUIRED",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 0,
+            "total": 3,
+            "transfer_receives": 1
+          },
+          "reserved_future_operations": 3
+        }
+      },
+      "existing_receive_126": {
+        "starting_operations": 126,
+        "planned_required_total": 129,
+        "unchanged_before_confirmation": true,
+        "decision": {
+          "status": "BLOCKED",
+          "reason": "COMPLETION_EVENT_BUDGET",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 0,
+            "total": 3,
+            "transfer_receives": 1
+          },
+          "reserved_future_operations": 3
+        },
+        "wait_plan": {
+          "status": "BLOCKED",
+          "reason": "COMPLETION_EVENT_BUDGET",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 0,
+            "total": 3,
+            "transfer_receives": 1
+          },
+          "reserved_future_operations": 3
+        }
+      },
+      "flat_eligibility": {
+        "operations": 128,
+        "no_payable_post_exists": true,
+        "obligation_status": "NO_SYNTHETIC_OBLIGATION_FLAT",
+        "below_cap_post_semantics_checked": true,
+        "closed_reconciliation": true,
+        "decision": {
+          "status": "HOLD",
+          "reason": "TARGET_AND_BUFFER_SATISFIED",
+          "mandatory_cleanup": {
+            "close_legs": 0,
+            "funding_posts": 0,
+            "total": 0,
+            "transfer_receives": 0
+          },
+          "reserved_future_operations": 0
+        }
+      },
+      "negative_funding": {
+        "starting_operations": 125,
+        "before_post_operations": 127,
+        "decision": {
+          "status": "NEXT_INTENT",
+          "reason": "FIXED_TARGET",
+          "mandatory_cleanup": {
+            "close_legs": 1,
+            "funding_posts": 1,
+            "total": 2,
+            "transfer_receives": 0
+          },
+          "reserved_future_operations": 2
+        },
+        "actual_closure": {
+          "NAV": "1999.5",
+          "fees": "0",
+          "funding_cash_posted": "-0.5",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 128,
+          "account_events": 128,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "2dc12fb38d0f624fff4b760e2e385c21df53d9ca8105f4568ea4e69873250efa"
+        }
+      },
+      "new_send_124": {
+        "starting_operations": 124,
+        "planned_required_total": 128,
+        "unchanged_before_confirmation": true,
+        "decision": {
+          "status": "NEXT_INTENT",
+          "reason": "LOWER_MARGIN_BUFFER",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 0,
+            "total": 3,
+            "transfer_receives": 1
+          },
+          "reserved_future_operations": 3
+        },
+        "actual_closure": {
+          "NAV": "1030",
+          "fees": "0",
+          "funding_cash_posted": "0",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 128,
+          "account_events": 128,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "648a5170c435510a0a94c067ce36fbc372c837a388b4462fd57b2722cf96c84f"
+        },
+        "waiting": {
+          "status": "WAIT",
+          "reason": "TRANSFER_RECEIPT_REQUIRED",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 0,
+            "total": 3,
+            "transfer_receives": 1
+          },
+          "reserved_future_operations": 3
+        }
+      },
+      "new_send_125": {
+        "starting_operations": 125,
+        "planned_required_total": 129,
+        "unchanged_before_confirmation": true,
+        "decision": {
+          "status": "BLOCKED",
+          "reason": "COMPLETION_EVENT_BUDGET",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 0,
+            "total": 3,
+            "transfer_receives": 1
+          },
+          "reserved_future_operations": 3
+        }
+      },
+      "pending_post_125": {
+        "starting_operations": 125,
+        "planned_required_total": 128,
+        "unchanged_before_confirmation": true,
+        "before_post_operations": 127,
+        "decision": {
+          "status": "NEXT_INTENT",
+          "reason": "FIXED_TARGET",
+          "mandatory_cleanup": {
+            "close_legs": 1,
+            "funding_posts": 1,
+            "total": 2,
+            "transfer_receives": 0
+          },
+          "reserved_future_operations": 2
+        },
+        "actual_closure": {
+          "NAV": "2000.5",
+          "fees": "0",
+          "funding_cash_posted": "0.5",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 128,
+          "account_events": 128,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "a018c94bee940112bd21b77b09b2e2d381f9c770437cbf7bfa8fb10b9b302a72"
+        },
+        "hold_plan": {
+          "status": "HOLD",
+          "reason": "TARGET_AND_BUFFER_SATISFIED",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 1,
+            "total": 3,
+            "transfer_receives": 0
+          },
+          "reserved_future_operations": 3
+        }
+      },
+      "pending_post_126": {
+        "starting_operations": 126,
+        "planned_required_total": 129,
+        "unchanged_before_confirmation": true,
+        "decision": {
+          "status": "BLOCKED",
+          "reason": "COMPLETION_EVENT_BUDGET",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 1,
+            "total": 3,
+            "transfer_receives": 0
+          },
+          "reserved_future_operations": 3
+        },
+        "hold_plan": {
+          "status": "BLOCKED",
+          "reason": "COMPLETION_EVENT_BUDGET",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 1,
+            "total": 3,
+            "transfer_receives": 0
+          },
+          "reserved_future_operations": 3
+        },
+        "risk_plan": {
+          "status": "BLOCKED",
+          "reason": "COMPLETION_EVENT_BUDGET",
+          "mandatory_cleanup": {
+            "close_legs": 2,
+            "funding_posts": 1,
+            "total": 3,
+            "transfer_receives": 0
+          },
+          "reserved_future_operations": 3
+        }
+      },
+      "zero_amount_funding": {
+        "starting_operations": 125,
+        "before_post_operations": 127,
+        "decision": {
+          "status": "NEXT_INTENT",
+          "reason": "FIXED_TARGET",
+          "mandatory_cleanup": {
+            "close_legs": 1,
+            "funding_posts": 1,
+            "total": 2,
+            "transfer_receives": 0
+          },
+          "reserved_future_operations": 2
+        },
+        "actual_closure": {
+          "NAV": "2000",
+          "fees": "0",
+          "funding_cash_posted": "0",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 128,
+          "account_events": 128,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "44e298084a6e37b671fdc2b8d77b51943e6574bcbc9a3e3797b42529e77a6433"
+        }
+      }
+    },
+    "P1_P5": {
+      "P1": {
+        "status": "HOLD",
+        "stable_repeat_plan": true,
+        "input_unchanged": true,
+        "NAV": "1999.6",
+        "fees": "0.4"
+      },
+      "P2": {
+        "static": {
+          "NAV": "2001.2",
+          "fees": "0.8",
+          "funding_cash_posted": "2",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 9,
+          "account_events": 9,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "0b5bb424bc41def7a8c70ff26a4ef3c477bf2cf2731f8e7faac76043dbd93b26"
+        },
+        "resize": {
+          "NAV": "2000.3",
+          "fees": "1.2",
+          "funding_cash_posted": "1.5",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 13,
+          "account_events": 13,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "f51a3c205337a66d6596fc851040ca07672240a1b0f057bda6f46512f5fdc497"
+        },
+        "difference_NAV": "-0.9",
+        "difference_funding": "-0.5",
+        "difference_fee_effect": "-0.4"
+      },
+      "P3": {
+        "early": {
+          "sent": "10",
+          "sticky_after_receive": false,
+          "risk_plan_status": "NEXT_INTENT",
+          "final": {
+            "NAV": "1030",
+            "fees": "0",
+            "funding_cash_posted": "0",
+            "spot_qty": "0",
+            "perp_qty_signed": "0",
+            "transfer_inflight": "0",
+            "pending_funding": "0",
+            "bridge_operations": 9,
+            "account_events": 9,
+            "closed_reconciliation": true,
+            "restore_matches": true,
+            "snapshot_sha256": "90355e0f9fa0e0d4768a18e0825eadb9a41b5d41a0a7b9f5f88282425749fe24"
+          }
+        },
+        "late": {
+          "sent": "10",
+          "sticky_after_receive": true,
+          "risk_plan_status": "STOP_RISK",
+          "final": {
+            "NAV": "1030",
+            "fees": "0",
+            "funding_cash_posted": "0",
+            "spot_qty": "0",
+            "perp_qty_signed": "0",
+            "transfer_inflight": "0",
+            "pending_funding": "0",
+            "bridge_operations": 9,
+            "account_events": 9,
+            "closed_reconciliation": true,
+            "restore_matches": true,
+            "snapshot_sha256": "8100e8a58e4390c932028f06d3ac777b7298a17ea8adc64d1a3fe118557fd8c6"
+          }
+        }
+      },
+      "P4": {
+        "before_capture": {
+          "NAV": "2000.5",
+          "fees": "0",
+          "funding_cash_posted": "0.5",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 9,
+          "account_events": 9,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "a37174c4566fbd67c62e9f2970b9eb28e538ac368796a48af8496d6b98f417e8"
+        },
+        "after_capture": {
+          "NAV": "2001",
+          "fees": "0",
+          "funding_cash_posted": "1",
+          "spot_qty": "0",
+          "perp_qty_signed": "0",
+          "transfer_inflight": "0",
+          "pending_funding": "0",
+          "bridge_operations": 9,
+          "account_events": 9,
+          "closed_reconciliation": true,
+          "restore_matches": true,
+          "snapshot_sha256": "6b709722eb9fdb9a323ccd8c723cf113f84574b806de7ac72000b0690ef1ed4f"
+        }
+      },
+      "P5": {
+        "existing_named_rejections": 14,
+        "previous_no_pending_close_boundary": {
+          "closed_nav": "1999.2",
+          "closed_operations": 128,
+          "growth_blocked_even_caller_reserve0": true,
+          "starting_operations": 126
+        }
+      }
+    }
+  },
+  "original_local_validation": {
+    "targeted": {
+      "test_methods": 9,
+      "exit_code": 0,
+      "runtime_seconds": "52.764",
+      "command": "PYTHONPATH=. python3 -B tests/test_funding_allocation.py -v",
+      "stderr_sha256": "548f3302557225bac8e4ba82df05aeeea0d9b8f2afd30a5f7b73e65ae1ba42f8",
+      "note": "Original producer included a private report-output option; that private receipt is identified by hash only here."
+    },
+    "single_related_funding_regression": {
+      "test_methods": 34,
+      "new_allocation_methods": 9,
+      "exit_code": 0,
+      "runtime_seconds": "53.837",
+      "command": "python3 -B -m unittest discover -s tests -p 'test_funding*.py' -v",
+      "stderr_sha256": "027be1a75d109b199a9fe43d113a1edf863683c8b15b5fb16012362ba50af7f2"
+    },
+    "local_not_CI": true,
+    "old22268_audit_or_new_market_data_runs": false
+  },
+  "evidence_limits": [
+    "Synthetic cash/NAV and operation counts are fixture accounting checks, not investment returns or real venue fills.",
+    "Cleanup slots are necessary lower bounds, not a guarantee of later clocks, wallet solvency or transfers.",
+    "Actual market history, fees/latency inputs, broker eligibility and production data rights remain unverified."
+  ],
+  "actual_market_data_requests": 0,
+  "orders": 0,
+  "paid_calls": 0,
+  "model_api_calls": 0,
+  "source_admitted": false,
+  "profitability_verified": false,
+  "publication_completed": false
+}
