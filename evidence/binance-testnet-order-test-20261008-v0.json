@@ -1,0 +1,66 @@
+{
+  "schema": "finite-testnet-observed-operator/1",
+  "mode": "order-test",
+  "origin": "https://testnet.binance.vision",
+  "adapter_sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+  "operator_cli_sha256": "8e3b471af6611a01683c8859ee0800180e03fdeeaa2b85a4a9ba5b6457b871e5",
+  "observer_sha256": "404243fdcfd91182b0c85866b11ca0cd1cf048a1877b8e7b32c88e8c57c2e9dd",
+  "manifest_sha256": "f35a7d140fb153d5735b0fc8434865453ddb6eb2f3de66c5c021fd41cddcc470",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/v3/time",
+      "attempted": true,
+      "http_status": 200,
+      "elapsed_seconds": 0.757
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/exchangeInfo",
+      "attempted": true,
+      "http_status": 200,
+      "elapsed_seconds": 0.5483
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/ticker/bookTicker",
+      "attempted": true,
+      "http_status": 200,
+      "elapsed_seconds": 1.7692
+    },
+    {
+      "method": "POST",
+      "path": "/api/v3/order/test",
+      "attempted": true,
+      "http_status": 200,
+      "elapsed_seconds": 1.2536
+    }
+  ],
+  "raw_requests_responses_balances_ids_keys_saved": false,
+  "real_money_orders_or_transfers": 0,
+  "paid_calls": 0,
+  "engineering_only_not_strategy_performance": true,
+  "personal_eligibility_or_local_law_certified": false,
+  "operator_result": {
+    "mode": "order-test",
+    "origin": "https://testnet.binance.vision",
+    "finite_result": {
+      "intent_exists": true,
+      "manifest_sha256": "f35a7d140fb153d5735b0fc8434865453ddb6eb2f3de66c5c021fd41cddcc470",
+      "state": "TEST_VALIDATED",
+      "new_order_post_reservations": 0,
+      "cancel_reservations": 0,
+      "order_test_reservations": 1,
+      "terminal_observed": false,
+      "reconciliation": null,
+      "last_error": null
+    },
+    "validation_only": true,
+    "real_money_orders": 0,
+    "automatic_close_of_residual_position": false
+  },
+  "workflow_completed": true,
+  "HTTP_order_test_POST_attempts": 1,
+  "HTTP_new_order_POST_attempts": 0,
+  "HTTP_cancel_DELETE_attempts": 0
+}

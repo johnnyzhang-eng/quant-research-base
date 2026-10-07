@@ -1,0 +1,18 @@
+{
+  "adapter_sha256": "154fdb545de15b061314c0ddd02546bf1446b47d5e3ac1fb687f412f174a4442",
+  "basis": "Source inspection: expiry guard runs before filters/quote/account; no second expiry guard between slow preflight and initial POST.",
+  "deadline_counterexample_independently_executed_by_this_packaging_run": false,
+  "finite_probe_admitted": false,
+  "known_issue_excluded_from_prior18category_audit": true,
+  "method": "FiniteRunner.run",
+  "order_ready": false,
+  "repair_scope": "New version outside this portable v3 candidate; preserve frozen original source.",
+  "schema": "binance-v3-known-lifecycle-limit/0",
+  "source_line_reference": [
+    800,
+    802,
+    803,
+    804,
+    808
+  ]
+}

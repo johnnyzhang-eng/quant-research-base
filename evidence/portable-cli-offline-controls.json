@@ -1,0 +1,29 @@
+{
+  "actual_credential_files_read": 0,
+  "adapter_pin": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+  "blocked_before_keys_journal_or_transport": [
+    "order-test",
+    "probe",
+    "recover"
+  ],
+  "finite_probe_admitted": false,
+  "network_calls": 0,
+  "orders": 0,
+  "python_runtime": "3.9.6",
+  "schema": "portable-cli-offline-controls/1",
+  "zero_network_default": {
+    "adapter_source_matches_reviewed_SHA": true,
+    "cancel_budget": 1,
+    "continuous_trading_enabled": false,
+    "credentials_read": false,
+    "finite_probe_admitted": false,
+    "mode": "dry-run",
+    "network_calls": 0,
+    "new_order_submission_budget": 1,
+    "production_orders_or_transfers_possible": false,
+    "production_wallet_connected": false,
+    "testnet_account_connected": false,
+    "testnet_order_fee_included_in_cap": false,
+    "testnet_order_max_notional_USDT": "25"
+  }
+}

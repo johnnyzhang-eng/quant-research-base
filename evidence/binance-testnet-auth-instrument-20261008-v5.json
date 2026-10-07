@@ -1,0 +1,45 @@
+{
+  "schema": "testnet-auth-instrument-result/1",
+  "source_sha256": "154fdb545de15b061314c0ddd02546bf1446b47d5e3ac1fb687f412f174a4442",
+  "prior_CLI_terminal_exit": 2,
+  "prior_CLI_failure_stage_not_instrumented": true,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/v3/time",
+      "attempted": true,
+      "http_status": 200,
+      "elapsed_seconds": 0.7541
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/account",
+      "attempted": true,
+      "http_status": 200,
+      "elapsed_seconds": 0.8593
+    }
+  ],
+  "account_authenticated": true,
+  "account_schema_accepted": true,
+  "orders": 0,
+  "paid_calls": 0,
+  "credential_values_or_hashes_emitted": false,
+  "clock_evidence": {
+    "offset_ms": 441,
+    "roundtrip_ms": 754
+  },
+  "can_trade_reported": true,
+  "one_character_asset_count": 8,
+  "asset_name_instrument": {
+    "field_values_retained": false,
+    "asset_count": 517,
+    "non_string_count": 0,
+    "empty_count": 0,
+    "non_ASCII_count": 3,
+    "lowercase_ASCII_count": 0,
+    "over20_character_count": 0,
+    "other_ASCII_character_count": 0
+  },
+  "asset_count": 517,
+  "completed": true
+}

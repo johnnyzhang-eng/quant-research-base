@@ -1,0 +1,47 @@
+{
+  "fake_execution": {
+    "Fraction_wallet_oracle_matches": true,
+    "POST_order_count": 1,
+    "actual_probe_journal_used": false,
+    "first_wallet_reconciliation_passed": true,
+    "network_calls": 0,
+    "order_terminal_state": "FILLED",
+    "real_credentials_loaded": false,
+    "recovery_GET_order_count": 1,
+    "reopened_journal_wallet_reconciliation_passed": true,
+    "residual_fake_BTC_position": true,
+    "submitted_business_parameters_match_manifest": true
+  },
+  "original_report": "binance-signal-order-bridge-20261008-v0.json",
+  "original_report_sha256": "a046132e5e32e5dda160a68f1d33aec3d59a2cb31e73c49a7b52a95af98cbcb2",
+  "producer_controls": {
+    "errors": 0,
+    "failures": 0,
+    "independent_audit": false,
+    "test_methods": 12
+  },
+  "raw_targets_alpha_private_paths_or_real_balances_not_copied": true,
+  "remaining_gates": [
+    "Independent peer audit of this exact source/report.",
+    "ETH order support, SELL/reduce and sell-before-buy wallet reconciliation are unimplemented.",
+    "Durable atomic multi-intent signal registry and broker journal dispatch integration are unimplemented; caller reset of the in-memory registry is not globally protected.",
+    "Historical receipts/PIT remain unknown; historical target copy is not a current qualified signal.",
+    "Qualified UTC-closed forward data, source rights, authenticated eligibility, actual account state/filters/costs and authorized adapter integration are required before any real order.",
+    "Fake filled order retains BTC; no continuous buy/sell strategy, realized profit, production execution or profitability qualification."
+  ],
+  "schema": "binance-signal-bridge-public-source-scope/0",
+  "semantic_controls": {
+    "ETH": "BLOCK_UNSUPPORTED_ASSET",
+    "HOLD": "HOLD",
+    "MIXED": "BLOCK_SELL_BEFORE_BUY_UNIMPLEMENTED",
+    "RETRY": "REUSE_NO_NEW_ORDER",
+    "SELL": "BLOCK_SELL_UNIMPLEMENTED"
+  },
+  "signal_bridge_source_included": false,
+  "source_bindings": {
+    "work/binance_signal_order_bridge_20261008_v0.py": "cf7668fca7668e8004e8d6f312677b66143432ac7893dc44dd608d7c271cae93",
+    "work/binance_spot_testnet_adapter_20261008_v2.py": "c7e2d9952c7afe6682e3ce41c0f9e043bdcdb32aff27daac97c9b51343cb27b4",
+    "work/test_binance_signal_order_bridge_20261008_v0.py": "7ba1e3f7923d9e96ee2c67141ad4b595bcb1fd6dcafa6ef9a254b9f1d623ec02"
+  },
+  "status": "OFFLINE_FAKE_CANDIDATE_ONLY_INDEPENDENT_AUDIT_PENDING"
+}

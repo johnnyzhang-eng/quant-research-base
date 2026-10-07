@@ -1,0 +1,479 @@
+{
+  "AST_scope": {
+    "added_methods": [
+      "FiniteRunner._check_deadline"
+    ],
+    "asset_and_pair_identity_credential_number_guard_journal_reconcile_AST_unchanged": true,
+    "changed_methods": [
+      "FiniteRunner.run",
+      "FiniteRunner.validate_order_test",
+      "GuardedClient._request"
+    ],
+    "class_fields_bases_decorators_unchanged": true,
+    "endpoint_policy_identical": true,
+    "signed_request_AST_unchanged_after_removing_only_deadline_checks_and_argument": true,
+    "unchanged_AST_definitions": 103
+  },
+  "actual_network_calls": 0,
+  "auditor_source_sha256": "93be6764cd8dc69876dc3f6cc0bc6d735ce1d26fbc2b19c3980226573466044b",
+  "criteria": {
+    "instrument": "owned fake routes/advancing clock; v3 must send after delay37ms to prove sensitivity",
+    "not_claimed": "exchange arrival/fill deadline, residency eligibility, real auth, production or account-global once-only",
+    "post_reservation": "no POST but budget1 retained in v4; reopen original fake file and recover query only",
+    "pre_reservation": "no POST and budget0 in v4",
+    "scope": "local last sampled clock before POST <= expiry; equality retained",
+    "unchanged": "all other top-level definitions/method AST, endpoint policy, assets and accounting guard semantics"
+  },
+  "criteria_sha256": "75a45fb0de7d46426d9c151cf4da7631431f3457ed9a68a6d78bef437fd37dce",
+  "finite_order_permission_granted": false,
+  "harness_repair_before_final_run": "Signing-delay injection initially also advanced a signed account GET. Final control advances only encoded order requests carrying newClientOrderId; no candidate behavior was changed.",
+  "independent_of_producer_test_helpers": true,
+  "limitations": [
+    "Last local sampled clock at transport dispatch only; scheduling delay and exchange arrival/fill are not controlled.",
+    "Optional low-level deadline must be provided by the FiniteRunner; arbitrary direct callers do not inherit a manifest.",
+    "Journal budget remains per one retained file, not account-global, and consumed reservation is not delivery evidence.",
+    "Source-specific focused audit is not a new full18-category audit or actual v4 authentication, eligibility or execution proof."
+  ],
+  "paid_calls": 0,
+  "producer_report_sha256": "d76a6fa2ed4aca297c2ceeb635c3edf50f9d691447f98f85103e07ea8173783c",
+  "real_key_or_account_or_canonical_journal_access": 0,
+  "real_orders": 0,
+  "scenario_count": 36,
+  "scenarios": [
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "test",
+      "phase": "slow_filters",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "test",
+      "phase": "slow_filters",
+      "relevant_budget": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "slow_filters",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "slow_filters",
+      "relevant_budget": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "test",
+      "phase": "slow_quote",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "test",
+      "phase": "slow_quote",
+      "relevant_budget": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "slow_quote",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "slow_quote",
+      "relevant_budget": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "slow_account",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "slow_account",
+      "relevant_budget": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "baseline",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "baseline",
+      "relevant_budget": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "test",
+      "phase": "reservation",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "test",
+      "phase": "reservation",
+      "relevant_budget": 1,
+      "state": "TEST_UNKNOWN"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "reservation",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "disk_restart": {
+        "POSTs": 0,
+        "budget_retained": 1,
+        "missing_order_did_not_release_budget": true,
+        "recovery_GETs": 2,
+        "same_fake_file": true
+      },
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "reservation",
+      "relevant_budget": 1,
+      "state": "SUBMIT_UNKNOWN"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "test",
+      "phase": "signing",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "test",
+      "phase": "signing",
+      "relevant_budget": 1,
+      "state": "TEST_UNKNOWN"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "signing",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "disk_restart": {
+        "POSTs": 0,
+        "budget_retained": 1,
+        "missing_order_did_not_release_budget": true,
+        "recovery_GETs": 2,
+        "same_fake_file": true
+      },
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "signing",
+      "relevant_budget": 1,
+      "state": "SUBMIT_UNKNOWN"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "test",
+      "phase": "request_guard",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "test",
+      "phase": "request_guard",
+      "relevant_budget": 1,
+      "state": "TEST_UNKNOWN"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        37
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "request_guard",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "disk_restart": {
+        "POSTs": 0,
+        "budget_retained": 1,
+        "missing_order_did_not_release_budget": true,
+        "recovery_GETs": 2,
+        "same_fake_file": true
+      },
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "request_guard",
+      "relevant_budget": 1,
+      "state": "SUBMIT_UNKNOWN"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        -1
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "test",
+      "phase": "boundary:-1",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        -1
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v4",
+      "kind": "test",
+      "phase": "boundary:-1",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        -1
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "boundary:-1",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        -1
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "boundary:-1",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        0
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "test",
+      "phase": "boundary:0",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        0
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v4",
+      "kind": "test",
+      "phase": "boundary:0",
+      "relevant_budget": 1,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        0
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "boundary:0",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [
+        0
+      ],
+      "POST_count": 1,
+      "guarded": false,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "boundary:0",
+      "relevant_budget": 1,
+      "state": "NEW"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v3",
+      "kind": "test",
+      "phase": "boundary:1",
+      "relevant_budget": 0,
+      "state": "NO_INTENT"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "test",
+      "phase": "boundary:1",
+      "relevant_budget": 0,
+      "state": "NO_INTENT"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v3",
+      "kind": "order",
+      "phase": "boundary:1",
+      "relevant_budget": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "POST_clock_minus_expiry": [],
+      "POST_count": 0,
+      "guarded": true,
+      "implementation": "v4",
+      "kind": "order",
+      "phase": "boundary:1",
+      "relevant_budget": 0,
+      "state": "INTENT_DURABLE"
+    }
+  ],
+  "schema": "binance-local-deadline-independent-audit/0",
+  "scope_controls": {
+    "Unicode_identity_and_fraction_commission_reconciliation_preserved": true,
+    "fixed_manifest_scope_preserved": true,
+    "low_level_deadline_invalid_scope_or_types_rejected": 5,
+    "self_consistent_above_limit_fill_rejected": true
+  },
+  "source_bindings": {
+    "work/binance_spot_testnet_adapter_20261008_v3.py": "154fdb545de15b061314c0ddd02546bf1446b47d5e3ac1fb687f412f174a4442",
+    "work/binance_spot_testnet_adapter_20261008_v4.py": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+    "work/test_binance_spot_testnet_adapter_20261008_v4.py": "32b0275868f01d258f2040128e0d0e8ba421ec05942cb66420665d9dc4e50e54"
+  },
+  "sources_and_producer_report_unchanged": true,
+  "status": "FOCUSED_LOCAL_DEADLINE_CONTROLS_PASS"
+}

@@ -1,0 +1,45 @@
+{
+  "actual_funding_postings_verified": false,
+  "complete_historical_strategy_NAV_qualified": false,
+  "dataset_diagnostics_attribution": "Binance Vision",
+  "dataset_diagnostics_license": "CC BY-NC-SA 4.0",
+  "excluded_first_boundary_ties": 1,
+  "fixed_cost_bps": [
+    0,
+    5,
+    10,
+    25,
+    50
+  ],
+  "historical_PIT_verified": false,
+  "independent_OOS": false,
+  "limitations": [
+    "29 absent mark minutes retained; no mark event or NAV sample in the gap; risk survival unknown",
+    "cash timing, settlement proxy, executable fills and fee decomposition explicitly modeled",
+    "single-writer offline saved-snapshot recovery; no live/concurrent/crash-atomic order dispatch",
+    "spot benchmark uses q=1 and idle quote cash, rather than investing all equity",
+    "already-inspected month and fixed unit quantity; no independent performance sample"
+  ],
+  "missing_mark_minutes": 29,
+  "original_report": "funding-conditional-month-results-20261007-v0.json",
+  "original_report_sha256": "4ec5b54f3ea0e7675d2dccf8ec5ec43b8194efb904345c12de5bd18623e6b342",
+  "private_paths_raw_prices_model_balances_or_alpha_not_copied": true,
+  "profits_or_user_capital_strategy": false,
+  "schema": "funding-conditional-public-source-scope/0",
+  "source_sha256": {
+    "daily_gap_crosscheck_v1": "b2d3042587ab0fd97bc22c43dfa47ce618aa378ed7b830ed99e67e77a2712d67",
+    "funding": "9ac19268ef0179c9acaf12b5ff753f36bd45ea6f067a01e05a818e5a67d6ad0f",
+    "index": "5fe304d5d51b1515bd7068190f0cbdd7972a615fabc28c77229942759130683c",
+    "ledger2": "dbea70295ef81f79e4df9a113997b30445add6bac2c9a219182f4f79d4024680",
+    "mark": "56133d45fc10a7d52fe22b3461c21ab633d61bb4764528922ca4bd49e72c6163",
+    "old_endpoint_protocol": "329a3881fc36fec33895514fba184e20aa67b3b83880daa40fbf6d0541429c38",
+    "perpetual": "27f811170642e518cee81253cf802affc3e534e585b9bac08fa7e5b2434b9f3b",
+    "scheduler": "fb49f3259869ffa400afd3f273ab36be6c8552ebff8c5733b9384b5debd3dc89",
+    "spot": "8435a748e5ad95357aa491d63689b748d801b05c3dbe258abb1b4047145fd18d",
+    "tests": "f87d0100c7a5f60079b831ef655434b38d2fb1a4b10819f51d763e5dc73d804c"
+  },
+  "status": "EXECUTED_GAP_EXPOSED_CONDITIONAL_MONTH_NOT_HISTORICAL_NAV_QUALIFIED",
+  "strict_funding_captures": 92,
+  "terms_url": "https://raw.githubusercontent.com/binance/binance-public-data/master/TERMS_AND_CONDITIONS.md",
+  "venue_margin_or_intraminute_survival_verified": false
+}

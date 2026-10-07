@@ -1,0 +1,525 @@
+{
+  "schema": "binance-api-local-post-deadline-controls/1",
+  "status": "PRODUCER_CONTROLS_PASS_PENDING_INDEPENDENT_REVIEW",
+  "source_sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+  "test_sha256": "32b0275868f01d258f2040128e0d0e8ba421ec05942cb66420665d9dc4e50e54",
+  "old_v3_sha256": "154fdb545de15b061314c0ddd02546bf1446b47d5e3ac1fb687f412f174a4442",
+  "old_v3_tests_sha256": "845bccf7d7281efe48ec83a2c59c2587c3837572480734850aa8fb3d82c489cf",
+  "criteria": {
+    "schema": "binance-api-local-post-deadline-controls/1",
+    "kind": "producer controls with old-v3 instrument sensitivity; not independent audit",
+    "freeze_before_execution": true,
+    "old_v3_sha256": "154fdb545de15b061314c0ddd02546bf1446b47d5e3ac1fb687f412f174a4442",
+    "expiry_rule": "last local dispatch sample<=expires; equality allowed; not venue receipt/fill guarantee",
+    "advancing_phases": [
+      "filters",
+      "quote",
+      "account",
+      "save_baseline",
+      "reserve",
+      "sign",
+      "guard_request"
+    ],
+    "pre_reservation_expiry": "GuardError; relevant budget remains0; no POST transport",
+    "post_reservation_expiry": "GuardError; relevant budget remains1; no POST transport; query-only recovery for post",
+    "normal_regression": "all54 preexisting controls retained under v4 import",
+    "existing_limits_unchanged": [
+      "clock RTT2000ms",
+      "clock offset5000ms",
+      "clock freshness30000ms",
+      "hard domains",
+      "BTCUSDT BUY LIMIT_MAKER grossnotional<=25",
+      "one retained journal lifecycle"
+    ],
+    "forbidden": [
+      "real account/key/journal",
+      "network",
+      "paid calls",
+      "old source edits"
+    ]
+  },
+  "criteria_sha256": "04f1c1328b65481f943163710567ba4377b8060521cb86c0648ecabd8b00279c",
+  "old54_regression_methods_retained": 54,
+  "new_deadline_test_methods": 10,
+  "unittest_methods_run": 64,
+  "unittest_failures": 0,
+  "unittest_errors": 0,
+  "all_source_test_bytes_unchanged_after_run": true,
+  "old_v3_late_post_known_counterexamples": 12,
+  "old_v3_sensitivity_controls_passed": true,
+  "v4_late_deadline_no_post_controls": 14,
+  "v4_deadline_prevention_controls_passed": true,
+  "deadline_evidence": [
+    {
+      "implementation": "v3",
+      "phase": "boundary-1",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        -1
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v4",
+      "phase": "boundary-1",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        -1
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v3",
+      "phase": "boundary-1",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        -1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "boundary-1",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        -1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v3",
+      "phase": "boundary0",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        0
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v4",
+      "phase": "boundary0",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        0
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v3",
+      "phase": "boundary0",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        0
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "boundary0",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        0
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v3",
+      "phase": "boundary1",
+      "kind": "test",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "NO_INTENT"
+    },
+    {
+      "implementation": "v4",
+      "phase": "boundary1",
+      "kind": "test",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "NO_INTENT"
+    },
+    {
+      "implementation": "v3",
+      "phase": "boundary1",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "implementation": "v4",
+      "phase": "boundary1",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "implementation": "v3",
+      "phase": "guard_request",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v4",
+      "phase": "guard_request",
+      "kind": "test",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_UNKNOWN"
+    },
+    {
+      "implementation": "v3",
+      "phase": "guard_request",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "guard_request",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "SUBMIT_UNKNOWN"
+    },
+    {
+      "implementation": "v3",
+      "phase": "reserve",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v4",
+      "phase": "reserve",
+      "kind": "test",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_UNKNOWN"
+    },
+    {
+      "implementation": "v3",
+      "phase": "reserve",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "reserve",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "SUBMIT_UNKNOWN"
+    },
+    {
+      "implementation": "v3",
+      "phase": "sign",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v4",
+      "phase": "sign",
+      "kind": "test",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_UNKNOWN"
+    },
+    {
+      "implementation": "v3",
+      "phase": "sign",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "sign",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "SUBMIT_UNKNOWN"
+    },
+    {
+      "implementation": "v4",
+      "phase": "restart-minus2013-query-only",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "SUBMIT_UNKNOWN"
+    },
+    {
+      "implementation": "v3",
+      "phase": "account",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "account",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "implementation": "v3",
+      "phase": "save_baseline",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "save_baseline",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "implementation": "v3",
+      "phase": "/api/v3/exchangeInfo",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v4",
+      "phase": "/api/v3/exchangeInfo",
+      "kind": "test",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "implementation": "v3",
+      "phase": "/api/v3/exchangeInfo",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "/api/v3/exchangeInfo",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "implementation": "v3",
+      "phase": "/api/v3/ticker/bookTicker",
+      "kind": "test",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_VALIDATED"
+    },
+    {
+      "implementation": "v4",
+      "phase": "/api/v3/ticker/bookTicker",
+      "kind": "test",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "implementation": "v3",
+      "phase": "/api/v3/ticker/bookTicker",
+      "kind": "post",
+      "guarded": false,
+      "post_transport_count": 1,
+      "post_clock_offsets_from_deadline": [
+        1
+      ],
+      "test_used": 0,
+      "post_used": 1,
+      "state": "NEW"
+    },
+    {
+      "implementation": "v4",
+      "phase": "/api/v3/ticker/bookTicker",
+      "kind": "post",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 0,
+      "post_used": 0,
+      "state": "INTENT_DURABLE"
+    },
+    {
+      "implementation": "v4",
+      "phase": "expired-test-no-new-order-recovery",
+      "kind": "test",
+      "guarded": true,
+      "post_transport_count": 0,
+      "post_clock_offsets_from_deadline": [],
+      "test_used": 1,
+      "post_used": 0,
+      "state": "TEST_UNKNOWN"
+    }
+  ],
+  "deadline_guarded_new_tests_use_latest_dispatch_clock": true,
+  "independent_review_passed": false,
+  "actual_network_calls": 0,
+  "real_key_files_read": 0,
+  "real_account_or_journal_access": 0,
+  "real_orders": 0,
+  "paid_calls": 0,
+  "limitations": [
+    "local last-sample transport dispatch cutoff; not exchange arrival or fill cutoff",
+    "optional low-level deadline is supplied by FiniteRunner; arbitrary direct client calls do not inherit a manifest",
+    "reservation consumption does not prove delivery; preserve same journal and query-only recovery",
+    "no change to finite gate, source admission, region eligibility or production authority"
+  ]
+}
