@@ -1,0 +1,66 @@
+{
+  "schema": "prospective-daily-entry-checkpoint/1",
+  "recorded_at_utc": "2026-10-07T07:05:46.810838+00:00",
+  "implemented": {
+    "bounded_daily_entry": true,
+    "completed_daily_pair_only": true,
+    "source_receipt_phase_protocol_and_revision_binding": true,
+    "append_only_restart_recovery": true,
+    "known_terminal_explicit_retry_distinct_from_unknown_attempt": true,
+    "automatic_background_scheduler": false
+  },
+  "synthetic_controls": {
+    "producer": 35,
+    "independent": 23,
+    "actual_HTTP_orders_and_paid_calls": 0,
+    "scope": "Artificial raw archive to source admission and persistent journal tests; these are not forward observations or profit evidence."
+  },
+  "actual_read_only_runtime": {
+    "commands": [
+      "status --no-network",
+      "run --no-network"
+    ],
+    "observed_at_utc": "2026-10-07T06:55:27.079432+00:00",
+    "terminal_exit_codes": [
+      0,
+      0
+    ],
+    "status": "NO_COMPLETED_UTC_DAY_DUE",
+    "journal_rows": 1,
+    "journal_bytes_unchanged": true,
+    "forward_rows": 0,
+    "HTTP_requests": 0,
+    "orders": 0,
+    "paid_calls": 0
+  },
+  "fingerprints": {
+    "daily_entry_code": "ac1dbf7a2dfde6587f8374757f02b984cced2e46df366a60c974e9ccce0f1b21",
+    "producer_control_report": "19b938ef110fe7098f905ae21d6855cb019f82f72b7bb10a610c19955abbf8c0",
+    "independent_control_report": "5572b19cb7b4beb526d18224cffb66a239ea634e2216956cf6ca8cd1fd1b58ce",
+    "actual_runtime_receipt": "d37fc7d3eb32f17805e986c206aba9923fc1c102c1d825e6ee7c0c927ef86525",
+    "economic_scope_review": "81754b8f4ad98e5087e561a15df7fbddc1bed783521c1b27e2ac3804ce74b243"
+  },
+  "future_economic_comparison": {
+    "candidate_and_risk_budget_comparator_initialized": true,
+    "additional_simple_hold_equal_rebalance_cash_baselines_implemented_at_checkpoint": false,
+    "first_full_evaluation_day_utc": "2026-10-08",
+    "prior_day_context_only": true,
+    "baseline_extension": "Separate append-only baseline implementation is in progress; existing two-wallet protocol and journal remain frozen."
+  },
+  "source_contract_review": {
+    "coinmetrics_noncommercial_dataset_reproduction_confirmed": true,
+    "coinmetrics_own_live_model_use_explicitly_confirmed": false,
+    "new_tiingo_free_starter_durable_retention_matches_research_requirement": false,
+    "tiingo_existing_account_terms_transition_or_custom_entitlement_verified": false,
+    "stooq_applicable_retention_contract_observed": false,
+    "production_source_qualified": false
+  },
+  "limits": [
+    "No future performance, trading fills, profitable advantage or return probability has been established.",
+    "Completed archive opening observations support retrospective measurement of an already frozen future opening, not contemporaneous execution.",
+    "Original four-ETF historical/corporate-action requirements, complete funding settlement evidence and real account/currency/risk controls remain open.",
+    "Foundation CI concerns public package tests, not independent private research acceptance or production eligibility."
+  ],
+  "private_data_uploaded": false,
+  "goal_complete": false
+}
