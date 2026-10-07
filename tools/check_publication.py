@@ -10,7 +10,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED_ROOTS = {"research_base", "tests", "tools", "examples", "docs", ".github"}
-ALLOWED_FILES = {"README.md", "LICENSE", ".gitignore", "pyproject.toml"}
+ALLOWED_FILES = {
+    "README.md", "LICENSE", ".gitignore", "pyproject.toml",
+    "experiments/atlas20_inventory_bridge_controls.py",
+}
 DENIED_PARTS = {"private", "factors-private", "data-private", "runs", "runs-local", "raw", "normalized"}
 SECRET = re.compile(r"(?:gh[pousr]_[A-Za-z0-9]{25,}|github_pat_[A-Za-z0-9_]{30,}|sk-[A-Za-z0-9]{24,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)")
 
