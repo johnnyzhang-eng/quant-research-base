@@ -1,0 +1,227 @@
+{
+  "actual_actions": {
+    "GitHub_writes": 0,
+    "actual_canonical_probe_journal_access": 0,
+    "network_calls": 0,
+    "new_forward_signals_created": 0,
+    "paid_calls": 0,
+    "real_credentials_read": 0,
+    "real_orders": 0
+  },
+  "assertion_calls_executed": 307,
+  "assertion_count_scope": "Every executed require call, including known-answer harness and input/source checks; group counts are distinct accounting/control bundles, not independent strategy experiments.",
+  "auditor_source_sha256": "0d8955fee5c180523982d20a2919bc7813799dded101002bc30ed3541e26a0d5",
+  "candidate_source_bindings": {
+    "outputs/binance-signal-order-bridge-20261008-v1.json": "cd8e422a98cc394ace4a9909b839edfbd81c72b743e37fa12212618681243593",
+    "work/binance_signal_bridge_independent_audit_20261008_v0.py": "773a029c97468c24579c286fe8d742c7dbd3d322dd7a264b590608935a7d79cc",
+    "work/binance_signal_order_bridge_20261008_v0.py": "cf7668fca7668e8004e8d6f312677b66143432ac7893dc44dd608d7c271cae93",
+    "work/binance_signal_order_bridge_20261008_v1.py": "07c7d706fd15ef937691e368e3074a953f6f890ee6f29ec8ee30c468a3ff2c20",
+    "work/binance_spot_testnet_adapter_20261008_v4.py": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+    "work/test_binance_signal_order_bridge_20261008_v1.py": "c65b282644d0dd639572d5bd47370dead7c5593f7d30c091f59658954052cce4"
+  },
+  "control_group_count": 15,
+  "controls": [
+    {
+      "assertions": 17,
+      "control_group": "independent_fraction_grid_fee_and_registry_restart",
+      "evidence": {
+        "Fraction_grid_fee_cash_control": true,
+        "actual_closed_reopened_registry": true,
+        "historical_or_real_observations": false,
+        "restart_plan_bytes_identity_and_expiry_unchanged": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 46,
+      "control_group": "identity_and_changed_observation_conflicts",
+      "evidence": {
+        "changed_observation_or_policy_cases": 5,
+        "observation_retry_no_fresh_plan_or_permission": true,
+        "same_cutoff_renamed_intent_cannot_bypass": true,
+        "source_namespace_target_conflict_cases": 4
+      },
+      "passed": true
+    },
+    {
+      "assertions": 62,
+      "control_group": "clock_boundaries_risk_and_false_receipt",
+      "evidence": {
+        "STOP_checked_before_retry_permission": true,
+        "inclusive_60000_and_exclusive_60001_controls": 4,
+        "risk_unknown_clock_receipt_refusals": 11
+      },
+      "passed": true
+    },
+    {
+      "assertions": 6,
+      "control_group": "own_fraction_wallet_and_outbound_transport",
+      "evidence": {
+        "Fake_POST_count": 1,
+        "fraction_full_fill_and_reopen_identity": true,
+        "no_real_fill_inferred": true,
+        "outbound_business_fields_bound": true,
+        "own_clock_and_routes": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 6,
+      "control_group": "fresh_process_registry_identity",
+      "evidence": {
+        "fresh_Python_process_used": true,
+        "no_parent_credentials_or_environment_keys_forwarded": true,
+        "one_retained_file_identity_reused": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 46,
+      "control_group": "unsupported_semantics_and_hostile_decimal_cash_boundary",
+      "evidence": {
+        "Fraction_fee_cash_boundary_hostile_Decimal_cases": 2,
+        "SELL_ETH_and_rotation_not_implemented": true,
+        "unsupported_or_invalid_semantic_cases": 10
+      },
+      "passed": true
+    },
+    {
+      "assertions": 12,
+      "control_group": "registry_and_plan_integrity",
+      "evidence": {
+        "memory_registry_rejected": true,
+        "retained_hash_mismatch_rejected": true,
+        "same_UID_arbitrary_writer_resistance_claimed": false,
+        "tampered_plan_before_stamp_rejected": true,
+        "unsafe_mode_and_symlink_rejected": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 17,
+      "control_group": "candidate_dispatch_and_retained_state_recovery",
+      "evidence": {
+        "candidate_helper_wallet_oracle_checked_separately_by_own_transport_group": true,
+        "first_fake_POSTs": 1,
+        "recover_GET_only": true,
+        "registry_and_adapter_files_closed_reopened": true,
+        "spent_registry_blocks_normal_repeat": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 8,
+      "control_group": "topup_position_difference_own_wallet_oracle",
+      "evidence": {
+        "own_and_candidate_wallet_reconciliation_agree": true,
+        "own_fraction_original_position_and_delta_checked": true,
+        "two_separate_synthetic_lifecycles": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 5,
+      "control_group": "known_wrong_commission_instrument_control",
+      "evidence": {
+        "candidate_source_not_mutated": true,
+        "deliberately_wrong_one_unit_commission_observation": true,
+        "same_instrument_detected_expected_wallet_failure": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 5,
+      "control_group": "v4_deadline_parameter_and_exact_expiry",
+      "evidence": {
+        "exact_deadline_argument_observed": true,
+        "expiry_equality_preserved": true,
+        "local_dispatch_clock_only_not_exchange_arrival": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 22,
+      "control_group": "pre_reservation_quote_account_expiry",
+      "evidence": {
+        "Fake_POSTs": 0,
+        "normal_repeat_and_initial_recovery_refused": true,
+        "preflight_clock_advance_cases": 2,
+        "stamp_consumed_adapter_budget_zero": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 36,
+      "control_group": "post_reservation_sign_guard_expiry_and_unknown_recovery",
+      "evidence": {
+        "Fake_POSTs": 0,
+        "after_sign_and_after_guard_cases": 2,
+        "consumed_budget_retained_after_real_close_reopen": true,
+        "no_resubmission_after_unknown_or_restart": true,
+        "unknown_recoveries_GET_only": 4
+      },
+      "passed": true
+    },
+    {
+      "assertions": 10,
+      "control_group": "stamp_before_journal_crash_and_restart",
+      "evidence": {
+        "artificial_failure_after_stamp_before_order_file": true,
+        "lost_eligibility_is_explicit_conservative_outcome": true,
+        "real_registry_restart_used": true,
+        "recovery_cannot_manufacture_POST": true
+      },
+      "passed": true
+    },
+    {
+      "assertions": 7,
+      "control_group": "closed_execution_scope_and_adapter_binding",
+      "evidence": {
+        "external_HTTP_transport_not_injected": true,
+        "scenario_subclass_or_altered_live_scope_rejected": true,
+        "wrong_adapter_binding_rejected_before_state_change": true
+      },
+      "passed": true
+    }
+  ],
+  "criteria": {
+    "changed_observations": "quote/cash/asof/policy retries cannot alter frozen plan or grant new dispatch permission",
+    "clock_bounds": "0<eligible-cutoff<=60000, eligibility age<=60000, observation age<=5000; equality controls",
+    "dispatch_deadline": "v4 supplied deadline; after-sign/guard expiry gives0POST; retained reservation never resubmits",
+    "dispatch_durability": "fake stamp retained across reopen; absent order file or post_used0 must not create an initial order",
+    "identity_conflicts": "same cutoff renamed intent/target/protocol/portfolio cannot yield another executable plan",
+    "instrument": "independent Fraction/clock/routes; no producer test helper imports",
+    "persisted_identity": "close/reopen one fake-only registry; original plan/ID/expiry immutable",
+    "schema": "binance-signal-bridge-independent-controls/1",
+    "scope_limits": "per retained fake registry/journal, not account-global; local deadline not exchange arrival/fill",
+    "source_scope": "offline BTC BUY projection; synthetic data only",
+    "unsupported": "ETH/SELL/rotation/continuous execution/profitability remain unimplemented"
+  },
+  "criteria_sha256": "d87785406a1a683950fd9d465271425c21bb333e26e30edee39451789be7a07f",
+  "decision_check": {
+    "P1_instrument_known_answers": "Fraction serialization/grid controls and a deliberately wrong commission that produces the expected wallet mismatch.",
+    "P2_mechanism_and_applicability": "v1 durable per-file registry, fixed cutoff identity and v4 local dispatch fence differ from v0 memory state; separate two-file crash gap remains conservative eligibility loss.",
+    "P3_attack_favorable_result": "Late sign/guard expiry, unknown order after restart, missing order file and changed signal/observations cannot produce an extra POST. This is bounded offline evidence only."
+  },
+  "failed_control_groups": 0,
+  "historical_fixture_loader_calls": 0,
+  "independent_control_method_count": 15,
+  "inputs_all_independently_constructed_synthetic": true,
+  "limits": [
+    "Only closed offline BTC BUY projection, with artificial clocks/capital/quotes; no historical/PIT or profitable strategy qualification.",
+    "Durable dedup is scoped to one retained owned fake registry and deterministic adapter files. Copies, resets or fresh registry files are outside the local identity contract.",
+    "Two-file stamp/order journal commits are not atomic. A crash after stamp loses permission conservatively; recovery cannot create an initial order.",
+    "The 60000ms cutoff-to-eligible limit is an explicit engineering fixture assumption, not a validated prospective daily scheduling convention.",
+    "Changed observations reusing a retained plan grant no new permission and cannot update the plan. There is no new production risk/market reevaluation at dispatch.",
+    "Local deadline controls transport entry only; process scheduling, network delivery and exchange arrival/fill are not guaranteed.",
+    "Closed FakeScenario simulated FILLED is synthetic. It does not demonstrate a real fill, continuous automated strategy, ETH/SELL/rotation, deposit integration, personal eligibility, NAV or returns."
+  ],
+  "passed_control_groups": 15,
+  "producer_test_helpers_imported": false,
+  "producer_test_methods_run": 0,
+  "report_freeze": "Exclusive-create final report; frozen file is never overwritten by this audit.",
+  "schema": "binance-signal-order-bridge-independent-audit/1",
+  "source_bindings_unchanged_after_controls": true,
+  "status": "LIMITED_OFFLINE_SYNTHETIC_ACCEPTANCE",
+  "version": "20261008-v1"
+}

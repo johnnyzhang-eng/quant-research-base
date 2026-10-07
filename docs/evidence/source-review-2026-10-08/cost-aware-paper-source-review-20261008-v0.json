@@ -1,0 +1,272 @@
+{
+  "schema": "cost-aware-paper-source-review/0",
+  "reviewed_at_utc": "2026-10-07T18:08:44.016145+00:00",
+  "scope": {
+    "read_only_primary_web": true,
+    "author_contact": false,
+    "external_code_execution": false,
+    "market_api_requests": 0,
+    "account_or_key_access": false,
+    "paid_calls": 0,
+    "orders": 0,
+    "old_frozen_files_changed": false,
+    "profitability_replication": false
+  },
+  "paper": {
+    "title": "Machine Learning-Based Bitcoin Trading Under Transaction Costs: Evidence From Walk-Forward Forecasting",
+    "version": "2606.00060v1",
+    "url": "https://arxiv.org/html/2606.00060v1",
+    "abstract_url": "https://arxiv.org/abs/2606.00060",
+    "page_submission_date": "2026-05-19",
+    "page_submission_timestamp_utc": "2026-05-19T14:30:49Z",
+    "date_evidence": "abstract Submission history and HTML header agree; not inferred from 2606 identifier",
+    "license_as_displayed": "CC BY-NC-ND 4.0",
+    "paper_derived_compact_summary": "Equations 5–7 apply a strict turnover-scaled forecast hurdle and otherwise retain the previous position. At c=0.001 and lambda=2, LO entries and exits require magnitude above 0.002; LS reversals require above 0.004. Table 6 reports LO loss-best ARC 65.40%, Sharpe 1.09, drawdown −67.42%, 251 trades; holding ARC 56.30%, Sharpe 0.82. Table 8 reports their Sharpe difference 0.27, CI [−0.46,0.95], Holm p=0.89, no rejection. Table 7 tests filtered versus unfiltered execution, not holding. Table 9 separately reports 73.25% for OHLCV+TA loss-best. Section 3.1 labels REST hourly history from 2017-12-01 through 2026-01-01 as USD-M futures. Appendix A.1 reports 122 padded hours. The availability section offers code by author request, without an explicit downloader endpoint. Sections 4.1 and 7 omit depth, partial fills, variable spread and funding-rate effects.",
+    "summary_english_word_count": 124,
+    "verbatim_body_words": 0
+  },
+  "primary_sources": [
+    {
+      "url": "https://arxiv.org/html/2606.00060v1",
+      "locations": [
+        "3.1",
+        "4.1 Eq2–7",
+        "4.6 Eq27/31",
+        "4.8",
+        "5.2 Tables6–8",
+        "5.3 Table9",
+        "7",
+        "A.1",
+        "Data and code availability"
+      ],
+      "status": "read"
+    },
+    {
+      "url": "https://arxiv.org/abs/2606.00060",
+      "location": "Submission history v1",
+      "status": "read"
+    },
+    {
+      "url": "https://www.binance.com/en/support/announcement/detail/360033314152",
+      "published": "2019-09-12 09:13 (page display; publication timezone unspecified)",
+      "go_live_utc": "2019-09-13T04:00:00Z",
+      "status": "read; beta mention does not establish 2017 production history"
+    },
+    {
+      "url": "https://github.com/binance/binance-public-data",
+      "locations": [
+        "Data Information / SPOT / Klines",
+        "FUTURES / Klines",
+        "CHECKSUM / Updates"
+      ],
+      "status": "read; current official metadata, not proof of author downloader"
+    },
+    {
+      "url": "https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market",
+      "location": "Kline/Candlestick data",
+      "status": "read; current spot endpoint GET /api/v3/klines"
+    }
+  ],
+  "instrument_notes": [
+    {
+      "requested_url": "https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data",
+      "result": "redirect returned developer homepage text, not requested endpoint body",
+      "resolution": "official binance-public-data README explicitly distinguishes /api/v3/klines from /fapi/v1/klines; no provider outage conclusion"
+    },
+    {
+      "result": "official README futures-format sample has a 2017-looking timestamp",
+      "meaning": "schema/example only; not an observed BTCUSDT futures history receipt"
+    }
+  ],
+  "independent_mechanism_analysis": {
+    "position_hold": "该规则对持仓变化设置门槛；已有多头遇到弱负预测会继续多头，零预测也不会自动退出。拒绝一次换仓不等于转为现金。",
+    "strict_boundary": "等于门槛不准换仓，只有严格超过才准；同方向且已有目标仓位时换手为零，计算通过也没有新增交易。",
+    "risk_exit_relationship": "若把风险退出也送入这个信号过滤器，弱预测会阻止退出。建议我们的风险STOP先决定去风险目标，绕过预测阈值，再经订单、持仓和资金核账；这属于新设计，不是论文已实现能力。",
+    "holding_comparison": "年化点估计较高、对未过滤模型的改善显著，都不推出对持有显著。不同对照、收益与Sharpe统计量、置信区间及多重比较必须分别核对；不拒绝也不证明两策略等价。",
+    "metric_convention": "论文Sharpe以复合年化收益减固定无风险率，再除年化标准差。独立控制只核算该定义，不把它偷偷换成算术均值Sharpe。",
+    "best_configuration_scope": "65.40%对应特定主规格；整篇其他配置有更高点估计，因此不称它为所有配置的绝对最高值。"
+  },
+  "data_identity_review": {
+    "status": "unresolved product/source-history inconsistency; no fraud or whole-method failure finding",
+    "official_endpoint_distinction": {
+      "spot": "GET /api/v3/klines",
+      "USD_M": "GET /fapi/v1/klines"
+    },
+    "same_symbol_and_ohlcv_not_product_proof": true,
+    "calendar_control": {
+      "modeled_start_utc": "2018-01-01T00:00:00Z",
+      "official_go_live_utc": "2019-09-13T04:00:00Z",
+      "hours_between": 14884,
+      "paper_gap_count": 122,
+      "interpretation": "2018至正式上线有14884小时；若这些前期数据全无，122个缺失小时的补值说明不足以独自解释。正式启动公告不测定更早beta首条记录，也不排除供应商回填代理数据。"
+    },
+    "strongest_alternative_explanation": {
+      "hypothesis": "现货BTCUSDT序列或早期现货与后期期货拼接，被整体写成USD-M；这比据日期差异直接推断造假更有解释力。",
+      "confirmed": false,
+      "why_consistent": "现货与USD-M共享BTCUSDT名称与近似K线列结构；论文未给实际下载路径。",
+      "falsifier": "下载代码固定fapi路径、原始HTTP/分页记录及前期条目来源；或作者明确标注早期代理与拼接日期。若实际为纯期货但起始日期写错，也需相应原始文件与行数证明。"
+    },
+    "other_alternatives": [
+      "样本起始日期或产品名称的文字错误",
+      "明确声明的代理/回填序列而非真实上市前成交"
+    ],
+    "what_not_proven": "没有下载任何原始行情，故没有证明作者实际使用现货、混合数据或伪造数据；也没有证明全部70k样本错误。"
+  },
+  "first_party_code_search": {
+    "queries": [
+      "exact paper title + code github",
+      "Andrei Bysik + github bitcoin"
+    ],
+    "author_public_repo_or_raw_dataset_located": false,
+    "scope_limit": "仅检查论文/摘要及两项定向搜索；未定位不等于不存在。搜索返回的第三方复现或书目不当作作者首方代码。",
+    "explicit_author_downloader_endpoint_located": false,
+    "author_contact_performed": false
+  },
+  "independent_controls": {
+    "engine": "Python standard-library Fraction and UTC datetime; own arithmetic, no author code",
+    "assertion_calls": 18,
+    "failures": 0,
+    "threshold_cases": [
+      {
+        "mode": "LO",
+        "prev": 0,
+        "forecast_log_return": "0.001",
+        "desired": 1,
+        "hurdle_fraction": "1/500",
+        "change_admitted": false,
+        "next": 0
+      },
+      {
+        "mode": "LO",
+        "prev": 0,
+        "forecast_log_return": "0.002",
+        "desired": 1,
+        "hurdle_fraction": "1/500",
+        "change_admitted": false,
+        "next": 0
+      },
+      {
+        "mode": "LO",
+        "prev": 0,
+        "forecast_log_return": "0.002001",
+        "desired": 1,
+        "hurdle_fraction": "1/500",
+        "change_admitted": true,
+        "next": 1
+      },
+      {
+        "mode": "LO",
+        "prev": 1,
+        "forecast_log_return": "-0.001",
+        "desired": 0,
+        "hurdle_fraction": "1/500",
+        "change_admitted": false,
+        "next": 1
+      },
+      {
+        "mode": "LO",
+        "prev": 1,
+        "forecast_log_return": "-0.002",
+        "desired": 0,
+        "hurdle_fraction": "1/500",
+        "change_admitted": false,
+        "next": 1
+      },
+      {
+        "mode": "LO",
+        "prev": 1,
+        "forecast_log_return": "-0.002001",
+        "desired": 0,
+        "hurdle_fraction": "1/500",
+        "change_admitted": true,
+        "next": 0
+      },
+      {
+        "mode": "LO",
+        "prev": 1,
+        "forecast_log_return": "0",
+        "desired": 0,
+        "hurdle_fraction": "1/500",
+        "change_admitted": false,
+        "next": 1
+      },
+      {
+        "mode": "LO",
+        "prev": 1,
+        "forecast_log_return": "0.001",
+        "desired": 1,
+        "hurdle_fraction": "0",
+        "change_admitted": true,
+        "next": 1
+      },
+      {
+        "mode": "LS",
+        "prev": 1,
+        "forecast_log_return": "-0.003",
+        "desired": -1,
+        "hurdle_fraction": "1/250",
+        "change_admitted": false,
+        "next": 1
+      },
+      {
+        "mode": "LS",
+        "prev": 1,
+        "forecast_log_return": "-0.004",
+        "desired": -1,
+        "hurdle_fraction": "1/250",
+        "change_admitted": false,
+        "next": 1
+      },
+      {
+        "mode": "LS",
+        "prev": 1,
+        "forecast_log_return": "-0.004001",
+        "desired": -1,
+        "hurdle_fraction": "1/250",
+        "change_admitted": true,
+        "next": -1
+      }
+    ],
+    "rounded_table_sharpe": {
+      "CA_fraction": "1020/937",
+      "holding_fraction": "5210/6383",
+      "difference_fraction": "1628890/5980871",
+      "rounding_scope": "rounded table inputs; not raw-return bootstrap replication"
+    },
+    "synthetic_one_hour_return": {
+      "simple_return": "-0.01",
+      "prev": "1",
+      "retained_position_net": "-1/100",
+      "forced_flat_net": "-1/1000",
+      "scope": "known-answer Eq4 arithmetic, not prediction accuracy or a guaranteed exit fill"
+    },
+    "not_counted_as_market_samples": true,
+    "bootstrap_replicated": false
+  },
+  "decision_check": {
+    "skill_applied": true,
+    "P1": "以11个持仓门槛案例、Sharpe定义和UTC小时数控制测量；官方格式示例不充当交易观测，重定向主页不充当正确文档。算术控制不充当论文收益复现。",
+    "P2": "当前具体缺口是产品标签/上市时间/下载路径之间的证据断点，不是已有适配器或数据源不可用的旧机制。候选解释需原始来源检验。",
+    "P3": "既不因为年化点估计漂亮就承诺优势，也不因为日期冲突就否定方法；保留现货标签/拼接/文字错误这些最强替代解释。"
+  },
+  "portable_mechanism": [
+    "将预期优势与预计换手成本比较，使弱信号延续已有目标仓位；先仅做离线信号实验。",
+    "把成本场景、严格门槛、交易方向和前一仓位固定到实验manifest，并保留每次被拒绝换仓的原因。",
+    "风险STOP、资料陈旧和仓位限额独立优先；不要把为减少换手而保留持仓解释成安全退出。"
+  ],
+  "replication_conditions": [
+    "原始下载器commit/实际base+endpoint+参数+分页、产品元数据、UTC单位和文件SHA；首末行及上市前每段来源明确。",
+    "原始与补值行分开，完整gap mask与拼接/代理规则留痕；不能把填平的缺口当可成交样本。",
+    "固定fold切分、标签时间、预测/持仓/成交时钟、训练随机种子和依赖版本；提供逐小时OOS预测与净收益以独立重算。",
+    "分清真实成交、估值与持仓资金；按适用产品核算费用/滑点/资金费率/保证金和风险退出，额外设计不得冒称逐字复现。",
+    "同本金同日期同成本口径的holding及简单基准；冻结选择规则后做独立留出和前瞻，并复算配对区块推断。"
+  ],
+  "conclusion": "可移植的是减少低预期优势换手的门槛机制；当前尚缺可审计产品数据和作者实现，无法把文中年化值当本项目复制收益或显著holding优势。",
+  "outbound_scan": {
+    "credentials_or_env_files": false,
+    "personal_financial_constraints": false,
+    "private_input_paths": false,
+    "real_balances_addresses_or_transaction_ids": false,
+    "raw_market_data": false
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "actual_actions": {
+    "GitHub_writes": 0,
+    "canonical_probe_journal_access": 0,
+    "network_calls": 0,
+    "paid_calls": 0,
+    "producer_full_CI_reruns": 0,
+    "real_credentials_read": 0,
+    "real_orders": 0
+  },
+  "actual_additions_validated_sha256_bytes_and_git_blob": 13,
+  "actual_full_roster_validated_sha256_bytes_git_blob_and_mode": 185,
+  "assertion_count_scope": "307 actual require calls for the same 15 frozen controls: 305 group calls plus 2 source-binding calls. This is a portability rerun of accounting controls, not 15 new strategy experiments or a producer CI execution.",
+  "complete_public_tree_bindings_sha256": "33c721cad87030ea8f184c88d4a807775258d3c703cebc295099106ca175ade3",
+  "complete_public_tree_file_count": 185,
+  "evidence": {
+    "all_discovered_test_cases": 432,
+    "assertion_calls_executed": 307,
+    "control_group_count": 15,
+    "controls": [
+      {
+        "assertions": 17,
+        "control_group": "independent_fraction_grid_fee_and_registry_restart",
+        "evidence": {
+          "Fraction_grid_fee_cash_control": true,
+          "actual_closed_reopened_registry": true,
+          "historical_or_real_observations": false,
+          "restart_plan_bytes_identity_and_expiry_unchanged": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 46,
+        "control_group": "identity_and_changed_observation_conflicts",
+        "evidence": {
+          "changed_observation_or_policy_cases": 5,
+          "observation_retry_no_fresh_plan_or_permission": true,
+          "same_cutoff_renamed_intent_cannot_bypass": true,
+          "source_namespace_target_conflict_cases": 4
+        },
+        "passed": true
+      },
+      {
+        "assertions": 62,
+        "control_group": "clock_boundaries_risk_and_false_receipt",
+        "evidence": {
+          "STOP_checked_before_retry_permission": true,
+          "inclusive_60000_and_exclusive_60001_controls": 4,
+          "risk_unknown_clock_receipt_refusals": 11
+        },
+        "passed": true
+      },
+      {
+        "assertions": 6,
+        "control_group": "own_fraction_wallet_and_outbound_transport",
+        "evidence": {
+          "Fake_POST_count": 1,
+          "fraction_full_fill_and_reopen_identity": true,
+          "no_real_fill_inferred": true,
+          "outbound_business_fields_bound": true,
+          "own_clock_and_routes": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 6,
+        "control_group": "fresh_process_registry_identity",
+        "evidence": {
+          "fresh_Python_process_used": true,
+          "no_parent_credentials_or_environment_keys_forwarded": true,
+          "one_retained_file_identity_reused": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 46,
+        "control_group": "unsupported_semantics_and_hostile_decimal_cash_boundary",
+        "evidence": {
+          "Fraction_fee_cash_boundary_hostile_Decimal_cases": 2,
+          "SELL_ETH_and_rotation_not_implemented": true,
+          "unsupported_or_invalid_semantic_cases": 10
+        },
+        "passed": true
+      },
+      {
+        "assertions": 12,
+        "control_group": "registry_and_plan_integrity",
+        "evidence": {
+          "memory_registry_rejected": true,
+          "retained_hash_mismatch_rejected": true,
+          "same_UID_arbitrary_writer_resistance_claimed": false,
+          "tampered_plan_before_stamp_rejected": true,
+          "unsafe_mode_and_symlink_rejected": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 17,
+        "control_group": "candidate_dispatch_and_retained_state_recovery",
+        "evidence": {
+          "candidate_helper_wallet_oracle_checked_separately_by_own_transport_group": true,
+          "first_fake_POSTs": 1,
+          "recover_GET_only": true,
+          "registry_and_adapter_files_closed_reopened": true,
+          "spent_registry_blocks_normal_repeat": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 8,
+        "control_group": "topup_position_difference_own_wallet_oracle",
+        "evidence": {
+          "own_and_candidate_wallet_reconciliation_agree": true,
+          "own_fraction_original_position_and_delta_checked": true,
+          "two_separate_synthetic_lifecycles": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 5,
+        "control_group": "known_wrong_commission_instrument_control",
+        "evidence": {
+          "candidate_source_not_mutated": true,
+          "deliberately_wrong_one_unit_commission_observation": true,
+          "same_instrument_detected_expected_wallet_failure": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 5,
+        "control_group": "v4_deadline_parameter_and_exact_expiry",
+        "evidence": {
+          "exact_deadline_argument_observed": true,
+          "expiry_equality_preserved": true,
+          "local_dispatch_clock_only_not_exchange_arrival": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 22,
+        "control_group": "pre_reservation_quote_account_expiry",
+        "evidence": {
+          "Fake_POSTs": 0,
+          "normal_repeat_and_initial_recovery_refused": true,
+          "preflight_clock_advance_cases": 2,
+          "stamp_consumed_adapter_budget_zero": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 36,
+        "control_group": "post_reservation_sign_guard_expiry_and_unknown_recovery",
+        "evidence": {
+          "Fake_POSTs": 0,
+          "after_sign_and_after_guard_cases": 2,
+          "consumed_budget_retained_after_real_close_reopen": true,
+          "no_resubmission_after_unknown_or_restart": true,
+          "unknown_recoveries_GET_only": 4
+        },
+        "passed": true
+      },
+      {
+        "assertions": 10,
+        "control_group": "stamp_before_journal_crash_and_restart",
+        "evidence": {
+          "artificial_failure_after_stamp_before_order_file": true,
+          "lost_eligibility_is_explicit_conservative_outcome": true,
+          "real_registry_restart_used": true,
+          "recovery_cannot_manufacture_POST": true
+        },
+        "passed": true
+      },
+      {
+        "assertions": 7,
+        "control_group": "closed_execution_scope_and_adapter_binding",
+        "evidence": {
+          "external_HTTP_transport_not_injected": true,
+          "scenario_subclass_or_altered_live_scope_rejected": true,
+          "wrong_adapter_binding_rejected_before_state_change": true
+        },
+        "passed": true
+      }
+    ],
+    "failed_control_groups": 0,
+    "fresh_process_import_origins": [
+      {
+        "adapter": "tools/binance_spot_testnet_adapter_20261008_v4.py",
+        "adapter_sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+        "bridge": "tools/binance_signal_order_bridge_20261008_v1.py",
+        "bridge_sha256": "07c7d706fd15ef937691e368e3074a953f6f890ee6f29ec8ee30c468a3ff2c20"
+      }
+    ],
+    "fresh_process_location_plumbing": "Actual public tools directory replaces legacy ROOT/work only; origin trace adds observations without changing pass predicates.",
+    "frozen_control_methods": [
+      [
+        "independent_fraction_grid_fee_and_registry_restart",
+        "numeric_and_restart"
+      ],
+      [
+        "identity_and_changed_observation_conflicts",
+        "identity_and_observation_conflicts"
+      ],
+      [
+        "clock_boundaries_risk_and_false_receipt",
+        "clocks_and_risk"
+      ],
+      [
+        "own_fraction_wallet_and_outbound_transport",
+        "own_adapter_lifecycle"
+      ],
+      [
+        "fresh_process_registry_identity",
+        "fresh_process_registry"
+      ],
+      [
+        "unsupported_semantics_and_hostile_decimal_cash_boundary",
+        "unsupported_and_cash_context"
+      ],
+      [
+        "registry_and_plan_integrity",
+        "registry_and_plan_integrity"
+      ],
+      [
+        "candidate_dispatch_and_retained_state_recovery",
+        "execute_and_restart"
+      ],
+      [
+        "topup_position_difference_own_wallet_oracle",
+        "topup_with_own_wallet"
+      ],
+      [
+        "known_wrong_commission_instrument_control",
+        "known_wrong_commission_instrument"
+      ],
+      [
+        "v4_deadline_parameter_and_exact_expiry",
+        "deadline_parameter_and_equal"
+      ],
+      [
+        "pre_reservation_quote_account_expiry",
+        "pre_reservation_expiry"
+      ],
+      [
+        "post_reservation_sign_guard_expiry_and_unknown_recovery",
+        "late_sign_or_guard"
+      ],
+      [
+        "stamp_before_journal_crash_and_restart",
+        "gap_between_stamp_and_journal"
+      ],
+      [
+        "closed_execution_scope_and_adapter_binding",
+        "closed_execution_scope"
+      ]
+    ],
+    "import_origins": {
+      "adapter": "tools/binance_spot_testnet_adapter_20261008_v4.py",
+      "adapter_sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+      "bridge": "tools/binance_signal_order_bridge_20261008_v1.py",
+      "bridge_sha256": "07c7d706fd15ef937691e368e3074a953f6f890ee6f29ec8ee30c468a3ff2c20"
+    },
+    "independent_controls_identical_to_frozen_root_functions": true,
+    "offline_network_fence_installed": true,
+    "passed_control_groups": 15,
+    "private_work_on_sys_path": false,
+    "producer_bridge_method_names_discovered": [
+      "test_actual_v4_deadline_argument_business_parameters_and_recovery",
+      "test_delay_span_boundary_and_future_stale_controls",
+      "test_dispatch_exact_expiry_equality_allowed",
+      "test_dispatch_stamp_before_missing_order_state_does_not_reissue",
+      "test_existing_trigger_rejected_before_registry_mutation",
+      "test_fee_cash_notional_and_hostile_Decimal_do_not_bypass",
+      "test_fraction_cash_fee_grid_instrument_and_inputs_unchanged",
+      "test_guard_cross_expiry_last_transport_fence",
+      "test_halt_hold_sell_ETH_rotation_no_permission_or_row",
+      "test_observation_clock_pending_false_receipt_and_invalid_shape",
+      "test_quote_cash_time_retry_reuses_without_permission_or_expiry_reset",
+      "test_registry_missing_path_permissions_marker_and_plan_corruption",
+      "test_same_cutoff_renaming_target_and_portfolio_conflicts",
+      "test_serialized_concurrent_compiles_only_one_new_plan",
+      "test_signing_cross_expiry_spent_reservation_restart_query_only",
+      "test_slow_preflight_has_no_order_reservation_or_recoverable_POST",
+      "test_topup_fake_baseline_matches_compiled_portfolio_and_Fraction",
+      "test_true_fresh_process_restart_and_conflict"
+    ],
+    "producer_bridge_methods_discovered": 18,
+    "producer_test_methods_executed_by_this_audit": 0,
+    "producer_test_origin": "tools/test_binance_signal_order_bridge_20261008_v1.py",
+    "public_finite_probe_admitted": false,
+    "public_source_pins": {
+      "research_base/binance_operator.py": "9da6ca374b00a92fbf95bfd676771dcf5e227fe4f867d2f49e592fe8dd973b47",
+      "research_base/binance_spot_testnet.py": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+      "tools/binance_signal_order_bridge_20261008_v1.py": "07c7d706fd15ef937691e368e3074a953f6f890ee6f29ec8ee30c468a3ff2c20",
+      "tools/binance_spot_testnet_adapter_20261008_v4.py": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+      "tools/test_binance_signal_order_bridge_20261008_v1.py": "c65b282644d0dd639572d5bd47370dead7c5593f7d30c091f59658954052cce4"
+    }
+  },
+  "frozen_root_audit_report_sha256": "d4b514f7682054715614bcf0a1d842a503f7a70fe9b4d47db8b467af4d4ac07b",
+  "frozen_root_auditor_sha256": "0d8955fee5c180523982d20a2919bc7813799dded101002bc30ed3541e26a0d5",
+  "immutable_report": "Exclusive-create; no frozen original is rewritten.",
+  "parent_172_bytes_unchanged_claim": "Publisher manifest assertion only; this audit does not fetch or independently reconstruct the remote parent tree.",
+  "projected_public_git_tree_sha1": "3fd28cf80f1bffaef27387074f7c68b6bb2e352c",
+  "publication_tree_projection": {
+    "all_185_explicit_roster_members_win_over_any_runtime_prefix": true,
+    "compiled_cache_files_observed_without_content_read": 10,
+    "compiled_cache_rule": "Only nonlisted __pycache__/*.pyc covered by both explicit gitignore rules; unknown .py inside cache directories is refused.",
+    "excluded_runner_output_files_observed": 206,
+    "first_dry_run_source_tree_sha256": "33c721cad87030ea8f184c88d4a807775258d3c703cebc295099106ca175ade3",
+    "initial_measurement_interruption": "Strict whole-directory count initially intercepted 206 newly generated runs-local runner files after the first dry run. No source pin was relaxed; explicit gitignored output was excluded and all 185 source bindings matched the original dry-run tree SHA.",
+    "instrument_controls": {
+      "controls_use_only_self_owned_synthetic_files": true,
+      "deliberate_bad_source_refusal_cases": 6,
+      "hash_change_and_missing_source_refused": true,
+      "legitimate_nonlisted_runtime_output_control": true,
+      "listed_source_under_runtime_prefix_kept": true,
+      "unknown_extra_and_nested_name_or_cache_directory_source_refused": true
+    },
+    "only_nonlisted_runtime_output_prefix": "runs-local/",
+    "repository_metadata_files_observed_without_content_read": 39,
+    "repository_metadata_prefix_separate_from_source": ".git/",
+    "runs_local_is_explicitly_gitignored": true,
+    "source_files": 185,
+    "unknown_extra_source_outside_runtime_prefix_refused": true
+  },
+  "publisher_full_roster_sha256": "00d74d532d522008f3f1af99c1e4d161266fc245b435908d1e3e29b9549afe09",
+  "publisher_manifest_schema": "crypto-source-bridge-publication-manifest/1",
+  "publisher_manifest_sha256": "095993d690ba23ee579b14ad99ac9510ba2f559a34a73ffd7e8950e12f69220c",
+  "publisher_manifest_validated": true,
+  "publisher_tree_and_self_owned_copy_unchanged": true,
+  "schema": "binance-public-bridge-portability-independent-audit/1",
+  "scope": "Offline BTC BUY engineering controls and public import/CI discovery only; no production admission, live/continuous strategy, eligibility, true fills or profitability.",
+  "status": "LIMITED_OFFLINE_PORTABILITY_ACCEPTANCE",
+  "version": "20261008-v0",
+  "wrapper_source_sha256": "0c3ea1119e8e34eb8ea6e3867a5ab2b01cb27fff885c35c7061a859d0f1333d3"
+}

@@ -1,0 +1,304 @@
+{
+  "schema": "dmoera-public-contract-discovery/0",
+  "reviewed_at_utc": "2026-10-07T18:55:07.945925+00:00",
+  "scope": {
+    "primary_public_read_attempts": 8,
+    "read_budget": 8,
+    "new_network_reads_after_budget": 0,
+    "external_code_executed": false,
+    "javascript_executed": false,
+    "api_backend_calls": 0,
+    "logins_terms_acceptance_or_signup": false,
+    "author_contact": false,
+    "account_or_credentials_read": false,
+    "keys_created": false,
+    "orders_or_transfers": 0,
+    "paid_calls": 0,
+    "other_frozen_files_modified": false
+  },
+  "result": "Public frontend documentation reduces interface ambiguity; complete executable contract, validation schema/logs and financial execution semantics remain unestablished within this search scope.",
+  "source_summary": "The public frontend documents on_bar once per closed five-minute bar, oldest-first OHLCV lookbacks, and a just-closed ctx.bar. It describes position helpers and long/short signals, confidence for router sizing, optional stop/target/horizon overrides, and None as no action. A Donchian example removes the last high to exclude the current bar; the helper implementation is not supplied. It names seven validation checks and consumes funnel, OOS, holdout, score and context fields. Full deployment is distinguished from an OOS trial. A fee calculator shows per-side slippage and maker/taker hints, not a validator fee ledger. The bundle links the official MCP repository. Its current Python resource reads local CREATOR_API.md and delegates reports to internal validation modules.",
+  "source_summary_english_words": 111,
+  "long_body_quotes": false,
+  "reads": [
+    {
+      "n": 1,
+      "url": "https://www.dmoera.xyz/studio",
+      "instrument": "web reader",
+      "result": "tool could not access URL",
+      "http_status": null,
+      "provider_unavailable_conclusion": false
+    },
+    {
+      "n": 2,
+      "url": "https://github.com/CacheCarti/Crypto-Strategies/blob/f8e32599c192b823dbe7aea77a2b9341c6114527/README.md",
+      "instrument": "web reader",
+      "result": "parsed pinned README including official studio link",
+      "http_status": null,
+      "version": "f8e32599c192b823dbe7aea77a2b9341c6114527"
+    },
+    {
+      "n": 3,
+      "url": "https://www.dmoera.xyz/studio",
+      "instrument": "standard-library HTTPS GET; no cookies/auth",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 2312,
+      "sha256": "20606176141dd210202acb8e0a3bd2472db68ffa668bedaa423f2f52deb72f88",
+      "result": "static app shell with one first-party bundle and a Google login script reference; neither login nor Google script fetched"
+    },
+    {
+      "n": 4,
+      "url": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "instrument": "static HTTPS resource read",
+      "http_status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "bytes": 1484970,
+      "sha256": "57d28392a8704f6a69383efb46bd5c8d38f120bb79e0972197dcc13df1f42e82",
+      "result": "documentation literals and public MCP link extracted without evaluation"
+    },
+    {
+      "n": 5,
+      "url": "https://github.com/CacheCarti/dmoera-mcp",
+      "instrument": "web reader",
+      "http_status": null,
+      "result": "public repository page and README parsed; current main, exact commit unavailable in parsed page"
+    },
+    {
+      "n": 6,
+      "url": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "instrument": "static HTTPS resource read",
+      "http_status": 200,
+      "bytes": 1484970,
+      "sha256": "57d28392a8704f6a69383efb46bd5c8d38f120bb79e0972197dcc13df1f42e82",
+      "result": "bounded contract and pipeline literal inspection; same bytes as n4"
+    },
+    {
+      "n": 7,
+      "url": "https://raw.githubusercontent.com/CacheCarti/dmoera-mcp/main/mcp_creator_server.py",
+      "instrument": "static HTTPS source read",
+      "http_status": 200,
+      "bytes": 33686,
+      "sha256": "348d06277c898c5123177c6ecb528a166ff882beca033bb483c9796054794295",
+      "version": "main fetched at review time; content pinned by SHA, no commit claimed",
+      "result": "resource/report delegation read; no imports or functions executed"
+    },
+    {
+      "n": 8,
+      "url": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "instrument": "static HTTPS resource read",
+      "http_status": 200,
+      "bytes": 1484970,
+      "sha256": "57d28392a8704f6a69383efb46bd5c8d38f120bb79e0972197dcc13df1f42e82",
+      "result": "lookback order, position, funnel and fee hints inspected; same bytes as n4/n6"
+    }
+  ],
+  "actual_public_link_chain": [
+    {
+      "from": "https://github.com/CacheCarti/Crypto-Strategies/blob/f8e32599c192b823dbe7aea77a2b9341c6114527/README.md",
+      "to": "https://www.dmoera.xyz/studio",
+      "relationship": "README official product link"
+    },
+    {
+      "from": "https://www.dmoera.xyz/studio",
+      "to": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "relationship": "HTML script src; statically read, not executed"
+    },
+    {
+      "from": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "to": "https://github.com/CacheCarti/dmoera-mcp",
+      "relationship": "explicit GitHub href"
+    },
+    {
+      "from": "https://github.com/CacheCarti/dmoera-mcp",
+      "to": "https://raw.githubusercontent.com/CacheCarti/dmoera-mcp/main/mcp_creator_server.py",
+      "relationship": "listed mcp_creator_server.py file; raw representation statically read"
+    }
+  ],
+  "discovered_docs_routes": {
+    "origin": "https://www.dmoera.xyz",
+    "read_method": "route strings and content literals in bundled frontend; route pages not separately rendered or fetched",
+    "routes": [
+      "/docs/creator/strategy-contract",
+      "/docs/creator/pipeline",
+      "/docs/user/how-it-works",
+      "/docs/user/live-trading"
+    ],
+    "backend_implementation_version_proven": false
+  },
+  "contract_findings": [
+    {
+      "item": "imports and subclass interface",
+      "level": "documented",
+      "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "locator": "StarterGuide template and strategy-contract content",
+      "supported": "Strategy / BarContext / Signal from domains.strategy_contract; required on_bar; optional initialize and on_position_close",
+      "unsupported": "abstract base implementation, exact dataclass definitions and validation constraints"
+    },
+    {
+      "item": "bar clock",
+      "level": "documented",
+      "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "locator": "StarterGuide lifecycle/current bar comments",
+      "supported": "one on_bar per closed 5-minute bar; ctx.bar is just closed",
+      "unsupported": "timestamp denotes open versus close, receive latency, signal acceptance time and fill event sequence"
+    },
+    {
+      "item": "history helper order",
+      "level": "documented",
+      "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "locator": "StarterGuide price-data comment",
+      "supported": "closes/opens/highs/lows/volumes use lookback counts and return oldest-first lists",
+      "unsupported": "helper code, maximum length, warmup/gap behavior, exact membership guarantee"
+    },
+    {
+      "item": "history includes current bar",
+      "level": "inferred_from_example_not_contract_proof",
+      "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "locator": "Donchian example uses highs[:-1] and calls it current-bar exclusion",
+      "supported": "example author intends last element to be the current bar",
+      "unsupported": "not established by a retrieved BarContext implementation or explicit history membership rule; ctx.history itself not documented in inspected literals"
+    },
+    {
+      "item": "current position",
+      "level": "documented",
+      "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "locator": "StarterGuide position comments",
+      "supported": "has_position, position_direction, position dictionary with direction/entry_price",
+      "unsupported": "quantity/notional identity, multiple positions, netting, residuals and cash/balance reconciliation"
+    },
+    {
+      "item": "signal/action meaning",
+      "level": "partially_documented",
+      "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "locator": "StarterGuide signal comments and signal examples",
+      "supported": "long/short directions; confidence used by router sizing; None means no action this bar",
+      "unsupported": "no explicit target portfolio weight, flat/exit command, same-direction dedup, pending-order overlap or position reversal execution contract"
+    },
+    {
+      "item": "stop/target/horizon",
+      "level": "partially_documented",
+      "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "locator": "signal overrides and METADATA",
+      "supported": "stop_loss_bps, take_profit_bps, horizon_seconds optional overrides; metadata includes declared_sl_bps, declared_tp_bps and declared_hold_seconds",
+      "unsupported": "stop/target reference price, same-bar dual-hit ordering, gap fills, intrabar versus close-only triggers and guaranteed execution"
+    },
+    {
+      "item": "signal versus fill clock",
+      "level": "unresolved",
+      "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+      "supported": "closed-bar signal callback is described",
+      "unsupported": "same close, next open or next quote fill; latency; fill_price schema; executable venue adapter and order lifecycle"
+    }
+  ],
+  "validation_findings": {
+    "level": "partial_public_UI_contract_not_complete_schema",
+    "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+    "named_checks": [
+      "safety",
+      "in_sample",
+      "out_of_sample",
+      "walk_forward",
+      "randomized_start",
+      "stress",
+      "blind_holdout"
+    ],
+    "observed_stage_ids": [
+      "walk_forward",
+      "randomized_start",
+      "perturbation",
+      "holdout"
+    ],
+    "observed_fields": [
+      "report.funnel",
+      "funnel.stage",
+      "funnel.status",
+      "funnel.metrics",
+      "oos_metrics",
+      "oos_trades",
+      "validation_context",
+      "validation_dataset",
+      "holdout",
+      "validation_score",
+      "stages_passed"
+    ],
+    "observed_trade_fields": [
+      "return_bps",
+      "realized_bps",
+      "timestamp"
+    ],
+    "window_metric_fields": [
+      "window_returns",
+      "window_alphas"
+    ],
+    "ui_behavior": "UI separately labels OOS testing and full Deploy; display stagesTotal defaults to7; public labels are not full acceptance rules.",
+    "pnl_display_measurement": "The inspected frontend adapter sums trade return_bps or realized_bps into a cumulative-bps graph. This does not establish compounded account NAV, capital denominator, open-position valuation or full cost settlement.",
+    "two_stage_card_alternative": "早期试测卡与完整部署卡可能口径不同；界面存在这种流程区分，但本次没有把固定仓十张卡逐一绑定到该流程/版本，不据此消解原矛盾。",
+    "complete_schema_located": false,
+    "all_seven_complete_logs_located": false,
+    "standalone_validator_implementation_located": false,
+    "remaining": [
+      "stage thresholds and fail/skip semantics",
+      "dataset/time-window manifest and hash",
+      "model cost configuration and exact logs",
+      "full per-event positions/cash/cost ledger",
+      "version binding of cards to deployment versus trial and all seven stages"
+    ]
+  },
+  "fee_findings": {
+    "source": "https://www.dmoera.xyz/assets/index-cFdq5MmR.js",
+    "level": "UI_inputs_and_educational_hints_only",
+    "documented_UI_hints": {
+      "maker_bps": 2,
+      "taker_bps": 5,
+      "slippage_input": "per side"
+    },
+    "applicable_validator_fee_proven": false,
+    "unsupported": [
+      "applicable venue/product/account tier",
+      "quote/base/BNB fee currency",
+      "charged notional and maker/taker classification",
+      "per-side versus round-trip in validation cards",
+      "funding/borrow/spread/slippage event settlement",
+      "fee rebates, partial fills and fee ledger identity"
+    ],
+    "interpretation": "不能把UI计算器提示或README单侧费率直接当固定验证卡实际费用；不同页面提示亦不构成完整成本模型。"
+  },
+  "MCP_source_findings": {
+    "url": "https://raw.githubusercontent.com/CacheCarti/dmoera-mcp/main/mcp_creator_server.py",
+    "source_sha256": "348d06277c898c5123177c6ecb528a166ff882beca033bb483c9796054794295",
+    "read_locations": {
+      "creator_api_docs": "lines856–864",
+      "get_strategy_report": "lines414–431",
+      "strategy_template": "from line866"
+    },
+    "resource_behavior": "creator-api://docs reads local CREATOR_API.md adjacent to the source and returns a missing-file message otherwise. The public top-level file listing did not show that file; it was not separately requested.",
+    "report_behavior": "get_strategy_report delegates to validation.upload_service.CreatorService.get_report_card; an advertised integrity block does not provide its backend schema or verifier.",
+    "template_behavior": "strategy_template references v2 contract and domains.strategy_contract; public wrapper/template is not an independent implementation of Strategy/BarContext/Signal.",
+    "version_caution": "Parsed README describes a thin HTTP client while the inspected current raw source imports internal engine/validation modules. Deployment version and documentation/source alignment have not been independently established.",
+    "backend_or_MCP_executed": false
+  },
+  "measurement_controls": {
+    "html_parser_known_answer_passed": true,
+    "known_answer": "one synthetic script src detected without executing it",
+    "public_studio_http200_corrects_web_parser_access_failure": true,
+    "bundle_hash_equal_across_three_reads": true,
+    "repeat_reads_are_not_independent_validation": true,
+    "status_unknown_for_web_parser_not_filled_as_http200": true,
+    "decision_check": {
+      "P1": "Known parser control and a second raw read distinguish extraction failure from product availability. Static UI schema/example fields do not verify backend execution or complete logs.",
+      "P2": "Specific remaining mechanism is missing backend contract/version binding, not a trading loss or unavailable platform.",
+      "P3": "Public documentation found reduces ambiguity, but neither marketing seven-stage claims nor example fee inputs establish acceptance or profit."
+    }
+  },
+  "next_offline_use": "可按公开说明建立显式假设的本地契约替身和时钟/费用控制；在未取得后台契约及卡片完整日志前，仅作近似仿写实验，不冒称平台结果逐字复现。",
+  "unresolved_scope_language": "本次8次首方公开读取范围未定位完整可执行契约、完整七阶段日志/schema和成交成本账本；不声明全球不存在、不判平台失败、不推荐入金或实盘。",
+  "privacy": {
+    "personal_account_data": false,
+    "credentials": false,
+    "user_identity_or_financial_constraints": false,
+    "private_paths": false,
+    "raw_market_history": false,
+    "outbound_published": false
+  }
+}
