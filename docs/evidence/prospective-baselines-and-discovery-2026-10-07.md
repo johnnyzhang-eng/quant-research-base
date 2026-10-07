@@ -1,0 +1,9 @@
+# Forward baselines and public-source discovery
+
+Three independent offline baseline wallets now implement initial equal buy-and-hold, monthly equal rebalancing and quote cash. The implementation passed 38 producer controls and 33 independent controls, including a 28-day artificial Fraction accounting audit. This is test data, not 28 observed market days.
+
+The actual baseline journal was initialized before the first complete evaluation day, 2026-10-08 UTC. Independent direct SQLite readback confirmed one initialization record, three cash-only hypothetical wallets, and zero decisions, fills, marks or fees. The frozen original two-wallet journal and daily entry were preserved. The next local synchronization found no admitted parent day and made no state change or network request. These comparison wallets do not multiply user capital.
+
+A finite two-hop following-network search identified eight fixed-version README references spanning crypto momentum/events, ETF allocation, executable two-venue spreads, and stock/option research. Public author relationships and repository source permalinks are recorded in [the accompanying JSON](prospective-baselines-and-discovery-2026-10-07.json). Forks, duplicate paths and same-author projects are not independent profit evidence. Repository update timestamps are not strategy publication dates. No external project code or live trading entry was run.
+
+The earlier daily-entry checkpoint remains an accurate record of its time, when these baselines were still being implemented. This append-only checkpoint adds the subsequent implementation and actual initialization. There are still zero future return observations; no profitable advantage or execution qualification is claimed. Original data, settlement, account and currency/risk requirements remain open.
