@@ -1,0 +1,71 @@
+{
+  "schema": "us4-provider-contract-public/1",
+  "review_date": "2026-10-07",
+  "original_symbols": [
+    "SPY",
+    "EFA",
+    "IEF",
+    "GLD"
+  ],
+  "required_start": "2005-01-01",
+  "source_review_sha256": "145d32137e59de498dec5f69efb7a03b7d170dd704cb630d4cfa03c39d5ecdb5",
+  "decision": "TWO_CONDITIONAL_CANDIDATES_NO_SOURCE_ADMISSION_OR_PAYMENT_RECOMMENDATION",
+  "providers": [
+    {
+      "name": "EODHD",
+      "plan": "Historian / EOD Historical All-World",
+      "advertised_monthly_base_price": {
+        "amount": "19.99",
+        "currency": "USD",
+        "offer_region": "North America",
+        "other_EUR_and_GBP_offers_observed": true,
+        "actual_region_price_confirmed": false,
+        "final_invoice_confirmed": false
+      },
+      "active_personal_storage_analysis_supported_by_terms": true,
+      "supported_only_for": "Qualifying Non-Professional personal non-commercial own-investment use, not acting for another person or organization",
+      "actual_user_eligibility_confirmed": false,
+      "post_cancellation_retention_explicitly_confirmed": false,
+      "post_termination_retention_explicitly_confirmed": false,
+      "all_four_symbol_histories_since_2005_actually_downloaded": false,
+      "complete_historical_dividend_payment_dates_confirmed": false,
+      "volume_definition": "split-adjusted per EOD documentation; strict unadjusted-volume mapping unresolved",
+      "own_account_automated_model_use_explicitly_confirmed": false,
+      "sources": [
+        "https://eodhd.com/pricing",
+        "https://eodhd.com/financial-apis/terms-conditions",
+        "https://eodhd.com/financial-apis/api-for-historical-data-and-volumes",
+        "https://eodhd.com/financial-apis/api-splits-dividends"
+      ]
+    },
+    {
+      "name": "Alpha Vantage",
+      "lowest_advertised_monthly_form": "$49.99; currency code and final invoice not independently established",
+      "use_classification_conditions": "Personal/commercial and financial-professional or association conditions in controlling terms must be checked against true use",
+      "actual_user_eligibility_confirmed": false,
+      "full_daily_history_requires_premium": true,
+      "all_four_symbol_histories_since_2005_actually_downloaded": false,
+      "complete_historical_dividend_payment_dates_confirmed": false,
+      "raw_derived_or_post_cancellation_retention_explicitly_confirmed": false,
+      "own_account_automated_model_use_explicitly_confirmed": false,
+      "sources": [
+        "https://www.alphavantage.co/premium/",
+        "https://www.alphavantage.co/documentation/",
+        "https://www.alphavantage.co/terms_of_service/"
+      ]
+    }
+  ],
+  "request_design_only": "12 requests per provider: daily/dividends/splits for each of the four symbols, contingent on rights, quote and schema closure; zero executed",
+  "supplier_inquiry": {
+    "draft_prepared": true,
+    "sent": false,
+    "reply_received": false
+  },
+  "new_market_API_requests": 0,
+  "subscriptions_or_purchases": 0,
+  "credentials_created_or_saved": 0,
+  "orders": 0,
+  "historical_source_admitted": false,
+  "original_protocol_changed": false,
+  "profit_edge_accepted": false
+}
