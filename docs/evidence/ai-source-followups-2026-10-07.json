@@ -1,0 +1,131 @@
+{
+  "WWCloud": {
+    "account_subscription_or_balance_details_excluded": true,
+    "applicable_model_or_tool_unit_prices_verified": null,
+    "exact_callable_models_verified": null,
+    "global_configuration_changes": 0,
+    "logged_in_subscription_UI_read_verified": true,
+    "model_inference_calls": 0,
+    "new_keys_or_saved_credentials": 0
+  },
+  "acceptance": {
+    "full_original_goal_complete": false,
+    "new_backtests": 0,
+    "new_economic_edges_accepted": 0,
+    "new_orders": 0,
+    "new_parameters_adopted": 0,
+    "no_new_latest_source_or_AI_vote_profit_probability": true,
+    "paid_API_calls": 0,
+    "real_forward_return_samples": 0,
+    "scope_preserved": [
+      "Original four-ETF historical coverage, data rights and cash/action timing.",
+      "BTC/ETH frozen prospective comparison with simple baselines.",
+      "Funding fee/settlement/margin and full-account reconciliation.",
+      "Actual execution eligibility and initial-capital stop/account mapping."
+    ]
+  },
+  "new_followup_batch": {
+    "complete_rendered_replies": 2,
+    "older_consultation_counts_preserved": true,
+    "partial_replies": 1,
+    "platforms": [
+      {
+        "platform": "Claude",
+        "public_source_read_once_scope": [
+          "WW-shan/Atlas20",
+          "WW-shan/LTT_Strategy"
+        ],
+        "role": "Fixed-source causal counterargument",
+        "source_access_and_experiment_output_not_independently_exported": true,
+        "state": "QUOTA_INTERRUPTED_PARTIAL_NOT_ACCEPTED"
+      },
+      {
+        "full_response_byte_completeness_verified": false,
+        "platform": "Gemini",
+        "residuals": [
+          "Thirteen control specifications are not thirteen executed tests.",
+          "Atlas20 crypto historical universe is not the original four-ETF universe.",
+          "A fee calculation requires fee asset, quantity and cash conventions."
+        ],
+        "role": "Statistics and self-financing cash/position contract",
+        "state": "RENDERED_REPLY_RECEIVED_REVIEWED"
+      },
+      {
+        "full_response_byte_completeness_verified": false,
+        "platform": "Grok",
+        "residuals": [
+          "Specific primary papers do not match every attributed market or mechanism.",
+          "Fee and funding interval assumptions require venue and instrument evidence.",
+          "The visible funding falsification paragraph has repeated words and unspecified rules; an AX capture is also length bounded. No platform-wide degradation is inferred."
+        ],
+        "role": "Recent cross-market primary-mechanism reconnaissance",
+        "state": "RENDERED_REPLY_RECEIVED_REVIEWED"
+      },
+      {
+        "platform": "Qwen",
+        "response_archive_available": false,
+        "role": "Alternative causal-source review after the Claude quota interruption",
+        "state": "VERIFIED_SUBMITTED_RESPONSE_NOT_YET_OBSERVED"
+      }
+    ],
+    "reply_not_yet_observed": 1,
+    "verified_question_submissions": 4
+  },
+  "primary_source_mapping": [
+    {
+      "mechanism": "Trend following on 84 traditional futures; not an ETF or BTC/ETH performance reproduction.",
+      "url": "https://arxiv.org/abs/2607.19497",
+      "v1_utc": "2026-07-21T18:16:01Z"
+    },
+    {
+      "mechanism": "Spot-perpetual hedge with dynamic collateral; read cost diagnostics omit gas/venue fees and author historical/live reports remain unreplicated.",
+      "url": "https://arxiv.org/abs/2605.05089",
+      "v1_utc": "2026-05-06T16:24:08Z"
+    },
+    {
+      "mechanism": "Funding-aware market making with fill-proxy simulation; not a reproduction of spot-perpetual carry profit.",
+      "url": "https://arxiv.org/abs/2605.06405",
+      "v1_utc": "2026-05-07T15:13:00Z"
+    },
+    {
+      "mechanism": "Descriptive compilation; differing event denominators/windows and no established T-7 net-trade or announcement-vintage reproduction.",
+      "url": "https://streamflow.finance/blog/token-unlock-report"
+    },
+    {
+      "read_scope": "Earlier cached abstract only; this round canonical page and same-paper PDF returned 403. Full-text methods not reviewed.",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6632838"
+    }
+  ],
+  "recorded_at_utc": "2026-10-07T09:58:52.361761+00:00",
+  "review_fingerprints": [
+    {
+      "artifact": "deepseek-corrective-answer-review-20261007.json",
+      "sha256": "d6e1abc5d28fe7c019e7586144bae993d03e1b0d4c358e52aa1bc93fb765b91a"
+    },
+    {
+      "artifact": "token-unlock-primary-evidence-review-20261007.json",
+      "sha256": "01ae8ec9f7c167d59f0730d440b3d6bb73501e4b95fe748e364dcb5aa9f5a986"
+    },
+    {
+      "artifact": "grok-current-primary-source-review-20261007.json",
+      "sha256": "7df801cd024c0f45c2e1fcd7d6aee80591fd57823b2e0ebbcedeb415baec3012"
+    },
+    {
+      "artifact": "wwcloud-post-unlock-model-review-20261007.json",
+      "sha256": "b89a015490d6ba17983e7361737287927d710cf43d2c3f0d0e9ba36aa4111fda"
+    },
+    {
+      "artifact": "free-ai-source-followup-review-20261007.json",
+      "sha256": "6fb4605a4e65390754ec1a0b59e048fd1f4f9a16dcca58a8ccf9b14fea23aa9c"
+    }
+  ],
+  "schema": "quant-ai-source-followup-checkpoint/1",
+  "scope": "Source discovery, UI consultation receipts and independent evidence review; no new strategy performance acceptance.",
+  "separate_deepseek_correction": {
+    "acceptance": "Partial correction only; old history is not fresh OOS, relative performance is not executable net profit, historical availability differs from local acquisition.",
+    "corrective_reply_observed": true,
+    "new_candidate_rule_adoptions": 0,
+    "prior_unknown_send_resolved_by_original_draft_inspection": true,
+    "verified_submissions": 1
+  }
+}
