@@ -1,0 +1,290 @@
+{
+  "actual_actions": {
+    "GitHub_writes": 0,
+    "actual_canonical_probe_journal_access": 0,
+    "network_calls": 0,
+    "new_forward_signals": 0,
+    "paid_calls": 0,
+    "real_credentials_read": 0,
+    "real_orders": 0
+  },
+  "actual_call_sites": {
+    "v2_request_entry": {
+      "line": 683,
+      "path": "tools/binance_signal_order_bridge_20261008_v2.py",
+      "source_sha256": "d6878ee61787c973edb851f2a061b0ddbecea1c79cd023230e8ae2496133952a"
+    },
+    "v2_risk_check": {
+      "line": 578,
+      "path": "tools/binance_signal_order_bridge_20261008_v2.py",
+      "source_sha256": "d6878ee61787c973edb851f2a061b0ddbecea1c79cd023230e8ae2496133952a"
+    },
+    "v2_transport_fence": {
+      "line": 665,
+      "path": "tools/binance_signal_order_bridge_20261008_v2.py",
+      "source_sha256": "d6878ee61787c973edb851f2a061b0ddbecea1c79cd023230e8ae2496133952a"
+    },
+    "v4_request": {
+      "line": 322,
+      "path": "tools/binance_spot_testnet_adapter_20261008_v4.py",
+      "source_sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891"
+    },
+    "v4_runner": {
+      "line": 816,
+      "path": "tools/binance_spot_testnet_adapter_20261008_v4.py",
+      "source_sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891"
+    }
+  },
+  "all_three_execution_sources_unchanged": true,
+  "assertion_calls_executed": 588,
+  "ast_control_comparison": {
+    "all_ten_normalized_AST_equal": true,
+    "base_source_sha256": "da4c8d6b8f73fee6530136d8dfdc2e6ec0e972112caa33d1a0d41e7e81c6d12b",
+    "control_methods": 10,
+    "core_v2_v4_pin_values_unchanged": true,
+    "exact_AST_unchanged_methods": [
+      "initial_risk_mutations",
+      "current_and_projected_floor",
+      "observation_clocks",
+      "latest_quote_and_total_exposure",
+      "late_sign_guard_rechecks",
+      "wallet_evidence_refusals",
+      "initial_gap_recovery_and_expiry",
+      "legal_latest_changes_and_pipeline_trace"
+    ],
+    "new_main_only_same_directory_source_and_explicit_output": true,
+    "normalized_control_AST_sha256": {
+      "bound_scope_and_good_wallet": "497983ed554a816dcfdcfccea71c53b332d7cade83a035150d7efb1415fcc245",
+      "current_and_projected_floor": "9a2c1e3b91e863dce6c1ab7a06b5b417b0e15dcad15b38ecc7ed64e459bc5182",
+      "initial_gap_recovery_and_expiry": "b8e0cbbc30eb09d65a9ba38f4d812b095f4477e6f9ca02ea51063783ef5da3c3",
+      "initial_risk_mutations": "6c6a07f29b8b1698ad15a4661010e03ff812f7dc283a2f6048094e32e7742bec",
+      "late_sign_guard_rechecks": "44dfa16a9f3e3e0f82e6f58506b513a080186c35fa1c89d95af1ddb20b396ff1",
+      "latest_quote_and_total_exposure": "b464d034e792d76ac255c34b27c3816904c72aece06c7f2beb08c32be6911d3b",
+      "legal_latest_changes_and_pipeline_trace": "d21628e73031f81592ad80a7d1993099e02f9c3299d393bdb805415eceb5b342",
+      "observation_clocks": "acfda5b49e16341e38cbe13a8bd21df0887400b8feb2c999c90c6a52e994dffa",
+      "spent_restart_and_fresh_child": "2d6dce4cc57c0ffee30a94b6ef8d3faf2b329ff64ec14aab2dd057e4594e6473",
+      "wallet_evidence_refusals": "5dab61e87cf05e85997c86fbd8000269593e605deb4b188fa59f45bc78d5db20"
+    },
+    "source_import_child_plumbing_only_methods": [
+      "bound_scope_and_good_wallet",
+      "spent_restart_and_fresh_child"
+    ]
+  },
+  "attack_matrix": {
+    "boundary_proof": "Actual v4 class/function file and SHA, actual exact POST business parameters and hooks after sign/guard are observed.",
+    "count_scope": "Methods/control bundles and executed assertions; neither a market sample count nor independent strategy experiments.",
+    "eligibility": "Only fake BTC BUY, frozen plan and retained owned registry; no real CNY-to-USDT inference.",
+    "error_category": "Local latest-risk refusal inside v4 transport must raise GuardError, not an ambiguous APIError or fake completed reconciliation.",
+    "instrument": "Self-made Fraction/unit known answers plus a deliberately wrong-unit refusal; no producer helper as outcome oracle.",
+    "late_block": "After adapter reservation, fake POST count remains zero and retained budget remains one.",
+    "new_observation": [
+      "halt after compile",
+      "floor crossed after compile",
+      "risk state unknown",
+      "account identity changed",
+      "portfolio identity changed",
+      "pair changed",
+      "observation stale/future",
+      "cash below fee-inclusive debit",
+      "quantity/current holding changes",
+      "pending state unknown",
+      "quote changed/off-grid/nonfinite",
+      "quote/capital/risk currency or units mismatch",
+      "exposure cap exceeded"
+    ],
+    "recovery": "Real close/reopen and fresh Python child only query the same spent identity, even under latest STOP/unknown state; zero reissue.",
+    "remaining_limits": [
+      "Fixed synthetic observation source does not authenticate real account/risk evidence.",
+      "No real CNY FX conversion or original capital-loss STOP validation.",
+      "SELL, ETH, rotation, continuous strategy, broker eligibility and strategy/returns certification remain absent.",
+      "Local fake transport boundary is not exchange arrival or fill protection."
+    ],
+    "root_required_specific_edges": [
+      "equity at floor30 blocks; one finite decimal unit above allows if all other facts fit",
+      "projected_equity after frozen fee reserve and embedded limit slippage must strictly exceed30",
+      "strict known/halted booleans and missing/null/string/int third states reject",
+      "total BTC mark exposure rather than only new order notional",
+      "maker price must stay below latest ask; drift equality and exceeded boundary",
+      "positive nonBTC/unknown-asset state cannot be silently dropped",
+      "USDT fee denomination is an artificial model assumption, not broker commission proof"
+    ],
+    "schema": "binance-signal-dispatch-independent-attack-matrix/2",
+    "time_of_change": [
+      "before dispatch",
+      "during order-signing",
+      "after order guard",
+      "immediately before closed fake POST"
+    ]
+  },
+  "auditor_source_sha256": "cd612de592a4af3bc3154fa6a64e307e38f59b0b3b4ef8fb88165f1c0be77e09",
+  "controls": [
+    {
+      "assertions": 18,
+      "evidence": {
+        "all_three_actual_risk_call_sites_observed": true,
+        "fixed_source_not_a_broker_proof": true,
+        "independent_actual_POST_and_wallet_Fraction_oracle": true,
+        "known_wrong_unit_instrument_refused": true
+      },
+      "method": "independent_instruments_good_wallet_and_actual_boundary_origins",
+      "passed": true
+    },
+    {
+      "assertions": 182,
+      "evidence": {
+        "independent_initial_invalid_cases": 26,
+        "initial_refusal_spends_grant_without_order_file": true,
+        "local_GuardError_zero_POST": true,
+        "unknown_boolean_fee_unit_and_extra_asset_checked": true
+      },
+      "method": "strict_initial_latest_risk_and_identity_mutations",
+      "passed": true
+    },
+    {
+      "assertions": 21,
+      "evidence": {
+        "current_floor_equality_and_projected_cost_floor_equality_refused": true,
+        "latest_lower_fee_cannot_reduce_frozen_reserve": true,
+        "one_decimal_unit_above_projected_floor_allowed": true
+      },
+      "method": "current_and_projected_fee_inclusive_floor_Fraction_edges",
+      "passed": true
+    },
+    {
+      "assertions": 57,
+      "evidence": {
+        "inclusive_age5000_stale5001_future_and_bool_checked": true,
+        "three_clock_domains_cases": 12
+      },
+      "method": "risk_wallet_quote_clock_boundaries",
+      "passed": true
+    },
+    {
+      "assertions": 36,
+      "evidence": {
+        "latest_maker_drift_fee_unit_cases": 5,
+        "new_notional_under_cap_but_total_exposure_over_cap_cases": 2
+      },
+      "method": "latest_quote_maker_drift_and_total_position_exposure",
+      "passed": true
+    },
+    {
+      "assertions": 192,
+      "evidence": {
+        "adapter_budget_kept_one": true,
+        "independent_sign_or_guard_latest_changes": 24,
+        "late_local_GuardError_zero_POST": true,
+        "not_ambiguous_network_or_completed_reconciliation": true
+      },
+      "method": "late_sign_guard_risk_changes_local_GuardError",
+      "passed": true
+    },
+    {
+      "assertions": 36,
+      "evidence": {
+        "actual_GET_account_evidence_invalid_cases": 6,
+        "extra_assets_not_silently_dropped": true,
+        "latest_provider_declaration_cannot_replace_GET_wallet_evidence": true
+      },
+      "method": "actual_wallet_evidence_refusals",
+      "passed": true
+    },
+    {
+      "assertions": 14,
+      "evidence": {
+        "actual_fresh_Python_process": true,
+        "same_plan_identity_and_spent_budget": true,
+        "three_unknown_recoveries_zero_reissue": true,
+        "unknown_or_halted_new_source_not_required_for_GET_only_recovery": true
+      },
+      "method": "spent_state_restart_and_fresh_child_GET_only",
+      "passed": true
+    },
+    {
+      "assertions": 18,
+      "evidence": {
+        "expiry_equality_allowed_expiry_plus_one_refused": true,
+        "initial_stop_then_real_close_reopen_cannot_create_order_file": true
+      },
+      "method": "initial_stop_journal_gap_and_expiry_boundaries",
+      "passed": true
+    },
+    {
+      "assertions": 11,
+      "evidence": {
+        "actual_ordered_pipeline": [
+          "risk-entry",
+          "v4-request",
+          "v4-sign",
+          "v4-guard",
+          "risk-final",
+          "closed-fake-POST"
+        ],
+        "call_sites_real_v2_subclass_and_v4_code_bytes": true,
+        "frozen_quantity_price_ID_expiry_preserved": true,
+        "latest_fee_lower_but_frozen_upper_reserve_used": true,
+        "valid_changed_cash_quote_and_lower_fee_allowed": true
+      },
+      "method": "legal_latest_changes_actual_v4_sign_guard_risk_POST_pipeline",
+      "passed": true
+    }
+  ],
+  "core_source_bindings": {
+    "binance_signal_order_bridge_20261008_v2.py": "d6878ee61787c973edb851f2a061b0ddbecea1c79cd023230e8ae2496133952a",
+    "binance_spot_testnet_adapter_20261008_v4.py": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891"
+  },
+  "count_scope": "Actual require calls for ten independent control bundles plus three exact source checks. Looped faults are neither market samples nor independent strategy experiments. Five known-answer instrument checks are separate, not require-call counts.",
+  "decision_check": {
+    "P1": "Independent Fraction/grid/wallet known answers and a deliberately wrong USDT/CNY unit refusal validate the instrument.",
+    "P2": "Latest-risk refusal at the v4 final fake transport fence is distinct from expiry; local GuardError retains spent reservations without ambiguous network submission.",
+    "P3": "Valid latest cash/quote/lower fee updates execute, so blanket refusal cannot manufacture all-pass safety. Late sign/guard faults and fresh-child unknown recovery attack the favorable result."
+  },
+  "failed_methods": 0,
+  "limits": [
+    "Fixed synthetic observation source does not authenticate real account/risk evidence.",
+    "No real CNY FX conversion or original capital-loss STOP validation.",
+    "SELL, ETH, rotation, continuous strategy, broker eligibility and strategy/returns certification remain absent.",
+    "Local fake transport boundary is not exchange arrival or fill protection.",
+    "No portfolio-global sticky breach, continuous execution, new partial-fill model or cancel-flow admission.",
+    "Equities are conditional artificial reference calculations; future gaps, real broker fees and real NAV are unproven.",
+    "Registry/order-journal commits are separate; a spent grant without an order journal loses eligibility conservatively.",
+    "Same-UID concurrent mutation and copied/reset/fresh registries are outside this per-retained-file contract.",
+    "This executable does not repeat the earlier eight-file preservation or verify the full public parent tree."
+  ],
+  "method_count": 10,
+  "original_legacy_preservation_provenance": {
+    "legacy_eight_file_preservation_reaudited_in_this_portable_run": false,
+    "original_local_auditor_sha256": "da4c8d6b8f73fee6530136d8dfdc2e6ec0e972112caa33d1a0d41e7e81c6d12b",
+    "original_local_report_sha256": "893f17472f58a3a6ee4e43a86c12c5e86b232d49d5fc174d91904f9c3e8139ac",
+    "scope": "The earlier local report covers the original eight-file closure. This portable run needs only bridge v2, adapter v4 and this auditor; it neither reads old reports nor repeats legacy preservation. Original local closure auditor source is outside this portable bundle."
+  },
+  "output_policy": "No file output by default. An explicit --output exclusively creates a new report; choose an owned runs-local or new report path.",
+  "passed_methods": 10,
+  "portable_execution_context": {
+    "bytecode_output_disabled": true,
+    "exact_three_source_file_directory": true,
+    "python_isolated_mode": true,
+    "runtime_requirement": "Only three same-directory source files and Python standard library; no work aliases, legacy helper artifacts or producer tests.",
+    "same_directory_file_count": 3
+  },
+  "producer_risk_snapshot_helper_calls": 0,
+  "producer_tests_imported_or_run": 0,
+  "schema": "binance-signal-order-bridge-dispatch-portable-independent-audit/2",
+  "source_directory_only_dependencies": true,
+  "source_origin": {
+    "adapter": {
+      "line": 322,
+      "path": "tools/binance_spot_testnet_adapter_20261008_v4.py",
+      "source_sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891"
+    },
+    "auditor": "tools/binance_signal_bridge_dispatch_portable_audit_20261008_v2.py",
+    "bridge": {
+      "line": 425,
+      "path": "tools/binance_signal_order_bridge_20261008_v2.py",
+      "source_sha256": "d6878ee61787c973edb851f2a061b0ddbecea1c79cd023230e8ae2496133952a"
+    },
+    "fresh_child_import_search_path": "tools"
+  },
+  "status": "LIMITED_OFFLINE_PORTABLE_DISPATCH_RECHECK_ACCEPTANCE",
+  "version": "20261008-v2-portable"
+}

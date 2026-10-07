@@ -1,0 +1,185 @@
+{
+  "schema": "binance-native-bot-source-review/1",
+  "reviewed_at_utc": "2026-10-07T20:52:51.702596+00:00",
+  "status": "LIMITED_OFFICIAL_DOCUMENTATION_SUPPORT_ONLY",
+  "scope": {
+    "unique_official_FAQ_page_read_budget": 6,
+    "unique_official_FAQ_pages_opened": 6,
+    "official_domain_discovery_queries": 5,
+    "same_six_page_open_or_position_commands": 15,
+    "same_six_page_find_commands": 6,
+    "reader_transport": "anonymous web reader; physical HTTP count/status unavailable, no direct HTTP-count claim",
+    "additional_linked_PNL_analysis_page_opened": false,
+    "other_third_party_pages_opened": 0,
+    "private_coupon_amounts_settings_user_identity_or_plans_sent_to_sources": false,
+    "account_UI_credentials_order_journals_or_balances_read": false,
+    "coupon_activation_account_opening_terms_acceptance_orders_transfers_or_paid_calls": 0,
+    "GitHub_writes": 0,
+    "old_sources_status_or_published187_files_modified": false
+  },
+  "summary_english": "Official redemption guidance conditionally permits Spot Grid, Rebalancing Bot, and Spot DCA when voucher settings allow bots. This does not certify API-trade eligibility or account access. Grid total profit combines matched-grid profit and unrealized inventory PNL. Bots-wallet totals and transfer-adjusted daily PNL differ; displayed calculations have fee, valuation, delay and futures-unrealized exclusions. Ending Grid cancels orders; liquidation depends on sell-on-stop choice and liquidity. Rebalancing can liquidate or retain coins. DCA can liquidate, or retain base assets on manual cancellation; its profit definition excludes trading fees. These documents establish mechanisms, not profitable parameters, completed rebates or audited all-account returns.",
+  "summary_english_word_count": 98,
+  "source_time_timezone": "Source publication/update timestamps are recorded as displayed; their timezone was not stated, so no UTC conversion is asserted.",
+  "sources": [
+    {
+      "id": "voucher",
+      "url": "https://www.binance.com/en/support/faq/detail/850671e05bb74848bf8fc4466279dda8",
+      "title": "How to Redeem Trading Fee Rebate Voucher",
+      "published": "2020-09-01 10:46",
+      "updated": "2025-11-30 20:00",
+      "observed_sections": [
+        "activation and rebate timing",
+        "rebate calculation",
+        "usage and exceptions"
+      ],
+      "supported": "Eligibility depends on individual voucher settings. If bots are eligible, supported spot products are Grid, Rebalancing and DCA. Auto-Invest, Spot TWAP, Futures TWAP/VP, Futures Grid under a spot voucher and Alpha are excluded. Refunds follow eligible net fees after discounts/referral deductions and the trade-back fraction, with expiry and remaining-cap limits. Wallet transaction history Distribution shows rebates; rewards can be region-unavailable.",
+      "not_certified": "No blanket external-API eligibility or exclusion is established by this generic page; individual voucher conditions remain controlling."
+    },
+    {
+      "id": "grid_operation",
+      "url": "https://www.binance.com/en/support/faq/detail/d5f441e8ab544a5b98241e00efb3a4ab",
+      "title": "What Is Spot Grid Trading and How Does It Work?",
+      "published": "2022-01-06 07:57",
+      "updated": "2026-08-13 08:03",
+      "observed_sections": [
+        "sell base coins on stop",
+        "end",
+        "running-order PNL",
+        "fees and reserved fees"
+      ],
+      "supported": "Ending Grid cancels running orders. A stop setting chooses market sale versus retaining base coins; liquidity or substantial inventory may prevent selling even when enabled. Funds and unused reserved fees return to Spot. Running-order details have PNL, pending orders and history. Fees follow spot schedules; fee-reserve refills can themselves create buys.",
+      "not_certified": "A stop is not proof of zero residual holdings, guaranteed liquidation price, completed cancellation or full net account performance."
+    },
+    {
+      "id": "grid_metrics",
+      "url": "https://www.binance.com/en/support/faq/detail/688ff6ff08734848915de76a07b953dd",
+      "title": "Binance Spot Grid Trading Parameters",
+      "published": "2022-05-05 10:42",
+      "updated": "2026-01-07 09:29",
+      "observed_sections": [
+        "matched-order profit",
+        "total profit",
+        "valuation and reserved fees"
+      ],
+      "supported": "Matched Grid profit deducts trading fees. Total profit adds unrealized PNL, so positive matched profit need not mean positive total profit. Balances include reserved fees, and valuation uses current price while running or stop-time price after termination. BNB fees are converted to quote value.",
+      "not_certified": "This metric definition is not a verified cash-flow-adjusted all-Binance-account return or liquidation quote."
+    },
+    {
+      "id": "bots_wallet",
+      "url": "https://www.binance.com/en/support/faq/detail/b1ec3d41b9a54dc4816c7682d37082d9",
+      "title": "How to Check Your Trading Bots Wallet Balance: A Step-by-Step Guide",
+      "published": "2023-11-17 08:54",
+      "updated": "2026-01-04 05:00",
+      "observed_sections": [
+        "website and app navigation",
+        "wallet glossary",
+        "daily PNL"
+      ],
+      "supported": "Website wallet menu or Assets/Trading Bots leads to bot assets; Spot Bots shows active bots total assets/profit. App Wallet/All/Trading Bots or Trading Bot/Total Balance provides the bot wallet. Daily PNL adjusts current versus opening net assets for net transfers; the FAQ excludes futures unrealized PNL from that daily metric and warns about delays/inconsistency. Spot-wallet formula separately excludes a handling fee; total balance conversion can differ from detail valuation.",
+      "not_certified": "Active bot aggregate and daily bot-wallet PNL are not complete historical total profit for all Binance accounts. The related account-PNL-analysis page was linked but not opened within the six-page budget."
+    },
+    {
+      "id": "rebalancing",
+      "url": "https://www.binance.com/en/support/faq/detail/29bbbd2e7fc24085be7a8a7d02779457",
+      "title": "What Is Rebalancing Bot and Frequently Asked Questions",
+      "published": "2023-01-05 03:43",
+      "updated": "2026-09-28 04:59",
+      "observed_sections": [
+        "allocation triggers",
+        "end",
+        "fees",
+        "order types"
+      ],
+      "supported": "Rebalancing maintains selected asset ratios via time/threshold triggers. Its stop choice either sells at market or transfers retained coins to Spot. It uses spot fees with no extra bot fee; trades use current-price limit IOC, with market orders for closing. Minimum order size can prevent target-ratio execution. Displayed preset annualized results are daily-close hypothetical rebalances, not this account live performance.",
+      "not_certified": "Exact net PNL ledger, filled target ratios, rebate settlement and positive returns remain unverified."
+    },
+    {
+      "id": "spot_dca",
+      "url": "https://www.binance.com/en/support/faq/detail/27713d3ddb3c406da52f36b9aaaa1360",
+      "title": "What Is Spot DCA and How Does It Work?",
+      "published": "2023-05-24 11:08",
+      "updated": "2026-03-17 10:06",
+      "observed_sections": [
+        "fees",
+        "end",
+        "profit breakdown",
+        "partially filled residuals"
+      ],
+      "supported": "DCA uses spot fees with no extra bot fee. End generally market-sells base holdings and returns funds to Spot; manual cancellation can retain base assets. Its displayed closing profit calculation omits trading fees. Running/History details separate total, round and floating profit; dust and partially filled leftovers can affect these components. The FAQ specifies neither edit nor pause for an active DCA bot.",
+      "not_certified": "Gross/displayed profit is not fee-inclusive audited NAV, and termination is not evidence all dust or residuals have actually cleared."
+    }
+  ],
+  "voucher_support": [
+    {
+      "native_bot": "Spot Grid",
+      "official_support": "conditional on voucher bot-eligibility settings",
+      "source_id": "voucher"
+    },
+    {
+      "native_bot": "Rebalancing Bot",
+      "official_support": "conditional on voucher bot-eligibility settings",
+      "source_id": "voucher"
+    },
+    {
+      "native_bot": "Spot DCA",
+      "official_support": "conditional on voucher bot-eligibility settings",
+      "source_id": "voucher"
+    }
+  ],
+  "native_versus_external_API": {
+    "support_level": "DO_NOT_EQUATE",
+    "reason": "Named platform-native bot eligibility does not confer eligibility on independently submitted API trades. If an individual voucher excludes API trades, native bot support does not override that restriction.",
+    "individual_private_coupon_settings_independently_verified_by_this_review": false,
+    "generic_FAQ_blanket_API_exclusion_or_API_entitlement_found": false
+  },
+  "whole_account_PNL_boundary": {
+    "supported_view": "Trading Bots wallet plus individual bot PNL and transaction history, with current assets, inventories, pending orders and actual fee/rebate records reconciled separately.",
+    "not_established": "A six-page doc review does not establish a single all-Binance-account cumulative fee-inclusive and cash-flow-adjusted NAV/PnL screen, especially for closed bots or assets transferred back to Spot.",
+    "today_PNL_is_not_all_time_PNL": true,
+    "Grid_Profit_is_not_total_PNL": true,
+    "bot_wallet_is_not_all_Binance_accounts": true
+  },
+  "synthetic_Fraction_known_answer": {
+    "instrument": "independent Python Fraction exact arithmetic",
+    "sample": "self-constructed synthetic accounting example; no market history, actual trades, voucher rate or venue fee replication",
+    "quote_units": "arbitrary synthetic currency",
+    "initial_cash": "500",
+    "matched_buy_cost": "100",
+    "matched_sell_proceeds": "110",
+    "matched_buy_and_sell_fee_each": "1",
+    "remaining_inventory_units": "2",
+    "inventory_entry_price": "100",
+    "inventory_purchase_fee": "1",
+    "terminal_mark_price": "60",
+    "gross_matched_difference": "10",
+    "net_matched_profit": "8",
+    "remaining_inventory_unrealized_PNL": "-80",
+    "total_fees": "3",
+    "terminal_cash": "307",
+    "marked_inventory": "120",
+    "terminal_NAV": "427",
+    "total_net_PNL": "-73",
+    "identities_checked": [
+      "NAV = cash + marked remaining inventory",
+      "total net PNL = gross matched difference + inventory unrealized PNL - all fees",
+      "total net PNL = net matched profit + inventory unrealized PNL - unmatched inventory fee"
+    ],
+    "known_answer_passed": true,
+    "inference": "Positive completed-grid profit can coexist with negative fee-inclusive total account PNL. No probability or profitable parameter inference."
+  },
+  "decision_check": {
+    "P1": "Six selected first-party FAQ identities and observed dates/sections bound to the findings. Navigation/API footer text was not mistaken for API rebate policy. Exact Fraction ledger identity is calibrated with a known numeric answer.",
+    "P2": "Voucher eligibility, native automation, externally submitted API orders, per-bot matched profit and account-wide net equity are distinct mechanisms. Similar UI labels are not treated as interchangeable.",
+    "P3": "The strongest countercase to an attractive grid-profit display is marked residual inventory plus every fee. Official exclusions and incomplete account-wide PNL coverage are retained; documentation is not profitability or jurisdictional admission."
+  },
+  "unverified_actual_conditions": [
+    "Account jurisdiction/KYC and product eligibility",
+    "Actual voucher settings, expiry, activation and subsequent rebate credit",
+    "Available pairs, current filters, order minimums and fee tier",
+    "Selected live parameters, liquidity, spread/slippage and open-order/inventory states",
+    "Full historical bot/account cash flows and fee-inclusive NAV reconciliation",
+    "Profitability probability, backtest robustness and acceptable future risk"
+  ],
+  "publication_privacy_note": "No user coupon face values/percentage, residence, account identity, private planning, raw balances or API keys are included. General conditional voucher reasoning only.",
+  "immutable_report": "Exclusive-create once; no earlier result is overwritten."
+}

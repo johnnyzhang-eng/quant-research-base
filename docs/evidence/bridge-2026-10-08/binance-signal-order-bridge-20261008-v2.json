@@ -1,0 +1,184 @@
+{
+  "schema": "binance-signal-order-bridge-producer-controls/2",
+  "completed_at_utc": "2026-10-07T20:51:03.829640+00:00",
+  "mode": "FAKE_TRANSPORT_HISTORY_CONTROL",
+  "source": {
+    "path": "work/binance_signal_order_bridge_20261008_v2.py",
+    "sha256": "d6878ee61787c973edb851f2a061b0ddbecea1c79cd023230e8ae2496133952a",
+    "copied_parent_path": "work/binance_signal_order_bridge_20261008_v1.py",
+    "copied_parent_sha256": "07c7d706fd15ef937691e368e3074a953f6f890ee6f29ec8ee30c468a3ff2c20"
+  },
+  "tests": {
+    "path": "work/test_binance_signal_order_bridge_20261008_v2.py",
+    "sha256": "e4f5e3d2933c65f34a8ff45393741f3a56603f0017136eb9430027be2d2dfdbc",
+    "methods_run": 16,
+    "assertion_calls": 409,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "methods": [
+      "test_good_fraction_budget_and_three_latest_fences",
+      "test_compile_then_halt_unknown_and_strict_boolean_rejections",
+      "test_floor_and_equity_identity_are_not_declared_only",
+      "test_projected_floor_exact_boundary_and_one_unit_good_control",
+      "test_risk_wallet_quote_time_stale_future_and_boundaries",
+      "test_identity_pending_and_extra_assets_reject",
+      "test_reaudit_changed_cash_quote_and_fee_never_rewrites_manifest",
+      "test_latest_mark_exposure_not_old_price",
+      "test_sign_and_guard_late_halt_or_unknown_remain_local",
+      "test_sign_and_guard_late_cash_quote_floor_or_clock",
+      "test_late_wallet_evidence_mismatch_and_extra_api_asset",
+      "test_expiry_equality_and_sign_guard_crossing",
+      "test_hostile_decimal_context_does_not_round_projected_floor",
+      "test_fresh_process_once_dedup_and_durable_clock_recovery",
+      "test_quote_drift_equality_and_exact_fee_inclusive_available_cash",
+      "test_wallet_malformed_values_and_clock_row_integrity"
+    ],
+    "producer_v1_tests_rerun": 0,
+    "independent_audit": false
+  },
+  "adapter": {
+    "path": "work/binance_spot_testnet_adapter_20261008_v4.py",
+    "sha256": "64189cdeaaaccf52ac5e8446e2233c1c63a5d8a5d6da025577df923d3d734891",
+    "modified": false,
+    "same_endpoint_tls_journal_and_deadline_rules": true
+  },
+  "old_frozen_files_sha_verified": [
+    {
+      "path": "work/binance_signal_order_bridge_20261008_v1.py",
+      "sha256": "07c7d706fd15ef937691e368e3074a953f6f890ee6f29ec8ee30c468a3ff2c20"
+    },
+    {
+      "path": "work/test_binance_signal_order_bridge_20261008_v1.py",
+      "sha256": "c65b282644d0dd639572d5bd47370dead7c5593f7d30c091f59658954052cce4"
+    },
+    {
+      "path": "outputs/binance-signal-order-bridge-20261008-v1.json",
+      "sha256": "cd8e422a98cc394ace4a9909b839edfbd81c72b743e37fa12212618681243593"
+    }
+  ],
+  "closed_scope": {
+    "asset": "BTCUSDT",
+    "side": "BUY",
+    "order_type": "LIMIT_MAKER",
+    "credentials": "explicit public dummy literals only",
+    "risk_provider": "exact-type in-memory artificial FakeRiskProvider",
+    "transport": "exact-type FakeScenario through risk wrapper; no arbitrary caller transport",
+    "real_credentials_loaded": false,
+    "real_http_requests": 0,
+    "actual_probe_journal_used": false,
+    "new_forward_signal": false,
+    "production_orders_or_transfers": 0,
+    "paid_calls": 0,
+    "GitHub_writes": 0
+  },
+  "interface": {
+    "compile": "same compile_position_deltas signature; retained registry v2 schema/marker creates a frozen plan with risk_contract and parent SHA",
+    "provider": "FakeRiskProvider(plan,snapshot); publish(snapshot) copies latest synthetic observations; read() copies snapshot",
+    "execution": "execute_fake(plan,registry,scenario,*,risk_provider,recover=False)",
+    "recovery": "already consumed signal and adapter POST reservation required; GET-only, no risk read needed for new exposure permission"
+  },
+  "risk_contract": {
+    "initial_capital_USDT": "50",
+    "stop_floor_USDT": "30",
+    "stop_at_or_below_floor": true,
+    "capital_is_artificial": true,
+    "not_user_CNY_or_FX_stop_loss": true,
+    "max_observation_age_ms": 5000,
+    "observation_freshness": "age in [0,5000], nonfuture; risk/wallet/quote/read clocks never regress in retained SQLite",
+    "identity": [
+      "mode",
+      "portfolio_id",
+      "BTCUSDT",
+      "protocol_sha256",
+      "cutoff_ms",
+      "frozen plan hash"
+    ],
+    "known_and_halted": "account_state_known is exactly True; halted exactly False; 1/0/None not accepted",
+    "wallet": "BTC/USDT closed account only, nonnegative exact free+locked; positions snapshot exact BTC/ETH keys with ETH=0 and BTC matching frozen initial BTC; available cash<=total cash; latest snapshot must equal captured account wallet before POST",
+    "equity_definition": "total_cash + BTC_before * latest reference_price; declared equity must equal this Fraction identity",
+    "projected_equity_definition": "total_cash - fixed_limit*fixed_quantity - frozen_quote_fee_reserve + (BTC_before+fixed_quantity)*latest reference_price",
+    "projected_floor": "both current and projected equity strictly >30; projected equality blocked; mark is an artificial reference, not a proven broker settlement mark",
+    "fee_asset": "USDT only",
+    "fee_semantics": "proportion of execution quote notional; latest fee<=frozen fee bound; use frozen quote fee reserve for cash/projected-NAV review",
+    "slippage": "embedded once in frozen limit, not deducted again",
+    "gross_notional_cap_USDT": "25",
+    "total_BTC_exposure_cap_USDT": "25",
+    "exposure_definition": "(BTC_before+fixed_quantity)*max(latest reference_price,frozen limit_price)",
+    "max_reference_drift_rate": "0.01",
+    "reference_drift_equality_allowed": true,
+    "manifest_expiry_equality_allowed": true,
+    "quantity_price_client_id_and_expiry": "never altered by latest snapshot; no newly granted order permission"
+  },
+  "recheck_locations": [
+    "after durable fake signal grant consumption, before constructing fake order journal/client",
+    "closed client _request entrance before unchanged v4 signing, for POST",
+    "closed transport wrapper after unchanged v4 signing/origin/path guard/final deadline, immediately before FakeScenario.transport"
+  ],
+  "reservation_and_error_semantics": {
+    "initial_risk_refusal": "signal stamp remains spent; missing order journal cannot authorize creation on recovery",
+    "late_risk_refusal": "adapter post reservation remains spent; no fake POST; restart -2013 queries cannot authorize reissue",
+    "error_type": "RiskBlocked subclasses both BridgeError and adapter.GuardError; local refusal is not relabeled an ambiguous network submission",
+    "observations": "risk_clocks_json durable monotonic state, validated on registry reads; no registry v1 migration or reset",
+    "recovery_halted_or_unknown": "GET-only order/trades/account reconciliation can proceed with invalid latest risk snapshot; never POST/DELETE"
+  },
+  "known_answer": {
+    "fixed_limit": "100.47",
+    "quantity": "0.199",
+    "gross_USDT": "19.99353",
+    "fee_USDT": "0.07997412",
+    "maximum_cash_debit_USDT": "20.07350412",
+    "latest_reference": "100.17",
+    "current_equity_USDT": "50",
+    "projected_equity_USDT": "49.86032588",
+    "current_cash_at_projected_floor_boundary_USDT": "30.13967412",
+    "projected_boundary_plus": "0.000000000000000001",
+    "arithmetic": "independent Fraction answers in focused controls; not economic observations"
+  },
+  "covered_semantics": [
+    "compile then halt/unknown/strict booleans, identity change or pending order: no POST and grant spent",
+    "current floor/equity inconsistency and cost-induced projected floor breach/equality; epsilon above is allowed",
+    "each of risk/wallet/quote stale/future/boolean clock; age5000 equality allowed; retained observations regress rejected",
+    "changed valid cash/quote/lower fee accepted after cash, exposure and account identity review without plan mutation",
+    "cash below fee-inclusive debit, fee above reserve, wrong fee asset, crossing/crossed quote, >1% drift and latest-reference exposure excess rejected",
+    "sign and guard advance risk to halted/unknown/floor/low cash/invalid quote/stale or future: local zero POST, reservation retained and twice -2013 query-only recovery",
+    "sign/guard cross expiry blocked by frozen v4; exact expiry allowed",
+    "late wallet update inconsistent with already captured account rejected; extra/malformed wallet assets and values blocked",
+    "fresh Python process retains consumed stamp, no new grant, no POST, only GET recovery; same signal recompile returns identical REUSE_NO_NEW_ORDER",
+    "hostile Decimal precision2/ROUND_DOWN cannot round projected floor into approval; quote drift and available cash exact boundaries"
+  ],
+  "instrument_correction": {
+    "initial_unfrozen_run": {
+      "methods_run": 14,
+      "assertion_calls": 380,
+      "failures": 0,
+      "errors": 1
+    },
+    "mechanism": "fresh-process test mistakenly requested result.post_used; v4 summary exposes new_order_post_reservations. Test corrected to actual public field; no adapter change.",
+    "final_run": {
+      "methods_run": 16,
+      "assertion_calls": 409,
+      "failures": 0,
+      "errors": 0
+    },
+    "old_frozen_report_overwritten": false
+  },
+  "limits": [
+    "All risk and wallet/quote observations are explicit artificial fixtures. No real risk authority, broker wallet/quote feed, forward schedule or strategy profitability is validated.",
+    "Checks and subsequent fake transport are not atomic against arbitrary concurrent mutation. There is no guarantee against future price gaps, fee-rule changes or real broker fills.",
+    "Artificial USDT initial50/floor30 is not a user CNY/FX risk budget. Projected NAV is conditional on the fixed snapshot/reference and fee bound, not future account NAV.",
+    "Separate signal-registry/order-journal commits conservatively lose permission on crash; never automatically refund or regenerate it. Deletion/copy/new journals and arbitrary same-UID mutation are outside retained-file integrity.",
+    "Once-only state is per retained artificial registry/intent, not account-global. No portfolio-global sticky breach history or continuous live risk engine is implemented.",
+    "After a captured account, different latest wallet values require matching fresh evidence; this minimal runner blocks rather than refreshing or resizing the frozen order.",
+    "Only BTC BUY and quote-USDT fees; no SELL/ETH/rotation/base-fee/BNB-fee order execution, continuous scheduler, cancel flow or new partial-fill model.",
+    "This producer report is not independent acceptance; independent auditor will attack frozen source/test/report before any broader admission. Existing real probe budgets are not reused."
+  ],
+  "outbound_scan": {
+    "credential_material": false,
+    "env_file_content": false,
+    "user_identity_or_financial_constraints": false,
+    "private_input_paths": false,
+    "real_balances_addresses_transaction_ids": false,
+    "raw_market_data": false
+  }
+}
