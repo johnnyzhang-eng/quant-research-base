@@ -1,0 +1,30 @@
+{
+  "id": "ROUND2-METHOD-STUDY-20261015",
+  "status": "conditional_economic_comparison_completed_and_independently_recomputed",
+  "question": "Does a published fixed monthly trend rule improve drawdown and losing-month frequency beyond a calibration-only fixed equity allocation?",
+  "primary_study": "https://mebfaber.com/wp-content/uploads/2016/05/SSRN-id962461.pdf",
+  "data_route": "Reuse existing SPY adjusted-price snapshot; download public issuer BIL NAV and historical distributions once per file. Prior Yahoo429 and next-open experiment remain preserved as incomplete.",
+  "issuer_sources": [
+    "https://www.ssga.com/library-content/products/fund-data/etfs/us/navhist-us-en-bil.xlsx",
+    "https://www.ssga.com/library-content/products/fund-data/etfs/us/spdr-etf-historical-distributions.xlsx"
+  ],
+  "model": "Separately frozen same-close idealized mixed market-total-return/NAV exercise; fixed SMA10, calibration-only q, four fixed comparisons and unchanged163-month test. No parameter scan or new trading framework.",
+  "corporate_action": "Issuer-authored announcement and SEC record corroborate BIL2017-11-30 reverse split. Apply half as many shares once; do not mistake raw NAV doubling for profit.",
+  "conditional_input": "Historical distribution amounts interpreted as contemporaneous per-share amounts; no retrospective re-scaling. Full historical convention not certified; retained auxiliary source contradictions do not enter the selected return fields.",
+  "independent_acceptance": {
+    "status": "PASS_CONDITIONAL_MODEL_NUMERICS",
+    "formula_frozen_before_executor_read": true,
+    "daily_points_per_portfolio": 3418,
+    "months_per_portfolio": 163,
+    "all_four_paths_and_checked_metrics_match": true,
+    "blindness_limit": "Calibrationq was shared before executor run; full curves/metrics were not. Not a fully blind experiment."
+  },
+  "source_crosscheck": "Seven available issuer NAV period-return comparisons agree within the published rounding unit; narrow source consistency check, not all-data certification.",
+  "interpretation": "A mixed economic tradeoff was observed. This study does not establish an implementable timing edge or a funded strategy; retain result and proceed by evidence rather than tuning. Numeric strategy performance remains private.",
+  "model_collaboration": "Codex independent method critic, executor and numerical verifier completed scoped work. Current official DeepSeek request timed out without final; old WorkBuddy request remainedThinking. Neither missing final counts as a critique.",
+  "protocol_sha256": "20340d20202d2cae5c2c9a2491021ac112e26093290d15126b4cb7a7cb180825",
+  "data_convention_addendum_sha256": "e0559ad6c5150b7e30efe7504fcc65a8a549d99e05c6ea0681d0db91781045ba",
+  "private_result_sha256": "06a5570703099ec969abeaf7c3d7a43979c0a8f42a1a908c45dfa8151214ff52",
+  "independent_review_sha256": "2d8789e4275f850d7494eede0c5c648b58ab60762738c263907939ab9c42cccc",
+  "publication_scope": "Methods, public source links and evidence hashes/status only. No raw vendor series, numeric private strategy performance, credentials, account material, personal paths or conversations."
+}
