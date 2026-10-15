@@ -1,0 +1,44 @@
+{
+  "schema": "public-functional-site-probe/1",
+  "observed_utc": "2026-10-15T06:36:51.572350+00:00",
+  "request_count": 1,
+  "completed_in_UI": true,
+  "configuration": {
+    "universe_selection": "Current HS300 snapshot dated 2026-10-14; selected in UI, actual historical membership not certified",
+    "factor": "20-day volatility",
+    "start": "2026-04-01",
+    "end": "2026-09-30",
+    "groups": 10,
+    "weights": "equal",
+    "rebalance": "monthly",
+    "commission": 0,
+    "slippage": 0
+  },
+  "displayed_coverage": {
+    "symbols": 300,
+    "trading_dates": 125,
+    "elapsed_ms": 4043
+  },
+  "visible_ic_axis_dates": [
+    "2026-04-01",
+    "2026-05-06",
+    "2026-06-01",
+    "2026-07-01",
+    "2026-08-03"
+  ],
+  "evidence_boundary": [
+    "UI configuration and completion were observed through normal accessibility text and screenshot, not exact request/response bytes.",
+    "The loading label generically said full market despite the selected HS300 option. A count of 300 is not a member-identity or historical-universe proof.",
+    "No per-stock 20-return inputs, factor values, group membership, single-factor CSV or exact result replay were observed.",
+    "Plotted dates support output/date visibility only; fixed-source timing semantics do not certify the deployed commit."
+  ],
+  "qualification": "Function and displayed coverage observed; pointwise factor qualification, paper replication and economic interpretation remain unqualified.",
+  "local_receipt_sha256": "4dd880fdcb68f54d3f62fe2a3f1389ea142275e0f50d294d5ad067aecc90e60a",
+  "protocol_sha256": "7ff3d3392db6aae52241c5a9f4f6e0e6a17e274d656c59fb9b4bc20498211e0a",
+  "excluded": [
+    "Private run identifier",
+    "Authenticated account UI/screenshot/page contents",
+    "IC, group-return, NAV or profit values"
+  ],
+  "next_action": "Stop this single probe; qualify inputs, members, availability and result export before any factor or profit inference."
+}

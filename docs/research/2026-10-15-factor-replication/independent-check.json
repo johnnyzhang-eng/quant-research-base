@@ -1,0 +1,104 @@
+{
+  "schema": "french-mom-independent-check/1",
+  "experiment_id": "FRENCH-MOM-IDENTITY-01",
+  "started_at_utc": "2026-10-15T05:50:50.735783+00:00",
+  "finished_at_utc": "2026-10-15T05:50:50.758172+00:00",
+  "elapsed_seconds": 0.022272041998803616,
+  "reviewer_role": "Independent Codex subagent",
+  "method": "Fresh csv reader parser anchored to exact monthly value-weight table title; fresh Decimal formula; no root work script imports or reads.",
+  "blindness": "Non-blind to root summary numbers; all primary inputs independently parsed and all exported rows independently recomputed.",
+  "input_sha256": {
+    "6_Portfolios_ME_Prior_12_2.csv": "0a53513f2e1eb803607619fb1efefa64fe87897fe826d91917041b489f1da898",
+    "F-F_Momentum_Factor.csv": "613b628c5ffa8b957e03ad3a4ccd891d3aa6daafc1801dffb7db7376f2017bdc",
+    "french-mom-protocol.json": "b6818d3431e7e7d3cf54f5e0598109ea669e5932a42bdaa4383a072d630c98d4",
+    "monthly-reconstruction.csv": "f88421418ceecbcf6787ec52c9cb372cd20860f8c17608c16019948d5a7005b9",
+    "summary.json": "6f70a08ae656932dc39ac2468bc61fff155fc94b160f39135d248b7e232f47a3"
+  },
+  "script_sha256": "1034ed80c433187229f0c7d1fba541b3f72e1ff57d9b7ba68ade8ee213eed020",
+  "crsp_vintage": "202608",
+  "primary_columns": {
+    "small_high_pct": "SMALL HiPRIOR",
+    "big_high_pct": "BIG HiPRIOR",
+    "small_low_pct": "SMALL LoPRIOR",
+    "big_low_pct": "BIG LoPRIOR"
+  },
+  "unit": "percentage points; source numeric strings used directly, no divide-by100 or return aggregation",
+  "unit_evidence": "Frozen protocol declares units; this check verifies no change of numerical scale between source, formula and export. Two CSV preambles do not independently label percentage units.",
+  "period": [
+    "192701",
+    "202608"
+  ],
+  "common_months": 1196,
+  "eligible_months": 1196,
+  "portfolio_only_months": [],
+  "factor_only_months": [],
+  "missing_skipped": [],
+  "published_decimal_places_distribution": {
+    "2": 5980
+  },
+  "bound_values_percentage_points": [
+    "0.0150"
+  ],
+  "bound_derivation": "4 * abs(0.5) * 0.005 + 0.005 = 0.015 percentage points (inclusive)",
+  "max_abs_difference_percentage_points": "0.01",
+  "exact_published_decimal_matches": 562,
+  "abs_difference_histogram_percentage_points": {
+    "0": 562,
+    "0.005": 581,
+    "0.01": 53
+  },
+  "outside_rounding_bound_months": [],
+  "all_exported_fields_compared": 11960,
+  "exported_row_field_mismatches": [],
+  "summary_checks": {
+    "vintage": true,
+    "period": true,
+    "common_count": true,
+    "eligible_count": true,
+    "missing": true,
+    "portfolio_only": true,
+    "factor_only": true,
+    "maximum_abs_residual": true,
+    "bounds": true,
+    "outside": true,
+    "exact_count": true,
+    "status": true
+  },
+  "four_examples": [
+    {
+      "month": "192701",
+      "all_fields_match": true,
+      "mismatched_fields": []
+    },
+    {
+      "month": "192702",
+      "all_fields_match": true,
+      "mismatched_fields": []
+    },
+    {
+      "month": "197611",
+      "all_fields_match": true,
+      "mismatched_fields": []
+    },
+    {
+      "month": "202608",
+      "all_fields_match": true,
+      "mismatched_fields": []
+    }
+  ],
+  "known_answer_controls": {
+    "known_positive_negative_legs": true,
+    "zero_symmetric_legs": true,
+    "two_decimal_radius": true,
+    "sum_rounding_bound_four_half_coefficients_plus_factor": true,
+    "bound_inclusive": true,
+    "just_outside_bound_rejects": true
+  },
+  "status": "pass",
+  "limit": "Published aggregate identity only; no stock selection, costs, strategy, wealth, alpha, risk or income inference.",
+  "network_requests": 0,
+  "paid_calls": 0,
+  "performance_calculations": 0,
+  "strategy_runs": 0,
+  "public_export": "Only local absolute path keys replaced by basenames; no values, checks, timing or observed result changed."
+}

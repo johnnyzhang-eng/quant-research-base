@@ -1,0 +1,29 @@
+{
+  "experiment_id": "FRENCH-MOM-IDENTITY-01",
+  "frozen_utc": "2026-10-15T05:47:22.555986+00:00",
+  "stage": "teaching aggregate-construction replication, conditional on final objection resolution",
+  "question": "Can official published monthly valueweighted size-by-prior2-12 return portfolios reconstruct the official published monthly Mom series within publication rounding?",
+  "formula": "(SmallHigh+BigHigh-SmallLow-BigLow)/2",
+  "data": "Only official French sixportfolio and Mom monthly CSV; same documented CRSP vintage required, acquisition snapshots hashed. No stock panel.",
+  "unit": "monthly percentage points, not decimal NAV returns",
+  "scope": "all common complete monthly observations, preserve each dataset endpoint and report unmatched months; do not trim for agreement",
+  "precision_rule_frozen_before_differences": "Infer each series published decimal precision from lexical data. For each month tolerance = sum(abs(coefficient_i)*0.5*10^(-precision_i)) + 0.5*10^(-precision_Mom); Decimal arithmetic, bound inclusive. Four coefficients abs0.5. Preserve per-row tolerance.",
+  "missing": "Use source documented missing sentinels; report/exclude affected rows explicitly, no imputation",
+  "acceptance": "Verify schema/valueweighted table, provenance/vintage/month alignment; every eligible month absolute difference <=its rounding bound; independently recompute before accepting",
+  "stop": "If metadata cannot establish matching conventions, or any residual beyond derived bound, record failure/inconclusive; do not change formula, weights, dates, cost or tolerance to pass",
+  "outputs": [
+    "source manifest",
+    "per-month reconstruction CSV",
+    "summary including max residual and failures",
+    "four observed example rows with original inputs",
+    "independent recomputation receipt"
+  ],
+  "excluded": [
+    "withinportfolio stock weighting reconstruction",
+    "transaction cost/turnover estimates",
+    "tradable longshort or raw-stock replication",
+    "cross-market suitability from factor returns",
+    "alpha,profit,CAGR,DD30 or monthly-income claim",
+    "parameter search"
+  ]
+}

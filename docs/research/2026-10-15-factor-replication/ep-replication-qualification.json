@@ -1,0 +1,152 @@
+{
+  "schema": "ep-replication-qualification/1",
+  "updated_utc": "2026-10-15T06:22:50.964272+00:00",
+  "source_repository": "https://github.com/WW-shan/hs300",
+  "source_commit": "ec7ac49bf9f286c85f34fb14880c3f3da7260f5e",
+  "qualified_claim": "The inspected AkShare standardized fields and native factor DSL are not presently certified to express the exact manuscript EP; this is not a finding that every provider or deployment lacks the data.",
+  "facts_from_static_source_review": [
+    {
+      "stage": "AkShare mapping",
+      "finding": "Ordinary net_income mapped; primary adjusted-profit Wind item and precise fallback not confirmed in this mapping.",
+      "reference": "backend/app/plugins/akshare/provider.py lines37-100 and491-534"
+    },
+    {
+      "stage": "Provider boundary",
+      "finding": "Custom/TickFlow may preserve extra records/fields. Current deployed provider and returned columns remain unqueried here.",
+      "reference": "backend/app/services/financial_sync.py lines56-127"
+    },
+    {
+      "stage": "Report history",
+      "finding": "Merge groups by symbol+period_end and keeps latest non-null columns, producing one final row per period; report-period history is not a full disclosure-version archive.",
+      "reference": "backend/app/services/financial_sync.py lines158-189"
+    },
+    {
+      "stage": "As-of",
+      "finding": "Announcement plus one calendar day / strictly after announcement controls availability of records that remain in input. It cannot reconstruct upstream records already discarded.",
+      "reference": "backend/app/backtest/fundamentals.py lines109-136 and170-186"
+    },
+    {
+      "stage": "Shares and prices",
+      "finding": "Historical float-share asof differs from EP total shares including B/H and ME all-A shares. Adjusted historical prices and current metadata shares are not faithful substitutes. raw_close in syntax whitelist alone does not prove the factor panel loads it.",
+      "reference": "backend/app/share_capital.py lines27-103; backend/app/api/kline.py lines388-419; backend/app/factors/dsl.py lines30-33"
+    },
+    {
+      "stage": "Native and extension features",
+      "finding": "Seven native financial factors do not include exact EP. Existing dated numeric extension fields may later carry a qualified observation but do not themselves recover publication timing or versions.",
+      "reference": "backend/app/backtest/fundamentals.py lines31-74; backend/app/factors/ext_factors.py lines100-126 and268-311"
+    }
+  ],
+  "single_point_qualification": {
+    "status": "pending; no actual stock data qualification or EP calculation completed",
+    "proposed_scope": "One stock, one report period, one formation month-end; annual report can reduce but not erase the profit-period ambiguity",
+    "necessary_evidence": [
+      "Original company primary adjusted-profit item or justified fallback, exact report period and unit",
+      "First publication and correction chronology before formation, including available time",
+      "Formation raw price and effective, historically known shares with A/B/H scope",
+      "Manual same-unit numerator/(price*shares) only after input definitions qualify"
+    ],
+    "stop": "No qualification if fields, publication versions, shares or period interpretation cannot match. A single qualified observation would still not certify a cross-sectional factor or profitability."
+  },
+  "revision_counterexample": {
+    "id": "EP-PIT-REV-02",
+    "status": "executed_original_source_AST_fixture; 3 cases and25 checks passed; root bounded acceptance",
+    "protocol_sha256": "df5fb1e0a93b83d310af8309e0e640d890ff09333a9c28e6ca38186cdba1f507",
+    "question": "Can report-period collapse followed by strict announcement-asof recover a pre-revision first-known version?",
+    "no_claims": [
+      "No actual historical stock restatement, advance-use leak or deployed runtime incident established",
+      "No full disk loader or whole-application integration executed",
+      "No EP qualification, factor direction, returns, DD30 or income established"
+    ],
+    "root_result_not_yet_received": false,
+    "v1_protocol_sha256": "718f6e68f4834ebf5587c49d0dd8512ee60566abda5bd0d217be88365209ae41",
+    "result_file": "ep-synthetic-result.json",
+    "observed": "Preserved disclosure archive gives expected first-known values; collapse by report period loses that version before the correction becomes effective. Strict asof still blocks revised values before their effective date in these rows.",
+    "checks": 25
+  },
+  "source_files": [
+    {
+      "path": "backend/app/api/financials.py",
+      "sha256": "cf71ce66b396e4763c6d96372f41c75d5a840bddc05eceba7922743311a47252",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/api/financials.py"
+    },
+    {
+      "path": "backend/app/api/kline.py",
+      "sha256": "aece3e130607cd5c6a1d581a10c326499be606a62fea2592c414893c48f0f8ad",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/api/kline.py"
+    },
+    {
+      "path": "backend/app/backtest/factor.py",
+      "sha256": "bccc2f3ba335fb15ed4bc4edac195e0d5b2ec5c8ebde5127827c14c1246e0d65",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/backtest/factor.py"
+    },
+    {
+      "path": "backend/app/backtest/fundamentals.py",
+      "sha256": "9441677e88b15a95be084b2732fa62609a931db8e4d879026860666aa74fd421",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/backtest/fundamentals.py"
+    },
+    {
+      "path": "backend/app/data_providers/schemas.py",
+      "sha256": "d9817f7dd11ded809081bde3df56f1fe77b828d390f0bc851aeb863b389913c5",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/data_providers/schemas.py"
+    },
+    {
+      "path": "backend/app/factors/dsl.py",
+      "sha256": "1adb78439bd7148add696c269c079a0b301ff1e4fc7d9ad69ab9d23e1f3c1740",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/factors/dsl.py"
+    },
+    {
+      "path": "backend/app/factors/ext_factors.py",
+      "sha256": "d6ea71bd50d1b504442c813227c4ae3e9999143d858c96b1bea230160d2abb96",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/factors/ext_factors.py"
+    },
+    {
+      "path": "backend/app/factors/registry.py",
+      "sha256": "3fa299f4188f4560cb12c5c1272742d4ce665b4ea4cfc3db5d1f92b1e93411c7",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/factors/registry.py"
+    },
+    {
+      "path": "backend/app/plugins/akshare/provider.py",
+      "sha256": "34100fa6d911464ee954e9d412f9d4950af8ac9ae3a3aefa276f11851898682f",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/plugins/akshare/provider.py"
+    },
+    {
+      "path": "backend/app/services/api_gateway.py",
+      "sha256": "627f9b166c57efdf511a0f57d5449b5fb57f26436a1debe51c2b1f6eb5902573",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/services/api_gateway.py"
+    },
+    {
+      "path": "backend/app/services/financial_sync.py",
+      "sha256": "7e53ebe3e2ca421ee56fd0162fab90a2519b933b05830a88fa97a72a69a57c46",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/services/financial_sync.py"
+    },
+    {
+      "path": "backend/app/share_capital.py",
+      "sha256": "077703a163b61e95c6d18ff33de7a989248441b0fe78725d6046c72c2ab49787",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/share_capital.py"
+    },
+    {
+      "path": "backend/tests/test_akshare_provider.py",
+      "sha256": "be06df574a0ac88578dd979b9fe41585276c9f78727e625d2c7458a1972573cd",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/tests/test_akshare_provider.py"
+    },
+    {
+      "path": "backend/tests/test_financial_shares.py",
+      "sha256": "53ee3b49c6db5b99efd7ba924d90ea2ad96f71734228dee7bebf8cf39fe63ad9",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/tests/test_financial_shares.py"
+    },
+    {
+      "path": "backend/tests/test_fundamental_factors.py",
+      "sha256": "bfbc50576bdb2e3b9a8cfd6840c7de22e2dfa393905ba161abcbee9de83a00a5",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/tests/test_fundamental_factors.py"
+    },
+    {
+      "path": "backend/tests/test_fuyao_financial.py",
+      "sha256": "769a14f7af7093539817569997c7ad2ac26038c1fbacbc2e8ce15b50c2c23a44",
+      "url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/tests/test_fuyao_financial.py"
+    }
+  ],
+  "local_evidence_sha256": {
+    "static_qualification_note": "4f5a7741ba5e859ddb5e54aa56579826a70777c53edbde541fe5aacc437fb00c"
+  },
+  "excluded": "Authenticated account UI, actual financial response bodies, source code copies, credentials and private conversations are not published."
+}

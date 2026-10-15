@@ -1,0 +1,155 @@
+{
+  "schema": "mature-pit-route-summary/1",
+  "recorded_utc": "2026-10-15T06:23:32.026115+00:00",
+  "repository": "https://github.com/microsoft/qlib",
+  "fixed_commit": "54355232463878d2eebb91fe0ee5fa7fa1f5976c",
+  "official_docs": "https://qlib.readthedocs.io/en/stable/advanced/PIT.html",
+  "conclusion": "有既有PIT格式和查询/转换实现可借鉴复用；本次没有找到随官方仓库提供、可证明合法下载且满足论文扣非净利润/TOT_SHR/vintage要求的原始中国历史数据包。格式/引擎能力不能填补数据缺口。",
+  "representation": {
+    "source_confirmed": true,
+    "schema": "每symbol+field文件中的记录含date(披露日)、period(报告期)、value、_next(同报告期下一修订指针)，附.index定位首条记录。",
+    "preserves_revisions": "dump_pit.py沿同一期链找到末尾后追加新记录并链接旧记录，未用最新行覆盖整期；前提为输入本身包含首次披露及各修订版本。",
+    "asof": "LocalPITProvider取得cutoff前存在的报告期；read_period_data遍历同一期_next链，在date>cutoff时停止，返回cutoff当日或之前的最后值。",
+    "does_not_reconstruct": "若供应商只给最新值，Qlib不能复原缺失的首次原值、真正披露日期或修订历史。",
+    "not_identical_to_our_gate": "源码按date<=cutoff包含公告当日；我们现有fixture是严格公告后生效。日粒度不足以自动区分盘后披露，实际可用时点须独立建模，不能直接宣称lag契约相同。",
+    "limits": [
+      "官方文档定位季度/年度数据，TOT_SHR变更可能是事件频率，不能只改字段名即保证合适。",
+      "当前LocalPITProvider源码明确非线程安全；未运行不能证明性能/并发适配。",
+      "dump_pit增量默认只追加date>文件最后date，迟到的旧披露或同日多版本不能假定会自动补全。",
+      "collector.normalize对缺公告日用季度45/年度90自然日偏移填充；这是推定日期，不可作为本项目严格PIT证据。"
+    ]
+  },
+  "data_qualification": {
+    "official_pit_collector": "官方提供BaoStock采集脚本，而非本次已验收的市场数据包。当前脚本把业绩快报/利润表映射ROE，把预告/成长指标映射YOYNI。",
+    "deducted_net_profit": "未在已读官方PIT collector映射NET_PROFIT_AFTER_DED_NR_LP或经核实同义扣非利润字段。",
+    "tot_shr": "未在已读PIT collector映射TOT_SHR或含A/B/H范围得到认证的历史总股数。",
+    "vintage_quality": "采集脚本使用发布日字段但不能保证上游服务保留所有原值/修订；未查询供应商或下载任何财务记录。",
+    "general_official_dataset_status": "固定commit README称官方通用数据集暂时禁用，并给出社区数据源替代；这不代表所有collector代码被禁用，也不证明社区包具备EP原始字段/vintage。未访问或下载社区包。",
+    "license": "仓库MIT适用于软件/文档；已读材料没有为本研究所需扣非利润/TOT_SHR/vintage原始数据给出专门的数据使用/再分发授权证明。不能把MIT当作上游数据许可。",
+    "price": "未核实所需原始数据的报价或当前免费资格；没有购买/收费调用。不能把开源代码与数据免费可用等同。",
+    "availability_decision": "NOT_QUALIFIED_AS_EP_DATA_SOURCE; no statement that any use is unlawful, only missing positive field/coverage/license evidence."
+  },
+  "reuse_route": "Require vendor-supplied original values, report periods, first disclosures and corrections before trying existing Qlib PIT tooling. Do not reconstruct missing original values from a latest-only table or create another framework.",
+  "qualified_as_EP_source": false,
+  "software_and_data_license_are_separate": true,
+  "source_evidence": [
+    {
+      "path": "docs/advanced/PIT.rst",
+      "sha256": "719bd98b46d5cadabc91ec278af2594b594b399aa13c5e4853fba9e6e2d2754c",
+      "bytes": 7298,
+      "lines": [
+        [
+          29,
+          47
+        ],
+        [
+          132,
+          136
+        ]
+      ],
+      "url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/docs/advanced/PIT.rst"
+    },
+    {
+      "path": "qlib/data/data.py",
+      "sha256": "e8e15dafbf64adcbdd8bfa222475535d5069731c58bff9c10d9458ed67ba915f",
+      "bytes": 49619,
+      "lines": [
+        [
+          746,
+          822
+        ]
+      ],
+      "url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/qlib/data/data.py"
+    },
+    {
+      "path": "qlib/utils/__init__.py",
+      "sha256": "f423a1b86444f8455a348ddce69c142dcbfa3ba68131897539c031bcf595de70",
+      "bytes": 32782,
+      "lines": [
+        [
+          112,
+          176
+        ]
+      ],
+      "url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/qlib/utils/__init__.py"
+    },
+    {
+      "path": "scripts/dump_pit.py",
+      "sha256": "879d8c20c033367ba6b774f2d5a85e36c79b232a5d9b183134d81b5c1cc3dde3",
+      "bytes": 11326,
+      "lines": [
+        [
+          150,
+          169
+        ],
+        [
+          225,
+          264
+        ]
+      ],
+      "url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/scripts/dump_pit.py"
+    },
+    {
+      "path": "scripts/data_collector/pit/collector.py",
+      "sha256": "f97283f205d786dfba2e19e0376edd48472943ca3ccaf948436308d1c274660f",
+      "bytes": 10639,
+      "lines": [
+        [
+          96,
+          142
+        ],
+        [
+          168,
+          193
+        ],
+        [
+          222,
+          243
+        ]
+      ],
+      "url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/scripts/data_collector/pit/collector.py"
+    },
+    {
+      "path": "scripts/data_collector/pit/README.md",
+      "sha256": "84b339f6ef67f39536a86e0011e564d01238537b1d3c030608443b1c17618a23",
+      "bytes": 1644,
+      "lines": [
+        [
+          1,
+          45
+        ]
+      ],
+      "url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/scripts/data_collector/pit/README.md"
+    },
+    {
+      "path": "README.md",
+      "sha256": "e9f7cc8eeb60e3fe3784ec496e350ecb584157c3240cda0651c20acb26fd9037",
+      "bytes": 44277,
+      "lines": [
+        [
+          231,
+          244
+        ],
+        [
+          270,
+          282
+        ]
+      ],
+      "url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/README.md"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+      "bytes": 1141,
+      "lines": [
+        [
+          1,
+          21
+        ]
+      ],
+      "url": "https://github.com/microsoft/qlib/blob/54355232463878d2eebb91fe0ee5fa7fa1f5976c/LICENSE"
+    }
+  ],
+  "source_receipt_sha256": "56db7f7e5250bf6d8f9a9083e674fa54cf08ad3f2b2dc71a8380e037aef76728",
+  "execution": "Static official-doc and pinned-source review only; Qlib/collector not installed or run, no market records downloaded, no vendor quote or account qualification verified."
+}

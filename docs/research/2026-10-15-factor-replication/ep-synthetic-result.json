@@ -1,0 +1,514 @@
+{
+  "id": "EP-PIT-REV-02-RESULT",
+  "executed_at_utc": "2026-10-15T06:19:04.012161+00:00",
+  "elapsed_seconds": 0.04528995882719755,
+  "protocol_sha256": "df5fb1e0a93b83d310af8309e0e640d890ff09333a9c28e6ca38186cdba1f507",
+  "v1_unchanged_sha256": "718f6e68f4834ebf5587c49d0dd8512ee60566abda5bd0d217be88365209ae41",
+  "commit": "ec7ac49bf9f286c85f34fb14880c3f3da7260f5e",
+  "python_version": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "polars_version": "1.44.1",
+  "script_sha256": "c9fccfa35842c16c3671c18480f31c4766b1ecd14732b845ca0016c3adc88ceb",
+  "execution_mode": "Actual source AST nodes unchanged; namespace only Polars and original constant; no whole application import, services, markets, credentials, or network in fixture.",
+  "in_memory_snapshot_preparation": "Subset selecting symbol/roe and parsing announce_date into _announce, matching relevant source-loader operations; original disk loader and its seven-field completeness check not executed.",
+  "cutoff_calendar_note": "Synthetic calendar cutoffs include weekend dates 2024-06-15/16 to test strict date comparison; not claimed real stock trading dates.",
+  "already_seen_comparisons": "Executor has seen source predictions, DeepSeek critique, and all frozen oracle values; this is not a blind experiment.",
+  "source_nodes_executed": [
+    {
+      "path": "backend/app/services/financial_sync.py",
+      "name": "_merge_report_history",
+      "file_sha256": "7e53ebe3e2ca421ee56fd0162fab90a2519b933b05830a88fa97a72a69a57c46",
+      "node_source_sha256": "8ad1976deabc43008e0531d8268d52d27b9234863cd041f0596e267754089847",
+      "lines": [
+        158,
+        190
+      ],
+      "rewritten": false
+    },
+    {
+      "path": "backend/app/backtest/fundamentals.py",
+      "name": "FUNDAMENTAL_FACTORS",
+      "file_sha256": "9441677e88b15a95be084b2732fa62609a931db8e4d879026860666aa74fd421",
+      "node_source_sha256": "359c66cb29f088caea424a4c575c7627594975d305cde3b23777aa72c520519b",
+      "lines": [
+        31,
+        39
+      ],
+      "rewritten": false
+    },
+    {
+      "path": "backend/app/backtest/fundamentals.py",
+      "name": "FUNDAMENTAL_FACTOR_NAMES",
+      "file_sha256": "9441677e88b15a95be084b2732fa62609a931db8e4d879026860666aa74fd421",
+      "node_source_sha256": "97b7fcc772188548b7d99f9439d6d3f0804df55f9c800220508e4e68c063703b",
+      "lines": [
+        41,
+        41
+      ],
+      "rewritten": false
+    },
+    {
+      "path": "backend/app/backtest/fundamentals.py",
+      "name": "attach_fundamental_factors",
+      "file_sha256": "9441677e88b15a95be084b2732fa62609a931db8e4d879026860666aa74fd421",
+      "node_source_sha256": "caf92d018d470a510632070ab38aee55d26d29a902c0f8d1191e2b767192f52e",
+      "lines": [
+        81,
+        138
+      ],
+      "rewritten": false
+    }
+  ],
+  "cases": [
+    {
+      "name": "changed_value_revision",
+      "archive_rows": [
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2022-12-31",
+          "announce_date": "2023-03-15",
+          "roe": 10.0,
+          "net_income": 50.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-03-15",
+          "roe": 20.0,
+          "net_income": 100.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-06-15",
+          "roe": 33.0,
+          "net_income": 80.0
+        }
+      ],
+      "compressed_rows": [
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2022-12-31",
+          "announce_date": "2023-03-15",
+          "roe": 10.0,
+          "net_income": 50.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-06-15",
+          "roe": 33.0,
+          "net_income": 80.0
+        }
+      ],
+      "cutoff_dates": [
+        "2024-03-14",
+        "2024-03-15",
+        "2024-03-16",
+        "2024-03-31",
+        "2024-06-15",
+        "2024-06-16"
+      ],
+      "archive_actual_roe": [
+        10.0,
+        10.0,
+        20.0,
+        20.0,
+        20.0,
+        33.0
+      ],
+      "compressed_actual_roe": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        33.0
+      ],
+      "archive_expected_roe": [
+        10,
+        10,
+        20,
+        20,
+        20,
+        33
+      ],
+      "compressed_expected_roe": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        33
+      ],
+      "checks": {
+        "archive_matches_frozen_oracle": true,
+        "compressed_matches_frozen_prediction": true,
+        "compressed_two_report_periods": true,
+        "no_future_value_before_first_announcement": true,
+        "same_day_first_report_not_early": true,
+        "strict_revision_day_gate": true,
+        "both_accept_revision_day_plus_one": true,
+        "pre_revision_information_loss_observed": true
+      }
+    },
+    {
+      "name": "same_value_revision",
+      "archive_rows": [
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2022-12-31",
+          "announce_date": "2023-03-15",
+          "roe": 10.0,
+          "net_income": 50.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-03-15",
+          "roe": 20.0,
+          "net_income": 100.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-06-15",
+          "roe": 20.0,
+          "net_income": 100.0
+        }
+      ],
+      "compressed_rows": [
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2022-12-31",
+          "announce_date": "2023-03-15",
+          "roe": 10.0,
+          "net_income": 50.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-06-15",
+          "roe": 20.0,
+          "net_income": 100.0
+        }
+      ],
+      "cutoff_dates": [
+        "2024-03-14",
+        "2024-03-15",
+        "2024-03-16",
+        "2024-03-31",
+        "2024-06-15",
+        "2024-06-16"
+      ],
+      "archive_actual_roe": [
+        10.0,
+        10.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "compressed_actual_roe": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        20.0
+      ],
+      "archive_expected_roe": [
+        10,
+        10,
+        20,
+        20,
+        20,
+        20
+      ],
+      "compressed_expected_roe": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        20
+      ],
+      "checks": {
+        "archive_matches_frozen_oracle": true,
+        "compressed_matches_frozen_prediction": true,
+        "compressed_two_report_periods": true,
+        "no_future_value_before_first_announcement": true,
+        "same_day_first_report_not_early": true,
+        "strict_revision_day_gate": true,
+        "both_accept_revision_day_plus_one": true,
+        "pre_revision_information_loss_observed": true
+      }
+    },
+    {
+      "name": "unrelated_null_column",
+      "archive_rows": [
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2022-12-31",
+          "announce_date": "2023-03-15",
+          "roe": 10.0,
+          "net_income": 50.0,
+          "unrelated_metric": 2.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-03-15",
+          "roe": 20.0,
+          "net_income": 100.0,
+          "unrelated_metric": 7.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-06-15",
+          "roe": 33.0,
+          "net_income": 80.0,
+          "unrelated_metric": null
+        }
+      ],
+      "compressed_rows": [
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2022-12-31",
+          "announce_date": "2023-03-15",
+          "roe": 10.0,
+          "net_income": 50.0,
+          "unrelated_metric": 2.0
+        },
+        {
+          "symbol": "SYNTHETIC_A.SH",
+          "period_end": "2023-12-31",
+          "announce_date": "2024-06-15",
+          "roe": 33.0,
+          "net_income": 80.0,
+          "unrelated_metric": 7.0
+        }
+      ],
+      "cutoff_dates": [
+        "2024-03-14",
+        "2024-03-15",
+        "2024-03-16",
+        "2024-03-31",
+        "2024-06-15",
+        "2024-06-16"
+      ],
+      "archive_actual_roe": [
+        10.0,
+        10.0,
+        20.0,
+        20.0,
+        20.0,
+        33.0
+      ],
+      "compressed_actual_roe": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        33.0
+      ],
+      "archive_expected_roe": [
+        10,
+        10,
+        20,
+        20,
+        20,
+        33
+      ],
+      "compressed_expected_roe": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        33
+      ],
+      "checks": {
+        "archive_matches_frozen_oracle": true,
+        "compressed_matches_frozen_prediction": true,
+        "compressed_two_report_periods": true,
+        "no_future_value_before_first_announcement": true,
+        "same_day_first_report_not_early": true,
+        "strict_revision_day_gate": true,
+        "both_accept_revision_day_plus_one": true,
+        "pre_revision_information_loss_observed": true,
+        "unrelated_null_column_keeps_old_nonnull": true
+      }
+    }
+  ],
+  "checks": [
+    {
+      "case": "changed_value_revision",
+      "name": "archive_matches_frozen_oracle",
+      "passed": true
+    },
+    {
+      "case": "changed_value_revision",
+      "name": "compressed_matches_frozen_prediction",
+      "passed": true
+    },
+    {
+      "case": "changed_value_revision",
+      "name": "compressed_two_report_periods",
+      "passed": true
+    },
+    {
+      "case": "changed_value_revision",
+      "name": "no_future_value_before_first_announcement",
+      "passed": true
+    },
+    {
+      "case": "changed_value_revision",
+      "name": "same_day_first_report_not_early",
+      "passed": true
+    },
+    {
+      "case": "changed_value_revision",
+      "name": "strict_revision_day_gate",
+      "passed": true
+    },
+    {
+      "case": "changed_value_revision",
+      "name": "both_accept_revision_day_plus_one",
+      "passed": true
+    },
+    {
+      "case": "changed_value_revision",
+      "name": "pre_revision_information_loss_observed",
+      "passed": true
+    },
+    {
+      "case": "same_value_revision",
+      "name": "archive_matches_frozen_oracle",
+      "passed": true
+    },
+    {
+      "case": "same_value_revision",
+      "name": "compressed_matches_frozen_prediction",
+      "passed": true
+    },
+    {
+      "case": "same_value_revision",
+      "name": "compressed_two_report_periods",
+      "passed": true
+    },
+    {
+      "case": "same_value_revision",
+      "name": "no_future_value_before_first_announcement",
+      "passed": true
+    },
+    {
+      "case": "same_value_revision",
+      "name": "same_day_first_report_not_early",
+      "passed": true
+    },
+    {
+      "case": "same_value_revision",
+      "name": "strict_revision_day_gate",
+      "passed": true
+    },
+    {
+      "case": "same_value_revision",
+      "name": "both_accept_revision_day_plus_one",
+      "passed": true
+    },
+    {
+      "case": "same_value_revision",
+      "name": "pre_revision_information_loss_observed",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "archive_matches_frozen_oracle",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "compressed_matches_frozen_prediction",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "compressed_two_report_periods",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "no_future_value_before_first_announcement",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "same_day_first_report_not_early",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "strict_revision_day_gate",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "both_accept_revision_day_plus_one",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "pre_revision_information_loss_observed",
+      "passed": true
+    },
+    {
+      "case": "unrelated_null_column",
+      "name": "unrelated_null_column_keeps_old_nonnull",
+      "passed": true
+    }
+  ],
+  "all_checks_passed": true,
+  "qualification": "This demonstrates same-report-period compression changes historical availability for these synthetic rows. It does not prove actual deployed historical leakage, EP mapping, profitability, or full-application integration.",
+  "exceptions": [
+    {
+      "attempt": 1,
+      "error": "NameError FUNDAMENTAL_FACTOR_NAMES omitted by AST harness",
+      "receipt": "fixture-first-attempt-exception.json",
+      "resolution": "Added unchanged source derived-constant AST node; inputs and oracle unchanged"
+    }
+  ],
+  "network_requests_during_fixture": 0,
+  "backtests_run": 0,
+  "platform_changes": 0,
+  "protocol_source_artifact": "revision-counterexample-protocol-v2.json; fixed records and expectations are embedded in the public reproducer, with original protocol hash retained.",
+  "public_export": "Original result with only private interpreter/path references omitted; all case rows, expectations, source-node hashes, checks and exception boundary preserved.",
+  "root_acceptance": "Root reviewed original 25-check result and source hashes; accepted only synthetic historical information loss, with no observed advance-use of revised value and no full-application claim.",
+  "original_result_sha256": "a790bc95c85d85b0ba1743902c1344900c5388fe546273b76e4f71c1814738f1",
+  "public_reproducer": {
+    "file": "reproduce_ep_revision_fixture.py",
+    "sha256": "db5a0ba4c4e605d9f3aad02f4ad434e2360faf241922f6ca7b7ec471cb4fd33b",
+    "requires": "Existing Python with polars==1.44.1; no automatic download or install",
+    "source_commit": "ec7ac49bf9f286c85f34fb14880c3f3da7260f5e",
+    "source_files": "Two separately obtained upstream source files; exact whole-file and node hashes enforced before use",
+    "port_check_utc": "2026-10-15T06:21:55.062183+00:00",
+    "port_check_elapsed_seconds": 0.061265625059604645,
+    "comparison_checks": {
+      "source_nodes_identical": true,
+      "all_cases_fields_identical": true,
+      "all_25_checks_identical": true,
+      "both_passed": true,
+      "original_result_unchanged": true
+    },
+    "port_check_result_sha256": "4f48104daee1512e9d87283b6751b09b24efb3b74624cc4979e66a273db5cf1f",
+    "independence": "Reuses original fixture implementation and oracle. Portability verification only; not an independent scientific recomputation."
+  },
+  "dependency_history": {
+    "polars_version": "1.44.1",
+    "runtime_version": "polars-runtime-32==1.44.1",
+    "prepared_in_task_local_environment": true,
+    "not_bundled": true,
+    "fixture_network_data_requests": 0
+  }
+}

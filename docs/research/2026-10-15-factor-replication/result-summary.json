@@ -1,0 +1,28 @@
+{
+  "experiment_id": "FRENCH-MOM-IDENTITY-01",
+  "crsp_vintage": "202608",
+  "period": [
+    "192701",
+    "202608"
+  ],
+  "eligible_months": 1196,
+  "common_months": 1196,
+  "missing_skipped": [],
+  "portfolio_only_months": [],
+  "factor_only_months": [],
+  "max_abs_difference_percentage_points": "0.01",
+  "bound_values_percentage_points": [
+    "0.0150"
+  ],
+  "outside_rounding_bound_months": [],
+  "exact_published_decimal_matches": 562,
+  "arithmetic_status": "pass",
+  "independent_recomputation": "passed; independent-check.json; all1196months and11960export fields matched",
+  "input_sha256": {
+    "6_Portfolios_ME_Prior_12_2.csv": "0a53513f2e1eb803607619fb1efefa64fe87897fe826d91917041b489f1da898",
+    "F-F_Momentum_Factor.csv": "613b628c5ffa8b957e03ad3a4ccd891d3aa6daafc1801dffb7db7376f2017bdc",
+    "french-mom-protocol.json": "b6818d3431e7e7d3cf54f5e0598109ea669e5932a42bdaa4383a072d630c98d4"
+  },
+  "scope": "Published aggregate return identity only; no underlying stock reconstruction, turnover, cost, alpha, NAV, drawdown or income calculation.",
+  "public_export": "Original summary with input-return example rows omitted; original summary hash in export provenance. No author data is redistributed."
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "lsy-original-clarifications/1",
+  "updated_utc": "2026-10-15T06:15:57.472939+00:00",
+  "status": "original-method clarification only; no original-stock empirical replication",
+  "publication_version": {
+    "current_primary": "Author-hosted accepted/forthcoming manuscript with internal date 2018-12-11, 56 PDF pages",
+    "what_was_not_read_as_current": "The 2019 journal typeset edition is not certified as inspected. Earlier 2018-08-27 draft used in first comparison remains a different version. Filename/hosting year are not internal-version proof.",
+    "source": "https://rodneywhitecenter.wharton.upenn.edu/wp-content/uploads/2019/04/01-18-Stambaugh.Published.BlumePrize.pdf",
+    "sha256": "5ac4c324b2d7e2fcc737471f661ea2ee2fd392452b2167078ad9ebf3d7ccb9e4",
+    "online_appendix": {
+      "url": "https://faculty.wharton.upenn.edu/wp-content/uploads/2016/11/size_value_china_appendix_2_rev.pdf",
+      "sha256": "7e612f3688f809e411888a6550bfebf0383e416e19acaccd38f639cb51c78820",
+      "pdf_pages": 7
+    }
+  },
+  "EP": {
+    "numerator": "Most recently publicly reported net profit excluding non-recurring gains/losses; exact primary Wind item NET_PROFIT_AFTER_DED_NR_LP",
+    "denominator": "Prior month-end A-share raw closing price times TOT_SHR; paper footnote includes B/H shares in this valuation denominator",
+    "frequency_does_not_define_profit_period": "Quarterly reporting after 2002 does not establish a single-quarter numerator. TTM, YTD/cumulative, annual or single-quarter interpretation remains unqualified in the examined passages. Do not silently substitute inverse PE_TTM.",
+    "ownership_attribution_not_silently_added": "Primary item is not additionally asserted to be attributable-to-parent earnings merely from an abbreviated field name.",
+    "fallback": "Only if primary adjusted-profit item is absent: NET_PROFIT_EXCL_MIN_INT_INC, net profit excluding minority-interest income; this is a separate fallback, not zero fill.",
+    "statement_priority": "Online appendix lists STATEMENT_TYPE 408005000, then 408001000; this alone does not establish historical restatement availability.",
+    "locations": [
+      "Main PDF physical p27 / printed p26, Appendix A.2 and footnote 5",
+      "Online appendix physical p3 / printed p2, EP field mapping",
+      "Online appendix physical p7 / printed p6, footnote 3 fallback",
+      "Online appendix physical p6 / printed p5, STATEMENT_TYPE"
+    ]
+  },
+  "information_time": {
+    "rule": "Select the most recently publicly released report whose release preceded the formation month-end; report period and publication time are separate.",
+    "not_yet_qualified": [
+      "Profit-period interpretation",
+      "Currency/unit scaling",
+      "Intraday timing of same-date disclosures",
+      "First announcement versus later corrections/restatements"
+    ],
+    "location": "Main PDF physical p26 / printed p25, A.1"
+  },
+  "ME_is_not_EP_denominator": {
+    "ME": "A-share price times all A shares, including non-tradable A shares",
+    "EP_valuation_denominator": "A-share price times total shares including B/H shares where applicable",
+    "prohibited_shortcuts": [
+      "Float shares as all A shares",
+      "Unqualified vendor total_mv as either denominator",
+      "Adjusted historical price times current shares"
+    ]
+  },
+  "sample_and_sorting": {
+    "original_sample": "2000-01 to 2016-12; Shanghai/Shenzhen main boards and GEM, prefixes 60/30/00, financial firms included",
+    "exclusions": "Less than six months listed; fewer than 120 trading observations in prior year or 15 in latest month; then smallest 30% by prior month-end ME. Do not replace with current survivors or current HS300.",
+    "sorts": "Remaining universe: ME median S/B, independent EP 30/70 thresholds, six value-weighted portfolios. VMG=(S/V+B/V-S/G-B/G)/2.",
+    "unresolved": "Section 5.1 does not explicitly impose positive EP; Section 6.1 anomaly tests explicitly use positive EP/CP. Do not transfer one test sample rule to the other.",
+    "locations": [
+      "Main PDF physical p26 / printed p25, A.1",
+      "Main PDF physical p13 / printed p12, Section 5.1",
+      "Main PDF physical p18 / printed p17, Section 6.1"
+    ]
+  },
+  "one_simple_fallback_question": {
+    "definition": "Same paper Table 2 column (2), PDF physical p37 / printed p36: intercept plus lagged log(ME) explaining monthly cross-sectional stock returns.",
+    "scope": "Still needs historical all-A-share market cap, historical universe and dividend-inclusive returns. It is not CH3 SMB, a small-cap trade strategy, or permission to backfill current shares.",
+    "status": "Method alternative only; no execution or new strategy selection"
+  },
+  "interpretation": "Earlier short phrases such as earnings/price, total shares or LSY2019 are pointers, not complete data definitions. These clarifications control subsequent original-replication qualification.",
+  "basis_artifact_sha256": {
+    "primary_rule_note": "deb3cede627f276edf42cb0ec579e818aefbf21f9a51d61f2b39001ba0113df7"
+  }
+}

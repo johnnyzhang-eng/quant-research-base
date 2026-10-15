@@ -1,0 +1,106 @@
+{
+  "schema": "synthetic-first-period-stat-caveat/1",
+  "id": "NAV-FIRST-PERIOD-01",
+  "source_commit": "ec7ac49bf9f286c85f34fb14880c3f3da7260f5e",
+  "source_url": "https://github.com/WW-shan/hs300/blob/ec7ac49bf9f286c85f34fb14880c3f3da7260f5e/backend/app/backtest/factor.py",
+  "source_sha256": "bccc2f3ba335fb15ed4bc4edac195e0d5b2ec5c8ebde5127827c14c1246e0d65",
+  "source_method_lines": {
+    "_calc_period_return": [
+      971,
+      1060
+    ],
+    "_group_sort_key": [
+      1101,
+      1107
+    ],
+    "_round_trip_cost": [
+      1122,
+      1130
+    ],
+    "_calc_group_nav": [
+      1133,
+      1184
+    ],
+    "_calc_group_stats": [
+      1234,
+      1288
+    ]
+  },
+  "source_node_sha256": {
+    "_calc_period_return": "ff1c6b9aa302d43baed07b98fd07bc8a71e0128b7fea068909d73da4847ca204",
+    "_group_sort_key": "1d4e4c3924777aa471b12a02b53137e7909e5af9450ae7fe7c6c7608d41e61c7",
+    "_round_trip_cost": "bb8246031d2d447b4ce4acd6baf22e9de08ddd52e4766a357a074c28d72f7fcc",
+    "_calc_group_nav": "a7f18928cfc3e0c8a9d99f2220d1fdb5a8bf9fac4932a5365dc03e9ef8e7cdfe",
+    "_calc_group_stats": "f3e35a84142ea53295e6a80b4de4bd801ceb245c6279b9ef88d5a73378a535fb"
+  },
+  "source_execution_mode": "Five unchanged static method AST nodes compiled into a minimal class; original functions with bundled numpy and existing isolated polars; no whole application.",
+  "synthetic_input_returns": [
+    "0.10",
+    "0.20",
+    "-0.10"
+  ],
+  "synthetic_NAV": [
+    "1.10",
+    "1.32",
+    "1.188"
+  ],
+  "synthetic_total_return": "0.188",
+  "confirmed_total_return_includes_first_period": true,
+  "source_group_stats_slice": {
+    "periods": 2,
+    "returns": [
+      "0.20",
+      "-0.10"
+    ],
+    "win_rate": "0.5",
+    "unrounded_sharpe": 1.1547005383792517,
+    "source_rounded_sharpe": "1.15"
+  },
+  "complete_sequence": {
+    "periods": 3,
+    "returns": [
+      "0.10",
+      "0.20",
+      "-0.10"
+    ],
+    "win_rate": "2/3",
+    "sharpe": 1.8516401995451028
+  },
+  "convention": "Population standard deviation (ddof=0), zero risk-free return, monthly annualization coefficient12. These short artificial sequences demonstrate formulas, not an investment estimate.",
+  "mechanism": {
+    "group_nav": "cum_prod(1+group_return) outputs first point after first period, no initial1 row",
+    "total_return": "lastNAV-1 includes first cumulative period",
+    "periods_for_win_sharpe": "arr[1:]/arr[:-1]-1 with positive previousNAV only; initialNAV-to-firstpoint return is absent",
+    "std": "np.std uses default population ddof0; monthly annualization coefficient12",
+    "full_sequence_recovery": "Prepend known initialNAV1 or use original group returns to retain the first period; this is explanatory, no source patch made"
+  },
+  "independent_check": {
+    "method": "Non-blind to worker result; independent exact Fraction formulas, no worker implementation read or rerun, no source methods invoked",
+    "standard_library_only": true,
+    "source_functions_executed": 0,
+    "checks": {
+      "nav_three_exact_rational": true,
+      "worker_nav_matches": true,
+      "worker_total_contains_first": true,
+      "full_period_count": true,
+      "source_period_count": true,
+      "full_win_rate": true,
+      "source_win_rate": true,
+      "full_sharpe": true,
+      "source_unrounded_sharpe": true,
+      "source_rounded_sharpe": true
+    },
+    "all_10_checks_passed": true,
+    "script_sha256": "ee7ecff9bc5d4a0e138c82c9104349c27bf0aaf6e1627e9081da6abcf3d034fa",
+    "receipt_sha256": "5c5e38af6ff8d53d8d13609c1c93712cd275896e1298631fc3df93d16b14e23f"
+  },
+  "worker_result_sha256": "ba1e8fb946da9d507f76be3437fafbc8b38908bf02cb26728f63ba1896f14c5c",
+  "limitations": [
+    "Only the pinned group_nav/group_stats source pair and synthetic positive-NAV example were checked.",
+    "Total return includes the first period; do not describe the entire first return as missing from NAV or profit.",
+    "Source long-short return reconstruction separately prepends1.0; this finding is not generalized to all long-short statistics.",
+    "No actual site deployment identity, private period returns, account performance or same runtime bug established.",
+    "Nominal first-of-month dates are synthetic calendar inputs, not certified exchange sessions."
+  ],
+  "scope": "Source-function demonstration with independent arithmetic check; not a deployed-site bug or profitable-strategy conclusion."
+}

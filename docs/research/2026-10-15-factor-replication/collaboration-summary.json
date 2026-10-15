@@ -1,0 +1,87 @@
+{
+  "scope": "Method selection and independent criticism; models did not independently browse sources. Model agreement was not used as acceptance.",
+  "participants": [
+    "Codex execution/evidence acceptance",
+    "Official DeepSeek actual final replies by named task below",
+    "WorkBuddy earlier-round finals retained; current VOL20 request has no final reply"
+  ],
+  "blindness": "Step had prior methodology discussion; this was not a fully blinded comparison.",
+  "accepted_changes": [
+    "Limit the executed task to the official published-aggregate Mom identity.",
+    "Do not infer ETF portfolio rebalancing functionality from a stock/factor tool.",
+    "Do not infer an investable strategy from aggregate return arithmetic."
+  ],
+  "rejected_additions": [
+    "Do not add arbitrary transaction-cost bps to monthly aggregates without turnover/fill/financing data.",
+    "Do not add an equal-weight experiment to the fixed value-weighted identity question.",
+    "Do not substitute an accounting test for the requested original-research learning stage."
+  ],
+  "acceptance_basis": "Official construction formula, source-vintage/schema qualification, frozen rounding bound, and independent recomputation of all eligible months.",
+  "raw_conversations_and_reasoning": "Excluded; only editorial dispositions and hashes are included.",
+  "earlier_round_participation": {
+    "scope": "Earlier French aggregate-identity method selection, separate from this later LSY/EP/VMG sprint",
+    "actual_finals": [
+      "Official DeepSeek entry:1 final",
+      "WorkBuddy Step-5-Preview: initial and revised final replies"
+    ],
+    "blindness": "Step saw earlier methodology conversation; not a fully blinded comparison."
+  },
+  "current_sprint_actual_DeepSeek_finals": [
+    {
+      "task": "ep-vintage",
+      "model_requested": "deepseek-flash",
+      "model_returned": "deepseek-flash",
+      "final_received": true,
+      "http_status": 200,
+      "inference_requests_sent": 1,
+      "finished_utc": "2026-10-15T06:13:33.417528+00:00",
+      "local_receipt_sha256": "a61f1d03f246cc5e1baf03c5e6e39a69d5363be69e57230bfecaea74d651c322",
+      "final_content_sha256": "dbbbfc056cc9352266c28ec23cd2bf717fef58e3535d1d69d7a99d23cbc6aa89",
+      "reasoning_published": false
+    },
+    {
+      "task": "ep-vintage-result",
+      "model_requested": "deepseek-flash",
+      "model_returned": "deepseek-flash",
+      "final_received": true,
+      "http_status": 200,
+      "inference_requests_sent": 1,
+      "finished_utc": "2026-10-15T06:22:14.764974+00:00",
+      "local_receipt_sha256": "ea1dce6ebabf754f4323300e16fbe96ff04239d09876452576937d85dce5e0ae",
+      "final_content_sha256": "809f06b5d970d845139d2346b2f94ab6f43a514340996114a3e2e3c7da8bc806",
+      "reasoning_published": false
+    },
+    {
+      "task": "vmg-units",
+      "model_requested": "deepseek-flash",
+      "model_returned": "deepseek-flash",
+      "final_received": true,
+      "http_status": 200,
+      "inference_requests_sent": 1,
+      "finished_utc": "2026-10-15T06:31:26.692352+00:00",
+      "local_receipt_sha256": "8071f747ec894a4bd90ade18f1e2479ae914f2e9059925878d4f8fce996dec89",
+      "final_content_sha256": "32e4760bdff9c932e04045bbb98ac8938f342516ed8a5ddfd67a81ef276e3448",
+      "reasoning_published": false
+    }
+  ],
+  "current_sprint_dispositions": [
+    {
+      "issue": "ROE substitute and report-period compression",
+      "accepted": "Test historical-availability loss only; do not infer EP behavior, production deployment or advance-use leakage."
+    },
+    {
+      "issue": "Same-value correction might be harmless",
+      "corrected": "Rejected after actual same-value case: moving the disclosure date while collapsing versions can still erase the earlier known value even when the numeric correction is unchanged."
+    },
+    {
+      "issue": "VMG units and current file vintage unknown",
+      "accepted": "One fixed204-month conditional mean under both unselected units, no invented input-rounding tolerance, no original-publication validation claim."
+    }
+  ],
+  "current_WorkBuddy_VOL20": {
+    "request_sent": true,
+    "observed_state": "Processed19s / Thinking",
+    "final_received": false,
+    "acceptance": "No current VOL20 WorkBuddy final or accepted Step critique claimed. Earlier-round actual Step finals remain historical facts."
+  }
+}

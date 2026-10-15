@@ -1,0 +1,122 @@
+{
+  "created_at_utc": "2026-10-15T05:43:14.257719+00:00",
+  "task": "Hypothetical research capital 50k-300k CNY; DD target <=30% and preference for fewer negative months. This is not account data or performance validation.",
+  "evidence_boundary": "Public original-method comparison only. Initial ETF research preference was not selected for immediate platform execution after further capability review; see collaboration-summary.json. No private UI or account material included.",
+  "sources": [
+    {
+      "id": "A1",
+      "title": "Liu, Stambaugh, Yuan: Size and Value in China",
+      "version": "2018-08-27 Wharton working paper, 55 PDF pages",
+      "url": "https://rodneywhitecenter.wharton.upenn.edu/wp-content/uploads/2018/10/01-18.Stambaugh.pdf",
+      "positions": [
+        "Section 2, printed pp4-5: WIND inputs and sample filters",
+        "Appendix A.1, printed p37: financial release dates, CSMAR risk-free series"
+      ],
+      "read_scope": "Selected data/method sections and abstract; not a full independent replication"
+    },
+    {
+      "id": "A2",
+      "title": "Stambaugh author data page",
+      "url": "https://fnce.wharton.upenn.edu/profile/stambaug/",
+      "positions": [
+        "Data: Liu, Stambaugh and Yuan Size and Value in China; CH-3/CH-4 and Wind mapping links"
+      ],
+      "verified_data_file": "Author daily CH-3 CSV verified locally; original data not redistributed."
+    },
+    {
+      "id": "E1",
+      "title": "Meb Faber: A Quantitative Approach to Tactical Asset Allocation",
+      "version": "2013 update hosted by author; 70 PDF pages",
+      "url": "https://mebfaber.com/wp-content/uploads/2016/05/SSRN-id962461.pdf",
+      "positions": [
+        "Printed pp19-22: fixed monthly 10-month SMA; total-return data; costs excluded",
+        "Printed pp34-35: implementation costs",
+        "Printed pp57-59: proprietary GFD series; drawdown and whipsaw caveats"
+      ],
+      "read_scope": "Selected rules/data/cost/FAQ sections; no performance reproduction"
+    },
+    {
+      "id": "C1",
+      "title": "Liu, Tsyvinski, Wu: Common Risk Factors in Cryptocurrency",
+      "version": "2019-04-15 author university PDF, 47 pages",
+      "url": "https://economics.yale.edu/sites/default/files/2022-10/LiuTsyvinskiWu2019%20COMMON%20RISK%20FACTORS.pdf",
+      "positions": [
+        "Printed pp1-4: data, portfolio sorting and shorting limitation",
+        "Section 2, printed pp4-5: active and defunct coins, weekly returns",
+        "Section 3.2 pp10-11: weekly momentum"
+      ],
+      "read_scope": "Selected data/method sections and abstract; historical factor evidence is not a spot-only or executable net-return result"
+    },
+    {
+      "id": "R1",
+      "title": "SSE Trading Rules, 2026 revision",
+      "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/fund/trading/c/c_20260424_10817739.shtml",
+      "attachment_url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/fund/trading/c/10817739/files/7ffa42ba08bf4605a9e680bd38d452b4.docx",
+      "positions": [
+        "Release notice specifies 2026-07-06 effectiveness and exceptions",
+        "Original DOCX 3.1.4-3.1.5 settlement/intraday-turnaround categories; 3.3.8 100-share/unit auction buy quantity"
+      ],
+      "caveat": "General SSE rule; special boards and security-specific exceptions must be checked; notice page metadata still says not-yet-effective despite specified date. General execution classes only, not account fee/qualification certification"
+    },
+    {
+      "id": "R2",
+      "title": "SSE ETF FAQ",
+      "url": "https://www.sse.com.cn/assortment/fund/etf/question/",
+      "positions": [
+        "Q3: stock ETF T+1; eligible bond/gold/crossborder/currency ETF T+0",
+        "Q4: 100 units minimum and CNY0.001 price step"
+      ]
+    },
+    {
+      "id": "R3",
+      "title": "PBOC and seven other agencies, Yinfa 2026 No42",
+      "url": "https://www.pbc.gov.cn/tiaofasi/144941/3581332/2026020619591971323/index.html",
+      "date": "2026-02-06",
+      "positions": [
+        "I(1): domestic virtual currency related financial activities and illegal cross-border service restrictions",
+        "Final paragraph: immediate effectiveness; Yinfa 2021 No237 simultaneously repealed"
+      ],
+      "caveat": "Relevant if executing from/serving mainland China; research-price access does not establish lawful account eligibility"
+    }
+  ],
+  "comparison": [
+    {
+      "direction": "A股个股横截面单因子",
+      "original_method": "A1: earnings-price value factor with size/universe filters; author A2 provides factor series",
+      "explainability": "较高，财务收益率与价格的经济含义清楚；因子解释力不等于可实盘alpha",
+      "reproducibility": "方法和已发布因子收益可学；完整个股复刻依赖历史公告时间、退市/ST/停牌、当期股票池与原始财务/复权数据。原文Wind，不能宣称全部免费可得",
+      "capital_50k_300k_cny": "原则上适合证券账户研究；50k多股票组合更受100股整手/高股价/最低佣金影响；300k减少权重离散，但实际组合证券价格/费率尚未核实。学术多空收益不可直接等同个人只做多",
+      "main_constraint": "R1一般竞价100股份整手、交收前禁卖；A1 Appendix A.1要求月末之前实际发布的财报",
+      "research_difficulty": "三者中个股PIT与财务工程最重，简单因子不意味着简单数据",
+      "platform_fit": "与因子/分层/横截面回测定位最吻合；当前站点历史PIT数据与实际功能由主代理核对，此处不作代码推断"
+    },
+    {
+      "direction": "股票/债券/黄金ETF低频配置或动量",
+      "original_method": "E1提供跨资产低频趋势的固定规则范例；原文5类美国/全球资产，不是中国股债金三ETF",
+      "explainability": "较高，先学分散风险与低频规则；不能把多资产全部叫市场中性",
+      "reproducibility": "只需少数总回报价格序列，低频规则易复述；原文长历史GFD是专有数据，且排除税佣滑点。中国ETF复刻只能另立适配实验，不能复制论文收益",
+      "capital_50k_300k_cny": "少数ETF+100份整手相对易分散，通常比50只个股更适配50k；无杠杆本金适配是研究判断，不是实际报价。需逐只核对上市日、净值/价格、分红、跟踪误差与费用",
+      "main_constraint": "R2股票ETF T+1，合资格债券/黄金ETF可T+0；最低100份。没有必要因T+0而做高频",
+      "research_difficulty": "三者中最小起步路径通常最轻；但月频权益只能给出采样回撤下界，DD<=30需日频估值",
+      "platform_fit": "平台是否支持ETF数据及组合现金/再平衡尚待实际界面核实，不能只因有ETF单标的就认定支持多资产配置"
+    },
+    {
+      "direction": "加密spot/组合",
+      "original_method": "C1学术因子研究，含周频排序及多空组合；不是现货只做多月度收入证明",
+      "explainability": "价格/规模/动量可解释；结构性风险、失效币与交易场所差异使简单叙述不足",
+      "reproducibility": "现货价格易读不等于历史全币池可复刻；原文要求存活与死亡币、历史市值/流通量；今天币种列表不能代替历史池。不能用一个交易所BTC替代原论文",
+      "capital_50k_300k_cny": "碎数量降低整手问题，但增加资金不能消除场所、稳定币、退出及境内执行约束；未核实合法可用执行渠道或真实账户费率",
+      "main_constraint": "R3当前2026通知的境内及跨境服务限制；C1原文明确承认卖空不可得，不能把多空结果移给spot组合",
+      "research_difficulty": "单币价格实验轻，但完整横截面研究/合法可执行组合较重；风险目标匹配弱于表面回测收益",
+      "platform_fit": "A股因子网站原生适配待核；不建议为复刻先搭第二套平台"
+    }
+  ],
+  "priority_research_question": {
+    "status": "proposal for independent debate, not a selected strategy or authorized backtest",
+    "question": "在同一真实ETF存续期、总回报及成本口径下，少数资产的低频分散配置本身，相对单一宽基，是否有足够证据减少回撤与亏损月份，值得进入固定规则复刻？",
+    "why_first": "把风险控制来源分解为资产分散与之后才考虑的择时；数据需求/参数少，适合50k-300k本金。是我的研究次序建议，不是Faber原文的中国三ETF结论。若现有平台不支持组合，应先核验工具而非另造框架。",
+    "strongest_counterexample": "股债金在同一通胀/流动性冲击中可能同时下跌；简单配置仍可能超过30%回撤，趋势在快速反转中会反复止损并增加亏损月。总回报/同日收盘成交/历史选择偏差也可能解释论文优势。若净效应来自现金占比或后见资产选择，不能归因于动量。",
+    "first_stage_deliverable": "仅一个可否定假设、一个已发表方法的规则和数据映射、同口径对照/失败条件；待主代理整合平台事实后再定实验，不现在调参数。"
+  },
+  "alternative_if_platform_only_crosssectional": "先做A1中一个EP因子定义/公告时点/当期股票池的可复刻性检查；学因子方向与暴露，不直接承诺DD30或高盈利月。"
+}

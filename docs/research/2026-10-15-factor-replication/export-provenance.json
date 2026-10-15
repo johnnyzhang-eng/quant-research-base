@@ -1,0 +1,77 @@
+{
+  "exported_at_utc": "2026-10-15T06:11:28.809081+00:00",
+  "base_repository": "https://github.com/johnnyzhang-eng/quant-research-base",
+  "base_main_commit": "23d86db3e1871767982774b3eb0e7cd22e47dc8f",
+  "original_local_artifacts": [
+    {
+      "artifact": "french-mom-protocol.json",
+      "sha256": "b6818d3431e7e7d3cf54f5e0598109ea669e5932a42bdaa4383a072d630c98d4"
+    },
+    {
+      "artifact": "french-mom-reconstruction/summary.json",
+      "sha256": "f4631c839dcedf657ef5f1ca4d52539c32e6430c868abdb78984f7444c730cb7"
+    },
+    {
+      "artifact": "french-mom-reconstruction/independent-check.json",
+      "sha256": "1a3e00d1d2bfc057af5eb720fef1f947600bf4d4dc3b2d14e535d3cf854f79e9"
+    },
+    {
+      "artifact": "french-mom-reconstruction/monthly-reconstruction.csv",
+      "sha256": "f88421418ceecbcf6787ec52c9cb372cd20860f8c17608c16019948d5a7005b9"
+    },
+    {
+      "artifact": "debate-disposition.json",
+      "sha256": "7dfcb8564e9ecb7bfee7d270cce8e515cdc250f8cf8d61a66b5d31e0afac73c0"
+    },
+    {
+      "artifact": "market-comparison/comparison.json",
+      "sha256": "156c4f045a6ab0a6e8504737d70e06747a98cd4038263abaa4b863cdca1a47dc"
+    }
+  ],
+  "transformations": [
+    "Published-return examples and source return columns omitted; only month/residual/bound/pass exported.",
+    "Absolute local path keys in independent receipt replaced by basenames.",
+    "Raw model transcripts and reasoning replaced by an editorial disposition summary.",
+    "Credentials, account UI and source downloads excluded.",
+    "Market comparison notes retain provisional nature and are superseded for immediate execution by collaboration disposition."
+  ],
+  "no_research_rerun": true,
+  "scope": "Public research trace combining original-method clarification, aggregate identities, bounded source synthetic controls and conditional descriptive evidence; no original-stock or profitable-strategy validation.",
+  "final_integration_utc": "2026-10-15T06:44:44.065569+00:00",
+  "additional_source_artifacts": [
+    {
+      "artifact": "site-evidence/vol20-site-result.json",
+      "sha256": "4dd880fdcb68f54d3f62fe2a3f1389ea142275e0f50d294d5ad067aecc90e60a"
+    },
+    {
+      "artifact": "ep-platform/next-data-route.json",
+      "sha256": "56db7f7e5250bf6d8f9a9083e674fa54cf08ad3f2b2dc71a8380e037aef76728"
+    },
+    {
+      "artifact": "ep-platform/nav-first-period-check.json",
+      "sha256": "ba1e8fb946da9d507f76be3437fafbc8b38908bf02cb26728f63ba1896f14c5c"
+    },
+    {
+      "artifact": "primary-study/nav-stat-independent-check.json",
+      "sha256": "5c5e38af6ff8d53d8d13609c1c93712cd275896e1298631fc3df93d16b14e23f"
+    },
+    {
+      "artifact": "primary-study/published-factor-conditional-v2-result.json",
+      "sha256": "bfeadced3692f4655e36f5221e3d0c292dea45ccd93c4bd6c51efc724fcdeeda"
+    },
+    {
+      "artifact": "primary-study/published-factor-target-conditional-v2.json",
+      "sha256": "f1dd3fe66ed8789305d4dc600253c15955ce9a0d002a2fa854d73967ca67d065"
+    }
+  ],
+  "safe_files_list_authority": "Final publication manifest is maintained outside the repository in the local preparation bundle; this provenance file is not a cached enumeration of publishable files.",
+  "line_ending_normalization": {
+    "file": "monthly-residuals.csv",
+    "from": "CRLF",
+    "to": "LF",
+    "parsed_rows_fields_unchanged": true,
+    "before_sha256": "1a413285405193ca6ea434d6eb6b5b93f65e1255f15befef9b1b25f5571abae6",
+    "after_sha256": "1ce60080f702743f41561a220e7c9ae71697c4efe805d681490ad45827d3bb81",
+    "original_private_artifacts_unchanged": true
+  }
+}

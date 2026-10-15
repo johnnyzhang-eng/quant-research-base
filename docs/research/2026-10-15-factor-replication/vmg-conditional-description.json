@@ -1,0 +1,79 @@
+{
+  "schema": "published-vmg-conditional-summary/1",
+  "experiment_id": "VMG-PUB-01",
+  "status": "one_conditional_description_complete_stopped",
+  "executed_utc": "2026-10-15T06:38:27.433089+00:00",
+  "author_source": {
+    "profile": "https://fnce.wharton.upenn.edu/profile/stambaug/",
+    "entry": "https://en.mingshiim.com/database",
+    "download_url": "https://en.mingshiim.com/static/CH3_factors_monthly_202608.xlsx",
+    "workbook_sha256": "8d956043a1a39d10bc1b777a865fca8cf40b1b628c1d94f900ba2b23c22819a4",
+    "declared_current_release": "202608",
+    "sheet": "Returnseries",
+    "field": "VMG",
+    "workbook_redistributed": false
+  },
+  "sample": {
+    "first_month": "200001",
+    "last_month": "201612",
+    "unique_months": 204,
+    "expected_month_keys_exact_match": true,
+    "missing_or_duplicate_months": []
+  },
+  "single_statistic": "One arithmetic mean of exactly204 original-sample month cells; raw worksheet XML numeric strings converted to exact Fraction values. No binary-float conversion or4decimal input rounding.",
+  "raw_stored_unit_mean_exact_rational": "22638000000000000139/2040000000000000000000",
+  "conditional_scenarios": [
+    {
+      "id": "IF_STORED_DECIMAL_RETURN",
+      "scale_to_percentage_points": 100,
+      "conditional_mean_percentage_points_decimal50": "1.1097058823529411832843137254901960784313725490196",
+      "conditional_mean_percentage_points_exact_rational": "22638000000000000139/20400000000000000000",
+      "inside_frozen_printed_interval": false,
+      "interpretation_selected_as_true": false
+    },
+    {
+      "id": "IF_STORED_ALREADY_PERCENT",
+      "scale_to_percentage_points": 1,
+      "conditional_mean_percentage_points_decimal50": "0.011097058823529411832843137254901960784313725490196",
+      "conditional_mean_percentage_points_exact_rational": "22638000000000000139/2040000000000000000000",
+      "inside_frozen_printed_interval": false,
+      "interpretation_selected_as_true": false
+    }
+  ],
+  "comparison": {
+    "paper_table": "Table3 mainPDF38/printed37 VMG",
+    "printed_value_percentage_points": "1.14",
+    "interval_percentage_points": [
+      "1.135",
+      "1.145"
+    ],
+    "inclusion": "lower inclusive, upper exclusive",
+    "extra_data_precision_tolerance": "0"
+  },
+  "unit_status": "unknown; both interpretations reported without selecting by target agreement",
+  "original_vintage_status": "unknown; current202608 author release is not verified original-paper snapshot",
+  "interpretation": "Neither conditional unit interpretation lies inside the prefrozen printed interval. This is conditional noncompatibility of a later updated file under each stated assumption, not unit identification, a reason for the difference, original-paper refutation or replication.",
+  "precision": "Long rational/Decimal representations preserve arithmetic; they do not certify economic/source precision. No extra input-error tolerance was invented.",
+  "protocol_sha256": "f1dd3fe66ed8789305d4dc600253c15955ce9a0d002a2fa854d73967ca67d065",
+  "frozen_utc": "2026-10-15T06:37:24.192190+00:00",
+  "v1_target_sha256": "b4c269bc5138c97d9be73bb8d0958ae20c849c7fd4ecace8602883e40e1201b8",
+  "method_revision": "Original target/sample unchanged; V2 removed invented input precision allowance and allowed both explicitly unselected unit scenarios after critique.",
+  "script_sha256": "fa809296d01b33c4330204ab0d957a492581165c27fc7bf9cbb61ca043cb86a3",
+  "local_result_sha256": "bfeadced3692f4655e36f5221e3d0c292dea45ccd93c4bd6c51efc724fcdeeda",
+  "statistics_not_computed": [
+    "standard deviation",
+    "t/HAC",
+    "other factors",
+    "other sample windows",
+    "daily-to-monthly aggregation"
+  ],
+  "stop_applied": true,
+  "source_workbook_modified": false,
+  "not_claimed": [
+    "Raw stock or original-factor reconstruction",
+    "Original publication data vintage or numeric units verified",
+    "Significance or investable account return",
+    "Alpha, DD<=30% or high profitable-month frequency"
+  ],
+  "next_scientific_question": "Can author/journal source documentation establish numeric units and original-release/revision lineage, so the fixed2000-2016 VMG mean becomes an identified comparison? If unavailable, stop faithful replication rather than change units, years, factor or tolerance."
+}

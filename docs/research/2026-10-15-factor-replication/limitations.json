@@ -1,0 +1,29 @@
+{
+  "measured": [
+    "Official published French aggregate-return identity within publication rounding",
+    "Three-case original-source AST synthetic version-compression availability demonstration",
+    "Synthetic source first-period win-rate/Sharpe slice with independent standard-library arithmetic",
+    "One later author-file VMG conditional mean under two explicitly unselected units",
+    "One normal-UI VOL20 functionality and displayed-coverage probe"
+  ],
+  "not_measured": [
+    "Raw stock sorting/NYSE breakpoints/value weights/delistings reconstruction",
+    "Executable long-short or personal account returns",
+    "Turnover, transaction costs, financing or slippage",
+    "NAV, alpha, strategy drawdown or profitable-month frequency",
+    "Attainment of DD<=30% or any income target",
+    "Faithful original LSY stock-panel replication",
+    "Pointwise site VOL20 factor/member/input validation",
+    "Original2018 publication VMG unit/vintage equivalence"
+  ],
+  "data_qualification": [
+    "Both source headers identify CRSP 202608; same retrieval session does not prove atomic publication.",
+    "Primary value-weight monthly tables have 1196 common complete months.",
+    "Auxiliary equal-weight table had inconsistent row width, was not used and was not repaired.",
+    "Missing source raw-HTML hashes remain unknown; URL hashes are not substituted for content hashes."
+  ],
+  "open_learning_question": "Can author/journal source documentation establish numeric units and original-release/revision lineage, so the fixed2000-2016 VMG mean becomes an identified comparison? If unavailable, stop faithful replication rather than change units, years, factor or tolerance.",
+  "prior_scope_replaced": "Earlier USD100 income experiments and the superseded reset-sprint repository diagnostics are not part of this publication.",
+  "EP_synthetic_result": "Source AST fixture completed: 3 cases,25 frozen checks passed. Confirms synthetic information loss from version compression, without advance-use of revised value in these rows. Not actual EP/stock/application/profit validation.",
+  "QLib_status": "Existing PIT design reviewed; no qualified EP original data or data-use permission inferred from MIT source license."
+}
