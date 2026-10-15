@@ -1,0 +1,54 @@
+{
+  "id": "SPY-BIL-SMA10-PILOT-01",
+  "status": "DATA_GATE_FAILED_PERFORMANCE_NOT_VERIFIED",
+  "question": "Does a fixed published ten-month equity/cash rule improve drawdown and losing-month frequency beyond simply holding less equity?",
+  "primary_source": "https://mebfaber.com/wp-content/uploads/2016/05/SSRN-id962461.pdf",
+  "scope": "Single-ETF SPY/BIL adaptation; not original proprietary-index result replication or a funded account.",
+  "protocol_sha256": "9a584b624499e826a29659c704b0fe8949e4200c7e9a9cfca98e66831d02228b",
+  "timing_addendum_sha256": "d891059a41f0dac938f8ae0aa3c377877c5a990c88b9f6e787e95770f35357d0",
+  "frozen_design": {
+    "signal": "Ten completed month-end adjusted SPY closes, fixed SMA10, ties keep prior state.",
+    "calibration_return_months": [
+      "2007-06",
+      "2012-12"
+    ],
+    "test_return_months": [
+      "2013-03",
+      "2026-09"
+    ],
+    "comparators": [
+      "SPY buy-and-hold",
+      "BIL buy-and-hold",
+      "Calibration-only mean equity allocation rebalanced monthly"
+    ],
+    "timing_modes": [
+      "Same-close idealized reference",
+      "Next-open causal variant"
+    ],
+    "holdings": "Synthetic total-return units held between monthly events; no daily rebalancing.",
+    "limits": "Gross fractional USD accounting; no taxes, commissions, slippage, FX or lot rounding; historical period is not genuinely unseen."
+  },
+  "execution": {
+    "provider": "Yahoo public chart",
+    "requests": [
+      {
+        "symbol": "SPY",
+        "http_status": 429,
+        "usable_market_observations": 0
+      },
+      {
+        "symbol": "BIL",
+        "http_status": 429,
+        "usable_market_observations": 0
+      }
+    ],
+    "retry_or_source_substitution": false,
+    "q_computed": false,
+    "performance_paths_computed": 0,
+    "return_or_risk_conclusion": "None. Access failure does not validate or invalidate the strategy."
+  },
+  "independent_check": "Error-body hashes corroborated. Timing source reviewed against separately frozen formulas; no numeric performance acceptance possible.",
+  "model_review": "Official DeepSeek returned a final critique supporting a calibration-only exposure control and distinguishing same-close idealization from next-open execution. This is design criticism, not performance evidence.",
+  "next_gate": "Qualify an available historical price/total-return snapshot and corporate-action conventions before one unchanged-rule economic comparison. Preserve this failed attempt.",
+  "publication_scope": "Methods, hashes and stopped execution status only; no raw market data, account material, credentials or private strategy performance."
+}
