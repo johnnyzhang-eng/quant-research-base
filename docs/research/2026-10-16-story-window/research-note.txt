@@ -1,0 +1,34 @@
+量化知识研究：从赚钱故事追到收益机制
+2026-10-16，STORY-WINDOW-20261016
+
+研究边界
+以比赛优胜者、公开公式、期权收入、机构和AI故事作为资料入口。定向阅读一手论文、规则、产品文件及后续反例；保留来源事实、解释、未知和阅读范围。此记录是知识研究，不是策略盈利认证，也没有实盘交易。
+原计划两小时，实际Goal记录运行2639秒后因远端上下文压缩连接错误中断。此次从文件恢复交付，未将不足两小时写成完整运行。未因中断重复外部推理请求。
+
+一、少亏损月并不消除尾部重亏
+ACG2012的同一1988-06-30至2011-12-31窗口，共282个月：PUT指数盈利215月、亏损67月；S&P500盈利178月、亏损104月。分别约76.2%和63.1%盈利月。PUT最差月−17.7%，S&P500−16.8%。这是Cboe支持、含回溯且未计个人交易成本和税费的指数研究，不是基金或个人净胜率。
+另一2019研究的1986-06至2018-12窗口，PUT月末MDD为−32.7%；不同窗口不能与上述月数混为同窗统计，也不等于日度回撤。权利金是承担赔付义务的对价，现金担保覆盖履约义务而不保证本金。
+实际基金PUTW于2022年改基准、2025年改名WTPI；不应把旧指数长期统计直接迁移到现行基金，分配收益率也不等于总回报。
+https://cdn.cboe.com/resources/indices/documents/pap-assetconsultinggroup-cboe-feb2012.pdf
+https://cdn.cboe.com/resources/education/research_publications/PutWriteCBOE19_v14_by_Prof_Oleg_Bondarenko_as_of_June_14.pdf
+https://www.wisdomtree.com/us/products/alternative/wtpi
+
+二、筛选有增量，与原配置适合持有分开
+德国F-score后续研究在仅多头、极小市值剔除、作者成本估计和同持股数对照下提供条件性改善证据。75个原配置的月末最大回撤绝对值均超过30%，最小42.01%，不能把相对改善当绝对低回撤。
+样本2000–2015，已见历史中选择配置；统一财报lag不自动证明逐公司初次公开时点。标题reality check也不等于White多重检验。公开PS代码与原文部分定义不同，部分数学等价、部分可改变分数；收益影响未量化，未改上游代码。
+https://link.springer.com/article/10.1007/s11408-021-00400-9
+https://github.com/OpenSourceAP/CrossSection/blob/b2fb2eeaec04819c5d62b449582b74dfb5dc07d1/Signals/pyCode/Predictors/PS.py
+
+三、AI预测、交易窗口和净收益分开
+Lopez-Lira/Tang实际取得的arXiv v6 PDF表1：隔夜新闻多空组合初始反应命中93.28%，随后开盘至收盘漂移命中58.06%；这里是组合交易日，不是个股或逐条新闻命中。初始反应区间含新闻前价格，不可在看到新闻后完整交易。OA7等权全调仓在20bp往返成本情景Sharpe−0.394，而5bp仍为正；不能据此否定所有LLM机制，也不能用约90%故事跳过成本、借券及模型时间审计。样本回溯，不是实盘。HTML和PDF日期冲突单列，未声称读到最新期刊全文。
+https://arxiv.org/pdf/2304.07619v6
+
+四、其余线索仍开放
+Unger的四冠含三个年度赛和一个季度赛，不能当四次等价年度验证。Medallion私有信号无完整规则，不追黑箱复刻。XIV的每日反向期货、终止条款和估值发布故障分开。SPAC历史研究的IPO获配单位、附送权证、可赎回普通股和合并后股票不是同一入口；历史年化不直接移植给二级买家。不同策略名也不证明风险分散，股票长仓与PUT可共同承担下跌；理论共同风险不等于实测相关性。
+https://www.worldcupchampionships.com/world-cup-trading-championship-historical-standings
+https://law.stanford.edu/wp-content/uploads/2022/07/2022-01-24-A-Sober-Look-At-SPACs-Yale-Journal-on-Regulation.pdf
+https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf
+
+协作与未完成项
+Codex负责来源和接受证据；官方DeepSeek reasoning实际3次终答，分别批判复刻定义、F-score长仓和PUT月份/尾部。根据原文纠正其SPX实物接货等错误，未将AI共识当证据。WorkBuddy本轮没有新终答。LLM新闻第4次批判仅准备，未发送。
+下一入口：先核已有PUT发布后官方指数的同窗月收益与日度回撤，再区分实际基金的规则阶段。统计协议已冻结，但原始观测尚未下载，没有新的增长曲线、回测或达标认定。其它机制保留为后续可讨论路线，不因这轮结果提前锁定市场。
